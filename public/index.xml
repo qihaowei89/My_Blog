@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>/</link>
+    <description>Recent content on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Compiling Custom CSS</title>
+      <link>/tutorial/custom-css/</link>
+      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/custom-css/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet molestie mauris nec tempor. Sed non lacus massa. Aliquam ut convallis velit. Etiam dictum mollis mi, a vestibulum ex suscipit ut. Proin viverra lacinia urna at interdum. Sed eu quam sit amet metus fermentum pharetra id a sem. Pellentesque lorem dolor, venenatis sed felis non, fringilla ornare felis. Donec nisi lorem, dignissim id interdum vel, cursus malesuada quam. Integer tempus consectetur tellus, nec sagittis est mattis vel.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started With hugo-geo</title>
+      <link>/tutorial/getting-started/</link>
+      <pubDate>Fri, 04 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/getting-started/</guid>
+      <description>&lt;p&gt;Setting up and configuring hugo-geo is as simple as changing a few values in your site &lt;code&gt;config.toml&lt;/code&gt;. Lets look at this example site&amp;rsquo;s config and go over what
+each of hugo-geo&amp;rsquo;s site &lt;code&gt;[params]&lt;/code&gt; do.&lt;/p&gt;
+
+&lt;p&gt;If this guide doesn&amp;rsquo;t answer your question it may be covered in the &lt;a href=&#34;http://gohugo.io/overview/configuration/&#34;&gt;Hugo documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>/about/</link>
+      <pubDate>Tue, 28 Jul 2015 09:51:51 -0400</pubDate>
+      
+      <guid>/about/</guid>
+      <description>This placeholder page could be your &amp;ldquo;about me&amp;rdquo; page, where you detail your contact information, portfolio pieces, and describe yourself and your goals.</description>
+    </item>
+    
+    <item>
+      <title>Welcome to Hugo-Geo!</title>
+      <link>/post/welcome/</link>
+      <pubDate>Tue, 28 Jul 2015 09:32:45 -0400</pubDate>
+      
+      <guid>/post/welcome/</guid>
+      <description>Welcome to hugo-geo, a resposive theme for the Hugo static site generator. Hugo is designed for post and tutorial sections, and is perfect for personal portfolio or blog sites.
+Why don&amp;rsquo;t you check out the Getting Started Tutorial and find out how you can use hugo-geo and customize it to your liking.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+  </channel>
+</rss>
