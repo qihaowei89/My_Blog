@@ -1,6 +1,7 @@
 baseurl = "/"
 theme = "hugo-geo"
 relativeURLs = false
+hasCJKLanguage = true
 languageCode = "en-us"
 title = "My New Hugo Site"
 disqusShortname = "shortcode-here"
@@ -17,18 +18,18 @@ paginate = 5
 	
 	analytics = "code-here"
 
-	email = "alexurquhart@gmail.com"
+	email = "weiqihao08@gmail.com"
 
 	profilepic = "img/profile.png"
 	
-	title = "MY NAME"
+	title = "Qihao Wei's Home"
 	subtitle = "MY HUGO BLOG"
 
 	# Social buttons for sidebar
 	# Each of these are optional
 	[[params.socialbuttons]]
 	faicon = "github"
-	url = "https://github.com/alexurquhart"
+	url = "https://github.com/qihaowei89"
 	[[params.socialbuttons]]
 	faicon = "twitter"
 	url = "https://twitter.com/alexanderurq"

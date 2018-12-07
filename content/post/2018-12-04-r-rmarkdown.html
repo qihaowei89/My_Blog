@@ -1,0 +1,428 @@
+---
+title: R 博客搭建
+author: ''
+date: '2018-12-04'
+categories:
+  - R
+tags:
+  - blogdown
+  - web page
+---
+
+
+
+<div class="section level2">
+<h2>1.1 安装</h2>
+<ul>
+<li><a href="https://www.r-project.org">R</a></li>
+<li><a href="https://www.rstudio.com">RStudio IDE</a></li>
+<li><a href="http://pandoc.org">Pandoc</a> (If not install RStudio)</li>
+</ul>
+<div id="-packageblogdown" class="section level3">
+<h3>1.1.1 安装 package—blogdown</h3>
+<pre class="r"><code>## Install from CRAN
+install.packages(&quot;blogdown&quot;)
+## Or, install from GitHub
+if (!requireNamespace(&quot;devtools&quot;)) install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;rstudio/blogdown&quot;)</code></pre>
+</div>
+<div id="-hugo" class="section level3">
+<h3>1.1.2 安装 <a href="https://gohugo.io">Hugo</a>静态网站生成器</h3>
+<pre class="r"><code># helper function in blogdown to download and install it automatically on major operating systems (Windows, macOS, and Linux)
+blogdown::install_hugo() </code></pre>
+<p>默认情况下，它安装最新版本的Hugo，但是可以通过<code>version</code>参数选择特定版本. 使用<code>blogdown::update_hugo()</code>升级或<code>install_hugo(force=TRUE)</code>重新安装Hugo，</p>
+</div>
+</div>
+<div class="section level2">
+<h2>1.2 一个快速的例子</h2>
+<p>在空文件夹中打开Rstudio IDE(<code>File -&gt; New Project</code>),再R控制台调用下面的函数：</p>
+<pre class="r"><code>blogdown::new_site() # 生成一个例子网站
+blogdown::serve_site() # 托管网站
+blogdown::stop_server() # 停止托管网站</code></pre>
+<p>现在，应该看到RStudio项目或当前工作目录下的一系列目录和文件。在解释这些新的目录和文件之前，我们首先介绍一项重要且有用的技术：LiveReload。这意味着当你修改并保存网站的任何源文件时，你的网站将自动重建并重新载入你的浏览器.基本上，一旦在浏览器中启动了网站，你就不再需要显式地重建它了。您所需要做的就是编辑源文件，例如Rmarkdown文档，并保存它们。无需单击任何按钮或运行任何命令。LiveReload是通过<code>blogdown::new_site()</code>实现的，默认情况下它是基于R包<a href="https://CRAN.R-project.org/package=servr"><code>servr</code></a>。</p>
+<div id="hugo-based-config.toml" class="section level3">
+<h3>1.2.1 Hugo-based网站三个基本的概念之一： 配置文件–<code>config.toml</code></h3>
+<p><code>config.toml</code>配置文件内容如下：</p>
+<pre><code>baseurl = &quot;/&quot;
+languageCode = &quot;en-us&quot;
+title = &quot;A Hugo website&quot;
+theme = &quot;hugo-lithium&quot;
+
+[[menu.main]]
+    name = &quot;About&quot;
+    url = &quot;/about/&quot;
+[[menu.main]]
+    name = &quot;GitHub&quot;
+    url = &quot;https://github.com/rstudio/blogdown&quot;
+[[menu.main]]
+    name = &quot;Twitter&quot;
+    url = &quot;https://twitter.com/rstudio&quot;
+</code></pre>
+</div>
+<div id="hugo-based-content" class="section level3">
+<h3>1.2.2 Hugo-based网站三个基本的概念之二： 内容文件夹–<code>content/</code></h3>
+<p>这是放置posts和pages的源文件–Rmarkdown或markdown的地方,<code>content/</code>文件夹下的<code>post/</code>文件夹中的内容目录的组织取决于你。你可以在那里有任意的文件和目录，这取决于你想要的网站结构。</p>
+</div>
+<div id="hugo-based-public" class="section level3">
+<h3>1.2.3 Hugo-based网站三个基本的概念之三： 出版文件夹–<code>public/</code></h3>
+<p>该文件夹下是构建网站时生成的文件，不需要手动添加文件到这个文件夹中。主要包含一些网页<code>*.html</code>文件和一些依赖文件：<code>*css.</code>，<code>*.js</code>以及图片。你可以把<code>public/</code>文件夹下所有内容上传到任何可以服务静态网站的服务器上，你的网站就会启动并运行。发布静态网站有很多选择，如果不熟悉部署网站，我们将在第3章中详细讨论。</p>
+<p>将在第1.6节中展示如何使用其他主题。但是，请记住，一个更复杂和花哨的主题可能需要您更多地了解所有底层技术，如Hugo模板语言、HTML、CSS和JavaScript。</p>
+</div>
+</div>
+<div id="rstudio-ide" class="section level2">
+<h2>1.3 RStudio IDE</h2>
+<p>RStudio IDE中有许多插件让编辑和预览网页更容易<code>Tools --&gt; Addins</code>.</p>
+<ul>
+<li><code>Server Site</code>: 该插件作用等同于<code>blogdown::serve_site()</code><br />
+</li>
+<li><code>New Post</code>: 该插件作用等同于<code>blogdown::new_post()</code><br />
+</li>
+<li><code>Update Metadata</code>: 该插件可以更新当前post的网页YAML元数据。</li>
+<li><code>Insert Image</code>: 该插件可以插入任何图片到当前post的网页</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>1.4 全局选项</h2>
+<p>可以根据个人喜好在搭建网站时设置全局选项。选项的格式是options(name = value),</p>
+<table>
+<thead>
+<tr class="header">
+<th>Option name</th>
+<th align="center">Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>servr.daemon</td>
+<td align="center">interactive()</td>
+<td>Use a daemonized server?</td>
+</tr>
+<tr class="even">
+<td>blogdown.author</td>
+<td align="center"></td>
+<td>The default author of new posts</td>
+</tr>
+<tr class="odd">
+<td>blogdown.ext</td>
+<td align="center">.md</td>
+<td>Default extension of new posts</td>
+</tr>
+<tr class="even">
+<td>blogdown.subdir</td>
+<td align="center">post</td>
+<td>A subdirectory under content/</td>
+</tr>
+<tr class="odd">
+<td>blogdown.yaml.empty</td>
+<td align="center">TRUE</td>
+<td>Preserve empty fields in YAML?</td>
+</tr>
+</tbody>
+</table>
+<p>建议在R的启动配置文件中设置这些选项。通过<code>?Rprofile</code>查看详细信息。<br />
+启动配置文件本质上来说是在启动R会话时执行的R脚本，它可以避免每次启动新的R会话时需要设定全局变量，它可以是<code>~/.Rprofile</code>文件或者在RStudio项目根目录下的<code>.Rprofile</code>文件。</p>
+<p>在RStudio中可以通过<code>file.edit()</code>创建这个文件：</p>
+<pre class="r"><code>file.edit(&quot;~/.Rprofile&quot;)
+# or file.edit(&quot;.Rprofile&quot;)</code></pre>
+<p>假使你倾向于使用<code>Rmd</code>(默认是<code>*.md</code>)托管博客，并且希望博客作者默认为‘Qihao Wei’，你可以使用如下配置文件设置：</p>
+<pre class="r"><code>options(blogdown.ext = &quot;.Rmd&quot;, blogdown.author = &quot;Qihao Wei&quot;)</code></pre>
+<p>R 只读取一个启动配置文件。如果你有一个配置<code>.Rprofile</code>在当前目录，一个全局配置位于<code>~/.Rprofile</code>,在当前目录启动R的时候执行的是前者。这可能使多个作者在同一网站项目上协作变得不方便，因为无法设置特定于作者的选项。 推荐做法是：</p>
+<pre class="r"><code># in .Rprofile of the website project
+if (file.exists(&quot;~/.Rprofile&quot;)) {
+  base::sys.source(&quot;~/.Rprofile&quot;, envir = environment())
+}
+# then set options(blogdown.author = &#39;Your Name&#39;) in
+# ~/.Rprofile</code></pre>
+<p>注意，如果<code>.Rprofile</code>没有后缀换行，R将静默地忽略<code>.Rprofile</code>的最后一行，因此请确保在<code>.Rprofile</code>的末尾添加至少一个换行。</p>
+</div>
+<div id="r-markdown-vs.markdown" class="section level2">
+<h2>1.5 R Markdown vs. Markdown</h2>
+<p>不能在普通Markdown文档中执行任何R代码，而在R Markdown文档中，可以嵌入R代码块(<code>{r})但是，您仍然可以使用围栏代码块</code>r’的语法在普通Markdown中嵌入R代码（注意，没有花括号{}）。这样的代码块将不被执行，并且可能适合于纯粹的演示目的。下面是R Markdown中R代码块的示例</p>
+<pre class="r"><code> ` ` `{r cool-plot, fig.cap=&#39;A cool plot.&#39;}
+  plot(cars, pch = 20)  # not really cool
+ ` ` `</code></pre>
+<p>下面是一个Markdown中R代码块的例子:</p>
+<pre><code> ` ` `r
+ 1 + 1 # not executed
+ ` ` `</code></pre>
+</div>
+<div class="section level2">
+<h2>1.6 主题</h2>
+<p>在Hugo中，主题控制整个site的外观和功能。<a href="http://themes.gohugo.io">Hugo 主题</a>提供样式，注意，不是所有的主题都在<code>blogdown</code>中测试过，<a href="https://github.com/rstudio/blogdown/issues"><strong>bug</strong>提交</a><br />
+使用一个主题，你需要知道<code>GitHub username</code>和<code>repository name</code>，然后通过<code>blogdown::install_theme()</code>安装使用这个主题，或者使用<code>new_site()</code>指定<code>theme参数</code>在新文件夹中利用这个主题创建一个新的网站。建议通过第二种方法（不同主题的使用方法不同，并且<code>config.toml</code>不同）。</p>
+<pre class="r"><code># for example, create a new site with the academic theme
+blogdown::new_site(theme = &quot;gcushen/hugo-academic&quot;)</code></pre>
+<p>下面列出了一些常用的符合常见需求的主题：</p>
+<ul>
+<li>简单/小巧类主题: <a href="https://github.com/yihui/hugo-xmin">XMin</a>, <a href="https://github.com/road2stat/hugo-tanka">Tanka</a>, <a href="https://github.com/AlexFinn/simple-a">simple-a</a>, <a href="https://github.com/jbub/ghostwriter">ghostwriter</a>.<br />
+</li>
+<li>复杂类主题: <a href="https://github.com/gcushen/hugo-academic">hugo-academic</a> (强烈推荐给学术界的用户), <a href="https://github.com/kakawait/hugo-tranquilpeak-theme">hugo-tranquilpeak-theme</a>, <a href="https://github.com/kishaningithub/hugo-creative-portfolio-theme">hugo-creative-portfolio-theme</a>, 和 <a href="https://github.com/devcows/hugo-universal-theme">hugo-universal-theme</a>.<br />
+-多媒体类主题: 如果对将多媒体内容添加到站点（如播客的音频文件）感兴趣，<a href="https://github.com/mattstratton/castanet">castanet主题</a>提供一个极好的框架。使用 castanet主题的站点<a href="https://www.r-podcast.org/">R-Podcast</a>是个很好的例子。</li>
+</ul>
+</div>
+<div class="section level2">
+<h2>1.7 一个参考流程</h2>
+<p>有很多方法可以搭建和发布一个网站，由于需要学习大量的技术来完全理解网站是如何工作的，所以我们要向初学者推荐一个工作流程，这样希望他们不需要完全理解本书的其余部分。这肯定不是最优的工作流，但是需要知道最少的技术细节。</p>
+<p>新建一个网站的流程： 1. 在<a href="http://themes.gohugo.io">hugo</a>找到GitHub repository链接，格式为<code>https://github.com/user/repo</code>。<br />
+2. 在RStudio中创建一个新的项目，在R控制台中输入<code>blogdown::new_site(theme = 'user/repo')</code>,其中的<code>user/repo</code>来自第一步中的链接。<br />
+3. 如果对于新的主题不喜欢，可以重复上述步骤重新搭建或者编辑<code>config.toml</code>配置文件。如果对某个选项不理解，可以找到主题的手册（通常在Github的README中）。</p>
+<p>编辑一个网站的流程：<br />
+1. 点击RStudio“Serve Site”插件来预览网页（在每次重新打开RStudio项目或者在重启R会话时），注意，不要点击工具栏中的<code>Knit</code>按钮。<br />
+2. 使用“New Post”插件来创建新的帖子或页面，然后编辑内容。<br />
+3. 使用“Update Metadata”插件修改YAML元数据（如果需要的话）。</p>
+<p>发布一个网站（如果对GIT和Gihub不熟悉）：<br />
+1. 重启R会话，运行<code>blogdown::hugo_build()</code>，将会在你项目的根目录生成一个<code>public/</code>文件夹。 2. 登陆<a href="https://www.netlify.com/">netify</a>（可以使用已有GitHub、Gitlab账户登陆）。如果这是你第一次发布这个网站，你可以创建一个新的网站，或者修改你现有网站。将<code>public/</code>文件夹从文件查看器拖放到Netlify网页的指示区域（显示“在这里用静态站点拖动文件夹”）。<br />
+3. 等待几秒钟，Netlify就可以部署这些文件了，它将给您分配<code>random-word-12345.netlify.com</code>一个随机子域。你可以把这个随机子域改变成更有意义的子域。</p>
+<p>如果你熟悉Git和GitHub，那么发布一个网站就容易多了。建议在Netlify上从GitHub存储库中创建一个包含网站源文件的新站点，以便可以连续部署，而不是每次都手动上传<code>public/</code>文件夹。通过这种方式，你不需要本地运行<code>blogdown::hugo_build()</code>，因为网站可以通过Hugo建立在Netlify上。详细信息见<a href="https://bookdown.org/yihui/blogdown/deployment.html#deployment">第三章</a></p>
+</div>
+<div id="hugo" class="section level1">
+<h1>2 Hugo</h1>
+<p>在本章中，我们将简要介绍<a href="https://gohugo.io">Hugo</a>，它是blogdown所基于的静态站点生成器。本章并不打算取代Hugo的官方文档，而是为那些刚刚开始使用Hugo的人提供指导。如有疑问，请参阅雨果官方文件。</p>
+<div id="hugo" class="section level2">
+<h2>2.1 静态网站和Hugo</h2>
+<p>静态站点通常由HTML文件（带有可选的外部依赖项，如图像和JavaScript库）组成，并且无论谁访问网页，Web服务器都向浏览器发送完全相同的内容。当请求页面时，服务器上没有动态计算。相比之下，动态站点依赖于服务器端语言来进行某些计算，并且根据不同的条件发送可能不同的内容。公共语言是PHP，动态网站的典型例子是Web论坛。例如，每个用户都有一个配置文件页面，但是通常这并不意味着服务器为每个用户存储了不同的HTML配置文件页面。相反，服务器将从数据库中获取用户数据，并动态呈现配置文件页面。</p>
+<p>对于静态站点，访问的每个URL通常都有一个对应的HTML文件存储在服务器上，因此在向访问者提供文件之前不需要计算任何内容。这意味着静态站点的响应时间往往比动态站点快，并且它们也更容易部署，因为部署仅仅意味着将静态文件复制到服务器。动态站点通常依赖于数据库，并且必须安装更多的软件包来为动态站点服务。要了解静态站点的更多优点，请阅读Hugo网站上的<a href="https://gohugo.io/about/benefits/">“静态站点生成器的优势”</a>页面。</p>
+<p>有许多静态站点生成器，包括Hugo、<a href="http://jekyllrb.com/">Jekyll</a>和<a href="https://hexo.io/">Hexo</a>等。它们中的大多数可以构建通用网站，但是通常用于构建博客。</p>
+<p>我们选择Hugo有很多原因，最突出的优势是：与其他静态站点生成器不同，Hugo的安装非常简单，因为它为大多数操作系统提供了单个可执行文件，而没有依赖性（参见1.1节）。它能比其他静态网页生成器更快地渲染数百页内容，并且据报道可以在大约1毫秒内渲染单个页面。最后，Hugo用户在Hugo讨论论坛和GitHub问题上都很活跃。</p>
+<p>尽管我们认为Hugo是一个很棒的静态站点生成器，但是实际上最主要的一个主要缺点是：不支持R Markdown。但是R markdown是<code>blogdown</code>包的基础，没有这个功能会使得在网页上使用R代码比较困难。除此之外，Hugo的默认Markdown引擎是“Blackfriday”，它没有Pandoc功能强大。</p>
+<p>Hugo使用一个特定文件和文件夹结构来创建你的网站（如下图）。<br />
+<img src="/post/2018-12-04-r-rmarkdown_files/folder-structure.png" alt="FIGURE 2.1: Possible files and folders created when you create a new site using blogdown." style="width:100.0%" style="height:100.0%" /></p>
+<p>本章的其余部分将详细介绍下列文件和文件夹： - <code>config.toml</code><br />
+- <code>content/</code><br />
+- <code>static/</code><br />
+- <code>themes/</code><br />
+- <code>layouts/</code></p>
+</div>
+<div class="section level2">
+<h2>2.2 配置</h2>
+<p>在你生成网页的时候，Hugo首先会搜索名为<code>config.toml</code>的文件，如果找不到，它会继续找<code>config.yaml</code>文件。由于大多数Hugo主题都包含提供<code>config.toml</code>文件的示例站点，并且TOML（Tom’s Obvious, Minimal Language）格式在Hugo社区中似乎更流行，因此这里我们将主要讨论<code>config.toml</code>。</p>
+<p>建议只对配置文件使用TOML语法（如果愿意，也可以使用YAML语法），并使用YAML作为（R）Markdown页面和帖子的元数据的数据格式，因为R Markdown和blogdown只支持YAML。（Hugo也支持config.json，但是blogdown不支持它，所以我们不建议您使用它。）如果你的网页已经使用了TOML语法，可以使用<code>blogdown::hugo_convert(unsafe = TRUE)</code>将TOML数据转换成YAML格式，注意在转换之前确保已经备份过网站，因为它将覆盖你dMarkdown文件。</p>
+<p>Hugo文档在其示例中没有始终使用TOML或YAML，这可能令人困惑。请在将示例复制到您自己的网站时注意配置格式。</p>
+<div id="toml" class="section level3">
+<h3>2.2.1 TOML语法</h3>
+<p>如果不熟悉TOML语法，我们将给出一个简要的概述，您可以阅读<a href="https://github.com/toml-lang/toml">完整的文档</a>来了解细节。</p>
+<p>TOML由等号分隔的“键值对”组成：</p>
+<pre><code>key = value</code></pre>
+<p>当您想在TOML文件中编辑配置时，只需更改对应值即可。作为字符串的值应该在<strong>引号</strong>中，而布尔值应该<strong>小写</strong>并且不需要引号适起来。</p>
+<pre><code>title = &quot;My Awesome Site&quot;
+
+relativeURLs = true</code></pre>
+<p>进一步进入配置文件，您可能会注意到括号中的一些值如下：</p>
+<pre><code>[social]
+    github = &quot;https://github.com/rstudio/blogdown&quot;
+    twitter = &quot;https://twitter.com/rstudio&quot;</code></pre>
+<p>这是TOML中的一个表，Hugo使用它们来填写站点内其他页面的信息。例如，上面的表格将在站点的模板中填充<code>.Site.Social</code>变量（在2.5节中有关此的更多信息）。</p>
+<p>最后，你会在双括号中找到一些这样的值：</p>
+<pre><code>[[menu.main]]
+    name = &quot;Blog&quot;
+    url = &quot;/blog/&quot;
+
+[[menu.main]]
+    name = &quot;Categories&quot;
+    url = &quot;/categories/&quot;
+
+[[menu.main]]
+    name = &quot;About&quot;
+    url = &quot;/about/&quot;</code></pre>
+<p>在TOML中，双括号用来表示表的数组。Hugo将此信息理解为菜单。如果上面的代码在config.toml文件中，那么生成网站的主菜单中有链接到Blog、Categories和About页面。该菜单的位置和样式在其他地方指定，但是每个菜单的名称和每个部分的链接都在这里定义。</p>
+</div>
+<div class="section level3">
+<h3>2.2.2 选项</h3>
+<p>Hugo支持的所有内置选项见<a href="https://gohugo.io/overview/configuration/">configuration</a>.你可以修改除了<code>contentDir</code>以外的所有选项。下面列出可能对你有用的一些选项：</p>
+<ul>
+<li><code>baseURL</code>: 通常，您必须将此选项的值更改为网站的baseURL。Hugo主题的例子中可能设置为<code>http://replace-this-with-your-hugo-site.com/</code>或<code>http://www.example.com/</code>,请用自己的URL替换它们（有关发布网站和获取域名的更多信息，请参阅第3章和附录C）。注意，如果要在域名的子路径下发布网站，则此选项可以是具有子路径的URL，例如，<code>http://www.example.com/docs/</code>。<br />
+</li>
+<li><code>enableEmoji</code>: 你可以把它设置为<code>true</code>，这样你就可以在Markdown使用像：微笑（<code>:smile:</code>）这样的<a href="http://www.emoji-cheat-sheet.com/">表情符号</a>。<br />
+</li>
+<li><code>permalinks</code>: 生成页面永久链接的规则。默认情况下，Hugo使用<code>content/</code>下的完整文件名来生成链接，例如，<code>content/about.md</code>将呈现给<code>public/about/index.html</code>，而<code>content/post/2015-07-23-foo.md</code>将呈现给<code>public/post/2015-07-23-foo/index.html</code>,在网站的实际链接是<code>/about/</code>和<code>/post/2015-07-23-foo/</code></li>
+</ul>
+<p>例如，您可以要求Hugo使用日期和标题作为链接呈现<code>content/post/</code>下页面：</p>
+<pre><code>[permalinks]
+    post = &quot;/:year/:month/:day/:title/&quot;</code></pre>
+<p>就个人而言，我建议您使用：<code>:slug</code>变量代替<code>:title</code>变量:</p>
+<pre><code>[permalinks]
+    post = &quot;/:year/:month/:day/:slug/&quot;</code></pre>
+<p>这是因为你的帖子标题可能会改变，而且你可能不想改变到帖子的链接，否则你必须将旧的链接重定向到新的链接，你可以设置一个固定的slug，这样到帖子的链接总是固定的，你可以自由地更新帖子的标题。<code>permalinks</code>的更多参数见https://gohugo.io/extras/permalinks/.</p>
+<ul>
+<li><code>publishDir</code>: 要生成网站的目录<br />
+</li>
+<li><code>theme</code>: <code>themes/</code>文件夹下的的Hugo主题的文件夹名字<br />
+</li>
+<li><code>ignoreFiles</code>: 在构建站点时，Hugo忽略某些文件的文件名模式（正则表达式）列表。建议您至少指定这些模式：<code>[&quot;\\Rmd$&quot;、&quot;\Rmarkdown$&quot;、&quot;_files$&quot;、&quot;_cache$&quot;]</code>。忽略<code>.Rmd</code>文件，因为blogdown会将它们编译成<code>.html</code>并且Hugo使用<code>.html</code>文件就足够了。带有<code>_files</code>和<code>_cache</code>后缀的文件，它们是编译Rmd文件之后的辅助文件。</li>
+<li><code>uglyURLs</code>: 默认情况下，Hugo生成“干净”URL，这可能有点令人惊讶，并且需要您理解当浏览器从服务器获取页面时URL是如何工作的。基本上，默认情况下，Hugo为<code>foo.md</code>而不是<code>foo.html</code>生成<code>foo/index.html</code>，因为前者允许您通过干净的URL <code>foo/</code>而不是<code>index.html</code>访问页面。 大多数Web服务器都理解像http://www.example.com/foo/这样的请求，并将在foo/下呈现index.html。如果您喜欢从<em>.md到</em>.html的严格映射，则可以通过将uglyURL设置为true启用“丑陋”URL。<br />
+</li>
+<li><code>hasCJKLanguage</code>: 如果您的网站主要使用CJK（中文、日文和韩文），我建议您将这个选项设置为true，这样Hugo的自动摘要和单词计数工作得更好。</li>
+</ul>
+<p>除了内置的Hugo选项之外，您还可以在<code>config.toml</code>中设置其他任意选项。例如，经常会看到一个名为<code>params</code>的选项，它在许多Hugo主题中广泛使用。当在Hugo主题中看到变量<code>.Site.Params.FOO</code>时，它表示在config.toml中的<code>[params]</code>下设置的选项<code>FOO</code>，例如，<code>.Site.Params.author</code>变量的值是<code>Frida Gomam</code>，在下面的配置文件中：</p>
+<pre><code>[params]
+    author = &quot;Frida Gomam&quot;
+    dateFormat = &quot;2006/01/02&quot;</code></pre>
+<p>所有这些选项的目的是避免对Hugo主题中的任何内容进行硬编码，以便用户可以轻松地编辑单个配置文件以将主题应用于他们的网站，而不必遍历许多HTML文件并逐个进行更改。</p>
+</div>
+</div>
+<div id="content" class="section level2">
+<h2>2.3 Content文件夹</h2>
+<p><code>content/</code>目录的结构可以是任意的。一个常见的结构是在<code>content/</code>的根目录下有几个静态页面，以及一个包含博客帖子的子目录<code>post/</code>：</p>
+<pre><code>├── _index.md
+├── about.md
+├── vitae.md
+├── post/
+│   ├── 2017-01-01-foo.md
+│   ├── 2017-01-02-bar.md
+│   └── ...
+└── ...
+</code></pre>
+<div id="yaml" class="section level3">
+<h3>2.3.1 YAML元数据</h3>
+<p>每个页面都以标题、日期、作者、类别、标记等信息的YAML元数据开始。根据特定的Hugo主题和模板使用，这些字段中的一些可能是可选的。</p>
+<p>注意：</p>
+<ul>
+<li><p><code>draft</code>：您可以通过设置<code>draft: true</code>将文档标记为草稿。如果站点是通过<code>blogdown::build_site()</code>或<code>blogdown.::hugo_build()</code>构建的，则不会呈现草稿，而是在本地预览模式下呈现（参见<a href="https://bookdown.org/yihui/blogdown/local-preview.html#local-preview">D.3节</a>）。</p></li>
+<li><code>publishdate</code>： 可以指定未来发布帖子的日期。类似于草稿，将来帖子只在本地预览模式下呈现。<br />
+</li>
+<li><code>weight</code>： 这个字段可以采用一个数值来告诉Hugo排序时页面的顺序，例如，当您生成一个目录下的所有页面的列表时，并且两个帖子具有相同的日期，您可以为它们分配不同的权重，以获得您想要的列表顺序。<br />
+</li>
+<li><p><code>slug</code>：URL的尾部字符串。当您为永久URL自定义规则时（见2.2.2节）尤为有用。</p></li>
+</ul>
+</div>
+<div id="body" class="section level3">
+<h3>2.3.2 Body</h3>
+<p>正如我们在第1.5节中提到的，你的帖子可以写在R标记或普通标记下。在撰写文章正文时，请注意两种格式之间的语法差异。</p>
+</div>
+<div class="section level3">
+<h3>2.3.3 短代码</h3>
+<p>除了Markdown的所有特性之外，Hugo还提供了一个名为“shortcodes”的有用特性。当Hugo呈现文章时，它可以根据传递给短代码的参数自动生成一个HTML片段。这很方便，因为您不必在帖子中键入或嵌入大量的HTML代码。例如，Hugo有嵌入Twitter卡的内置短代码。通常，下面的代码这就是如何在页面上嵌入Twitter卡（图2.2）：</p>
+<pre><code>&lt;blockquote class=&quot;twitter-tweet&quot;&gt;
+  &lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Anyone know of an R package for
+    interfacing with Alexa Skills?
+    &lt;a href=&quot;https://twitter.com/thosjleeper&quot;&gt;@thosjleeper&lt;/a&gt;
+    &lt;a href=&quot;https://twitter.com/xieyihui&quot;&gt;@xieyihui&lt;/a&gt;
+    &lt;a href=&quot;https://twitter.com/drob&quot;&gt;@drob&lt;/a&gt;
+    &lt;a href=&quot;https://twitter.com/JennyBryan&quot;&gt;@JennyBryan&lt;/a&gt;
+    &lt;a href=&quot;https://twitter.com/HoloMarkeD&quot;&gt;@HoloMarkeD&lt;/a&gt; ?
+  &lt;/p&gt;
+  &amp;mdash; Jeff Leek (@jtleek)
+  &lt;a href=&quot;https://twitter.com/jtleek/status/852205086956818432&quot;&gt;
+    April 12, 2017
+  &lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;
+&lt;/script&gt;</code></pre>
+<div class="figure">
+<img src="/post/2018-12-04-r-rmarkdown_files/jtleek-tweet.png" alt="FIGURE 2.2: A tweet by Jeff Leek." style="width:100.0%" style="height:100.0%" />
+<p class="caption">FIGURE 2.2: A tweet by Jeff Leek.</p>
+</div>
+<p>如果使用上述短代码，则在Markdown源文件中编写：</p>
+<pre><code>{{&lt; tweet 852205086956818432 &gt;}}</code></pre>
+<p>基本上，您只需要将tweet的ID传递给名为<code>tweet</code>的短代码。Hugo将自动获取tweet，并为您呈现相应的HTML片断。有关短代码的更多信息，请参见https://gohugo.io/extras/shortcodes/.</p>
+<p>短代码只能在普通的Markdown文件中工作。要在R Markdown中使用短代码，必须调用函数<code>blogdown::shortcode()</code>:</p>
+<pre class="r"><code>blogdown::shortcode(&#39;tweet&#39;, &#39;852205086956818432&#39;) </code></pre>
+</div>
+</div>
+<div id="-1" class="section level2">
+<h2>2.4 主题</h2>
+<p>Hugo主题是模板文件和网站资源（如CSS和JavaScript文件）的集合。简而言之，主题定义网站外观。<a href="https://themes.gohugo.io/">Hugo网站</a>提供了大量的主题可供使用，除非你是个资深的web开发人员，建议从使用现成主题开始学习。这些主题的质量和复杂性变化很大，应该谨慎选择。例如，可以查看GitHub上的主题的星星数量，以及该库是否相对活跃。我们不建议使用一个超过一年没有更新的主题。</p>
+<div class="section level3">
+<h3>2.4.1 默认主题</h3>
+<p>通常，GitHub上的每个主题都有一个<code>README</code>文件，它是主题的说明文档。另一个文件是<code>exampleSite</code>目录下的<code>config.toml</code>，它包含基于此主题的网站的示例配置。如果主题没有<code>README</code>文件或<code>exampleSite</code>目录，建议不使用这个主题。</p>
+<p>例如，主题<code>hugo-lithium</code>中的<code>config.toml</code>文件包含如下选项：</p>
+<pre><code>baseurl = &quot;/&quot;            # 可以在您的网站拥有域名之后再配置此选项。不要忘记尾斜杠。
+relativeurls = false     # （false）网站必须通过Web服务器查看，（true）通过文件查看器查看本地网站
+languageCode = &quot;en-us&quot;   # 
+title = &quot;A Hugo website&quot; # 网站的标题。通常在Web浏览器的标题栏或页面选项卡中显示
+theme = &quot;hugo-lithium&quot;   # 主题的目录名。在更改主题时，要小心，因为不同主题在配置方面可能完全不同
+googleAnalytics = &quot;&quot;     # 谷歌分析跟踪ID（如UA-000000-2）。可以在https://analytics.google.com注册获取跟踪ID。
+disqusShortname = &quot;&quot;     
+ignoreFiles = [&quot;\\.Rmd$&quot;, &quot;\\.Rmarkdown&quot;, &quot;_files$&quot;, &quot;_cache$&quot;]
+
+[permalinks]
+    post = &quot;/:year/:month/:day/:slug/&quot;
+
+[[menu.main]]
+    name = &quot;About&quot;
+    url = &quot;/about/&quot;
+[[menu.main]]
+    name = &quot;GitHub&quot;
+    url = &quot;https://github.com/rstudio/blogdown&quot;
+[[menu.main]]
+    name = &quot;Twitter&quot;
+    url = &quot;https://twitter.com/rstudio&quot;
+
+[params]  # 主题的杂项参数
+    description = &quot;A website built through Hugo and blogdown.&quot;
+
+    highlightjsVersion = &quot;9.12.0&quot; #这些选项用于配置在网页上突出显示代码块的语法
+    highlightjsCDN = &quot;//cdnjs.cloudflare.com/ajax/libs&quot;
+    highlightjsLang = [&quot;r&quot;, &quot;yaml&quot;]
+    highlightjsTheme = &quot;github&quot;
+
+    MathJaxCDN = &quot;//cdnjs.cloudflare.com/ajax/libs&quot;  # 数学表达式
+    MathJaxVersion = &quot;2.7.5&quot;
+
+[params.logo]
+    url = &quot;logo.png&quot;
+    width = 50
+    height = 50
+    alt = &quot;Logo&quot;
+</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2>2.5 模板</h2>
+<p>Hugo主题主要包括两个部分：模板和网站资源。前者是必不可少的，它告诉Hugo如何渲染页面。通常包括CSS和JavaScript文件，以及像图像和视频之类的其他资源。这些资源决定了网站的外观和功能，有些资源也可能嵌入到网页内容中。<br />
+<strong>具体内容略</strong><br />
+详细内容可参考：<a href="https://bookdown.org/yihui/blogdown/templates.html" class="uri">https://bookdown.org/yihui/blogdown/templates.html</a></p>
+</div>
+<div class="section level2">
+<h2>2.6 自定义布局</h2>
+<p><strong>具体内容略</strong><br />
+详细内容可参考：<a href="https://bookdown.org/yihui/blogdown/custom-layouts.html" class="uri">https://bookdown.org/yihui/blogdown/custom-layouts.html</a></p>
+</div>
+<div class="section level2">
+<h2>2.7 静态网页文件</h2>
+<p><strong>具体内容略</strong><br />
+详细内容可参考：<a href="https://bookdown.org/yihui/blogdown/static-files.html" class="uri">https://bookdown.org/yihui/blogdown/static-files.html</a></p>
+</div>
+</div>
+<div class="section level1">
+<h1>3 部署</h1>
+<p>由于静态网站基本上是一个包含网页资源的文件夹，所以部署起来比基于动态服务（如PHP或数据库）的网站要容易得多。您只需要将文件上传到服务器，网站很快就会启动并运行。关键问题是要使用哪个Web服务器。如果没有自己的服务器，可以尝试本章中列出的那些服务器。他们大部分是免费的（除了亚马逊S3），或者至少提供免费的计划。免责声明：本书的作者不附属于任何这些服务或公司，并且不能保证这些服务将永远提供。</p>
+<p>考虑到对初学者的成本和友好性，我们目前推荐<a href="https://www.netlify.com">Netlify</a>.它提供了一个免费的计划。如果以前没有发布网站的经验，只要登录使用GitHub帐户或其他帐户，将<strong><code>blogdown</code></strong>构建的网站的<code>public/</code>文件夹拖到Netlify页面，网站将在几秒钟内以<code>randow-word-12345.netlity.com</code>形式的Netlify提供的随机子域(可以自定义名称)上线。可以轻松地自动化这个过程（请参阅第3.1节以获得更多的细节）。</p>
+<p>第二个简单的解决方案是<a href="http://uBoo.co">Updog</a>，它的特点是Dropbox集成。网站的发布简单,像将<strong>blogdown</strong>网站的<code>public/</code>文件夹下的文件复制到Dropbox文件夹。Updog的免费计划只提供有限的特性，它的付费计划将允许您访问更丰富的特性。</p>
+<p>如果您不介意使用命令行工具或熟悉GIT/GitHub，那么可以考虑使用GitHub Pages、Travis CI或Amazon S3等服务来构建或托管网站。无论使用哪种服务，可以随时更改服务。正如之前提到的，<code>blogdown</code>的优点是网站是一个静态文件的文件夹，可以将其移动到任何Web服务器。</p>
+<div id="netlify" class="section level2">
+<h2>3.1 Netlify</h2>
+<p>在Netlify发布网页的方法很简单：</p>
+<p>第一种方法 上传<code>public/</code>文件夹到网站，等待一会，就会得到一个<code>*.netlify.com</code>格式的随机的子域名（这种方式适合不频繁更新的网站）</p>
+<p>第二种方法 Netlify利用Github、Gitlab存储库，调用Hugo自动部署网站。（将会花费几分钟来配置）</p>
+<p>首先，需要在Git存储库中托管网站的所有源文件。可以不用将<code>public/</code>文件夹托管到GIT储存库，因为这些会自动生成。目前Netlify支持的GIT储存库包括：GitHub, GitLab, 和BitBucket。使用这些帐户中的任何一个，都可以从Netlify的主页登录，并按照指南从GIT存储库创建新站点。</p>
+<p>Netlify支持多个静态网站生成器，包括Jykyl和Hugo。对于新站点，必须指定用于构建网站的命令以及发布目录的路径。Netlift支持Hugo的多个版本，因此构建命令可以是<code>hugo</code>。默认版本是0.17，这太老了，我们建议您少使用版本0.20。要指定大于或等于0.20的版本，需要在Netlify上创建一个环境变量<code>HUGO_VERSION</code>。更多有关信息，请参见Netlify文档。发布的文件夹默认为<code>public</code>，除非你在<code>config.toml</code>中修改。</p>
+<p>第一次在Netlify上部署网站可能要花一两分钟，但是后续更新网站源时可能要快得多（几秒钟）。</p>
+<p>在GIT存储库与Netlify连接之后，要解决的最后一个问题是修改域名。如果要使用不同的域，则需要配置域的一些DNS记录以将其指向Netlify服务器。有关域名的一些背景知识见<a href="https://bookdown.org/yihui/blogdown/domain-name.html#domain-name">附录C</a>。</p>
+<p>如果不熟悉域名或者不想了解更多关于它们的信息，那么可以考虑RStudio公司提供的免费子域名<code>*.rbind.io</code>。请访问Rbind<a href="https://support.rbind.io">网站</a>了解如何申请子域.事实上，Rbind组织也提供免费帮助如何建立一个基于<strong>blogdown</strong>的网站.</p>
+<p>Netlify不需要预先建立网站,只需要将更新源文件推送到GitHub，Netlify将为您构建网站。本章的其余解决方案将要求您在本地构建网站，并显式或隐式上传<code>public/</code>文件夹。也就是说，可以使用任何工具预构建您的网站，将它推到GitHub，并且Netlify仍然能够为您部署它。需要做的是让构建命令为空，并告诉Netlify发布目录（例如，Hugo的默认<code>public/</code>，但是如果预构建的网站位于根目录下，请指定）.然后，Netlify只需将此目录下的所有文件上传到其服务器，而不需要重新构建您的网站。</p>
+</div>
+<div id="updog" class="section level2">
+<h2>3.2 Updog</h2>
+<p><a href="https://updog.co">Updog</a>提供了一个简单的服务：它将指定的Dropbox(或Google Drive)文件夹转换为网站。主要原理是，您授予Updog读取文件夹的权限，它将充当中间人将此文件夹下的文件提供给访问者。这个文件夹必须通过域名访问，而Updog提供了免费的子域<code>*.updog.co</code>。例如，如果已将子域<code>example.updog.co</code>分配给Dropbox文件夹，当访问者希望看到页面https://example.updog.co/foo/index.html的内容，Updog将读取Dropbox文件夹中的文件<code>foo/index.html</code>，并将其显示给访问者。</p>
+<p>目前，Updog的免费计划只允许每个帐户有一个网站，将在你的网页页脚上插入“Hosted on Updog”。你可能不喜欢这些限制。使用Updog的主要好处是Dropbox会持续同步文件。你需要做的就是确保你的网站是正确的Dropbox文件夹生成的。通过在<code>config.toml</code>中设置选项<code>publishDir</code>，可以很容易地实现这一点。例如，假设您分配给Updog的文件夹是<code>~/Dropbox/Apps/updog/my-website/</code>，您的源文件夹在<code>~/Dropbox/Apps/updog/my-source/</code>，可以在<code>~/Dropbox/Apps/updog/my-source/config.toml</code>配置中设置<code>publishDir: &quot;../my-website&quot;</code></p>
+<p>如果您不想使用默认的Updog子域名，并且只需要将域名的CNAME记录指向Updog子域名，也可以使用您的自定义域名。</p>
+</div>
+<div id="github-pages" class="section level2">
+<h2>3.3 Github Pages</h2>
+<p><a href="https://pages.github.com">GitHub Pages</a>是托管静态网站(特别是使用Jekyll构建的网站)的非常流行的方法，但是与Netlify相比，它的优势并不明显，也不吸引人。建议考虑Netlify+Hugo的组合：</p>
+<p><strong>具体内容略</strong><br />
+详细见<a href="https://bookdown.org/yihui/blogdown/github-pages.html">github-pages</a></p>
+</div>
+<div id="travis-github" class="section level2">
+<h2>3.4 Travis + GitHub</h2>
+<p><strong>具体内容略</strong><br />
+详细见<a href="https://bookdown.org/yihui/blogdown/travis-github.html">travis-github</a></p>
+</div>
+<div id="gitlab-pages" class="section level2">
+<h2>3.5 GitLab Pages</h2>
+<p><strong>具体内容略</strong><br />
+详细见<a href="https://bookdown.org/yihui/blogdown/gitlab-pages.html">gitlab-pages</a></p>
+</div>
+</div>

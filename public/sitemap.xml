@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/2018-12-04-r-rmarkdown/</loc>
+    <lastmod>2018-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018-11-23-r-rmarkdown/</loc>
+    <lastmod>2018-11-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tutorial/custom-css/</loc>
     <lastmod>2016-03-05T00:00:00+00:00</lastmod>
   </url>
@@ -23,13 +33,14 @@
   </url>
   
   <url>
-    <loc>/post/2015-07-23-r-rmarkdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+    <loc>/tags/blog/</loc>
+    <lastmod>2015-07-28T09:32:45-04:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/blog/</loc>
-    <lastmod>2015-07-28T09:32:45-04:00</lastmod>
+    <loc>/tags/blogdown/</loc>
+    <lastmod>2018-12-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -41,37 +52,37 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/plot/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+    <lastmod>2018-12-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2015-07-28T09:32:45-04:00</lastmod>
+    <lastmod>2018-12-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r-markdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/regression/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+    <lastmod>2018-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/series/</loc>
     <lastmod>2016-03-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/shiny/</loc>
+    <lastmod>2018-11-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/shiny-server/</loc>
+    <lastmod>2018-11-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -95,6 +106,12 @@
   
   <url>
     <loc>/tutorials/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/web-page/</loc>
+    <lastmod>2018-12-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

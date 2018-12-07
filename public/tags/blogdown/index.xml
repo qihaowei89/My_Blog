@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogdown on My New Hugo Site</title>
+    <link>/tags/blogdown/</link>
+    <description>Recent content in Blogdown on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/blogdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>R 博客搭建</title>
+      <link>/post/2018-12-04-r-rmarkdown/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018-12-04-r-rmarkdown/</guid>
+      <description>1.1 安装 R RStudio IDE Pandoc (If not install RStudio) 1.1.1 安装 package—blogdown ## Install from CRAN install.packages(&amp;quot;blogdown&amp;quot;) ## Or, install from GitHub if (!requireNamespace(&amp;quot;devtools&amp;quot;)) install.packages(&amp;quot;devtools&amp;quot;) devtools::install_github(&amp;quot;rstudio/blogdown&amp;quot;) 1.1.2 安装 Hugo静态网站生成器 # helper function in blogdown to download and install it automatically on</description>
+    </item>
+    
+  </channel>
+</rss>
