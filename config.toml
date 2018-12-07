@@ -3,7 +3,7 @@ theme = "hugo-geo"
 relativeURLs = false
 hasCJKLanguage = true
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "My Blog Site"
 disqusShortname = "shortcode-here"
 paginate = 5
 
@@ -44,9 +44,6 @@ paginate = 5
 	name = "About"
 	url = "about"
 	
-	[[params.navlinks]]
-	name = "Blog"
-	url = ""
 	
 	[[params.navlinks]]
 	name = "Tutorials"

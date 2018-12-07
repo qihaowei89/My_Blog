@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on My New Hugo Site</title>
+    <title>Tags on My Blog Site</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on My New Hugo Site</description>
+    <description>Recent content in Tags on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jul 2015 09:32:45 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 04 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Blog</title>
-      <link>/tags/blog/</link>
-      <pubDate>Tue, 28 Jul 2015 09:32:45 -0400</pubDate>
-      
-      <guid>/tags/blog/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Blogdown</title>

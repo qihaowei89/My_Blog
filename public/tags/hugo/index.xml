@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo on My New Hugo Site</title>
+    <title>Hugo on My Blog Site</title>
     <link>/tags/hugo/</link>
-    <description>Recent content in Hugo on My New Hugo Site</description>
+    <description>Recent content in Hugo on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 Mar 2016 00:00:00 +0000</lastBuildDate>
@@ -32,16 +32,6 @@ each of hugo-geo&amp;rsquo;s site &lt;code&gt;[params]&lt;/code&gt; do.&lt;/p&gt
 &lt;p&gt;If this guide doesn&amp;rsquo;t answer your question it may be covered in the &lt;a href=&#34;http://gohugo.io/overview/configuration/&#34;&gt;Hugo documentation&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Welcome to Hugo-Geo!</title>
-      <link>/post/welcome/</link>
-      <pubDate>Tue, 28 Jul 2015 09:32:45 -0400</pubDate>
-      
-      <guid>/post/welcome/</guid>
-      <description>Welcome to hugo-geo, a resposive theme for the Hugo static site generator. Hugo is designed for post and tutorial sections, and is perfect for personal portfolio or blog sites.
-Why don&amp;rsquo;t you check out the Getting Started Tutorial and find out how you can use hugo-geo and customize it to your liking.</description>
     </item>
     
   </channel>
