@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="学习生物信息常用流程-1">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2018-12-07">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/">
+    <meta property="og:site_name" content="My Blog Site">
+    
+    <meta property="og:tags" content="RNA-seq">
+    
+    <meta property="og:tags" content="pipeline">
+    
+    <meta property="og:tags" content="bioinfomatics">
+    
+    <meta name="generator" content="Hugo 0.50" />
+    <title>学习生物信息常用流程-1 &middot; My Blog Site</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="My Blog Site" />
+    
+    
+    <link rel="icon" href="/favicon.ico" />
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="/">Qihao Wei&#39;s Home</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+					<li><a href="/about">About</a></li>
+				
+					<li><a href="/tutorial/">Tutorials</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="/">Qihao Wei&#39;s Home</a></h1>
+		
+		
+		
+			<small class="text-center center-block">MY HUGO BLOG</small>
+		
+		
+		
+			<img id="profile-pic" src="//img/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://github.com/qihaowei89"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://twitter.com/alexanderurq"><i class="fa fa-twitter fa-2x"></i></a>
+			
+				<a href="https://linkedin.com"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://plus.google.com/&#43;YourID"><i class="fa fa-google-plus fa-2x"></i></a>
+			
+
+			<a href="mailto:weiqihao08@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+				<a href="/about">About</a>
+			
+				<a href="/tutorial/">Tutorials</a>
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>学习生物信息常用流程-1</h1>
+	</header>
+
+	<article>
+		
+
+
+<div id="rnacocktailrna-seq" class="section level3">
+<h3>RNACocktail:一种精确高效的RNA-seq分析框架</h3>
+<p>From：<a href="https://bioinform.github.io/rnacocktail/" class="uri">https://bioinform.github.io/rnacocktail/</a></p>
+<p>RNACocktail pipeline可对短read和长read进行广谱的RNA-Seq分析，以便能够从转录数据获得有意义的见解。它是在分析了各种RNA-Seq样品(从生殖系、癌症到干细胞数据集)以及使用多种工具组合来确定一个全面、快速和准确的pipeline的技术之后开发的。</p>
+<table>
+<thead>
+<tr class="header">
+<th>short-read</th>
+<th>long-read</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>alignment</td>
+<td>error correction</td>
+</tr>
+<tr class="even">
+<td>transcriptome reconstruction</td>
+<td>alignment</td>
+</tr>
+<tr class="odd">
+<td>denovo transcriptome assembly</td>
+<td>transcriptome reconstruction</td>
+</tr>
+<tr class="even">
+<td>alignment-free quantification</td>
+<td>fusion prediction</td>
+</tr>
+<tr class="odd">
+<td>differential expression analysis</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>fusion prediction</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>variant calling</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>RNA editing prediction</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="rnacocktail" class="section level3">
+<h3>1 下载RNACocktail</h3>
+<p><a href="https://github.com/bioinform/RNACocktail/archive/v0.2.2.tar.gz">最新版本下载地址</a><br />
+<a href="https://github.com/bioinform/RNACocktail/releases">历史版本下载地址</a></p>
+</div>
+<div id="rnacocktail-docker" class="section level3">
+<h3>2 RNACocktail Docker镜像</h3>
+<p>Docker镜像的<a href="https://hub.docker.com/r/marghoob/rnacocktail/">下载地址</a></p>
+</div>
+<div class="section level3">
+<h3>3 系统要求</h3>
+<p>安装Python 2.7 以及下面的py包：</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Tool</th>
+<th align="center">Version tested</th>
+<th align="center">Pipeline modes used in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">pybedtools</td>
+<td align="center">0.7.7</td>
+<td align="center">editing</td>
+</tr>
+<tr class="even">
+<td align="center">pysam</td>
+<td align="center">0.9.0</td>
+<td align="center">editing</td>
+</tr>
+<tr class="odd">
+<td align="center">numpy</td>
+<td align="center">1.12.0</td>
+<td align="center">editing</td>
+</tr>
+<tr class="even">
+<td align="center">scipy</td>
+<td align="center">0.18.1</td>
+<td align="center">long_fusion</td>
+</tr>
+<tr class="odd">
+<td align="center">biopython</td>
+<td align="center">1.66</td>
+<td align="center">fusion</td>
+</tr>
+<tr class="even">
+<td align="center">openpyxl</td>
+<td align="center">1.5.6</td>
+<td align="center">fusion</td>
+</tr>
+<tr class="odd">
+<td align="center">pandas</td>
+<td align="center">0.19.2</td>
+<td align="center">fusion</td>
+</tr>
+<tr class="even">
+<td align="center">xlrd</td>
+<td align="center">0.6.1</td>
+<td align="center">fusion</td>
+</tr>
+</tbody>
+</table>
+<p>pybedtools依赖<a href="https://github.com/arq5x/bedtools2">bedtools</a>(v2.27.0) 软件。</p>
+<p>此外，必须提供以下工具的路径作为RNACocktail参数。或者，工具的可执行文件可以是环境变量中路径，也可以定义在<code>defaults.py</code>：</p>
+<table style="width:74%;">
+<colgroup>
+<col width="6%" />
+<col width="25%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Version</th>
+<th>Pipeline modes used in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/samtools/samtools">SAMtools</a></td>
+<td>1.2</td>
+<td>align, reconstruct, long_align, long_reconstruct, and editing</td>
+</tr>
+<tr class="even">
+<td><a href="http://ccb.jhu.edu/software/hisat2/index.shtml">HISAT2</a></td>
+<td>2.0.5</td>
+<td>align</td>
+</tr>
+<tr class="odd">
+<td><a href="https://ccb.jhu.edu/software/stringtie/index.shtml">StringTie</a></td>
+<td>1.3.3</td>
+<td>reconstruct and diff</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/COMBINE-lab/salmon">Salmon</a></td>
+<td>0.8.0</td>
+<td>quantify</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/dzerbino/oases">Oases</a></td>
+<td>0.2.09</td>
+<td>assembly</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/dzerbino/velvet">Velvet</a></td>
+<td>1.2.10</td>
+<td>assembly</td>
+</tr>
+<tr class="odd">
+<td>R with <a href="https://www.bioconductor.org/packages/devel/bioc/html/DESeq2.html">DESeq2</a>, <a href="https://github.com/hadley/readr">readr</a>, and <a href="https://github.com/mikelove/tximport">tximport</a>,readr,rjson, libraries</td>
+<td>3.3.2</td>
+<td>diff, editing</td>
+</tr>
+<tr class="even">
+<td><a href="http://bioinf.wehi.edu.au/featureCounts/">featureCounts</a></td>
+<td>1.5.0-p1</td>
+<td>diff</td>
+</tr>
+<tr class="odd">
+<td><a href="http://www.atgc-montpellier.fr/lordec/">LoRDEC</a></td>
+<td>0.6</td>
+<td>long_correct</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/alexdobin/STAR">STAR</a></td>
+<td>2.5.2b</td>
+<td>long_align</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/bioinform/IDP/">IDP</a></td>
+<td>0.1.9</td>
+<td>long_reconstruct</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.healthcare.uiowa.edu/labs/au/IDP-fusion/default.asp">IDP-fusion</a></td>
+<td>1.1.1</td>
+<td>long_fusion</td>
+</tr>
+<tr class="odd">
+<td><a href="https://software.broadinstitute.org/gatk/">GATK</a></td>
+<td>3.5-0</td>
+<td>variant and editing</td>
+</tr>
+<tr class="even">
+<td><a href="https://broadinstitute.github.io/picard/">Picard</a></td>
+<td>2.2.2</td>
+<td>variant</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/zhqingit/giremi">GIREMI</a></td>
+<td>0.2.1</td>
+<td>editing</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/GATB/gatb-core">gatb-core</a></td>
+<td>1.1.0</td>
+<td>editing</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/samtools/htslib">HTSlib</a></td>
+<td>1.3</td>
+<td>editing</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/ndaniel/fusioncatcher">FusionCatcher</a></td>
+<td>0.99.5a beta</td>
+<td>fusion</td>
+</tr>
+<tr class="odd">
+<td><a href="http://bowtie-bio.sourceforge.net/index.shtml">bowtie</a></td>
+<td>1.2.0</td>
+<td>fusion</td>
+</tr>
+<tr class="even">
+<td><a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">bowtie2</a></td>
+<td>2.2.9</td>
+<td>fusion, long_fusion</td>
+</tr>
+<tr class="odd">
+<td><a href="http://bio-bwa.sourceforge.net/">bwa</a></td>
+<td>0.7.15</td>
+<td>fusion</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/ncbi/sra-tools">sra toolkit</a></td>
+<td>2.8.1</td>
+<td>fusion</td>
+</tr>
+<tr class="odd">
+<td><a href="http://ftp.gnu.org/gnu/coreutils/">coreutils</a></td>
+<td>8.25</td>
+<td>fusion</td>
+</tr>
+<tr class="even">
+<td><a href="http://zlib.net/pigz/">pigz</a></td>
+<td>2.3.1</td>
+<td>fusion</td>
+</tr>
+<tr class="odd">
+<td><a href="http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/blat">blat</a></td>
+<td>0.35</td>
+<td>fusion</td>
+</tr>
+<tr class="even">
+<td><a href="http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/faToTwoBit">faToTwoBit</a></td>
+<td></td>
+<td>fusion</td>
+</tr>
+<tr class="odd">
+<td><a href="http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64.v287/liftOver">liftOver</a></td>
+<td></td>
+<td>fusion</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/ndaniel/seqtk">SeqTK</a></td>
+<td>1.0-r82b</td>
+<td>fusion</td>
+</tr>
+<tr class="odd">
+<td><a href="http://research-pub.gene.com/gmap/">gmap</a></td>
+<td>2017-02-15</td>
+<td>long_fusion</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="rnacocktail" class="section level3">
+<h3>4 安装RNACocktail</h3>
+<p>RNACocktail是python的一个软件包，可以使用pip安装(<a href="https://github.com/bioinform/RNACocktail/archive/v0.2.2.tar.gz" class="uri">https://github.com/bioinform/RNACocktail/archive/v0.2.2.tar.gz</a>),通常，安装源将是:<a href="https://github.com/bioinform/RNACocktail/archive/version.tar.gz" class="uri">https://github.com/bioinform/RNACocktail/archive/version.tar.gz</a>。</p>
+</div>
+<div id="rnacocktail" class="section level3">
+<h3>5 运行RNACocktail</h3>
+<p><code>run_rnacocktail.py -h</code> get help<br />
+<code>run_rnacocktail.py align -h</code> get short-read alignment help.<br />
+<code>run_rnacocktail.py reconstruct -h</code> get short-read transcriptome reconstruction help.<br />
+<code>run_rnacocktail.py quantify -h</code> get short-read quantification help.<br />
+<code>run_rnacocktail.py diff -h</code> get short-read differential expression help.<br />
+<code>run_rnacocktail.py denovo -h</code> get short-read de novo assembly help.<br />
+<code>run_rnacocktail.py long_correct -h</code> get long-read error correction help.<br />
+<code>run_rnacocktail.py long_align -h</code> get long-read alignment help.<br />
+<code>run_rnacocktail.py long_reconstruct -h</code> get long-read transcriptome reconstruction help.<br />
+<code>run_rnacocktail.py long_fusion -h</code> get long-read fusion detection help.<br />
+<code>run_rnacocktail.py variant -h</code> get variant calling help.<br />
+<code>run_rnacocktail.py editing -h</code> get RNA editing detection help.<br />
+<code>run_rnacocktail.py fusion -h</code> get RNA fusion detection help.<br />
+<code>run_rnacocktail.py all -h</code> get running all RNACocktail pipeline steps help.</p>
+<p>RNACocktail的all模式会根据输入数据，自动执行尽可能全面的分析，包括从比对到差异表达式分析的等步骤。</p>
+</div>
+<div id="rnacoktail" class="section level3">
+<h3>6 RNACoktail测试</h3>
+<p><strong>Small test</strong><br />
+<code>cd test</code><br />
+<code>./test_run.sh</code></p>
+<p><strong>Extensive test of all modes on Docker image</strong><br />
+<code>cd test</code><br />
+<code>./docker_test.sh</code></p>
+</div>
+<div class="section level3">
+<h3>7 分析脚本</h3>
+<p>分析用到的脚本可以在<code>analaysis_scripts</code>文件夹中找到</p>
+</div>
+<div class="section level3">
+<h3>8 输出文件</h3>
+<p>下表总结了各个RNACocktail模式下可能生成的输出文件。</p>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="18%" />
+<col width="22%" />
+<col width="35%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Command</th>
+<th>Default Tool</th>
+<th>Output Files</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Short-read alignment</td>
+<td>align</td>
+<td>HISAT2</td>
+<td><strong>alignments:</strong>alignments.sorted.bam <strong>junctions:</strong>splicesites.tab</td>
+</tr>
+<tr class="even">
+<td>Short-read transcriptome reconstruction</td>
+<td>reconstruct</td>
+<td>StringTie</td>
+<td><strong>trasncripts:</strong>transcripts.gtf <strong>expressions:</strong>gene_abund.tab</td>
+</tr>
+<tr class="odd">
+<td>Short-read quantification</td>
+<td>quantify</td>
+<td>Salmon-SMEM</td>
+<td><strong>expressions:</strong>quant.sf</td>
+</tr>
+<tr class="even">
+<td>Short-read differential expression</td>
+<td>diff</td>
+<td>DESeq2</td>
+<td><strong>differential expressions:</strong>deseq2_res.tab</td>
+</tr>
+<tr class="odd">
+<td>Short-read de novo assembly</td>
+<td>denovo</td>
+<td>Oases</td>
+<td><strong>trasncripts:</strong>transcripts.fa</td>
+</tr>
+<tr class="even">
+<td>Long-read error correction</td>
+<td>long_correct</td>
+<td>LoRDEC</td>
+<td><strong>corrected reads:</strong>long_corrected.fa</td>
+</tr>
+<tr class="odd">
+<td>Long-read alignment</td>
+<td>long_align</td>
+<td>STARlong</td>
+<td><strong>alignments:</strong>Aligned.out.psl</td>
+</tr>
+<tr class="even">
+<td>Long-read transcriptome reconstruction</td>
+<td>long_reconstruct</td>
+<td>IDP</td>
+<td><strong>trasncripts:</strong>isoform.gtf <strong>expressions:</strong>isoform.exp</td>
+</tr>
+<tr class="odd">
+<td>Long-read fusion detection</td>
+<td>long_fusion</td>
+<td>IDP-fusion</td>
+<td><strong>fusions:</strong>fusion_report.tsv</td>
+</tr>
+<tr class="even">
+<td>Variant calling</td>
+<td>variant</td>
+<td>GATK</td>
+<td><strong>variants:</strong>variants_filtered.vcf</td>
+</tr>
+<tr class="odd">
+<td>RNA editing detection</td>
+<td>editing</td>
+<td>GIREMI</td>
+<td><strong>edits:</strong>giremi_out.txt.res</td>
+</tr>
+<tr class="even">
+<td>RNA Fusion detection</td>
+<td>fusion</td>
+<td>FusionCatcher</td>
+<td><strong>fusions:</strong>final-list_candidate-fusion-genes.txt</td>
+</tr>
+<tr class="odd">
+<td>Running all steps</td>
+<td>all</td>
+<td>whole pipeline</td>
+<td>all outputs of the successful steps.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example" class="section level3">
+<h3>9 Example</h3>
+<p>接下来介绍用于以各种模式和数据类型（short-reads和long-reads）运行RNACocktail的一些Example 命令行。特别地，Example 17和18显示了如何使用<code>all</code>模式进行最全面的分析。注意RNACocktail需要预先构建参考基因组和参考转录组的索引。</p>
+<p><strong>Example 1 (align short paired-end):</strong><br />
+Run of RNACocktail for alignment of paired-end short-read sequences (HISAT2).</p>
+<pre><code>run_rnacocktail.py align \
+      --align_idx hisat2-idx \
+      --outdir out \
+      --workdir work \
+      --ref_gtf genes.GRCh37.gtf \
+      --1 seq_1.fq.gz \
+      --2 seq_2.fq.gz \
+      --hisat2 /path/to/hisat2 \
+      --hisat2_sps /path/to/hisat2_extract_splice_sites.py \
+      --samtools /path/to/samtools \
+      --threads 10 \
+      --sample A</code></pre>
+<p><strong>Example 2 (align short single-end):</strong><br />
+Run of RNACocktail for alignment of single-end short-read sequences (HISAT2).</p>
+<pre><code>run_rnacocktail.py align \
+      --align_idx hisat2-idx \
+      --outdir out \
+      --workdir work \
+      --ref_gtf genes.GRCh37.gtf \
+      --U seq.fq.gz \
+      --hisat2 /path/to/hisat2 \
+      --hisat2_sps /path/to/hisat2_extract_splice_sites.py \
+      --samtools /path/to/samtools \
+      --threads 10 \
+      --sample A</code></pre>
+<p><strong>Example 3 (reconstruct short-read):</strong><br />
+Run of RNACocktail for short-read transcriptome reconstruction (StringTie).</p>
+<pre><code>run_rnacocktail.py reconstruct \
+      --alignment_bam work/hisat2/A/alignments.sorted.bam \
+      --outdir out \
+      --workdir work \
+      --ref_gtf genes.GRCh37.gtf \
+      --stringtie /path/to/stringtie \
+      --threads 10 \
+      --sample A</code></pre>
+<p><strong>Example 4 (quantify short paired-end):(alignment-free)</strong><br />
+Run of RNACocktail for (alignment-free) quantification of paired-end short-read sequences (Salmon-SMEM).</p>
+<pre><code>salmon index \
+    -t Homo_sapiens.GRCh38.cdna.1.fa \
+    -i Homo_sapiens.GRCh38.cdna.1.quasi \
+    --type quasi
+    
+for sample in A1 A2 B1 B2
+do 
+run_rnacocktail.py quantify 
+      --quantifier_idx Homo_sapiens.GRCh38.cdna.1.quasi \
+      --1 ../${sample}_1.fq.gz \
+      --2 ../${sample}_2.fq.gz \
+      --libtype IU \
+      --salmon_k 19 \
+      --outdir out \
+      --workdir work \
+      --salmon salmon \
+      --threads 4 \
+      --sample A \
+      --unzip
+done   
+
+</code></pre>
+<p><strong>Example 5 (quantify short single-end):(alignment-free)</strong><br />
+Run of RNACocktail for (alignment-free) quantification of single-end short-read sequences (Salmon-SMEM).</p>
+<pre><code>salmon index \
+    -t Homo_sapiens.GRCh38.cdna.1.fa \
+    -i Homo_sapiens.GRCh38.cdna.1.quasi \
+    --type quasi
+
+
+for sample in A1 A2 B1 B2
+do  
+run_rnacocktail.py quantify \
+  --quantifier_idx Homo_sapiens.GRCh38.cdna.1.quasi \
+  --U ../${sample}.fq.gz \
+  --libtype IU \
+  --salmon_k 19 \
+  --outdir out  \
+  --workdir work \
+  --threads 4 \
+  --sample ${sample} \
+  --unzip 
+done
+ </code></pre>
+<p><strong>Example 6 (diff alignment-free):</strong><br />
+Run of RNACocktail for differential expression analysis of quantifications computed using Salmon-SMEM (DESeq2).</p>
+<pre><code>run_rnacocktail.py diff \
+    --quant_files \
+      work/salmon_smem/A1/quant.sf,work/salmon_smem/A2/quant.sf \
+      work/salmon_smem/B1/quant.sf,work/salmon_smem/B2/quant.sf \
+    --sample A1,A2 B1,B2 \
+    --ref_gtf Homo_sapiens.GRCh38.90.chr.1.gtf \
+    --outdir out \
+    --workdir work</code></pre>
+<p><strong>Example 7 (diff alignment):</strong><br />
+Run of RNACocktail for differential expression analysis of reads aligned using HISAT2 on reference transcriptome (DESeq2).</p>
+<pre><code>run_rnacocktail.py diff \
+    --alignments \
+      work/hisat2/A1/alignments.sorted.bam,work/hisat2/A2/alignments.sorted.bam \
+      work/hisat2/B1/alignments.sorted.bam,work/hisat2/B2/alignments.sorted.bam \
+    --sample A1,A2 B1,B2 \
+    --ref_gtf genes.GRCh37.gtf \
+    --outdir out \
+    --workdir work \
+    --featureCounts /path/to/featureCounts</code></pre>
+<p><strong>Example 8 (diff):</strong><br />
+Run of RNACocktail for differential expression analysis of reads aligned using HISAT2 on StringTie computed transcriptome (DESeq2).</p>
+<pre><code>run_rnacocktail.py diff \
+    --alignments \
+      work/hisat2/A1/alignments.sorted.bam,work/hisat2/A2/alignments.sorted.bam \
+      work/hisat2/B1/alignments.sorted.bam,work/hisat2/B2/alignments.sorted.bam \
+    --transcripts_gtfs work/stringtie/A1/transcripts.gtf,work/stringtie/A2/transcripts.gtf \
+      work/stringtie/B1/transcripts.gtf,work/stringtie/B2/transcripts.gtf \
+    --sample A1,A2 B1,B2 \
+    --ref_gtf genes.GRCh37.gtf \
+    --outdir out \
+    --workdir work \
+    --featureCounts /path/to/featureCounts</code></pre>
+<p><strong>Example 9 (denovo):</strong><br />
+Run of RNACocktail for de novo assembly (Oases).</p>
+<pre><code>run_rnacocktail.py denovo \
+    --1 seq_1.fq.gz \
+    --2 seq_2.fq.gz \
+    --outdir out \
+    --workdir work \
+    --oases /path/to/oases \
+    --velveth /path/to/velveth \
+    --velvetg /path/to/velvetg \
+    --threads 4 \
+    --sample A \
+    --file_format fastq.gz</code></pre>
+<p><strong>Example 10 (long_correct):</strong><br />
+Run of RNACocktail for long-read error correction (LoRDEC).</p>
+<pre><code>run_rnacocktail.py long_correct \
+    --kmer 23 \
+    --solid 3 \
+    --short seq.fq.gz \
+    --long seq_long.fa \
+    --outdir out \
+    --workdir work \
+    --lordec /path/to/lordec-correct \
+    --threads 4 \
+    --sample A</code></pre>
+<p><strong>Example 11 (long_align):</strong><br />
+Run of RNACocktail for long-read alignment (STARlong).</p>
+<pre><code>run_rnacocktail.py long_align \
+    --long work/lordec/A/long_corrected.fa \
+    --outdir out \
+    --workdir work \
+    --starlong /path/to/STARlong \
+    --threads 4 \
+    --sample A \
+    --sam2psl /path/to/sam2psl.py \
+    --samtools /path/to/samtools -\
+    -genome_dir /path/to/STAR/genome_idx</code></pre>
+<p><strong>Example 12 (long_reconstruct):</strong></p>
+<p>Run of RNACocktail for long-read transcriptome reconstruction (IDP).</p>
+<pre><code>run_rnacocktail.py long_reconstruct \
+    --alignment work/hisat2/A/alignments.sorted.bam \
+    --short_junction work/hisat2/A/splicesites.bed \
+    --long_alignment work/starlong/A/Aligned.out.psl \
+    --outdir out \
+    --workdir work \
+    --idp /path/to/runIDP.py \
+    --threads 4 \
+    --sample A \
+    --read_length 100 \
+    --ref_genome genome.GRCh37.fa \
+    --ref_all_gpd hg19.all.refSeq_gencode_ensemble_EST_known.gpd \
+    --ref_gpd genes.GRCh37.refFlat.txt \
+    --samtools /path/to/samtools \
+    --idp_cfg idp.cfg</code></pre>
+<p><strong>Example 13 (long_fusion):</strong><br />
+Run of RNACocktail for long-read fusion detection (IDP-fusion).</p>
+<pre><code>run_rnacocktail.py long_fusion \
+    --alignment work/hisat2/A/alignments.sorted.bam \
+    --short_junction work/hisat2/A/splicesites.bed \
+    --short_fasta seq.fa \
+    --long_fasta work/lordec/A/long_corrected.fa \
+    --outdir out \
+    --workdir work \
+    --threads 4 \
+    --sample A \
+    --ref_genome genome.GRCh37.fa \
+    --ref_all_gpd hg19.all.refSeq_gencode_ensemble_EST_known.gpd \
+    --ref_gpd genes.GRCh37.refFlat.txt \
+    --read_length 100 \
+    --genome_bowtie2_idx genome.bt2_idx \
+    --transcriptome_bowtie2_idx genes.bt2_idx \
+    --uniqueness_bedgraph uniqueness.bedGraph \
+    --gmap_idx gmap_idx \
+    --idpfusion /path/to/runIDP.py \
+    --samtools /path/to/samtools \
+    --idpfusion_cfg idpfusion.cfg</code></pre>
+<p>Example 14 (variant): Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignment. run_rnacocktail.py variant –alignment work/hisat2/A/alignments.sorted.bam –outdir out –workdir work –picard /path/to/picard.jar –gatk /path/to/GenomeAnalysisTK.jar –threads 10 –sample A –ref_genome genome.GRCh37.fa –IndelRealignment –knownsites dbsnp_138.b37.vcf</p>
+<p>Example 15 (editing): Run of RNACocktail for RNA editing detection (GIREMI) run_rnacocktail.py editing –alignment work/gatk/A/bsqr.bam –variant work/gatk/A/variants_filtered.vcf –strand_pos test/GRCh37_strand_pos.bed –genes_pos test/GRCh37_genes_pos.bed –outdir out –workdir work –giremi_dir /path/to/giremi/directory/ –gatk /path/to/GenomeAnalysisTK.jar –samtools /path/to/samtools –htslib_dir /path/to/htslib/directory/ –threads 10 –sample A –ref_genome genome.GRCh37.fa –knownsites dbsnp_138.b37.vcf</p>
+<p>Example 16 (fusion): Run of RNACocktail for RNA fusion detection (FusionCatcher) run_rnacocktail.py fusion –data_dir /path/to/fusioncatcher/ensembl/data/directory/ –input seq_1.fq.gz,seq_2.fq.gz –outdir out –workdir work –fusioncatcher /path/to/fusioncatcher –threads 4 –sample A</p>
+<p>Example 17 (all): Run all pipeline steps (Short-read example) run_rnacocktail.py all –outdir out –workdir work –threads 10 –1 A1_1.fq.gz,A2_1.fq.gz B1_1.fq.gz,B2_1.fq.gz –2 A1_2.fq.gz,A2_2.fq.gz B1_2.fq.gz,B2_2.fq.gz –sample all_A1,all_A2 all_B1,all_B2 –ref_gtf genes.GRCh37.gtf –ref_genome genome.GRCh37.fa –align_idx hisat2-idx –quantifier_idx salmon_fmd_idx –unzip –file_format fastq.gz –IndelRealignment –CleanSam –knownsites dbsnp_138.b37.vcf –strand_pos test/GRCh37_strand_pos.bed –genes_pos test/GRCh37_genes_pos.bed –data_dir /path/to/fusioncatcher/ensembl/data/directory/ –giremi_dir /path/to/giremi/directory/ –gatk /path/to/GenomeAnalysisTK.jar –htslib_dir /path/to/htslib/directory/ –picard /path/to/picard.jar –samtools /path/to/samtools –hisat2 /path/to/hisat2 –hisat2_sps /path/to/hisat2_extract_splice_sites.py –stringtie /path/to/stringtie –salmon /path/to/salmon –featureCounts /path/to/featureCounts –oases /path/to/oases –velveth /path/to/velveth –velvetg /path/to/velvetg –lordec /path/to/lordec-correct –sam2psl /path/to/sam2psl.py –fusioncatcher /path/to/fusioncatcher</p>
+<p>Example 18 (all): Run all pipeline steps (long-read example) run_rnacocktail.py all –outdir out –workdir work –threads 10 –U seq_short.fa –long seq_long.fa –sample all_C –ref_gtf genes.GRCh37.gtf –ref_genome genome.GRCh37.fa –align_idx hisat2-idx –quantifier_idx salmon_fmd_idx –unzip –file_format fasta –IndelRealignment –CleanSam –knownsites dbsnp_138.b37.vcf –strand_pos test/GRCh37_strand_pos.bed –genes_pos test/GRCh37_genes_pos.bed –data_dir /path/to/fusioncatcher/ensembl/data/directory/ –giremi_dir /path/to/giremi/directory/ –gatk /path/to/GenomeAnalysisTK.jar –htslib_dir /path/to/htslib/directory/ –star_genome_dir /path/to/STAR/genome_idx/ –genome_bowtie2_idx genome.bt2_idx –transcriptome_bowtie2_idx genes.bt2_idx –uniqueness_bedgraph uniqueness.bedGraph –gmap_idx gmap_idx –ref_all_gpd hg19.all.refSeq_gencode_ensemble_EST_known.gpd –ref_gpd genes.GRCh37.refFlat.txt –read_length 100 –picard /path/to/picard.jar –hisat2_opts &quot;-f&quot; –idp /path/to/idp/runIDP.py –idpfusion /path/to/idpfusion/runIDP.py –samtools /path/to/samtools –hisat2 /path/to/hisat2 –hisat2_sps /path/to/hisat2_extract_splice_sites.py –stringtie /path/to/stringtie –salmon /path/to/salmon –featureCounts /path/to/featureCounts –oases /path/to/oases –velveth /path/to/velveth –velvetg /path/to/velvetg –lordec /path/to/lordec-correct –sam2psl /path/to/sam2psl.py –fusioncatcher /path/to/fusioncatcher</p>
+</div>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shortcode-here" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>

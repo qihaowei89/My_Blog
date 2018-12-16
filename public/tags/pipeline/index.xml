@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pipeline on My Blog Site</title>
+    <link>/tags/pipeline/</link>
+    <description>Recent content in Pipeline on My Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/pipeline/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>学习生物信息常用流程-1</title>
+      <link>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
+      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacock</description>
+    </item>
+    
+  </channel>
+</rss>

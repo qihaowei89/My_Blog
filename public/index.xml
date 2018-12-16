@@ -6,10 +6,55 @@
     <description>Recent content on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 04 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Dec 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>部署Shiny应用程序到Web</title>
+      <link>/post/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0web/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0web/</guid>
+      <description>当你构建完成一个shiny应用程序后，可以将其部署到本地，或者到web。 部署shiny应用到本地 一旦你编写了Shiny应用程序，你就可以把它</description>
+    </item>
+    
+    <item>
+      <title>Quantification(transcript-level)--Salmon</title>
+      <link>/post/quantification-transcript-level-salmon/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/quantification-transcript-level-salmon/</guid>
+      <description>Salmon是快速RNA-seq转录组定量工具。它需要提供一组目标转录本（参考转录本或者从头组装的转录本）进行定量。 两种模式： - quasi-mapping-based: 参考转录本</description>
+    </item>
+    
+    <item>
+      <title>Tools-gffread(cufflinks)</title>
+      <link>/post/tools-gffread-cufflinks/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/tools-gffread-cufflinks/</guid>
+      <description>gffread gffread这工具，官网的定义为used to generate a FASTA file with the DNA sequences for all transcripts in a GFF file,比如一个很常见的需求，对于stringtie组装后的gt</description>
+    </item>
+    
+    <item>
+      <title>alignment</title>
+      <link>/post/alignment/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/alignment/</guid>
+      <description>Hisat2 HISAT2是一个快速和敏感的比对程序，用于将下一代测序读数（全基因组、转录组和外显组测序数据）映射到人类基因组群体（以及单个参考基因组）</description>
+    </item>
+    
+    <item>
+      <title>学习生物信息常用流程-1</title>
+      <link>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
+      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacock</description>
+    </item>
     
     <item>
       <title>R 博客搭建</title>

@@ -1,0 +1,32 @@
+---
+title: Quantification(transcript-level)--Salmon
+author: ''
+date: '2018-12-12'
+slug: quantification-transcript-level-salmon
+categories:
+  - Bioinfomatics
+tags:
+  - quantification
+  - RNA-seq
+css: []
+description: ''
+highlight: yes
+index: no
+scripts: []
+---
+
+
+**Salmon**是快速RNA-seq转录组定量工具。它需要提供一组目标转录本（参考转录本或者从头组装的转录本）进行定量。   
+
+
+两种模式：   
+- **quasi-mapping-based**:  参考转录本**FASTA**文件 + **FASTA/FASTQ**文件   
+- **alignment-based **: 参考转录本**FASTA**文件 + **SAM/BAM**文件   
+
+
+**第一步**：建立参考转录组的索引   
+salmon index -t 
+
+
+
+

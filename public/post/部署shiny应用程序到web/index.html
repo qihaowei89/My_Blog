@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="部署Shiny应用程序到Web">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2018-12-14">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0web/">
+    <meta property="og:site_name" content="My Blog Site">
+    
+    <meta property="og:tags" content="shiny">
+    
+    <meta property="og:tags" content="shiny-server">
+    
+    <meta name="generator" content="Hugo 0.50" />
+    <title>部署Shiny应用程序到Web &middot; My Blog Site</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="My Blog Site" />
+    
+    
+    <link rel="icon" href="/favicon.ico" />
+    
+
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="/">Qihao Wei&#39;s Home</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+					<li><a href="/about">About</a></li>
+				
+					<li><a href="/tutorial/">Tutorials</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="/">Qihao Wei&#39;s Home</a></h1>
+		
+		
+		
+			<small class="text-center center-block">MY HUGO BLOG</small>
+		
+		
+		
+			<img id="profile-pic" src="//img/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://github.com/qihaowei89"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://twitter.com/alexanderurq"><i class="fa fa-twitter fa-2x"></i></a>
+			
+				<a href="https://linkedin.com"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://plus.google.com/&#43;YourID"><i class="fa fa-google-plus fa-2x"></i></a>
+			
+
+			<a href="mailto:weiqihao08@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+				<a href="/about">About</a>
+			
+				<a href="/tutorial/">Tutorials</a>
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>部署Shiny应用程序到Web</h1>
+	</header>
+
+	<article>
+		
+
+
+<p>当你构建完成一个<strong>shiny应用程序</strong>后，可以将其部署到本地，或者到web。</p>
+<div id="shiny" class="section level3">
+<h3>部署shiny应用到本地</h3>
+<p>一旦你编写了Shiny应用程序，你就可以把它分发给其他人，让他们在自己的电脑上运行——他们可以用一个R命令下载和运行Shiny应用程序。</p>
+<p><strong>Gist</strong><br />
+将代码放到<a href="gist.github.com">gist</a>(GitHub提供的代码粘贴服务).<a href="https://gist.github.com/jcheng5/3239667">一个例子https://gist.github.com/jcheng5/3239667</a></p>
+<p>下载使用这个shiny app需要先安装R和Shiny包，然后只需输入以下命令运行应用程序：</p>
+<pre class="r"><code>shiny::runGist(&#39;3239667&#39;)</code></pre>
+<p>根据自己app对应的gist’s ID 来替换<code>3239667</code>，或者可以使用完整链接e.g.<code>'https://gist.github.com/jcheng5/3239667'</code></p>
+<p><strong>GitHub仓库</strong><br />
+如果您的项目存储在GitHub上的git存储库中，其他人可以直接下载并运行应用程序。一个示例https://github.com/rstudio/shiny_example。以下命令将下载并运行应用程序：</p>
+<pre class="r"><code>shiny::runGitHub(&#39;shiny_example&#39;, &#39;rstudio&#39;)</code></pre>
+<p>在这个示例中，GitHub帐户是“rstudio”，存储库是“shiny_example”；您需要用帐户和存储库名称替换它们。</p>
+<p><strong>Zip压缩文件，通过web传送</strong><br />
+如果将项目的zip或tar文件存储在Web或FTP服务器上，用户可以下载并使用如下命令运行该项目：</p>
+<pre class="r"><code>runUrl(&#39;https://github.com/rstudio/shiny_example/archive/master.zip&#39;)</code></pre>
+<p><strong>Zip压缩文件，通过复制</strong><br />
+复制，解压缩文件后通过命令<code>shiny::runApp</code>运行程序，</p>
+<p><strong>封装成R软件包</strong><br />
+如果您的Shiny应用程序对更广泛的受众有用，那么将其转换成R包可能是值得的。将Shiny应用程序目录放在包的<code>inst</code>目录下，然后通过以下代码内容的函数来创建包：</p>
+<pre class="r"><code>shiny::runApp(system.file(&#39;appdir&#39;, package=&#39;packagename&#39;))</code></pre>
+<p>其中<code>appdir</code>是<code>inst</code>中应用程序的子目录的名称，<code>packagename</code>是包的名称。</p>
+</div>
+<div id="shiny" class="section level3">
+<h3>部署shiny应用到网络</h3>
+<p>这里介绍4种方法： <strong>Shinyapps.io(可以免费部署5个程序)</strong><br />
+<code>Shinyapps.io</code>是用于托管Shiny web应用程序的平台，下面将展示如何创建一个<code>shinyapps.io</code>帐户并将第一个应用程序部署到云中。</p>
+<p><strong>安装<code>rsconnect</code></strong><br />
+通过<code>rsconnect</code>包将应用程序部署到<code>shinyapps.io</code>服务。<code>rsconnect</code>包现在托管在CRAN上。可以通过运行R命令来安装它：</p>
+<pre class="r"><code>install.packages(&#39;rsconnect&#39;)
+library(rsconnect)</code></pre>
+<p><strong>创建一个<code>shinyapps.io</code>账户</strong><br />
+<a href="https://www.shinyapps.io/">链接</a></p>
+<p><strong>配置<code>rsconnect</code></strong><br />
+一旦在<code>shinyapps.io</code>中设置了帐户，就可以配置<code>rsconnect</code>包以使用您的帐户。<code>shinyapps.io</code>自动为您生成一个令牌和密码,<code>rsconnect</code>包可以使用该令牌和密码来访问您的帐户。令牌在Shiyapps仪表板右上角菜单中的<code>Tokens</code>下。</p>
+<p>复制<code>rsconnect::setAccountInfo</code>函数到RStudio命令行运行。</p>
+</div>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shortcode-here" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>

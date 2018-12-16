@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rna Seq on My Blog Site</title>
+    <link>/tags/rna-seq/</link>
+    <description>Recent content in Rna Seq on My Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rna-seq/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Quantification(transcript-level)--Salmon</title>
+      <link>/post/quantification-transcript-level-salmon/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/quantification-transcript-level-salmon/</guid>
+      <description>Salmon是快速RNA-seq转录组定量工具。它需要提供一组目标转录本（参考转录本或者从头组装的转录本）进行定量。 两种模式： - quasi-mapping-based: 参考转录本</description>
+    </item>
+    
+    <item>
+      <title>alignment</title>
+      <link>/post/alignment/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/alignment/</guid>
+      <description>Hisat2 HISAT2是一个快速和敏感的比对程序，用于将下一代测序读数（全基因组、转录组和外显组测序数据）映射到人类基因组群体（以及单个参考基因组）</description>
+    </item>
+    
+    <item>
+      <title>学习生物信息常用流程-1</title>
+      <link>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
+      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacock</description>
+    </item>
+    
+  </channel>
+</rss>
