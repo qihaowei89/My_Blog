@@ -1,8 +1,8 @@
 ---
-title: 部署Shiny应用程序到Web
+title: 部署Shiny应用程序
 author: RStudio
 date: '2018-12-14'
-slug: 部署shiny应用程序到web
+slug: 部署shiny应用程序
 categories:
   - R
 tags:
@@ -18,7 +18,7 @@ scripts: []
 
 当你构建完成一个**shiny应用程序**后，可以将其部署到本地，或者到web。   
 
-###部署shiny应用到本地   
+###                                部署shiny应用到本地   
 一旦你编写了Shiny应用程序，你就可以把它分发给其他人，让他们在自己的电脑上运行——他们可以用一个R命令下载和运行Shiny应用程序。
 
 **Gist**   
@@ -60,10 +60,8 @@ shiny::runApp(system.file('appdir', package='packagename'))
 
 
 
-###部署shiny应用到网络   
+###                                       部署shiny应用到网络   
 
-
-这里介绍4种方法：
 **Shinyapps.io(可以免费部署5个程序)**    
 `Shinyapps.io`是用于托管Shiny web应用程序的平台，下面将展示如何创建一个`shinyapps.io`帐户并将第一个应用程序部署到云中。   
 
@@ -83,6 +81,82 @@ library(rsconnect)
 
 复制`rsconnect::setAccountInfo`函数到RStudio命令行运行。
 
+**A Demo app**   
+```{r echo=TRUE,include=TRUE,eval=FALSE}
+install.packages(c('ggplot2','shiny'))
+
+library(shiny)
+library(ggplot2)
+
+dataset <- diamonds
+ui <- fluidPage(
+
+  titlePanel("Diamonds Explorer"),
+
+  sidebarPanel(
+
+    sliderInput('sampleSize', 'Sample Size', min=1, max=nrow(dataset),
+                value=min(1000, nrow(dataset)), step=500, round=0),
+
+    selectInput('x', 'X', names(dataset)),
+    selectInput('y', 'Y', names(dataset), names(dataset)[[2]]),
+    selectInput('color', 'Color', c('None', names(dataset))),
+
+    checkboxInput('jitter', 'Jitter'),
+    checkboxInput('smooth', 'Smooth'),
+
+    selectInput('facet_row', 'Facet Row', c(None='.', names(dataset))),
+    selectInput('facet_col', 'Facet Column', c(None='.', names(dataset)))
+  ),
+
+  mainPanel(
+    plotOutput('plot')
+  )
+)
+
+
+server <- function(input, output) {
+
+  dataset <- reactive({
+    diamonds[sample(nrow(diamonds), input$sampleSize),]
+  })
+
+  output$plot <- renderPlot({
+
+    p <- ggplot(dataset(), aes_string(x=input$x, y=input$y)) + geom_point()
+
+    if (input$color != 'None')
+      p <- p + aes_string(color=input$color)
+
+    facets <- paste(input$facet_row, '~', input$facet_col)
+    if (facets != '. ~ .')
+      p <- p + facet_grid(facets)
+
+    if (input$jitter)
+      p <- p + geom_jitter()
+    if (input$smooth)
+      p <- p + geom_smooth()
+
+    print(p)
+
+  }, height=700)
+
+}
+
+
+shinyApp(ui, server)
+
+
+```   
+
+**部署应用**   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+library(rsconnect)
+deployApp()
+
+```
+
+或者使用RStudio IDE的`Publish`按钮部署应用
 
 
 

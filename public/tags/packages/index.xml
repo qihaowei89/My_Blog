@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Packages on My Blog Site</title>
+    <link>/tags/packages/</link>
+    <description>Recent content in Packages on My Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/packages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bioconductor&#43;CRAN镜像设定</title>
+      <link>/post/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/</guid>
+      <description>Select a CRAN Mirror 显示所有的镜像信息: getCRANmirrors(all = FALSE, local.only = FALSE) 选择镜像: ## CRAN mirror chooseCRANmirror(graphics = getOption(&amp;quot;menu.graphics&amp;quot;), ind = NULL, useHTTPS = getOption(&amp;quot;useHTTPS&amp;quot;, TRUE), local.only = FALSE) ## CRAN mirror chooseBioCmirror(graphics = getOption(&amp;quot;menu.graphics&amp;quot;), ind = NULL, useHTTPS = getOption(&amp;quot;useHTTPS&amp;quot;, TRUE), local.only = FALSE) 显示当前BioC_mirr</description>
+    </item>
+    
+  </channel>
+</rss>

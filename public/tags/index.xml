@@ -23,7 +23,7 @@
     <item>
       <title>Bioinfomatics</title>
       <link>/tags/bioinfomatics/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/bioinfomatics/</guid>
       <description></description>
@@ -66,11 +66,29 @@
     </item>
     
     <item>
+      <title>Packages</title>
+      <link>/tags/packages/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/packages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Pipeline</title>
       <link>/tags/pipeline/</link>
       <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/pipeline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>/tags/programming/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/programming/</guid>
       <description></description>
     </item>
     

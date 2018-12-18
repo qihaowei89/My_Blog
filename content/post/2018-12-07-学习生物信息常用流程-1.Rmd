@@ -63,8 +63,6 @@ pybedtools依赖[bedtools](https://github.com/arq5x/bedtools2)(v2.27.0) 软件�
 此外，必须提供以下工具的路径作为RNACocktail参数。或者，工具的可执行文件可以是环境变量中路径，也可以定义在`defaults.py`：   
 
 
-   
-
 |Tool|Version|Pipeline modes used in|
 |----|-----------------|-----------------------------|
 |[SAMtools](https://github.com/samtools/samtools)|1.2|align, reconstruct, long_align, long_reconstruct, and editing|
@@ -390,33 +388,170 @@ run_rnacocktail.py long_fusion \
     --idpfusion_cfg idpfusion.cfg
 ```   
 
-Example 14 (variant):
+**Example 14 (variant):**   
 Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignment.
-run_rnacocktail.py variant --alignment work/hisat2/A/alignments.sorted.bam --outdir out --workdir work --picard /path/to/picard.jar --gatk /path/to/GenomeAnalysisTK.jar --threads 10 --sample A --ref_genome genome.GRCh37.fa --IndelRealignment --knownsites dbsnp_138.b37.vcf
+```
+run_rnacocktail.py variant \
+    --alignment work/hisat2/A/alignments.sorted.bam \
+    --outdir out \
+    --workdir work \
+    --picard /path/to/picard.jar \
+    --gatk /path/to/GenomeAnalysisTK.jar \
+    --threads 10 \
+    --sample A \
+    --ref_genome genome.GRCh37.fa \
+    --IndelRealignment \
+    --knownsites dbsnp_138.b37.vcf
+```    
 
-Example 15 (editing):
+**Example 15 (editing):**
 Run of RNACocktail for RNA editing detection (GIREMI)
-run_rnacocktail.py editing --alignment work/gatk/A/bsqr.bam --variant work/gatk/A/variants_filtered.vcf --strand_pos test/GRCh37_strand_pos.bed --genes_pos test/GRCh37_genes_pos.bed --outdir out --workdir work --giremi_dir /path/to/giremi/directory/ --gatk /path/to/GenomeAnalysisTK.jar --samtools /path/to/samtools --htslib_dir /path/to/htslib/directory/ --threads 10 --sample A --ref_genome genome.GRCh37.fa --knownsites dbsnp_138.b37.vcf
+```
+run_rnacocktail.py editing \
+    --alignment work/gatk/A/bsqr.bam \
+    --variant work/gatk/A/variants_filtered.vcf \
+    --strand_pos test/GRCh37_strand_pos.bed \
+    --genes_pos test/GRCh37_genes_pos.bed \
+    --outdir out \
+    --workdir work \
+    --giremi_dir /path/to/giremi/directory/ \
+    --gatk /path/to/GenomeAnalysisTK.jar \
+    --samtools /path/to/samtools \
+    --htslib_dir /path/to/htslib/directory/ \
+    --threads 10 \
+    --sample A \
+    --ref_genome genome.GRCh37.fa \
+    --knownsites dbsnp_138.b37.vcf
+```   
 
-Example 16 (fusion):
+**Example 16 (fusion):**
 Run of RNACocktail for RNA fusion detection (FusionCatcher)
-run_rnacocktail.py fusion --data_dir /path/to/fusioncatcher/ensembl/data/directory/ --input seq_1.fq.gz,seq_2.fq.gz --outdir out --workdir work --fusioncatcher /path/to/fusioncatcher --threads 4 --sample A
+```
+run_rnacocktail.py fusion \
+    --data_dir /path/to/fusioncatcher/ensembl/data/directory/ \
+    --input seq_1.fq.gz,seq_2.fq.gz \
+    --outdir out \
+    --workdir work \
+    --fusioncatcher /path/to/fusioncatcher \
+    --threads 4 \
+    --sample A
+```   
 
-Example 17 (all):
+**Example 17 (all):**
 Run all pipeline steps (Short-read example)
-run_rnacocktail.py all --outdir out --workdir work --threads 10 --1 A1_1.fq.gz,A2_1.fq.gz B1_1.fq.gz,B2_1.fq.gz --2 A1_2.fq.gz,A2_2.fq.gz B1_2.fq.gz,B2_2.fq.gz --sample all_A1,all_A2 all_B1,all_B2 --ref_gtf genes.GRCh37.gtf --ref_genome genome.GRCh37.fa --align_idx hisat2-idx --quantifier_idx salmon_fmd_idx --unzip --file_format fastq.gz --IndelRealignment --CleanSam --knownsites dbsnp_138.b37.vcf --strand_pos test/GRCh37_strand_pos.bed --genes_pos test/GRCh37_genes_pos.bed --data_dir /path/to/fusioncatcher/ensembl/data/directory/ --giremi_dir /path/to/giremi/directory/ --gatk /path/to/GenomeAnalysisTK.jar --htslib_dir /path/to/htslib/directory/ --picard /path/to/picard.jar --samtools /path/to/samtools --hisat2 /path/to/hisat2 --hisat2_sps /path/to/hisat2_extract_splice_sites.py --stringtie /path/to/stringtie --salmon /path/to/salmon --featureCounts /path/to/featureCounts --oases /path/to/oases --velveth /path/to/velveth --velvetg /path/to/velvetg --lordec /path/to/lordec-correct --sam2psl /path/to/sam2psl.py --fusioncatcher /path/to/fusioncatcher
+```
+run_rnacocktail.py all \
+    --outdir out \
+    --workdir work \
+    --threads 10 \
+    --1 A1_1.fq.gz,A2_1.fq.gz B1_1.fq.gz,B2_1.fq.gz \
+    --2 A1_2.fq.gz,A2_2.fq.gz B1_2.fq.gz,B2_2.fq.gz \
+    --sample all_A1,all_A2 all_B1,all_B2 \
+    --ref_gtf genes.GRCh37.gtf \
+    --ref_genome genome.GRCh37.fa \
+    --align_idx hisat2-idx \
+    --quantifier_idx salmon_fmd_idx \
+    --unzip \
+    --file_format fastq.gz \
+    --IndelRealignment \
+    --CleanSam \
+    --knownsites dbsnp_138.b37.vcf \
+    --strand_pos test/GRCh37_strand_pos.bed \
+    --genes_pos test/GRCh37_genes_pos.bed \
+    --data_dir /path/to/fusioncatcher/ensembl/data/directory/ \
+    --giremi_dir /path/to/giremi/directory/ \
+    --gatk /path/to/GenomeAnalysisTK.jar \
+    --htslib_dir /path/to/htslib/directory/ \
+    --picard /path/to/picard.jar \
+    --samtools /path/to/samtools \
+    --hisat2 /path/to/hisat2 \
+    --hisat2_sps /path/to/hisat2_extract_splice_sites.py \
+    --stringtie /path/to/stringtie \
+    --salmon /path/to/salmon \
+    --featureCounts /path/to/featureCounts \
+    --oases /path/to/oases \
+    --velveth /path/to/velveth \
+    --velvetg /path/to/velvetg \
+    --lordec /path/to/lordec-correct \
+    --sam2psl /path/to/sam2psl.py \
+    --fusioncatcher /path/to/fusioncatcher
+```   
 
-Example 18 (all):
+
+**Example 18 (all):**
 Run all pipeline steps (long-read example)
-run_rnacocktail.py all --outdir out --workdir work --threads 10 --U seq_short.fa --long seq_long.fa --sample all_C --ref_gtf genes.GRCh37.gtf --ref_genome genome.GRCh37.fa --align_idx hisat2-idx --quantifier_idx salmon_fmd_idx --unzip --file_format fasta --IndelRealignment --CleanSam --knownsites dbsnp_138.b37.vcf --strand_pos test/GRCh37_strand_pos.bed --genes_pos test/GRCh37_genes_pos.bed --data_dir /path/to/fusioncatcher/ensembl/data/directory/ --giremi_dir /path/to/giremi/directory/ --gatk /path/to/GenomeAnalysisTK.jar --htslib_dir /path/to/htslib/directory/ --star_genome_dir /path/to/STAR/genome_idx/ --genome_bowtie2_idx genome.bt2_idx --transcriptome_bowtie2_idx genes.bt2_idx --uniqueness_bedgraph uniqueness.bedGraph --gmap_idx gmap_idx --ref_all_gpd hg19.all.refSeq_gencode_ensemble_EST_known.gpd --ref_gpd genes.GRCh37.refFlat.txt --read_length 100 --picard /path/to/picard.jar --hisat2_opts \"-f\" --idp /path/to/idp/runIDP.py --idpfusion /path/to/idpfusion/runIDP.py --samtools /path/to/samtools --hisat2 /path/to/hisat2 --hisat2_sps /path/to/hisat2_extract_splice_sites.py --stringtie /path/to/stringtie --salmon /path/to/salmon --featureCounts /path/to/featureCounts --oases /path/to/oases --velveth /path/to/velveth --velvetg /path/to/velvetg --lordec /path/to/lordec-correct --sam2psl /path/to/sam2psl.py --fusioncatcher /path/to/fusioncatcher
+```
+run_rnacocktail.py all \
+    --outdir out \
+    --workdir work \
+    --threads 10 \
+    --U seq_short.fa \
+    --long seq_long.fa \
+    --sample all_C \
+    --ref_gtf genes.GRCh37.gtf \
+    --ref_genome genome.GRCh37.fa \
+    --align_idx hisat2-idx \
+    --quantifier_idx salmon_fmd_idx \
+    --unzip \
+    --file_format fasta \
+    --IndelRealignment \
+    --CleanSam \
+    --knownsites dbsnp_138.b37.vcf \
+    --strand_pos test/GRCh37_strand_pos.bed \
+    --genes_pos test/GRCh37_genes_pos.bed \
+    --data_dir /path/to/fusioncatcher/ensembl/data/directory/ \
+    --giremi_dir /path/to/giremi/directory/ \
+    --gatk /path/to/GenomeAnalysisTK.jar \
+    --htslib_dir /path/to/htslib/directory/ \
+    --star_genome_dir /path/to/STAR/genome_idx/ \
+    --genome_bowtie2_idx genome.bt2_idx \
+    --transcriptome_bowtie2_idx genes.bt2_idx \
+    --uniqueness_bedgraph uniqueness.bedGraph \
+    --gmap_idx gmap_idx \
+    --ref_all_gpd hg19.all.refSeq_gencode_ensemble_EST_known.gpd \
+    --ref_gpd genes.GRCh37.refFlat.txt \
+    --read_length 100 \
+    --picard /path/to/picard.jar \
+    --hisat2_opts \"-f\" \
+    --idp /path/to/idp/runIDP.py \
+    --idpfusion /path/to/idpfusion/runIDP.py \
+    --samtools /path/to/samtools \
+    --hisat2 /path/to/hisat2 \
+    --hisat2_sps /path/to/hisat2_extract_splice_sites.py \
+    --stringtie /path/to/stringtie \
+    --salmon /path/to/salmon \
+    --featureCounts /path/to/featureCounts \
+    --oases /path/to/oases \
+    --velveth /path/to/velveth \
+    --velvetg /path/to/velvetg \
+    --lordec /path/to/lordec-correct \
+    --sam2psl /path/to/sam2psl.py \
+    --fusioncatcher /path/to/fusioncatcher
+```  
 
 
 
 
+**准备基因组的index文件**   
+**HISAT2**   
+`hisat2-build [options] reference.fa hisat2_index_basename`   
+[more](http://ccb.jhu.edu/software/hisat2/manual.shtml)   
 
+**Salmon-SMEM**   
+`salmon index -t reference.fa -i salmon_index_basename --type fmd`   
+[more](http://salmon.readthedocs.io/en/latest/salmon.html#using-salmon)   
 
+**STAR**   
+`STAR --runMode genomeGenerate --genomeDir STAR_index_basename --genomeFastaFiles reference.fa --runThreadN 4`      
+[more](http://chagall.med.cornell.edu/RNASEQcourse/STARmanual.pdf)
 
+**GMAP**   
+`gmap_build -d gmap_index_basename reference.fa`   
+[more](http://research-pub.gene.com/gmap/)
 
+**bowtie2**   
+`bowtie2-build reference.fa bowtie2_index_basename`   
+[more](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml)
 
 
 

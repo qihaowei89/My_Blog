@@ -1,0 +1,83 @@
+---
+title: 函数式编程语言中常见的高阶函数(in R)
+author: RStudio
+date: '2018-12-17'
+slug: 函数式编程语言中常见的高阶函数-in-r
+categories:
+  - R
+tags:
+  - programming
+css: []
+description: ''
+highlight: yes
+index: no
+scripts: []
+---
+
+
+
+<p><strong>在列表对象上循环</strong><br />
+<code>lapply</code>:<strong>输入</strong><code>list</code>对象，<strong>返回</strong>与x等长的<code>list</code>对象<br />
+<code>sapply</code>:是<code>lapply</code>的用户友好版本，默认情况下，返回向量或矩阵。<br />
+<code>endoapply</code> 与<code>mendoapply</code>类似于<code>lapply</code>和<code>sapply</code>，不过返回的对象与输入对象的类型一致，而不是<code>list</code></p>
+<p><code>revElements(x,i)</code>:倒序输入<code>list</code>对象x，<code>i</code>指定list index</p>
+<p><code>pc</code>:返回与输入对象具有相同长度的列表或List对象。</p>
+<p><strong>List对象的函数编程方法</strong></p>
+<p><strong>FROM</strong>: <code>?base::Reduce</code></p>
+<pre class="r"><code># Usage   
+Reduce(f,x,init,right = FALSE,accumulate = FALSE)
+Filter(f,x)
+Find(f,x,right = FALSE, nomatch = NULL)
+Map(f)
+Negate(f)
+Position(f, x, right = FALSE, nomatch = NA_integer_)</code></pre>
+<p><strong>Arguments</strong></p>
+<table>
+<colgroup>
+<col width="6%" />
+<col width="93%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>args</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>f</td>
+<td>a function of the appropriate arity (binary for Reduce, unary for Filter, Find and Position, k-ary for Map if this is called with k arguments). An arbitrary predicate function for Negate.</td>
+</tr>
+<tr class="even">
+<td>x</td>
+<td>a vector.</td>
+</tr>
+<tr class="odd">
+<td>init</td>
+<td>an R object of the same kind as the elements of x.</td>
+</tr>
+<tr class="even">
+<td>right</td>
+<td>a logical indicating whether to proceed from left to right (default) or from right to left.</td>
+</tr>
+<tr class="odd">
+<td>accumulate</td>
+<td>a logical indicating whether the successive reduce combinations should be accumulated. By default, only the final combination is used.</td>
+</tr>
+<tr class="even">
+<td>nomatch</td>
+<td>the value to be returned in the case when “no match” (no element satisfying the predicate) is found.</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>vectors.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>List对象中表达式的计算</strong></p>
+<pre class="r"><code># Usage
+with(data, expr, ...)
+within(data, expr, ...)</code></pre>
+<p><strong>将列表合并到矩阵中</strong></p>
+<pre class="r"><code>rbind(..., deparse.level=1L)
+cbind(..., deparse.level=1L)</code></pre>

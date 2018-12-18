@@ -1,8 +1,8 @@
 ---
-title: 部署Shiny应用程序到Web
+title: 部署Shiny应用程序
 author: RStudio
 date: '2018-12-14'
-slug: 部署shiny应用程序到web
+slug: 部署shiny应用程序
 categories:
   - R
 tags:
@@ -42,7 +42,7 @@ scripts: []
 </div>
 <div id="shiny" class="section level3">
 <h3>部署shiny应用到网络</h3>
-<p>这里介绍4种方法： <strong>Shinyapps.io(可以免费部署5个程序)</strong><br />
+<p><strong>Shinyapps.io(可以免费部署5个程序)</strong><br />
 <code>Shinyapps.io</code>是用于托管Shiny web应用程序的平台，下面将展示如何创建一个<code>shinyapps.io</code>帐户并将第一个应用程序部署到云中。</p>
 <p><strong>安装<code>rsconnect</code></strong><br />
 通过<code>rsconnect</code>包将应用程序部署到<code>shinyapps.io</code>服务。<code>rsconnect</code>包现在托管在CRAN上。可以通过运行R命令来安装它：</p>
@@ -53,4 +53,71 @@ library(rsconnect)</code></pre>
 <p><strong>配置<code>rsconnect</code></strong><br />
 一旦在<code>shinyapps.io</code>中设置了帐户，就可以配置<code>rsconnect</code>包以使用您的帐户。<code>shinyapps.io</code>自动为您生成一个令牌和密码,<code>rsconnect</code>包可以使用该令牌和密码来访问您的帐户。令牌在Shiyapps仪表板右上角菜单中的<code>Tokens</code>下。</p>
 <p>复制<code>rsconnect::setAccountInfo</code>函数到RStudio命令行运行。</p>
+<p><strong>A Demo app</strong></p>
+<pre class="r"><code>install.packages(c(&#39;ggplot2&#39;,&#39;shiny&#39;))
+
+library(shiny)
+library(ggplot2)
+
+dataset &lt;- diamonds
+ui &lt;- fluidPage(
+
+  titlePanel(&quot;Diamonds Explorer&quot;),
+
+  sidebarPanel(
+
+    sliderInput(&#39;sampleSize&#39;, &#39;Sample Size&#39;, min=1, max=nrow(dataset),
+                value=min(1000, nrow(dataset)), step=500, round=0),
+
+    selectInput(&#39;x&#39;, &#39;X&#39;, names(dataset)),
+    selectInput(&#39;y&#39;, &#39;Y&#39;, names(dataset), names(dataset)[[2]]),
+    selectInput(&#39;color&#39;, &#39;Color&#39;, c(&#39;None&#39;, names(dataset))),
+
+    checkboxInput(&#39;jitter&#39;, &#39;Jitter&#39;),
+    checkboxInput(&#39;smooth&#39;, &#39;Smooth&#39;),
+
+    selectInput(&#39;facet_row&#39;, &#39;Facet Row&#39;, c(None=&#39;.&#39;, names(dataset))),
+    selectInput(&#39;facet_col&#39;, &#39;Facet Column&#39;, c(None=&#39;.&#39;, names(dataset)))
+  ),
+
+  mainPanel(
+    plotOutput(&#39;plot&#39;)
+  )
+)
+
+
+server &lt;- function(input, output) {
+
+  dataset &lt;- reactive({
+    diamonds[sample(nrow(diamonds), input$sampleSize),]
+  })
+
+  output$plot &lt;- renderPlot({
+
+    p &lt;- ggplot(dataset(), aes_string(x=input$x, y=input$y)) + geom_point()
+
+    if (input$color != &#39;None&#39;)
+      p &lt;- p + aes_string(color=input$color)
+
+    facets &lt;- paste(input$facet_row, &#39;~&#39;, input$facet_col)
+    if (facets != &#39;. ~ .&#39;)
+      p &lt;- p + facet_grid(facets)
+
+    if (input$jitter)
+      p &lt;- p + geom_jitter()
+    if (input$smooth)
+      p &lt;- p + geom_smooth()
+
+    print(p)
+
+  }, height=700)
+
+}
+
+
+shinyApp(ui, server)</code></pre>
+<p><strong>部署应用</strong></p>
+<pre class="r"><code>library(rsconnect)
+deployApp()</code></pre>
+<p>或者使用RStudio IDE的<code>Publish</code>按钮部署应用</p>
 </div>
