@@ -504,7 +504,22 @@ Netlify不需要预先建立网站,只需要将更新源文件推送到GitHub，
 
 
 
+## blogdown中使用`MathJax`数学公式（补充）   
 
+添加下面代码到`layouts/partials/head.html`中，    
+
+```
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+```   
 
 
 

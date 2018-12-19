@@ -425,4 +425,18 @@ ignoreFiles = [&quot;\\.Rmd$&quot;, &quot;\\.Rmarkdown&quot;, &quot;_files$&quot
 <p><strong>具体内容略</strong><br />
 详细见<a href="https://bookdown.org/yihui/blogdown/gitlab-pages.html">gitlab-pages</a></p>
 </div>
+<div id="blogdownmathjax" class="section level2">
+<h2>blogdown中使用<code>MathJax</code>数学公式（补充）</h2>
+<p>添加下面代码到<code>layouts/partials/head.html</code>中，</p>
+<pre><code>&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;]
+  }
+});
+&lt;/script&gt;
+&lt;script async type=&quot;text/javascript&quot;
+  src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;
+&lt;/script&gt;</code></pre>
+</div>
 </div>
