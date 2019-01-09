@@ -1,0 +1,201 @@
+---
+title: docker 镜像制作
+author: ''
+date: '2019-01-08'
+slug: docker-镜像制作
+categories:
+  - linux
+tags:
+  - docker images
+css: []
+description: ''
+highlight: yes
+index: no
+scripts: []
+---
+
+
+**第一步 下载基础ubuntu镜像**
+```
+# size = 86.7 Mb
+docker pull ubuntu
+````
+
+**第二步 使用docker build构建本地镜像**   
+参考[链接](https://www.jianshu.com/p/0cb3c75e1521)
+
+```
+mkdir dockerfile 
+cd dockerfile
+vim Dockerfile
+```
+在Dockerfile中编辑：   
+```
+FROM ubuntu
+MAINTAINER by wqh
+RUN apt update
+RUN apt-get install -y r-base 
+RUN apt-get install -y python
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/conda.sh && \
+    /bin/bash ~/conda.sh -b -p /opt/conda && \
+    rm ~/conda.sh && \
+    echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
+
+COPY <源路径> <目标路径> # <源路径>必须是上下文根目录的相对路径！<目标路径> 可以是容器内的绝对路径，也可以是相对路径
+ADD <源路径> <目标路径> # ADD与COPY指令在功能上十分相似,<源路径>可以是一个指向一个网络文件的URL，这种情况下，Docker引擎会试图下载这个URL指向的文件到<目标路径>去。ADD指令如果 <源路径> 为一个tar压缩文件的话，ADD 指令将会自动解压缩这个压缩文件到 <目标路径> 
+EXPOSE 80
+```   
+
+开始构建docker镜像
+```
+docker build -t test:ubuntu .
+```
+
+列出docker镜像   
+```
+docker image ls -a 
+```
+
+尝试运行初次构建的镜像并安装相关依赖软件   
+```
+docker run -v=/home/wqh/:/home/wqh/ -it <IMAGE ID>
+```
+
+列出容器快照找到最近修改保存的<CONTAINER ID>
+```
+docker ps -a
+
+# CONTAINER ID    IMAGE         COMMAND     CREATED                  STATUS        ORTS NAMES
+# 7ed84537456d  872a7a87f4f0  "/bin/bash" 6 minutes ago Exited (0) 8 seconds ago  vibrant_allen
+```   
+
+提交修改的容器，并生成新的镜像 
+```
+docker commit <CONTAINER ID > <新镜像名称>
+
+```
+查看保存的镜像能否运行   
+```
+docker run -v=/home/wqh/:/home/wqh/ -it <IMAGE ID>
+```
+常用参数解释：  
+`-v`  挂载本地文件夹到镜像中
+`-t`  让Docker分配一个伪终端并绑定到容器的标准输入上   
+`-i`  让容器的标准输入保持打开   
+`-d`  以守护方式打开（即非交互模式，后台运行）   
+还有一个比较常用的，做网络配置时端口映射的参数-p，例如下面的命令将宿主机的3222端口映射到容器的22端口、将宿主机的3280端口映射到容器的22端口，用法如下：   
+```
+#-p 设置端口映射 -p 宿主机端口:容器端口  
+sudo docker run -v=/home/wqh/:/home/ -ti -p 3222:22 -p 3280:80 87e5b6b3ccc1 /bin/bash
+```
+
+**docker镜像导出/导入**   
+```
+docker save -o <name to save>.tar <REPOSITORY>
+docker load -i <>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**docker管理**
+**1. 移除所有docker对象(container,images,networks)**   
+`docker system prune `删除所有容器、镜像和networks     
+`docker system prune -f ` 跳过提示的tags     
+`docker system prune --volumes ` 删除所有未使用的卷    
+
+**2. 移除所有dockercontainer**      
+```
+# 列出docker容器   
+docker container  ls -a  
+
+# 列出停止的容器 
+docker container ls -a --filter status=exited --filter status=created 
+
+# 列出停止docker容器ID   
+docker container stop $(docker container ls -aq)
+
+# 移除docker容器  
+docker container rm <CONTAINER ID 1>  
+
+# 设置过滤选项删除容器  
+docker container prune --filter "until=12h"   
+
+# 移除所有停止的容器 
+docker container rm $(docker container ls -aq) 
+ 
+``` 
+
+**3. 移除docker镜像**    
+```
+# 列出所有镜像
+docker image ls -a 
+
+# 移除镜像
+docker image  rm <IMAGE ID>
+
+# 移除所有未挂载镜像
+docker image  prune 
+
+# 移除所有镜像
+docker image prune -a
+
+# 移除符合过滤参数的镜像
+docker image prune -a --filter "until=12h"
+
+```
+
+**4 移除volume**   
+```
+docker volume ls 
+docker volume rm <VOLUME NAME>
+docker volume prune <-f or --force 不提示tag>
+
+```
+
+**5 移除Networks**   
+```
+docker network ls 
+docker network rm <NETWORK ID>
+docker network prune
+docker network prune -a --filter "until=12h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+**docker 镜像制作**   
+
+
+
+
+
+
+
+

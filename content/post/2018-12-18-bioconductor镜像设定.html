@@ -30,3 +30,6 @@ chooseBioCmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL,
                  useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE),
                  local.only = FALSE)</code></pre>
 <p>显示当前<strong>BioC_mirror</strong>，<code>options(&quot;BioC_mirror&quot;)</code> 显示当前<strong>CRAN mirror</strong>, <code>options(&quot;repos&quot;)</code>和<code>getOption(&quot;repos&quot;)</code></p>
+<p><strong>安装旧版本包</strong></p>
+<pre class="r"><code>packageurl &lt;- &quot;http://bioconductor.org/packages/3.4/bioc/src/contrib/DESeq2_1.14.1.tar.gz&quot;
+install.packages(packageurl, repos=NULL, type=&quot;source&quot;)</code></pre>

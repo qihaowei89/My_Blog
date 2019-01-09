@@ -6,10 +6,64 @@
     <description>Recent content on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>docker 镜像制作</title>
+      <link>/post/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</link>
+      <pubDate>Tue, 08 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</guid>
+      <description>第一步 下载基础ubuntu镜像 # size = 86.7 Mb docker pull ubuntu 第二步 使用docker build构建本地镜像 参考链接 mkdir dockerfile cd dockerfile vim Dockerfile 在Dockerfile中编辑：</description>
+    </item>
+    
+    <item>
+      <title>python学习</title>
+      <link>/post/python%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/python%E5%AD%A6%E4%B9%A0/</guid>
+      <description>目录操作 os.getcwd(): 获取当前所在目录 os.chdir(dir): 改变工作目录为“dir”</description>
+    </item>
+    
+    <item>
+      <title>使用R下载SRA数据</title>
+      <link>/post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</guid>
+      <description>library(SRAdb) setwd(&amp;quot;/home/wqh/sra_download/SRR6660814&amp;quot;) sra_dbname &amp;lt;- &amp;quot;../SRAmetadb.sqlite&amp;quot; sra_con &amp;lt;- dbConnect(dbDriver(&amp;quot;SQLite&amp;quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&amp;quot;SRR6660815&amp;quot;), sra_con, fileType=&amp;#39;fastq&amp;#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &amp;lt;- &amp;#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&amp;#39;</description>
+    </item>
+    
+    <item>
+      <title>R网页爬虫</title>
+      <link>/post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/</guid>
+      <description>常见的网页分为静态页面和AJAX增强的动态网页 1.静态页面 rvest + xml2 组合 xml2::read_html(x,encoding =,)：读取静态页面为xml对象 rvest::html_nodes(x</description>
+    </item>
+    
+    <item>
+      <title>R中文件读写函数</title>
+      <link>/post/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/</guid>
+      <description>示例数据1 (50 MB) require(data.table) # Demo speed-up n = 1e6 DT = data.table( a=sample(1:1000,n,replace=TRUE), b=sample(1:1000,n,replace=TRUE), c=rnorm(n), d=sample(c(&amp;quot;foo&amp;quot;,&amp;quot;bar&amp;quot;,&amp;quot;baz&amp;quot;,&amp;quot;qux&amp;quot;,&amp;quot;quux&amp;quot;),n,replace=TRUE), e=rnorm(n), f=sample(1:1000,n,replace=TRUE) ) DT[2,b:=NA_integer_] DT[4,c:=NA_real_] DT[3,d:=NA_character_] DT[5,d:=&amp;quot;&amp;quot;] DT[2,e:=+Inf] DT[3,e:=-Inf] system.time(write.table(DT,&amp;quot;test.csv&amp;quot;,sep=&amp;quot;,&amp;quot;,row.names=FALSE,quote=FALSE)) cat(&amp;quot;File size (MB):&amp;quot;, round(file.info(&amp;quot;test.csv&amp;quot;)$size/1024^2),&amp;quot;\n&amp;quot;) # 50 MB (1e6 rows x 6 columns) 使用read.csv读入 # 第一次读入 system.time(DF1 &amp;lt;- read.csv(&amp;quot;test.csv&amp;quot;,stringsAsFactors=FALSE)) # 5.8 sec (first time in</description>
+    </item>
+    
+    <item>
+      <title>R实用函数备忘录</title>
+      <link>/post/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/</guid>
+      <description>within(SQLDF,{b&amp;lt;-as.integer(b);c&amp;lt;-as.numeric(c)})</description>
+    </item>
     
     <item>
       <title>MathJax公式写法</title>

@@ -1,0 +1,22 @@
+---
+title: R实用函数备忘录
+author: ''
+date: '2018-12-20'
+slug: r实用函数备忘录
+categories:
+  - R
+tags:
+  - functions
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+within(SQLDF,{b<-as.integer(b);c<-as.numeric(c)})
+
+
+```
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data on My Blog Site</title>
+    <link>/tags/data/</link>
+    <description>Recent content in Data on My Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>R网页爬虫</title>
+      <link>/post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/</guid>
+      <description>常见的网页分为静态页面和AJAX增强的动态网页 1.静态页面 rvest + xml2 组合 xml2::read_html(x,encoding =,)：读取静态页面为xml对象 rvest::html_nodes(x</description>
+    </item>
+    
+  </channel>
+</rss>

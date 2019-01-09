@@ -43,3 +43,10 @@ chooseBioCmirror(graphics = getOption("menu.graphics"), ind = NULL,
 显示当前**BioC_mirror**，`options("BioC_mirror")`
 显示当前**CRAN mirror**, `options("repos")`和`getOption("repos")`
 
+**安装旧版本包**
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+packageurl <- "http://bioconductor.org/packages/3.4/bioc/src/contrib/DESeq2_1.14.1.tar.gz"
+install.packages(packageurl, repos=NULL, type="source")
+```
+

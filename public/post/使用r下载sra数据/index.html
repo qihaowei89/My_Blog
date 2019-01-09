@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="使用R下载SRA数据">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2018-12-26">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/">
+    <meta property="og:site_name" content="My Blog Site">
+    
+    <meta property="og:tags" content="data download">
+    
+    <meta name="generator" content="Hugo 0.50" />
+    <title>使用R下载SRA数据 &middot; My Blog Site</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="My Blog Site" />
+    
+    
+    <link rel="icon" href="../../favicon.ico" />
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+    });
+    </script>
+    <script async type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="../../">Qihao Wei&#39;s Home</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+					<li><a href="../../about">About</a></li>
+				
+					<li><a href="../../tutorial/">Tutorials</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="../../">Qihao Wei&#39;s Home</a></h1>
+		
+		
+		
+			<small class="text-center center-block">MY HUGO BLOG</small>
+		
+		
+		
+			<img id="profile-pic" src="//img/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://github.com/qihaowei89"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://twitter.com/alexanderurq"><i class="fa fa-twitter fa-2x"></i></a>
+			
+				<a href="https://linkedin.com"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://plus.google.com/&#43;YourID"><i class="fa fa-google-plus fa-2x"></i></a>
+			
+
+			<a href="mailto:weiqihao08@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+				<a href="../../about">About</a>
+			
+				<a href="../../tutorial/">Tutorials</a>
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>使用R下载SRA数据</h1>
+	</header>
+
+	<article>
+		
+
+
+<pre class="r"><code>library(SRAdb)
+setwd(&quot;/home/wqh/sra_download/SRR6660814&quot;)
+sra_dbname &lt;- &quot;../SRAmetadb.sqlite&quot;
+sra_con &lt;- dbConnect(dbDriver(&quot;SQLite&quot;), sra_dbname)
+
+# For Failed to open TCP Connection
+# iptables -I INPUT -p tcp --dport 33001 -j ACCEPT
+# iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT
+
+
+## Download sra files from NCBI SRA using ftp protocol:
+getSRAfile( c(&quot;SRR6660815&quot;), sra_con, fileType=&#39;fastq&#39;)
+
+
+## Download fastq files from EBI  ftp siteusing fasp protocol:
+ascpCMD &lt;-  &#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m  -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&#39;
+s1 &lt;- Sys.time()
+getSRAfile(c(&quot;SRR6660814&quot;), sra_con = sra_con, fileType = &quot;fastq&quot;, srcType = &quot;fasp&quot;,ascpCMD = ascpCMD )
+s2 &lt;- Sys.time()
+
+
+
+## Start IGV from R if no IGV running
+## Not run: startIGV(memory=&#39;mm&#39;)
+
+## load BAM files to IGV
+## Not run: 
+exampleBams = file.path(system.file(&#39;extdata&#39;,package=&#39;SRAdb&#39;), dir(system.file(&#39;extdata&#39;,package=&#39;SRAdb&#39;),pattern=&#39;bam$&#39;))
+sock &lt;- IGVsocket()
+IGVload(sock,exampleBams)
+
+
+## End(Not run)
+## Change the IGV genome
+## Not run: 
+IGVgenome(sock,genome=&#39;hg18&#39;)
+
+## End(Not run)
+## Go to a specified region in IGV
+## Not run: 
+IGVgoto(sock,&#39;chr1:1-10000&#39;)
+IGVgoto(sock,&#39;TP53&#39;)
+
+## End(Not run)
+
+## Make a snapshot of the current IGV window
+## Not run:   
+IGVsnapshot(sock)
+dir()
+
+## End(Not run)
+
+
+## create a graphNEL object from SRA accessions, which are full text search results of terms &#39;primary thyroid cell line&#39;
+g &lt;- sraGraph(&#39;primary thyroid cell line&#39;, sra_con)
+
+## Not run: 
+library(Rgraphviz)
+attrs &lt;- getDefaultAttrs(list(node=list(fillcolor=&#39;lightblue&#39;, shape=&#39;ellipse&#39;)))
+plot(g, attrs=attrs)
+
+## End(Not run)
+
+dbDisconnect(sra_con) 
+
+} else {
+  print(&quot;use getSRAdbFile() to get a copy of the SRAmetadb.sqlite file
+and then rerun the example&quot;)
+}</code></pre>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shortcode-here" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>

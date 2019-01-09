@@ -225,7 +225,6 @@ run_rnacocktail.py quantify
       --unzip
 done   
 
-
 ```   
 
 **Example  5 (quantify short single-end):(alignment-free)**    

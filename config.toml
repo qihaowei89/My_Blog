@@ -1,12 +1,12 @@
 baseurl = "/"
 theme = "hugo-geo"
-relativeURLs = false
+relativeURLs = true
 hasCJKLanguage = true
 languageCode = "en-us"
 title = "My Blog Site"
 disqusShortname = "shortcode-here"
 paginate = 5
-
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [taxonomies]
 	tag = "tags"
 	tutorial = "tutorials"
@@ -48,3 +48,4 @@ paginate = 5
 	[[params.navlinks]]
 	name = "Tutorials"
 	url = "tutorial/"
+  

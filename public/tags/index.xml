@@ -39,11 +39,56 @@
     </item>
     
     <item>
+      <title>Data</title>
+      <link>/tags/data/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Download</title>
+      <link>/tags/data-download/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-download/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Dna</title>
       <link>/tags/dna/</link>
       <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/dna/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker Images</title>
+      <link>/tags/docker-images/</link>
+      <pubDate>Tue, 08 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/docker-images/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>File I/O</title>
+      <link>/tags/file-i-o/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/file-i-o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Functions</title>
+      <link>/tags/functions/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/functions/</guid>
       <description></description>
     </item>
     
@@ -170,6 +215,15 @@
       <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
       
       <guid>/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Crawler</title>
+      <link>/tags/web-crawler/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/web-crawler/</guid>
       <description></description>
     </item>
     
