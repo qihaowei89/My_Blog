@@ -121,10 +121,12 @@
 		
 
 
+<div id="docker-build" class="section level3">
+<h3><strong>docker build构建本地镜像</strong></h3>
 <p><strong>第一步 下载基础ubuntu镜像</strong></p>
 <pre><code># size = 86.7 Mb
 docker pull ubuntu</code></pre>
-<p><strong>第二步 使用docker build构建本地镜像</strong><br />
+<p><strong>第二步 构建本地镜像</strong><br />
 参考<a href="https://www.jianshu.com/p/0cb3c75e1521">链接</a></p>
 <pre><code>mkdir dockerfile 
 cd dockerfile
@@ -139,9 +141,12 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     /bin/bash ~/conda.sh -b -p /opt/conda &amp;&amp; \
     rm ~/conda.sh &amp;&amp; \
     echo &quot;export PATH=/opt/conda/bin:$PATH&quot; &gt;&gt; ~/.bashrc
+    
+# &lt;源路径&gt;必须是上下文根目录的相对路径！&lt;目标路径&gt; 可以是容器内的绝对路径，也可以是相对路径
+COPY &lt;源路径&gt; &lt;目标路径&gt; 
 
-COPY &lt;源路径&gt; &lt;目标路径&gt; # &lt;源路径&gt;必须是上下文根目录的相对路径！&lt;目标路径&gt; 可以是容器内的绝对路径，也可以是相对路径
-ADD &lt;源路径&gt; &lt;目标路径&gt; # ADD与COPY指令在功能上十分相似,&lt;源路径&gt;可以是一个指向一个网络文件的URL，这种情况下，Docker引擎会试图下载这个URL指向的文件到&lt;目标路径&gt;去。ADD指令如果 &lt;源路径&gt; 为一个tar压缩文件的话，ADD 指令将会自动解压缩这个压缩文件到 &lt;目标路径&gt; 
+# ADD与COPY指令在功能上十分相似,&lt;源路径&gt;可以是一个指向一个网络文件的URL，这种情况下，Docker引擎会试图下载这个URL指向的文件到&lt;目标路径&gt;去。ADD指令如果 &lt;源路径&gt; 为一个tar压缩文件的话，ADD 指令将会自动解压缩这个压缩文件到 &lt;目标路径&gt; 
+ADD &lt;源路径&gt; &lt;目标路径&gt; 
 EXPOSE 80</code></pre>
 <p>开始构建docker镜像</p>
 <pre><code>docker build -t test:ubuntu .</code></pre>
@@ -166,10 +171,15 @@ EXPOSE 80</code></pre>
 还有一个比较常用的，做网络配置时端口映射的参数-p，例如下面的命令将宿主机的3222端口映射到容器的22端口、将宿主机的3280端口映射到容器的22端口，用法如下：</p>
 <pre><code>#-p 设置端口映射 -p 宿主机端口:容器端口  
 sudo docker run -v=/home/wqh/:/home/ -ti -p 3222:22 -p 3280:80 87e5b6b3ccc1 /bin/bash</code></pre>
-<p><strong>docker镜像导出/导入</strong></p>
+</div>
+<div id="docker" class="section level3">
+<h3><strong>docker镜像导出/导入</strong></h3>
 <pre><code>docker save -o &lt;name to save&gt;.tar &lt;REPOSITORY&gt;
 docker load -i &lt;&gt;</code></pre>
-<p><strong>docker管理</strong> <strong>1. 移除所有docker对象(container,images,networks)</strong><br />
+</div>
+<div id="docker" class="section level3">
+<h3><strong>docker管理</strong></h3>
+<p><strong>1. 移除所有docker对象(container,images,networks)</strong><br />
 <code>docker system prune</code>删除所有容器、镜像和networks<br />
 <code>docker system prune -f</code> 跳过提示的tags<br />
 <code>docker system prune --volumes</code> 删除所有未使用的卷</p>
@@ -207,15 +217,21 @@ docker image prune -a
 
 # 移除符合过滤参数的镜像
 docker image prune -a --filter &quot;until=12h&quot;
-</code></pre>
+
+# 如果出现错误：Can’t delete image with children
+docker inspect --format=&#39;{{.Id}} {{.Parent}}&#39; $(docker images --filter since=&lt;image_id&gt; -q)
+docker rmi {sub_image_id}</code></pre>
 <p><strong>4 移除volume</strong></p>
 <pre><code>docker volume ls 
 docker volume rm &lt;VOLUME NAME&gt;
 docker volume prune &lt;-f or --force 不提示tag&gt;
 </code></pre>
-<p><strong>5 移除Networks</strong><br />
-``` docker network ls docker network rm <NETWORK ID> docker network prune docker network prune -a –filter “until=12h”</p>
-<p><strong>docker 镜像制作</strong></p>
+<p><strong>5 移除Networks</strong></p>
+<pre><code>docker network ls 
+docker network rm &lt;NETWORK ID&gt;
+docker network prune
+docker network prune -a --filter &quot;until=12h&quot;</code></pre>
+</div>
 
 	</article>
 </main>

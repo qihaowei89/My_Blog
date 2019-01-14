@@ -14,14 +14,14 @@ index: no
 scripts: []
 ---
 
-
+###**docker build构建本地镜像**
 **第一步 下载基础ubuntu镜像**
 ```
 # size = 86.7 Mb
 docker pull ubuntu
 ````
 
-**第二步 使用docker build构建本地镜像**   
+**第二步 构建本地镜像**   
 参考[链接](https://www.jianshu.com/p/0cb3c75e1521)
 
 ```
@@ -40,9 +40,12 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     /bin/bash ~/conda.sh -b -p /opt/conda && \
     rm ~/conda.sh && \
     echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
+    
+# <源路径>必须是上下文根目录的相对路径！<目标路径> 可以是容器内的绝对路径，也可以是相对路径
+COPY <源路径> <目标路径> 
 
-COPY <源路径> <目标路径> # <源路径>必须是上下文根目录的相对路径！<目标路径> 可以是容器内的绝对路径，也可以是相对路径
-ADD <源路径> <目标路径> # ADD与COPY指令在功能上十分相似,<源路径>可以是一个指向一个网络文件的URL，这种情况下，Docker引擎会试图下载这个URL指向的文件到<目标路径>去。ADD指令如果 <源路径> 为一个tar压缩文件的话，ADD 指令将会自动解压缩这个压缩文件到 <目标路径> 
+# ADD与COPY指令在功能上十分相似,<源路径>可以是一个指向一个网络文件的URL，这种情况下，Docker引擎会试图下载这个URL指向的文件到<目标路径>去。ADD指令如果 <源路径> 为一个tar压缩文件的话，ADD 指令将会自动解压缩这个压缩文件到 <目标路径> 
+ADD <源路径> <目标路径> 
 EXPOSE 80
 ```   
 
@@ -89,27 +92,14 @@ docker run -v=/home/wqh/:/home/wqh/ -it <IMAGE ID>
 sudo docker run -v=/home/wqh/:/home/ -ti -p 3222:22 -p 3280:80 87e5b6b3ccc1 /bin/bash
 ```
 
-**docker镜像导出/导入**   
+###**docker镜像导出/导入**   
 ```
 docker save -o <name to save>.tar <REPOSITORY>
 docker load -i <>
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-**docker管理**
+###**docker管理**
 **1. 移除所有docker对象(container,images,networks)**   
 `docker system prune `删除所有容器、镜像和networks     
 `docker system prune -f ` 跳过提示的tags     
@@ -154,6 +144,9 @@ docker image prune -a
 # 移除符合过滤参数的镜像
 docker image prune -a --filter "until=12h"
 
+# 如果出现错误：Can’t delete image with children
+docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<image_id> -q)
+docker rmi {sub_image_id}
 ```
 
 **4 移除volume**   
@@ -170,32 +163,6 @@ docker network ls
 docker network rm <NETWORK ID>
 docker network prune
 docker network prune -a --filter "until=12h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-**docker 镜像制作**   
-
-
-
-
-
-
+```
 
 
