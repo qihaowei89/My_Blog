@@ -70,7 +70,9 @@ sudo docker run -v=/home/wqh/:/home/ -ti -p 3222:22 -p 3280:80 87e5b6b3ccc1 /bin
 <div id="docker" class="section level3">
 <h3><strong>docker镜像导出/导入</strong></h3>
 <pre><code>docker save -o &lt;name to save&gt;.tar &lt;REPOSITORY&gt;
-docker load -i &lt;&gt;</code></pre>
+docker load -i &lt;&gt;
+# 这时导入的镜像是没有TAG的可以使用下面命令重新命名
+docker tag &lt;IAMGE_ID&gt; &lt;REPOSITORY:TAG&gt;</code></pre>
 </div>
 <div id="docker" class="section level3">
 <h3><strong>docker管理</strong></h3>
