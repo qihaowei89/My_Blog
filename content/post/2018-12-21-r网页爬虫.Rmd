@@ -90,17 +90,22 @@ url <- "https://cancer.sanger.ac.uk/cosmic/fusion/overview?fid=2&amp;gid=75087"
 # 加载网页
 remDr$navigate(url)
 
-# 通过Xpath获取选项位置
-web_elem_cite <- remDr$findElement(using = "xpath","/html/body/app-root/app-search-result-page/div/div[2]/div/app-search-result/div/div[2]/div[2]/a[4]")
-
-# 模拟鼠标单击
-web_elem_cite$clickElement()
-
-web_cite <- remDr$findElement(using = "xpath",　"/html/body/app-root/app-search-result-page/div/div[2]/div/app-search-result/div[2]/div[2]/div/div[2]/div[2]")
+# 通过Xpath获取选项位置,模拟鼠标单击
+remDr$findElement(using = "xpath", xpath)$clickElement()
 
 # 获取需要提取的文本信息
-# pubmed <- webRef$getElementAttribute("outerHTML")[[1]]
-Cite <- web_cite$getElementText()[[1]]
+web_cite <- remDr$findElement(using = "xpath", click_xpath)$getElementText()[[1]]
+
+# 输入文本信息
+to_search <- remDr$findElement(using = "xpath",input_xpath)
+to_search$clearElement()
+# 输入文本
+search_enter <- list("输入内容",key='enter')
+to_search$sendKeysToElement(search_enter) 
+
+# 获取标签属性值，例如“id”
+to_ids <- remDr$findElement(using = "xpath",'//*[@id="searchfrm"]/div/table')
+ids <- to_ids$getElementAttribute("outerHTML")[[1]] %>% read_html() %>% html_nodes("tr a") %>% html_attr("id") %>% unique()
 
 ```   
 
