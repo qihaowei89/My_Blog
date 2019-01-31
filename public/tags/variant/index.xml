@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Variant on My Blog Site</title>
+    <link>/tags/variant/</link>
+    <description>Recent content in Variant on My Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/variant/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GATK 使用笔记</title>
+      <link>/post/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <description>** read group ** samtools view -H sample.bam | grep &amp;#39;@RG&amp;#39; 显示如下： @RG ID:H0164.2 PL:illumina PU:H0164ALXX140820.2 LB:Solexa-272222 PI:0 DT:2014-08-20T00:00:00-0400 SM:NA12878 CN:BI ID = Read group identifier,此标记标识每个read属于哪个read group，因此每个r</description>
+    </item>
+    
+  </channel>
+</rss>

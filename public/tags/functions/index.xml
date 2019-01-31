@@ -26,7 +26,7 @@
       <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/</guid>
-      <description>within(SQLDF,{b&amp;lt;-as.integer(b);c&amp;lt;-as.numeric(c)})</description>
+      <description>within(SQLDF,{b&amp;lt;-as.integer(b);c&amp;lt;-as.numeric(c)}) ip &amp;lt;- installed.packages() pkgs.to.remove &amp;lt;- ip[!(ip[,&amp;quot;Priority&amp;quot;] %in% c(&amp;quot;base&amp;quot;, &amp;quot;recommended&amp;quot;)), 1] sapply(pkgs.to.remove, remove.packages) # vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercont</description>
     </item>
     
   </channel>

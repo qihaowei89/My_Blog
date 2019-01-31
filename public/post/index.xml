@@ -6,10 +6,19 @@
     <description>Recent content in Posts on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GATK 使用笔记</title>
+      <link>/post/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <description>** read group ** samtools view -H sample.bam | grep &amp;#39;@RG&amp;#39; 显示如下： @RG ID:H0164.2 PL:illumina PU:H0164ALXX140820.2 LB:Solexa-272222 PI:0 DT:2014-08-20T00:00:00-0400 SM:NA12878 CN:BI ID = Read group identifier,此标记标识每个read属于哪个read group，因此每个r</description>
+    </item>
     
     <item>
       <title>docker 镜像制作</title>
@@ -62,7 +71,7 @@
       <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/</guid>
-      <description>within(SQLDF,{b&amp;lt;-as.integer(b);c&amp;lt;-as.numeric(c)})</description>
+      <description>within(SQLDF,{b&amp;lt;-as.integer(b);c&amp;lt;-as.numeric(c)}) ip &amp;lt;- installed.packages() pkgs.to.remove &amp;lt;- ip[!(ip[,&amp;quot;Priority&amp;quot;] %in% c(&amp;quot;base&amp;quot;, &amp;quot;recommended&amp;quot;)), 1] sapply(pkgs.to.remove, remove.packages) # vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercont</description>
     </item>
     
     <item>
