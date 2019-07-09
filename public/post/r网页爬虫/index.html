@@ -17,7 +17,7 @@
     
     <meta property="og:tags" content="data">
     
-    <meta name="generator" content="Hugo 0.50" />
+    <meta name="generator" content="Hugo 0.40.1" />
     <title>R网页爬虫 &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -120,10 +120,7 @@
 	</header>
 
 	<article>
-		
-
-
-<p><strong>常见的网页分为静态页面和AJAX增强的动态网页</strong></p>
+		<p><strong>常见的网页分为静态页面和AJAX增强的动态网页</strong></p>
 <p><strong>1.静态页面 <code>rvest</code> + <code>xml2</code> 组合</strong></p>
 <p><code>xml2::read_html(x,encoding =,)</code>：读取静态页面为<code>xml对象</code><br />
 <code>rvest::html_nodes(x=,css=/xpath=)</code>：提取<code>xml对象</code>中符合要求的所有节点</p>
@@ -197,7 +194,7 @@ ids &lt;- to_ids$getElementAttribute(&quot;outerHTML&quot;)[[1]] %&gt;% read_htm
 
 
   <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     

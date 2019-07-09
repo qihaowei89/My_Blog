@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="AnnotationDbi : Bioconductor Annotation 包的使用介绍">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-02-12">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/annotationdbi-bioconductor-annotation-%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/">
+    <meta property="og:site_name" content="My Blog Site">
+    
+    <meta name="generator" content="Hugo 0.40.1" />
+    <title>AnnotationDbi : Bioconductor Annotation 包的使用介绍 &middot; My Blog Site</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="My Blog Site" />
+    
+    
+    <link rel="icon" href="../../favicon.ico" />
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+    });
+    </script>
+    <script async type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="../../">Qihao Wei&#39;s Home</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+					<li><a href="../../about">About</a></li>
+				
+					<li><a href="../../tutorial/">Tutorials</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="../../">Qihao Wei&#39;s Home</a></h1>
+		
+		
+		
+			<small class="text-center center-block">MY HUGO BLOG</small>
+		
+		
+		
+			<img id="profile-pic" src="//img/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://github.com/qihaowei89"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://twitter.com/alexanderurq"><i class="fa fa-twitter fa-2x"></i></a>
+			
+				<a href="https://linkedin.com"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://plus.google.com/&#43;YourID"><i class="fa fa-google-plus fa-2x"></i></a>
+			
+
+			<a href="mailto:weiqihao08@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+				<a href="../../about">About</a>
+			
+				<a href="../../tutorial/">Tutorials</a>
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>AnnotationDbi : Bioconductor Annotation 包的使用介绍</h1>
+	</header>
+
+	<article>
+		<p>Bioconductor网站提供了大量的注释资源，包括<em>gene centric</em>和<em>genome centric</em>。如果想了解如何创建新的注释相关的R包，参考<em>AnnotationForge</em>包中的vignette<code>Creating select Interfaces for custom Annotation resources</code>。</p>
+<p>AnnotationDbi包中与<em>Gene centric</em>相关的注释数据库如下：</p>
+<ul>
+<li>Organism 水平: 如，org.Mm.eg.db<br />
+</li>
+<li>Platform 水平: 如，hgu133plus2.db, hgu133plus2.probes, hgu133plus2.cdf.<br />
+</li>
+<li>Homology 水平: 如，hom.Dm.inp.db.<br />
+</li>
+<li>System-biology 水平: 如，GO.db</li>
+</ul>
+<p>AnnotationDbi包中与<em>Genome centric</em>相关的注释数据库如下：</p>
+<ul>
+<li>Transcriptome 水平: 如，TxDb.Hsapiens.UCSC.hg19.knownGene, EnsDb.Hsapiens.v75<br />
+</li>
+<li>Generic genome features: 可以通过<code>GenomicFeatures</code>生成</li>
+</ul>
+<p>基于Web的资源，通过<code>Biomart</code>包访问<a href="http://www.biomart.org/">biomart</a>：</p>
+<ul>
+<li>查询基于Biomart-Web的资源中基因、序列、单核苷酸多态性等。</li>
+</ul>
+<p>这些注释包可以使用四种方法来访问内容：<code>columns</code>,<code>keytypes</code>,<code>keys</code>,<code>select</code>.这些方法目前可以与所有的<strong>chip</strong>, <strong>organism</strong> <strong>TxDb</strong>包以及流行的<strong>GO.db</strong>包一起使用。</p>
+<p><strong>载入数据库</strong></p>
+<pre class="r"><code>samplefile &lt;- system.file(&quot;extdata&quot;, &quot;hg19_knownGene_sample.sqlite&quot;,
+package=&quot;GenomicFeatures&quot;)
+txdb &lt;- loadDb(samplefile)
+#或者
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+txdb &lt;- TxDb.Hsapiens.UCSC.hg19.knownGene #shorthand (for convenience)
+txdb</code></pre>
+<p><strong>1 AnnotationDB对象和Select方法</strong><br />
+支持<code>columns</code>,<code>keytypes</code>,<code>keys</code>,<code>select</code>方法<br />
+以及新增的提取单列数据的<code>mapIds</code>方法</p>
+<p><strong>2 ChipDb 对象个Select方法</strong><br />
+另外一种常见的注释包是基于平台或基于芯片。该软件包的目的是为一系列探针或探针贴上标签。这种类型的包会载入一种为ChipDb的类型：</p>
+<pre class="r"><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;hgu95av2.db&quot;)
+library(hgu95av2.db)
+
+# 列出hgu95av2.db包中可用的方法和属性
+ls(&quot;package:hgu95av2.db&quot;)
+
+# 查看这对象
+hgu95av2.db
+
+# 查看hgu95av2.db对象包含数据的列名
+columns(hgu95av2.db)
+
+# 了解每个列数据的详细含义
+help(&quot;SYMBOL&quot;)
+
+# 查看那些列可以作为查询的关键字，使用keytypes方法得到的结果与columns方法有点相似
+keytypes(hgu95av2.db)
+
+# 提取特定类型的关键字
+head(keys(hgu95av2.db,keytype=&quot;SYMBOL&quot;))
+
+# 提取匹配关键字的数据
+k &lt;- head(keys(hgu95av2.db,keytype=&quot;PROBEID&quot;))
+
+# 使用select返回包含多列的a data.frame对象
+select(hgu95av2.db, keys=k, columns=c(&quot;SYMBOL&quot;,&quot;GENENAME&quot;), keytype=&quot;PROBEID&quot;)
+
+# 使用mapIds返回包含一列的a character vector, a list or a SimpleCharacterList对象
+mapIds(hgu95av2.db, keys=k, column=c(&quot;GENENAME&quot;), keytype=&quot;PROBEID&quot;)</code></pre>
+<p><strong>3 OrgDb 对象和Select方法</strong><br />
+<strong>organism</strong>水平的软件包使用特定的基因编号规则(如，Entrez Gene id)，并且会提供这种编号规则同其他常见编号规则的映射(如，GenBank or Uniprot accession number, RefSeq id等等)。<br />
+一个<strong>org</strong>类型的包的名字的格式为：<code>org.&lt;Ab&gt;.&lt;id&gt;.db, 如org.Sc.sgd.db</code><br />
+<code>&lt;Ab&gt;</code>是物种来源的两字母缩写(如，Sc是Saccharomyces cerevisiae的缩写)<br />
+<code>&lt;id&gt;</code>是特定编号规则的小字母缩写(如，sgd是Saccharomyces Genome Database的缩写，而eg是Entrez Gene的缩写)<br />
+下面的练习应该有助于熟悉在organism包的使用:<br />
+<strong>练习 1</strong><br />
+展示<a href="http://bioconductor.org/packages/org.Hs.eg.db">org.Hs.eg.db</a>包的OrgDb对象</p>
+<pre class="r"><code># source(&quot;https://bioconductor.org/biocLite.R&quot;)
+# biocLite(&quot;org.Hs.eg.db&quot;)
+
+library(org.Hs.eg.db)
+columns(org.Hs.eg.db)
+help(&quot;SYMBOL&quot;)
+keytypes(org.Hs.eg.db)
+
+uniKeys &lt;- head(keys(org.Hs.eg.db, keytype=&quot;UNIPROT&quot;))
+cols &lt;- c(&quot;SYMBOL&quot;, &quot;PATH&quot;)
+select(org.Hs.eg.db, keys=uniKeys, columns=cols, keytype=&quot;UNIPROT&quot;)</code></pre>
+<p><strong>练习 2</strong><br />
+使用select函数来注释结果<br />
+请运行以下代码段（它将加载我为演示目的提供的示例数据结果）：</p>
+<pre class="r"><code>load(system.file(&quot;extdata&quot;,&quot;resultTable.Rda&quot;,package = &quot;AnnotationDbi&quot;))
+head(resultTable)
+annots &lt;- select(org.Hs.eg.db, keys = row.names(resultTable),columns = c(&quot;SYMBOL&quot;,&quot;GENENAME&quot;), keytype = &quot;ENTREZID&quot;)
+resultTable &lt;- merge(resultTable, annots, by.x=0, by.y=&quot;ENTREZID&quot;)
+head(resultTable)</code></pre>
+<p><strong>4 使用select操作GO.db</strong><br />
+例子，已知GO IDs，想知道更多关于它的信息：</p>
+<pre class="r"><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;GO.db&quot;)
+
+library(GO.db)
+GOIDs &lt;- c(&quot;GO:0042254&quot;,&quot;GO:0044183&quot;)
+select(GO.db, keys=GOIDs, columns=&quot;DEFINITION&quot;, keytype=&quot;GOID&quot;)</code></pre>
+<p><strong>5 使用select操作TxDb</strong><br />
+TxDb包能将一组基因组坐标联系到各种转录组特征。其中包含某些特征（如基因和转录）的标识符，描述了这些不同元素之间的关系的内部模式。所有的TxDb包都遵循一个特定的命名规则.</p>
+<p><strong>练习 3</strong><br />
+展示<a href="http://bioconductor.org/packages/TxDb.Hsapiens.UCSC.hg19.knownGene">TxDb.Hsapiens.UCSC.hg19.knownGene</a>包的TxDb对象</p>
+<pre class="r"><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;TxDb.Hsapiens.UCSC.hg19.knownGene&quot;)
+
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+txdb &lt;- TxDb.Hsapiens.UCSC.hg19.knownGene
+columns(txdb)
+keytypes(txdb)
+
+keys &lt;- head(keys(txdb, keytype=&quot;GENEID&quot;))
+cols &lt;- c(&quot;TXID&quot;, &quot;TXSTART&quot;)
+select(txdb, keys=keys, columns=cols, keytype=&quot;GENEID&quot;)</code></pre>
+<p>TxDb对象除了上述的<code>select</code>方法外，同时也会提供一些常见的方法(<code>transcripts</code>，<code>exons</code>，<code>cds</code>，<code>transcriptsBy</code>，<code>exonsBy</code>，<code>cdsBy</code>).想详细了解这些方法可以参考<code>GenomicFeatures</code>包中的教程<code>vignette(&quot;GenomicFeatures&quot;,package = &quot;GenomicFeatures&quot;)</code></p>
+<p><strong>6 使用select操作EnsDb</strong><br />
+与上一节讨论的<code>TxDb对象/包</code>类似，<code>EnsDb对象/包</code>提供了基因模型的基因组坐标以及附加的注释（例如基因名、生物类型等），但是是根据Ensembl提供的注释进行定制的。此外，这些方法还允许使用EnsDb特定的过滤框架从数据库中检索选定的信息（有关详细信息，请参阅<code>vignette(&quot;ensembldb&quot;,package=&quot;ensembldb&quot;)</code>）。</p>
+<pre class="r"><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;EnsDb.Hsapiens.v75&quot;)
+
+library(EnsDb.Hsapiens.v75)
+edb &lt;- EnsDb.Hsapiens.v75
+edb
+columns(edb)
+keytypes(edb)
+keys &lt;- head(keys(edb, keytype=&quot;GENEID&quot;))
+select(edb, keys=keys, columns=c(&quot;TXID&quot;, &quot;TXSEQSTART&quot;, &quot;TXBIOTYPE&quot;), keytype=&quot;GENEID&quot;)
+linkY &lt;- keys(edb, filter=list(GeneBiotypeFilter(&quot;lincRNA&quot;),SeqNameFilter(&quot;Y&quot;))) # 查看支持哪些filter函数 supportedFilters() 具体用法查看?AnnotationFilter
+length(linkY)
+## We get now all transcripts for these genes.
+txs &lt;- select(edb, keys=linkY, columns=c(&quot;TXID&quot;, &quot;TXSEQSTART&quot;, &quot;TXBIOTYPE&quot;),keytype=&quot;GENEID&quot;)
+nrow(txs)
+## Alternatively, we could specify/pass the filters with the keys argument.
+txs &lt;- select(edb, keys=list(GeneBiotypeFilter(&quot;lincRNA&quot;), SeqNameFilter(&quot;Y&quot;)),columns=c(&quot;TXID&quot;, &quot;TXSEQSTART&quot;,&quot;TXBIOTYPE&quot;))
+nrow(txs)
+
+# 获取基因的cds区域
+cds_db &lt;- cdsBy(edb,filter = SeqNameFilter(c(1:22, &quot;X&quot;, &quot;Y&quot;)),columns = c(&quot;gene_id&quot;,&quot;gene_name&quot;))@unlistData
+# 配合(`transcripts`，`exons`，`cds`，`transcriptsBy`，`exonsBy`，`cdsBy`)使用的函数
+x=edb
+listColumns(x)
+listGenebiotypes(x)
+listTxbiotypes(x)
+listTables(x)
+metadata(x)
+organism(x)
+returnFilterColumns(x)
+returnFilterColumns(x) &lt;- T
+seqinfo(x)
+seqlevels(x)
+updateEnsDb(x)</code></pre>
+<p><strong>7 获取基因序列数据</strong></p>
+<pre class="r"><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;BSgenome.Hsapiens.UCSC.hg19&quot;)
+library(BSgenome.Hsapiens.UCSC.hg19)
+# bs &lt;- BSgenome.Hsapiens.UCSC.hg19
+
+# 提取基因组的所有转录区域，不管它们是否被翻译。(无实际意义)
+tx_seqs1 &lt;- extractTranscriptSeqs(Hsapiens, TxDb.Hsapiens.UCSC.hg19.knownGene,use.names=TRUE) 
+# 使用translate将碱基序列转换成蛋白序列
+suppressWarnings(translate(tx_seqs1))
+
+# 提取基因组的编码区,cdsBy()函数
+cds_seqs &lt;- extractTranscriptSeqs(Hsapiens, cdsBy(txdb, by=&quot;tx&quot;, use.names=TRUE))
+translate(cds_seqs)</code></pre>
+<p><strong>8 创建新的TxDb对象或者软件包</strong><br />
+<code>GenomicFeatures</code>包提供将从<strong>UCSC Genome Bioinformatics or BioMart</strong>下载的数据转换成TxDb对象,还支持使用<code>makeTxDb</code>从自定义数据源创建txdb对象；</p>
+<p><strong>8.1 <code>makeTxDbFromUCSC</code></strong><br />
+<code>makeTxDbFromUCSC</code>函数可从UCSC下载物种特定版本(例如,“mm9”,“hg19”)的转录组数据表(例如,“knownGene”, “refGene”, “ensGene”)<br />
+<code>supportedUCSCtables</code>函数查看可用数据表</p>
+<pre class="r"><code>library(GenomicFeatures)
+supportedUCSCtables(genome=&quot;hg19&quot;)
+hg19KG_txdb &lt;- makeTxDbFromUCSC(genome=&quot;hg19&quot;, tablename=&quot;knownGene&quot;)
+
+head(getChromInfoFromUCSC(&quot;hg19&quot;))</code></pre>
+<p><strong>8.2 <code>makeTxDbFromBiomart</code></strong></p>
+<pre class="r"><code>mmusculusEnsembl &lt;- makeTxDbFromBiomart(dataset=&quot;mmusculus_gene_ensembl&quot;)</code></pre>
+<p><strong>8.3 <code>makeTxDbFromEnsembl</code></strong></p>
+<p><strong>8.4 <code>makeTxDbFromGFF</code></strong></p>
+<p><strong>8.5 保存TxDd对象到本地,和从本地加载TxDd对象</strong></p>
+<pre class="r"><code>saveDb(mm9KG_txdb, file=&quot;fileName.sqlite&quot;)
+mm9KG_txdb &lt;- loadDb(&quot;fileName.sqlite&quot;)</code></pre>
+<p><strong>8.6 使用<code>makeTxDbPackageFromUCSC</code>和<code>makeTxDbPackageFromBiomart</code></strong><br />
+从已有注释文件生成注释包通常更方便。<code>makeTxDbPackageFromUCSC</code>和<code>makeTxDbPackageFromBiomart</code>这两个函数与<code>makeTxDbFromUCSC</code>和<code>makeTxDbFromBiomart</code>类似只是它们将采取额外的步骤将数据库实际包装到注释包中。然后可以从Bioconductor存储库中安装该软件包.</p>
+<p><code>supportedFilters()</code></p>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shortcode-here" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>

@@ -12,7 +12,7 @@
     <meta property="og:url" content="/">
     <meta property="og:site_name" content="My Blog Site">
     
-    <meta name="generator" content="Hugo 0.50" />
+    <meta name="generator" content="Hugo 0.40.1" />
     <title>My Blog Site &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -118,17 +118,17 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-in-r/">函数式编程语言中常见的高阶函数(in R)</a>
+			<a href="../../post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/">R网页爬虫</a>
 			<br>
 			<small>
-				17 December 2018
+				21 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		在列表对象上循环 lapply:输入list对象，返回与x等长的list对象 sapply:是lapply的用户友好版本，默认情况下，返回向量或
+		常见的网页分为静态页面和AJAX增强的动态网页 1.静态页面 rvest + xml2 组合 xml2::read_html(x,encoding =,)：读取静态页面为xml对象 rvest::html_nodes(x
 		
-			... <a href="../../post/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-in-r/">Read More</a>
+			... <a href="../../post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
@@ -136,7 +136,9 @@
 		<small class="text-muted">
 			
 			
-				<a href="../../tags/programming"><span class="label label-success">programming</span></a>
+				<a href="../../tags/web-crawler"><span class="label label-success">Web crawler</span></a>
+			
+				<a href="../../tags/data"><span class="label label-success">data</span></a>
 			
 		</small>
 		
@@ -147,17 +149,17 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/genomicranges/">GenomicRanges</a>
+			<a href="../../post/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/">R实用函数备忘录</a>
 			<br>
 			<small>
-				17 December 2018
+				20 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		基因组集合操作union,intersect,setdiff 1. union取两个基因组区域的并集 x &lt;- GRanges(&quot;chr1&quot;, IRanges(c(2, 9) , c(7, 19)), strand=c(&quot;+&quot;, &quot;-&quot;)) y &lt;- GRanges(&quot;chr1&quot;, IRanges(5, 10), strand=&quot;-&quot;) union(x, y) union(x, y, ignore.strand=TRUE) 2. i
+		within(SQLDF,{b&lt;-as.integer(b);c&lt;-as.numeric(c)}) ip &lt;- installed.packages() pkgs.to.remove &lt;- ip[!(ip[,&quot;Priority&quot;] %in% c(&quot;base&quot;, &quot;recommended&quot;)), 1] sapply(pkgs.to.remove, remove.packages) # vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercont
 		
-			... <a href="../../post/genomicranges/">Read More</a>
+			... <a href="../../post/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
@@ -165,7 +167,7 @@
 		<small class="text-muted">
 			
 			
-				<a href="../../tags/bioinfomatics"><span class="label label-success">bioinfomatics</span></a>
+				<a href="../../tags/functions"><span class="label label-success">functions</span></a>
 			
 		</small>
 		
@@ -176,17 +178,17 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">部署Shiny应用程序</a>
+			<a href="../../post/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/">R中文件读写函数</a>
 			<br>
 			<small>
-				14 December 2018
+				20 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		当你构建完成一个shiny应用程序后，可以将其部署到本地，或者到web。 部署shiny应用到本地 一旦你编写了Shiny应用程序，你就可以把它
+		示例数据1 (50 MB) require(data.table) # Demo speed-up n = 1e6 DT = data.table( a=sample(1:1000,n,replace=TRUE), b=sample(1:1000,n,replace=TRUE), c=rnorm(n), d=sample(c(&quot;foo&quot;,&quot;bar&quot;,&quot;baz&quot;,&quot;qux&quot;,&quot;quux&quot;),n,replace=TRUE), e=rnorm(n), f=sample(1:1000,n,replace=TRUE) ) DT[2,b:=NA_integer_] DT[4,c:=NA_real_] DT[3,d:=NA_character_] DT[5,d:=&quot;&quot;] DT[2,e:=+Inf] DT[3,e:=-Inf] system.time(write.table(DT,&quot;test.csv&quot;,sep=&quot;,&quot;,row.names=FALSE,quote=FALSE)) cat(&quot;File size (MB):&quot;, round(file.info(&quot;test.csv&quot;)$size/1024^2),&quot;\n&quot;) # 50 MB (1e6 rows x 6 columns) 使用read.csv读入 # 第一次读入 system.time(DF1 &lt;- read.csv(&quot;test.csv&quot;,stringsAsFactors=FALSE)) # 5.8 sec (first time in
 		
-			... <a href="../../post/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">Read More</a>
+			... <a href="../../post/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
@@ -194,9 +196,7 @@
 		<small class="text-muted">
 			
 			
-				<a href="../../tags/shiny"><span class="label label-success">shiny</span></a>
-			
-				<a href="../../tags/shiny-server"><span class="label label-success">shiny-server</span></a>
+				<a href="../../tags/file-i/o"><span class="label label-success">file I/O</span></a>
 			
 		</small>
 		
@@ -207,17 +207,17 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/alignment/">alignment</a>
+			<a href="../../post/%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A1%80-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/">自动化交易基础--知识点扫盲</a>
 			<br>
 			<small>
-				12 December 2018
+				19 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		Hisat2 HISAT2是一个快速和敏感的比对程序，用于将下一代测序读数（全基因组、转录组和外显组测序数据）映射到人类基因组群体（以及单个参考基因组）
+		配套代码 净值曲线 是交易账户的价值随时间变化的曲线，它刻画了现金加上投资组合的价值总和随时间的变化。若账户的投资金额不变，我们希望它呈直线上升
 		
-			... <a href="../../post/alignment/">Read More</a>
+			... <a href="../../post/%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A1%80-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
@@ -225,13 +225,9 @@
 		<small class="text-muted">
 			
 			
-				<a href="../../tags/align"><span class="label label-success">align</span></a>
+				<a href="../../tags/r"><span class="label label-success">R</span></a>
 			
-				<a href="../../tags/dna"><span class="label label-success">DNA</span></a>
-			
-				<a href="../../tags/rna-seq"><span class="label label-success">RNA-seq</span></a>
-			
-				<a href="../../tags/hisat2"><span class="label label-success">HISAT2</span></a>
+				<a href="../../tags/trading-with-r"><span class="label label-success">trading with R</span></a>
 			
 		</small>
 		
@@ -242,25 +238,21 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/tools-gffread-cufflinks/">Tools-gffread(cufflinks)</a>
+			<a href="../../post/mathjax%E5%85%AC%E5%BC%8F%E5%86%99%E6%B3%95/">MathJax公式写法</a>
 			<br>
 			<small>
-				12 December 2018
+				19 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		gffread gffread这工具，官网的定义为used to generate a FASTA file with the DNA sequences for all transcripts in a GFF file,比如一个很常见的需求，对于stringtie组装后的gt
-		
-			... <a href="../../post/tools-gffread-cufflinks/">Read More</a>
+		参考
 		
 	</div>
 	<div class="panel-footer">
 		
 		<small class="text-muted">
 			
-			
-				<a href="../../tags/bioinfomatics"><span class="label label-success">bioinfomatics</span></a>
 			
 		</small>
 		
@@ -274,12 +266,13 @@
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="../../" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="../../" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="../../page/2/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="../../page/2/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -291,7 +284,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../">1</a></li>
+    <li
+    ><a href="../../">1</a></li>
     
     
     
@@ -302,7 +296,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../page/2/">2</a></li>
+    <li
+    ><a href="../../page/2/">2</a></li>
     
     
     
@@ -313,7 +308,8 @@
         
     
     
-    <li class="page-item active"><a class="page-link" href="../../page/3/">3</a></li>
+    <li
+    class="active"><a href="../../page/3/">3</a></li>
     
     
     
@@ -324,15 +320,29 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../page/4/">4</a></li>
+    <li
+    ><a href="../../page/4/">4</a></li>
     
     
-    <li class="page-item">
-    <a href="../../page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="../../page/5/">5</a></li>
+    
+    
+    <li
+    >
+    <a href="../../page/4/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="../../page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="../../page/5/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>

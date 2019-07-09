@@ -15,7 +15,7 @@
     
     <meta property="og:tags" content="bioinfomatics">
     
-    <meta name="generator" content="Hugo 0.50" />
+    <meta name="generator" content="Hugo 0.40.1" />
     <title>GenomicRanges &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -118,10 +118,7 @@
 	</header>
 
 	<article>
-		
-
-
-<p><strong>基因组集合操作<code>union</code>,<code>intersect</code>,<code>setdiff</code></strong></p>
+		<p><strong>基因组集合操作<code>union</code>,<code>intersect</code>,<code>setdiff</code></strong></p>
 <p><strong>1. <code>union</code>取两个基因组区域的并集</strong></p>
 <pre><code>x &lt;- GRanges(&quot;chr1&quot;, IRanges(c(2, 9) , c(7, 19)), strand=c(&quot;+&quot;, &quot;-&quot;))
 y &lt;- GRanges(&quot;chr1&quot;, IRanges(5, 10), strand=&quot;-&quot;) 
@@ -159,7 +156,7 @@ setdiff(grlist, shift(grlist, 3))
 
 
   <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     

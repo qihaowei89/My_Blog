@@ -17,7 +17,7 @@
       <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</guid>
-      <description>library(SRAdb) setwd(&amp;quot;/home/wqh/sra_download/SRR6660814&amp;quot;) sra_dbname &amp;lt;- &amp;quot;../SRAmetadb.sqlite&amp;quot; sra_con &amp;lt;- dbConnect(dbDriver(&amp;quot;SQLite&amp;quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&amp;quot;SRR6660815&amp;quot;), sra_con, fileType=&amp;#39;fastq&amp;#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &amp;lt;- &amp;#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&amp;#39;</description>
+      <description>library(SRAdb) setwd(&amp;quot;/home/wqh/sra_download/SRR6660814&amp;quot;) sra_dbname &amp;lt;- &amp;quot;../SRAmetadb.sqlite&amp;quot; sra_con &amp;lt;- dbConnect(dbDriver(&amp;quot;SQLite&amp;quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&amp;quot;SRR6660815&amp;quot;), sra_con, fileType=&amp;#39;fastq&amp;#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &amp;lt;- &amp;#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&amp;#39; s1 &amp;lt;- Sys.</description>
     </item>
     
   </channel>

@@ -12,7 +12,7 @@
     <meta property="og:url" content="/">
     <meta property="og:site_name" content="My Blog Site">
     
-    <meta name="generator" content="Hugo 0.50" />
+    <meta name="generator" content="Hugo 0.40.1" />
     <title>My Blog Site &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -118,17 +118,129 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/">R实用函数备忘录</a>
+			<a href="../../post/annotationdbi-bioconductor-annotation-%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/">AnnotationDbi : Bioconductor Annotation 包的使用介绍</a>
 			<br>
 			<small>
-				20 December 2018
+				12 February 2019
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		within(SQLDF,{b&lt;-as.integer(b);c&lt;-as.numeric(c)}) ip &lt;- installed.packages() pkgs.to.remove &lt;- ip[!(ip[,&quot;Priority&quot;] %in% c(&quot;base&quot;, &quot;recommended&quot;)), 1] sapply(pkgs.to.remove, remove.packages) # vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercont
+		Bioconductor网站提供了大量的注释资源，包括gene centric和genome centric。如果想了解如何创建新的注释相关的R
 		
-			... <a href="../../post/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/">Read More</a>
+			... <a href="../../post/annotationdbi-bioconductor-annotation-%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
+			<a href="../../post/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">GATK 使用笔记</a>
+			<br>
+			<small>
+				25 January 2019
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		** read group ** samtools view -H sample.bam | grep &#39;@RG&#39; 显示如下： @RG ID:H0164.2 PL:illumina PU:H0164ALXX140820.2 LB:Solexa-272222 PI:0 DT:2014-08-20T00:00:00-0400 SM:NA12878 CN:BI ID = Read group identifier,此标记标识每个read属于哪个read group，因此每个r
+		
+			... <a href="../../post/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="../../tags/variant"><span class="label label-success">variant</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
+			<a href="../../post/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/">docker 镜像制作</a>
+			<br>
+			<small>
+				8 January 2019
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		docker build构建本地镜像 第一步 下载基础ubuntu镜像 # size = 86.7 Mb docker pull ubuntu 第二步 构建本地镜像 参考链接 mkdir dockerfile cd dockerfile vim Dockerfile 在Dockerfile中编辑： FROM
+		
+			... <a href="../../post/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="../../tags/docker-images"><span class="label label-success">docker images</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
+			<a href="../../post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/">使用R下载SRA数据</a>
+			<br>
+			<small>
+				26 December 2018
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		library(SRAdb) setwd(&quot;/home/wqh/sra_download/SRR6660814&quot;) sra_dbname &lt;- &quot;../SRAmetadb.sqlite&quot; sra_con &lt;- dbConnect(dbDriver(&quot;SQLite&quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&quot;SRR6660815&quot;), sra_con, fileType=&#39;fastq&#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &lt;- &#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&#39; s1 &lt;- Sys.
+		
+			... <a href="../../post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
+			
+				<a href="../../tags/data-download"><span class="label label-success">data download</span></a>
+			
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
+			<a href="../../post/python%E5%AD%A6%E4%B9%A0/">python学习</a>
+			<br>
+			<small>
+				26 December 2018
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		目录操作 os.getcwd(): 获取当前所在目录 os.chdir(dir): 改变工作目录为“dir”
 		
 	</div>
 	<div class="panel-footer">
@@ -144,132 +256,19 @@
 </div>
 
 
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="../../post/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/">R中文件读写函数</a>
-			<br>
-			<small>
-				20 December 2018
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		示例数据1 (50 MB) require(data.table) # Demo speed-up n = 1e6 DT = data.table( a=sample(1:1000,n,replace=TRUE), b=sample(1:1000,n,replace=TRUE), c=rnorm(n), d=sample(c(&quot;foo&quot;,&quot;bar&quot;,&quot;baz&quot;,&quot;qux&quot;,&quot;quux&quot;),n,replace=TRUE), e=rnorm(n), f=sample(1:1000,n,replace=TRUE) ) DT[2,b:=NA_integer_] DT[4,c:=NA_real_] DT[3,d:=NA_character_] DT[5,d:=&quot;&quot;] DT[2,e:=+Inf] DT[3,e:=-Inf] system.time(write.table(DT,&quot;test.csv&quot;,sep=&quot;,&quot;,row.names=FALSE,quote=FALSE)) cat(&quot;File size (MB):&quot;, round(file.info(&quot;test.csv&quot;)$size/1024^2),&quot;\n&quot;) # 50 MB (1e6 rows x 6 columns) 使用read.csv读入 # 第一次读入 system.time(DF1 &lt;- read.csv(&quot;test.csv&quot;,stringsAsFactors=FALSE)) # 5.8 sec (first time in
-		
-			... <a href="../../post/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="../../tags/file-i/o"><span class="label label-success">file I/O</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="../../post/%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A1%80-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/">自动化交易基础--知识点扫盲</a>
-			<br>
-			<small>
-				19 December 2018
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		配套代码 净值曲线 是交易账户的价值随时间变化的曲线，它刻画了现金加上投资组合的价值总和随时间的变化。若账户的投资金额不变，我们希望它呈直线上升
-		
-			... <a href="../../post/%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A1%80-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="../../tags/r"><span class="label label-success">R</span></a>
-			
-				<a href="../../tags/trading-with-r"><span class="label label-success">trading with R</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="../../post/mathjax%E5%85%AC%E5%BC%8F%E5%86%99%E6%B3%95/">MathJax公式写法</a>
-			<br>
-			<small>
-				19 December 2018
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		参考
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-		</small>
-		
-	</div>
-</div>
-
-
-	<div class="panel panel-default">
-	<div class="panel-header">
-		<h3>
-			<a href="../../post/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/">Bioconductor&#43;CRAN镜像设定</a>
-			<br>
-			<small>
-				18 December 2018
-			</small>
-		</h3>
-	</div>
-	<div class="panel-body">
-		Select a CRAN Mirror 显示所有的镜像信息: getCRANmirrors(all = FALSE, local.only = FALSE) 选择镜像: ## CRAN mirror chooseCRANmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL, useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE), local.only = FALSE) ## CRAN mirror chooseBioCmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL, useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE), local.only = FALSE) 显示当前BioC_mirr
-		
-			... <a href="../../post/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/">Read More</a>
-		
-	</div>
-	<div class="panel-footer">
-		
-		<small class="text-muted">
-			
-			
-				<a href="../../tags/packages"><span class="label label-success">packages</span></a>
-			
-		</small>
-		
-	</div>
-</div>
-
-
 
 <div class="text-center center-block">
 	
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="../../" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="../../" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="../../" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="../../" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -281,7 +280,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../">1</a></li>
+    <li
+    ><a href="../../">1</a></li>
     
     
     
@@ -292,7 +292,8 @@
         
     
     
-    <li class="page-item active"><a class="page-link" href="../../page/2/">2</a></li>
+    <li
+    class="active"><a href="../../page/2/">2</a></li>
     
     
     
@@ -303,7 +304,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../page/3/">3</a></li>
+    <li
+    ><a href="../../page/3/">3</a></li>
     
     
     
@@ -314,15 +316,28 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../page/4/">4</a></li>
+    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
     
     
-    <li class="page-item">
-    <a href="../../page/3/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="../../page/5/">5</a></li>
+    
+    
+    <li
+    >
+    <a href="../../page/3/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="../../page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="../../page/5/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>

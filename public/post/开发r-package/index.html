@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="开发R package">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-02-22">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/%E5%BC%80%E5%8F%91r-package/">
+    <meta property="og:site_name" content="My Blog Site">
+    
+    <meta name="generator" content="Hugo 0.40.1" />
+    <title>开发R package &middot; My Blog Site</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="My Blog Site" />
+    
+    
+    <link rel="icon" href="../../favicon.ico" />
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+    });
+    </script>
+    <script async type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="../../">Qihao Wei&#39;s Home</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+					<li><a href="../../about">About</a></li>
+				
+					<li><a href="../../tutorial/">Tutorials</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="../../">Qihao Wei&#39;s Home</a></h1>
+		
+		
+		
+			<small class="text-center center-block">MY HUGO BLOG</small>
+		
+		
+		
+			<img id="profile-pic" src="//img/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://github.com/qihaowei89"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://twitter.com/alexanderurq"><i class="fa fa-twitter fa-2x"></i></a>
+			
+				<a href="https://linkedin.com"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://plus.google.com/&#43;YourID"><i class="fa fa-google-plus fa-2x"></i></a>
+			
+
+			<a href="mailto:weiqihao08@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+				<a href="../../about">About</a>
+			
+				<a href="../../tutorial/">Tutorials</a>
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>开发R package</h1>
+	</header>
+
+	<article>
+		<pre class="r"><code>knitr::opts_chunk$set(echo = TRUE, eval = FALSE, include = TRUE, message = FALSE,  warning = FALSE)</code></pre>
+<pre><code>#   Build and Reload Package:  &#39;Ctrl + Shift + B&#39;
+#   Check Package:             &#39;Ctrl + Shift + E&#39;
+#   Test Package:              &#39;Ctrl + Shift + T&#39;
+</code></pre>
+<div id="week1" class="section level2">
+<h2>Week1</h2>
+<p><strong>学习目标</strong></p>
+<ul>
+<li>了解R包的基础结构和用途<br />
+</li>
+<li>使用<code>devtools</code>包创建一个简单的R包骨架<br />
+</li>
+<li>识别命名空间文件中的关键指令</li>
+</ul>
+<div id="introduction" class="section level3">
+<h3>1 Introduction</h3>
+<p><strong>1 Mac OS开发环境</strong><br />
+要在Mac OS中开发，首先需要下载Xcode开发环境。虽然您不需要Xcode附带的IDE来开发R包，但是您需要它附带的许多工具，包括C编译器（clang）。Xcode可以从Mac应用商店或苹果的Xcode开发者页面获取。安装之后，您将拥有C编译器以及许多其他的Unix shell工具。您还将拥有编译C代码所需的头文件。<br />
+虽然您不太可能用Fortran代码构建自己的包，但许多较旧的包（包括R本身）都包含Fortran代码。因此，为了构建这些包，您需要一个Fortran编译器。默认情况下，Mac OS不附带ON，因此您可以从R for Mac工具页下载GNU Fortran编译器。<br />
+Simon Urbanek维护的R for Mac工具包提供了更多详细信息，尤其是对于旧版本的Mac OS。</p>
+<p><strong>2 Windows开发环境</strong><br />
+在Windows上，R核心已经组装了一个工具包，您可以一次下载所有工具，并通过一个简单的安装工具进行安装。<a href="https://cran.r-project.org/bin/windows/Rtools/">RTools</a>包有不同的版本，这取决于您使用的R版本。确保获得与您的r版本相匹配的r tools版本。一旦安装了该版本，您将拥有构建r包所需的大部分工具。您可以选择安装一些其他工具，如本文所述。</p>
+<p><strong>3 Unix/Linux开发环境</strong><br />
+如果您在类似Unix的系统上使用R，那么您可能已经拥有了构建R包的工具。特别是，如果您从源代码安装的R，那么您已经有了C编译器和Fortran编译器。但是，如果您从包管理系统安装的R，那么可能需要安装编译器以及头文件。这些通常以后缀-devel的包来提供。例如，<code>readline</code>包的头文件可能位于<code>readline-devel</code>包中。关键是这些-devel包不需要运行r，只需要从源代码构建r包。</p>
+</div>
+<div id="r-packages" class="section level3">
+<h3>2 R packages</h3>
+<p><strong>R packages介绍</strong><br />
+R包是一种扩展R的基本功能的机制，它是编写函数的自然扩展，每个函数都能很好地完成特定的事情。函数的使用简化了用户的工作，因为用户不再需要了解底层代码的细节。他们只需要了解输入和输出。<br />
+当你开发了许多函数，就很自然地将它们分组到实现总体目标的函数集合中,这个函数集合就可用组装成一个R包。R包代表另一个抽象层次，其中向用户提供的接口是一组面向用户的函数。函数提供了对包的底层功能的访问，并简化了用户体验。<br />
+R包是将代码分发给其他人的更好的方法，因为它们为希望与您的代码交互的人提供了干净统一的用户体验。R包需要标准格式的文档，R（和rstudio）随附的各种工具有助于检查包，使其不包含不一致或错误。R用户已经熟悉如何使用R包，因此如果以这种格式显示，他们将能够快速采用您的代码。</p>
+<p>本章重点介绍了构建R包的关键元素。构建包的详细信息可以在<a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">编写R扩展手册</a>中找到。</p>
+<p><strong>R package的基本组成</strong><br />
+一个R包最开始是一个目录,其中包含两个特定子目录:<br />
+- <code>R/</code> R code文件存放的目录<br />
+- <code>man</code> 说明文档存放的目录</p>
+<p>在<code>package</code>目录的顶层，必须拥有<code>DESCRIPTION</code>和<code>NAMESPACE</code>文件,这是一个R package的最低要求,也可以添加其他文件和子目录，将在下面的部分中讨论如何添加和为什么添加。</p>
+<p>虽然rstudio不是开发R包的必需品，但它有许多方便的特性，使开发过程更容易和更快。为了使用rstudio进行包开发，必须正确设置环境,详细教程参考<a href="https://github.com/rdpeng/daprocedures/blob/master/lists/Rpackage_preflight.md">Roger’s</a>。</p>
+<p><strong><code>DESCRIPTION</code>文件介绍</strong><br />
+<code>DESCRIPTION</code>文件是R包的一个重要部分，因为它包含用于存储库(如CRAN)和R本身的关键元数据,包名称、版本号、作者和维护者联系信息、许可证信息以及对其他包的任何依赖关系。</p>
+<p>例如，下面是CRAN上<code>mvtsplot包</code>的<code>DESCRIPTION</code>文件。此包提供了绘制多变量时间序列数据绘图的函数。</p>
+<pre class="r"><code>Package:  mvtsplot
+Version:  1.0-3
+Date:  2016-05-13
+Depends:  R (&gt;= 3.0.0)
+Imports: splines, graphics, grDevices, stats, RColorBrewer
+Title:  Multivariate Time Series Plot
+Author:  Roger D. Peng &lt;rpeng@jhsph.edu&gt;
+Maintainer:  Roger D. Peng &lt;rpeng@jhsph.edu&gt;
+Description:  A function for plotting multivariate time series data.
+License:  GPL (&gt;= 2)
+URL: https://github.com/rdpeng/mvtsplot</code></pre>
+<p><strong><code>NAMESPACE</code>文件介绍</strong><br />
+<code>NAMESPACE</code>文件指定提供给用户的包的接口。这是通过一系列<code>export()</code>语句将包中的函数导出给用户。用户不能直接调用未导出的函数。除了<code>export</code>函数，<code>NAMESPACE</code>文件还指定包导入依赖的函数或包(必须在这个文件中导入)。</p>
+<p>下面是<code>mvtspot</code>包的<code>NAMESPACE</code>文件内容:</p>
+<pre class="r"><code>export(&quot;mvtsplot&quot;)
+
+import(splines)
+import(RColorBrewer)
+importFrom(&quot;grDevices&quot;, &quot;colorRampPalette&quot;, &quot;gray&quot;)
+importFrom(&quot;graphics&quot;, &quot;abline&quot;, &quot;axis&quot;, &quot;box&quot;, &quot;image&quot;, &quot;layout&quot;,
+           &quot;lines&quot;, &quot;par&quot;, &quot;plot&quot;, &quot;points&quot;, &quot;segments&quot;, &quot;strwidth&quot;,
+           &quot;text&quot;, &quot;Axis&quot;)
+importFrom(&quot;stats&quot;, &quot;complete.cases&quot;, &quot;lm&quot;, &quot;na.exclude&quot;, &quot;predict&quot;,
+           &quot;quantile&quot;)</code></pre>
+<p>例子中只有<code>mvtspot</code>函数通过<code>export</code>函数导出.但是有两种导入方法:</p>
+<ul>
+<li><code>import()</code> 只需将包名称作为参数，该外部包的所有函数都可以访问。</li>
+<li><code>importFrom()</code> 接受一个包和一系列函数名作为参数。能准确地指定需要从外部包中获得的函数。例如，此包从<code>grDevices</code>包导入<code>colorRampPalette()</code>函数和<code>gray()</code>函数。<br />
+一般来说，最好使用<code>importFrom()</code>,指定需要从包中获取的函数。需要包中的全部函数时，使用<code>import()</code>导入整个包可能会更好。</li>
+</ul>
+<p>必须仔细考虑要导出的函数。首先,导出的函数必须提供<strong>操作文档</strong>和<strong>帮助文档</strong>。其次,限制导出的函数的数量(如果可能的话),不要随意删除已经导出的函数,一旦人们习惯了使用导出的函数,删除它会导致用户不习惯。最后，导出的函数较多可能会导致用户的<code>NAMESPACE</code>与其他包中的函数冲突。最小化导出函数可以减少与其他包发生冲突的几率(使用更特殊函数名称是另一种方法)。</p>
+<p>** 命名空间函数表示法**<br />
+使用R包数量增大后,出现重名的R包可能性会增大.例如,常用的R包<code>dplyr</code>包中的<code>filter</code>函数,在<code>stats</code>包中同样有名为<code>filter()</code>的函数.如果同时加载了两个包（一个可能性更大的项目中），那么如何调用特定的<code>filter</code>函数？<br />
+在R中每个函数都有全称,相应包的命名空间作为函数全称的一部分:<br />
+<code>&lt;package name&gt;::&lt;exported function name&gt;</code>,例如:<code>dplyr::filter()</code><br />
+原则上，每一个函数都可以用这种方式引用，但对于交互工作来说，这是挺麻烦的.然而，对于编程来说，如果有可能出现混淆，那么使用全名引用函数通常更安全。</p>
+<p>可以使用命名空间表示法调用包未导出的函数.操作符<code>:::</code>可以实现这个调用,用法:<code>&lt;package name&gt;:::&lt;unexported function name&gt;</code>.这对于检查未导出函数的代码(例如出于调试目的)或临时访问包的某些未导出函数很有用.但是,这不是个好习惯,因为为导出的函数未来在更新升级过程中会发生改变.此外，对于CRAN上的包，不允许使用<code>:::</code>运算符。</p>
+<p>** load attach包的Namespace**<br />
+弄清楚<code>loading</code>包与<code>attaching</code>包的差异很重要<br />
+在<code>包A</code>import了<code>包B</code>的命名空间,<code>包A</code>会<code>loading``包B</code>的命名空间便于访问<code>包B</code>中导出的函数.这个时候,<code>包B</code>的命名空间loadinged,但是只有<code>包A</code>能访问,它不会出现在搜索列表,别的用户不要访问,别的包也不能访问.<br />
+而<code>attaching</code>会让包的命名空间可以出现在搜索列表,别的用户/软件包也可以访问和使用.</p>
+<p>** R的子文件夹**<br />
+R子目录包含所有R代码，可以在单个文件中，也可以在多个文件中。对于较大的包，通常最好将代码拆分为多个文件，这些文件逻辑上将函数分组在一起。R代码文件的怎么命名并不重要，但通常建议不要在文件名中使用空格.</p>
+<p><code>man/</code>子目录包含包中所有导出对象的文档。对于R的旧版本，必须使用<code>LaTeX-style</code>将R对象的文档写到man目录中,但是，随着<code>roxygen2</code>包的开发，我们不再需要这样做，并且可以将文档直接写入R代码文件。因此，您可能很少与man目录进行交互，因为其中的所有文件都将由<code>roxygen2</code>包自动生成</p>
+</div>
+<div id="devtools" class="section level3">
+<h3>3 devtools包</h3>
+<p><strong>devtools包</strong> HadleyWickham引入了一个名为<code>devtools</code>的包，包括各种各样的有助于R中R包的开发函数.掌握<code>devtools包</code>的最佳资源是HadleyWickham的<a href="http://r-pkgs.had.co.nz">书</a>。</p>
+<p>下面是<code>devtools</code>中包含的一些关键函数以及它们的功能，按照开发R包时可能使用它们的顺序排列：</p>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>load_all</code></td>
+<td>加载包中所有函数的代码</td>
+</tr>
+<tr class="even">
+<td><code>document</code></td>
+<td>利用<code>roxygen2</code>代码生成<code>\man</code>文件夹下的文档和<code>NAMESPACE</code>文件</td>
+</tr>
+<tr class="odd">
+<td><code>use_data</code></td>
+<td>将R会话中的对象另存为包中的数据集</td>
+</tr>
+<tr class="even">
+<td><code>use_vignette</code></td>
+<td>生成<code>vignette</code></td>
+</tr>
+<tr class="odd">
+<td><code>use_readme_rmd</code></td>
+<td>生成<code>Rmarkdown</code>格式的<code>README</code>文件</td>
+</tr>
+<tr class="even">
+<td><code>use_build_ignore</code></td>
+<td>设置在构建R包的时候需要忽略的文件</td>
+</tr>
+<tr class="odd">
+<td><code>check</code></td>
+<td>查完整的R包是否有任何错误、警告或注释</td>
+</tr>
+<tr class="even">
+<td><code>build_win</code></td>
+<td>构建一个用于Windows系统的版本,您将收到一封电子邮件，其中包含指向结果的链接</td>
+</tr>
+<tr class="odd">
+<td><code>use_travis</code></td>
+<td>设置以便于在包中使用<code>Travis CI</code>包</td>
+</tr>
+<tr class="even">
+<td><code>use_cran_comments</code></td>
+<td>创建一个文件，您可以在其中添加评论，以包含在您的CRAN提交中</td>
+</tr>
+<tr class="odd">
+<td><code>submit_cran</code></td>
+<td>提交包到CRAN</td>
+</tr>
+<tr class="even">
+<td><code>use_news_md</code></td>
+<td>向包中添加一个文件，以提供有关新版本更改的信息</td>
+</tr>
+</tbody>
+</table>
+<p>其中一些函数对于一个包只需要使用一次。一次性(对于每个包)函数主要是为包设置某种类型的基础结构的功能.例如,你想使用<code>R Markdown</code>来创建一个用于发布在<strong>GitHub</strong>中R包的<code>README</code>文件,可以使用<code>use_readme_rmd</code>函数创建适当的基础结构.此函数在包的主目录中添加名为<code>README.Rmd</code>的初始<code>README</code>文件.您可以编辑此文件并将其呈现到<code>Markdown</code>,以向GitHub用户提供有关您的包的更多信息.</p>
+<p>由于<code>CRAN</code>会检查包的顶层目录中是否有<code>README</code>文件(如果有会报错),因此<code>use_readme_rmd</code>函数会在<code>.Rbuildignore</code>文件中添加R markdown格式的<code>README</code>文件以及它创建的<code>Markdown</code>文件的文件名，因此在构建包时忽略该文件.</p>
+<p>** 创建一个包**<br />
+<code>devtools</code>包中最早使用的基础构架函数是<code>create</code>,此函数的输入是所创建包文件路径，创建包初始结构(代码,数据等等).或者可以通过RStudio的窗口化创建:<code>“File” -&gt; “New Project” -&gt; “New Direction” -&gt; “R Package”</code><br />
+除了上述方法,同样可以通过手动方式创建一个包(一般不建议通过这个方式)<br />
+示例创建一个“test”包<br />
+文件夹目录如下:</p>
+<pre><code>├── DESCRIPTION
+├── man
+├── NAMESPACE
+├── packrat
+├── R
+├── .Rbuildignore
+├── .Rprofile
+├── .Rproj.user
+└── test.Rproj</code></pre>
+<p><strong>其他函数</strong><br />
+除了创建包初始文件结构的<code>create</code>函数,还会用到<code>load_all</code>和<code>document</code>函数.<br />
+<code>load_all</code>函数会载入整个包的文件夹(默认情况,基于当前目录,同时也可以指定其他位置的目录文件路径),除了载入所有R函数,同时还加载所有的包数据，并编译和连接在包中的<code>C、C++、FORTRAN</code>代码.可以使用<code>load_all</code>来确保使用的是所有包中的函数和数据的最新版本.<br />
+<code>document</code>函数根据每个函数中包含的<code>roxygen2</code>注释的最新版本重写<strong>help</strong>文件和<strong>NAMESPACE</strong>文件(下一节将详细介绍如何使用<code>roxygen2</code>)</p>
+<p>Rstudio创建了一个非常有用的包开发技巧表，它涵盖了许多devtools函数,<a href="https://www.rstudio.com/wp-content/uploads/2015/06/devtools-cheatsheet.pdf">pdf见</a></p>
+</div>
+</div>
+<div id="week2" class="section level2">
+<h2>Week2</h2>
+</div>
+<div class="section level2">
+<h2>1 说明文档</h2>
+<p><strong>1.1 说明文档</strong><br />
+通常包含两种主要类型的说明文档:</p>
+<ul>
+<li>较长文档 为整个软件包提供教程或概述(包的<code>vignettes</code>和<code>README</code>文件创建文档)<br />
+</li>
+<li>较短文档 某函数的帮助文件(使用<code>roxygen2</code>包创建更容易)</li>
+</ul>
+<p>在本节中，我们将介绍创建此文档的原因和方法。此外，vignette/README文档可以使用knitr创建R代码和文本混合的R Markdown</p>
+<p><strong>1.2 Vignette和README文件</strong><br />
+帮助用户了解如何使用包的基本知识:<br />
+- Vignette文件: 用户从CRAN安装包(<code>install.packages()</code>)或者从GitHub中安装包(<code>install_github(...,build_vignettes=TRUE)</code>)以后,就可以在本地访问<br />
+- README文件: 如果需要分享包到GitHub仓库上,这个文档将会在个人账户主页显示</p>
+<p>如果<code>README</code>文件确定不包含R代码,则说明文档可以直接使用<code>Markdown</code>语法并以<code>.md</code>作为后缀命名.若包含R代码,则可以使用<code>READMDE.Rmd</code>创建说明文档,后面在使用<code>knitr</code>包将其按<code>Markdown</code>格式呈现<br />
+使用<code>devtools</code>包中的<code>use_readme_md</code>创建<code>README.md</code>格式文档,<code>use_readme_rmd</code>创建<code>README.rmd</code>格式文档.这些函数会将适当的文件添加到包目录的顶层,同时也会将这些文件名称添加到“.Rbuildignore”中，因为在包目录的顶层具有这些文件可能会在构建包时导致一些问题</p>
+<p><code>README</code>文件对于分享R包到GitHub仓库很实用,但是在构建一个新包或者发布到CRAN仓库中将不会自动创建这个文件.如果想要创建包含在包构建中的教程或概述文档，应该通过添加一个或多个包<code>vignette</code>来实现。<code>vignette</code>存储在包目录中的<code>vignettes</code>子目录中</p>
+<p>可以使用<code>devtools::use_vignette()</code>函数创建<code>vignette</code>文件,可以创建多个<code>vignette</code>文件.<br />
+例如,在包的顶层目录创建一个名为<code>model_details</code>的<code>vignette</code>:</p>
+<pre class="r"><code>use_vignette(&quot;model_details&quot;)</code></pre>
+<p>通过<code>use_vignette</code>创建<code>vignette</code>后，要更新vignette的YAML(r markdown文档顶部的代码)中的Vignette索引条目。将此处的“Vignette Title”替换为<code>vignette</code>的实际标题。</p>
+<p><strong>1.3 Knitr/Markdown</strong><br />
+<code>vignette</code>文档和<code>Markdow</code>文档都可以使用<code>R Markdown</code>的文件格式.<br />
+可以在20分钟内学会创建和“knit”一个可复制的文档，而且如果你想定制这个过程，你还可以做更多的工作，也许在最初的20分钟内你会学到<code>Knitr</code>的80%<br />
+标记语言的示例包括:</p>
+<ul>
+<li>HTML(超文本标记语言)<br />
+</li>
+<li>LaTex<br />
+</li>
+<li>Markdown(轻量级标记语言)</li>
+</ul>
+<p><a href="https://bookdown.org/rdpeng/RProgDA/documentation.html#common-markdown-formatting-elements">Markdown文件语法介绍</a></p>
+<p>Markdown文件中YAML部分的内容如下:</p>
+<pre><code>---
+title: &quot;Vignette Title&quot;
+author: &quot;Vignette Author&quot;
+date: &quot;2019-05-17&quot;
+output: rmarkdown::html_vignette
+vignette: &gt;
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---</code></pre>
+<p><strong>1.4 kniter常用选项</strong><br />
+<strong>1.4.1 r 代码块命名</strong></p>
+<pre class="r"><code>data(mtcars)
+head(mtcars)</code></pre>
+<p><strong>1.4.2 常用选项</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>echo</code></td>
+<td>是否打印R代码(<code>T/F</code>)</td>
+</tr>
+<tr class="even">
+<td><code>eval</code></td>
+<td>是否执行R代码(<code>T/F</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>messages</code></td>
+<td>是否打印运行过程生成的<code>messages</code>信息(<code>T/F</code>)</td>
+</tr>
+<tr class="even">
+<td><code>warning</code></td>
+<td>是否打印运行过程生成的<code>warnings</code>信息(<code>T/F</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>include</code></td>
+<td><code>False</code>表示运行代码,但是不打印代码或者结果(<code>T/F</code>)</td>
+</tr>
+<tr class="even">
+<td><code>resulte</code></td>
+<td>如何打印结果(例如,<code>results=hide</code>,运行代码，但不打印结果)</td>
+</tr>
+<tr class="odd">
+<td><code>fig.width</code></td>
+<td>打印图形的宽度(以英寸为单位),例如，<code>fig.width=4</code></td>
+</tr>
+<tr class="even">
+<td><code>fig.height</code></td>
+<td>打印图形的高度(以英寸为单位)</td>
+</tr>
+</tbody>
+</table>
+<p>可以在文档的开始设定一个<strong>global_options</strong>设定默认参数:</p>
+<pre class="r"><code>knitr::opts_chunk$set(echo = FALSE, message = FALSE,  warning = FALSE)</code></pre>
+<p><strong>1.5 帮助文件和<code>roxygen2</code>包</strong><br />
+除了编写能够概述整个软件包的教程，还应该编写特定函数的文档，向用户展示如何使用函数.<br />
+帮助文档主要在<code>/man</code>文件夹,R文档格式命名以<code>.Rd</code>结尾(与<code>LaTex</code>相似).曾经必须单个写入所有的这些帮助文件.使用<code>roxygen2</code>，可以将帮助文件信息直接添加到定义函数的代码上方<br />
+<code>roxygen2</code>帮助文档的格式如下:</p>
+<ul>
+<li>每行以<code>#'</code>开头<br />
+</li>
+<li>文档的第一行为函数的简要介绍,随后的文档块是对其详细描述<br />
+</li>
+<li>之后，使用以<code>@</code>+<code>tags</code>来定义要包含的每个元素</li>
+<li>文档的每个部分之间留一个空行，并且缩进第二行以及之后几行元素，使代码更容易阅读</li>
+</ul>
+<p>下面是使用<code>roxygen2</code>编写的<code>hello_world</code>函数说明文档格式的基本示例：</p>
+<pre class="r"><code>#&#39; Print &quot;Hello world&quot; 
+#&#39;
+#&#39; This is a simple function that, by default, prints &quot;Hello world&quot;. You can 
+#&#39; customize the text to print (using the \code{to_print} argument) and add
+#&#39; an exclamation point (\code{excited = TRUE}).
+#&#39;
+#&#39; @param to_print A character string giving the text the function will print
+#&#39; @param excited Logical value specifying whether to include an exclamation
+#&#39;    point after the text
+#&#39; 
+#&#39; @return This function returns a phrase to print, with or without an 
+#&#39;    exclamation point added. As a side effect, this function also prints out
+#&#39;    the phrase. 
+#&#39;
+#&#39; @examples
+#&#39; hello_world()
+#&#39; hello_world(excited = TRUE)
+#&#39; hello_world(to_print = &quot;Hi world&quot;)
+#&#39;
+#&#39; @export
+hello_world &lt;- function(to_print = &quot;Hello world&quot;, excited = FALSE){
+    if(excited) to_print &lt;- paste0(to_print, &quot;!&quot;)
+    print(to_print)
+}</code></pre>
+<p><strong><code>roxygens2</code>常用标签</strong><br />
+<a href="https://bookdown.org/rdpeng/RProgDA/documentation.html#common-roxygen2-tags">常用标签参考</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>标签</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>@return</code></td>
+<td>函数返回的对象的描述</td>
+</tr>
+<tr class="even">
+<td><code>@parameter</code></td>
+<td>函数参数说明</td>
+</tr>
+<tr class="odd">
+<td><code>@inheritParams</code></td>
+<td>要从中获取参数定义的函数的名称</td>
+</tr>
+<tr class="even">
+<td><code>@examples</code></td>
+<td>显示如何使用函数的示例代码</td>
+</tr>
+<tr class="odd">
+<td><code>@details</code></td>
+<td>添加描述函数如何工作的更多详细信息(例如,所用的算法的细节)</td>
+</tr>
+<tr class="even">
+<td><code>@note</code></td>
+<td>在函数或其用途上添加注释</td>
+</tr>
+<tr class="odd">
+<td><code>@source</code></td>
+<td>添加有关代码源或函数想法的详细信息</td>
+</tr>
+<tr class="even">
+<td><code>@references</code></td>
+<td>添加与函数相关的引用</td>
+</tr>
+<tr class="odd">
+<td><code>@importFrom</code></td>
+<td>从另一个包中导入要在此函数中使用的函数(这对于诸如<code>%&gt;%</code>和<code>%within%</code>这类函数尤其有用)</td>
+</tr>
+<tr class="even">
+<td><code>@export</code></td>
+<td>导出函数,这样用户在加载包时可以直接访问它</td>
+</tr>
+</tbody>
+</table>
+<p>在使用<code>roxygen2</code>编写帮助文件时，请记住以下几点：</p>
+<ul>
+<li><code>@example</code>和<code>@examples</code>的作用不同,<a href="mailto:应该始终使用@examples">应该始终使用@examples</a>(复数)标记作为示例代码，否则在构建文档时会出错</li>
+<li><code>@inheritParams</code>函数可以节省大量时间，因为如果在包中的多个函数中使用相同的参数，则可以只在一个位置编写和编辑这些参数描述,但是，请记住，必须将<code>@inheritParams</code>指向最初的<code>@param</code>函数，而不是另外一个使用<code>@inheritParams</code>函数<br />
+</li>
+<li><code>@export</code>使用户能够直接使用该函数，因此必须在<code>roxygen2</code>文档中.如果已经编写了一个函数，但在尝试编译<code>README</code>文件或<code>vignette</code>时却没有找到它，那么很可能是忘记了<code>export</code>该函数</li>
+</ul>
+<p><code>roxygen2</code>文档中可以包含特定的格式(列表等)和公式 <a href="https://bookdown.org/rdpeng/RProgDA/documentation.html#common-roxygen2-formatting-tags">常用格式参考</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>标签</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>\code{}</code></td>
+<td>设置类似代码的显示格式<code>\code{function(args)}</code></td>
+</tr>
+<tr class="even">
+<td><code>\dontrun{}</code></td>
+<td>与<code>@examples</code>一起使用，以避免在包构建和测试期间运行示例代码<code>\dontrun{code}</code></td>
+</tr>
+<tr class="odd">
+<td><code>\link{}</code></td>
+<td>连接到另外的R函数</td>
+</tr>
+<tr class="even">
+<td><code>\eqn{}{}</code></td>
+<td>行内公式<code>\eqn{a + b (inline)}</code></td>
+</tr>
+<tr class="odd">
+<td><code>\deqn{}{}</code></td>
+<td>代码块内公式<code>\deqn{a + b (block)}</code></td>
+</tr>
+<tr class="even">
+<td><code>\itemize{}</code></td>
+<td>创建详细列表</td>
+</tr>
+<tr class="odd">
+<td><code>\url{}</code></td>
+<td>包含Web链接<code>\url{url}</code></td>
+</tr>
+<tr class="even">
+<td><code>\href{}{}</code></td>
+<td>包含Web链接<code>\href{url}{display}</code></td>
+</tr>
+</tbody>
+</table>
+<p>使用R文档格式的一些提示：</p>
+<ul>
+<li>通常,连接到别的R函数时,应该按照<code>\code{\link[package]{function}}</code><br />
+</li>
+<li>一些公式,包括上标和下标，不会在基于Markdown文档中解析(但会在基于PDF的文档中解析),使用<code>\eqn</code>和<code>deqn</code>,一个是完全格式化的，由基于PDF的文档完全编译，另一个是简化格式的，基于Markdown文档(例如,<code>\deqn{ \frac{X^2}{Y} }{ X2 / Y }</code>)<br />
+</li>
+<li>对于帮助文件中需要运行一段时间的示例，需要将示例代码包装在<code>\dontrun</code>中<br />
+</li>
+<li><p><code>\url</code>和<code>\href</code>都可以包含一个Web链接.两者的区别在于<code>\url</code>将在帮助文档中打印出网址，而<code>\href</code>允许使用网址以外的文本作为链接的锚文本.例如:</p>
+<pre><code>&quot;For more information, see \url{www.google.com}.&quot;
+&quot;For more information, \href{www.google.com}{Google it}.&quot;</code></pre></li>
+</ul>
+<p>除了给函数编写说明文档,还应该为包中的数据编写相应说明.为此，在包的<code>/R</code>文件夹中创建一个名为<code>data.R</code>的文件,用于记录包的所有数据集.使用<code>roxygen2</code>记录每个数据集，并用引号将每个数据集的名称概括在内.在下一节中有更多关于使用roxygen2记录包数据的详细信息。</p>
+</div>
+<div class="section level2">
+<h2>2 包中的数据集</h2>
+<p><strong>2.1 概述</strong><br />
+许多R包设计用于数据的操作、可视化和建模，因此在包中包含一些数据可能是一个好主意.大多数开发人员在其包中包含数据的主要原因是演示如何使用包中包含的函数和包含的数据。创建一个包作为发布数据的手段也是一种越来越流行的方法。当在包中包含数据时，考虑到压缩包文件应该<strong>小于5MB</strong>，这是CRAN允许的最大包大小。如果您的软件包大于5MB，请确保在下载和安装软件包的说明中通知用户。</p>
+<p><strong>2.2 Demos数据</strong><br />
+<strong>数据对象</strong><br />
+要在包中包含数据集，首先要创建在全局环境中的对象。可以在包中包含任何R对象，而不仅仅是数据框。然后确保处在包目录，并使用<code>use_data()</code>函数，列出要包含在包中的每个对象。当用户加载包时，作为参数传递给<code>use_data()</code>对象的名称将是用户载入这个包时这个对象的名称，因此请确保使用您喜欢的变量名称。</p>
+<p>接下来需要为包中的每个数据集创建说明文档,这样可以通过<code>?dataset</code>查看数据集的信息.在<code>R/</code>目录下创建包含数据集说明文档的<code>data.R</code>文件,示例是<code>minimap</code>包中数据集<code>maple</code>的说明文档:</p>
+<pre class="r"><code>#&#39; Production and farm value of maple products in Canada
+#&#39;
+#&#39; @source Statistics Canada. Table 001-0008 - Production and farm value of
+#&#39;  maple products, annual. \url{http://www5.statcan.gc.ca/cansim/}
+#&#39; @format A data frame with columns:
+#&#39; \describe{
+#&#39;  \item{Year}{A value between 1924 and 2015.}
+#&#39;  \item{Syrup}{Maple products expressed as syrup, total in thousands of gallons.}
+#&#39;  \item{CAD}{Gross value of maple products in thousands of Canadian dollars.}
+#&#39;  \item{Region}{Postal code abbreviation for territory or province.}
+#&#39; }
+#&#39; @examples
+#&#39; \dontrun{
+#&#39;  maple
+#&#39; }
+&quot;maple&quot;</code></pre>
+<p>数据框格式的数据集的说明包含如下几个属性:</p>
+<ul>
+<li>标题 描述数据集对象的信息</li>
+<li><code>@source</code>标签 数据来自哪里<br />
+</li>
+<li><code>@format</code>标签 描述每列数据信息</li>
+</ul>
+<p><strong>原始数据</strong><br />
+要在包中包含原始数据文件，应该在R包的<code>inst/extdata</code>下创建一个目录.<br />
+例如,假设在构建的名为<code>mypackage</code>包的目录<code>inst/extdata</code>中保存了一个<code>response.json</code>原始数据集,那么可以通过<code>system.file(&quot;extdata&quot;,&quot;response.json&quot;,package=&quot;mypackage&quot;)</code>访问这个原始数据文件.</p>
+<p><strong>2.3 内部数据</strong><br />
+使用<code>usethis::use_data(...,internal=TRUE)</code>函数可以将多个数据对象保存到<code>R/sysdata.rda</code>中<br />
+使用<code>usethis::use_data(...)</code>函数可以将单个数据对象保存到单个<code>data/&lt;数据对象名称&gt;.rda</code>中</p>
+<p><strong>2.4 数据包</strong><br />
+专门用于数据发布的包:</p>
+<ul>
+<li><a href="https://github.com/juliasilge/janeaustenr">janeaustenr</a><br />
+</li>
+<li><a href="https://github.com/jennybc/gapminder">gapminder</a></li>
+<li><a href="https://github.com/hadley/babynames">babynames</a><br />
+</li>
+<li><a href="https://github.com/seankross/lego">lego</a></li>
+</ul>
+<p>使用R包作为发布数据的方法有其优点和缺点:</p>
+<ul>
+<li>优点: 数据容易载入到R，用户只需要安装和加载包,对于刚接触R并且不熟悉导入和清理数据的人来说非常有用<br />
+</li>
+<li>缺点: 对于不使用R的人来说，数据包中的数据是不可访问的</li>
+</ul>
+<p><code>use_data_raw</code>函数,将在包中创建一个名为<code>data_raw</code>的目录</p>
+</div>
+<div id="r" class="section level2">
+<h2>3 R包开发的测试框架</h2>
+<p>当完成编写了代码，并且把代码存放到可以运行的目录,接下来最好考虑一些关于代码的事情</p>
+</div>
+<div id="cran" class="section level2">
+<h2>4 通过CRAN检查</h2>
+</div>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shortcode-here" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>

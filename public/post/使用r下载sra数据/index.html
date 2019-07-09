@@ -15,7 +15,7 @@
     
     <meta property="og:tags" content="data download">
     
-    <meta name="generator" content="Hugo 0.50" />
+    <meta name="generator" content="Hugo 0.40.1" />
     <title>使用R下载SRA数据 &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -118,10 +118,7 @@
 	</header>
 
 	<article>
-		
-
-
-<pre class="r"><code>library(SRAdb)
+		<pre class="r"><code>library(SRAdb)
 setwd(&quot;/home/wqh/sra_download/SRR6660814&quot;)
 sra_dbname &lt;- &quot;../SRAmetadb.sqlite&quot;
 sra_con &lt;- dbConnect(dbDriver(&quot;SQLite&quot;), sra_dbname)
@@ -200,7 +197,7 @@ and then rerun the example&quot;)
 
 
   <div id="disqus_thread"></div>
-<script type="application/javascript">
+<script>
     var disqus_config = function () {
     
     

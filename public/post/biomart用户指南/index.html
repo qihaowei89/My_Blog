@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# website: http://ogp.me/ns/website#">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta property="og:title" content="Biomart用户指南">
+    
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2019-02-21">
+    
+    <meta property="og:description" content="">
+    <meta property="og:url" content="/post/biomart%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/">
+    <meta property="og:site_name" content="My Blog Site">
+    
+    <meta name="generator" content="Hugo 0.40.1" />
+    <title>Biomart用户指南 &middot; My Blog Site</title>
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/default.min.css">
+    
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="My Blog Site" />
+    
+    
+    <link rel="icon" href="../../favicon.ico" />
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+    });
+    </script>
+    <script async type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top visible-xs">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+				<a class="navbar-brand" href="../../">Qihao Wei&#39;s Home</a>
+			
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				
+				
+					<li><a href="../../about">About</a></li>
+				
+					<li><a href="../../tutorial/">Tutorials</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div id="menu" class="hidden-xs col-sm-4 col-md-3">
+	<div id="menu-content" class="vertical-align">
+		
+			<h1 class="text-center"><a href="../../">Qihao Wei&#39;s Home</a></h1>
+		
+		
+		
+			<small class="text-center center-block">MY HUGO BLOG</small>
+		
+		
+		
+			<img id="profile-pic" src="//img/profile.png" alt="My Picture" class="img-circle center-block">
+		
+		<div id="social" class="text-center">
+			
+				<a href="https://github.com/qihaowei89"><i class="fa fa-github fa-2x"></i></a>
+			
+				<a href="https://twitter.com/alexanderurq"><i class="fa fa-twitter fa-2x"></i></a>
+			
+				<a href="https://linkedin.com"><i class="fa fa-linkedin fa-2x"></i></a>
+			
+				<a href="https://plus.google.com/&#43;YourID"><i class="fa fa-google-plus fa-2x"></i></a>
+			
+
+			<a href="mailto:weiqihao08@gmail.com"><i class="fa fa-envelope-o fa-2x"></i></a>
+		</div>
+		<div id="links" class="text-center">
+			
+			
+				<a href="../../about">About</a>
+			
+				<a href="../../tutorial/">Tutorials</a>
+			
+		</div>
+	</div>
+</div>
+
+		<div id="content" class="col-xs-12 col-sm-8 col-md-9">
+			<div class="row">
+				<div id="post" class="col-sm-offset-1 col-sm-10 col-md-10 col-lg-8">
+
+<main>
+	<header>
+		<h1>Biomart用户指南</h1>
+	</header>
+
+	<article>
+		<div class="section level3">
+<h3>1 介绍</h3>
+<p><a href="http://bioconductor.org/packages/biomaRt">biomaRt</a>软件包为越来越多的数据库提供了接口，这些数据库实现了<a href="http://www.biomart.org/">biomaRt软件套件</a>。该包支持以统一的方式检索大量数据，而无需了解底层数据库模式或编写复杂的SQL查询。BioMart数据库的例子有Ensembl、UniProt和HapMap。这些主要数据库使Biomart用户能够直接访问各种数据集，并支持R提供的各种强大的在线查询。</p>
+</div>
+<div id="biomart" class="section level3">
+<h3>2 选择BioMart数据库和数据集</h3>
+<p>选择BioMart database 使用<code>biomaRt::listMarts()</code>列出可用数据库<br />
+链接BioMart database 使用<code>ensembl=biomaRt::useMart(&quot;ensembl&quot;)</code>链接可以数据库,<code>biomaRt::useMart()</code>(遇到代理问题<code>Sys.setenv(&quot;http_proxy&quot; = &quot;http://my.proxy.org:9999&quot;)</code>or<code>options(RCurlOptions = list(proxy=&quot;uscache.kcc.com:80&quot;,proxyuserpwd=&quot;------:-------&quot;))</code>)</p>
+<pre class="r"><code>ensembl=useMart(&quot;ensembl&quot;)
+listDatasets(ensembl)
+ensembl = useDataset(&quot;hsapiens_gene_ensembl&quot;,mart=ensembl)</code></pre>
+<p>或者</p>
+<pre class="r"><code>ensembl = useMart(&quot;ensembl&quot;,dataset=&quot;hsapiens_gene_ensembl&quot;)</code></pre>
+</div>
+<div class="section level3">
+<h3>3 如何构建查询</h3>
+<p><code>getBM()</code>函数输入三个参数:<br />
+- <code>filters</code>: 用于查询(输入),<code>listFilters()</code>列出选定的数据库中可用的<code>filters</code><br />
+- <code>attributes</code>: 显示结果(输出),<code>listAttributes()</code>函数列出选定的数据库中可用的<code>attributes</code><br />
+- <code>values</code>: 过滤器值的矢量。如果使用多个筛选器，values参数需要一个值列表，其中列表中的每个位置对应于filters参数中筛选器的位置（参见下面的示例）。<br />
+- <code>mart</code>: Mart对象,通过<code>useMart()</code>函数创建</p>
+<p>备注: 常见的Ensembl查询有封装好的函数可以使用:<code>getGene()</code>和<code>getSequence()</code></p>
+<p><strong>简单练习</strong><br />
+我们有一个来自U133PLUS2平台的<code>Affymetrix ID</code>列表，我们希望使用Ensembl映射来检索相应的<code>EntrzGene ID</code>。<br />
+<code>filter(input)</code>: <strong>u133plus2 platform</strong><br />
+<code>attributes(output)</code>: <strong>EntrezGene ID</strong>,<strong>u133plus2 ID</strong></p>
+<pre class="r"><code>ensembl = useMart(&quot;ensembl&quot;,dataset=&quot;hsapiens_gene_ensembl&quot;)
+affyids=c(&quot;202763_at&quot;,&quot;209310_s_at&quot;,&quot;207500_at&quot;)
+getBM(attributes=c(&#39;affy_hg_u133_plus_2&#39;, &#39;entrezgene&#39;), 
+      filters = &#39;affy_hg_u133_plus_2&#39;, 
+      values = affyids, 
+      mart = ensembl)</code></pre>
+</div>
+<div id="biomart" class="section level3">
+<h3>4 biomaRt查询示例</h3>
+<p><strong>4.1 用<code>Hugo symbol</code>和相应基因的染色体位置信息注释一组Affymetrix ID</strong></p>
+<pre class="r"><code>listAttributes(ensembl)[grep(listAttributes(ensembl)$name,pattern =&quot;u133&quot;),]
+listAttributes(ensembl)[grep(listAttributes(ensembl)$name,pattern =&quot;entre&quot;),]
+listFilters(ensembl)[grep(listFilters(ensembl)$name,pattern =&quot;u133&quot;),] 
+
+affyids=c(&quot;202763_at&quot;,&quot;209310_s_at&quot;,&quot;207500_at&quot;)
+getBM(attributes = c(&quot;affy_hg_u133_plus_2&quot;,&quot;hgnc_symbol&quot;,&quot;chromosome_name&quot;,&quot;start_position&quot;,&quot;end_position&quot;,&quot;band&quot;),
+      filters = &quot;affy_hg_u133_plus_2&quot;,
+      values = affyids, mart = ensembl)</code></pre>
+<p><strong>4.2 用<code>go注释</code>对一组<code>entrzgene ID</code>进行注释</strong></p>
+<pre class="r"><code>entrez=c(&quot;673&quot;,&quot;837&quot;)
+goids = getBM(attributes = c(&#39;entrezgene&#39;, &#39;go_id&#39;), 
+              filters = &#39;entrezgene&#39;, 
+              values = entrez, 
+              mart = ensembl)
+head(goids)</code></pre>
+<p><strong>4.3 检索位于染色体17、20或Y上的所有与特定GO术语相关的基因的Hugo基因 symbols</strong></p>
+<pre class="r"><code>go=c(&quot;GO:0051330&quot;,&quot;GO:0000080&quot;,&quot;GO:0000114&quot;,&quot;GO:0000082&quot;)
+chrom=c(17,20,&quot;Y&quot;)
+getBM(attributes= &quot;hgnc_symbol&quot;,
+      filters=c(&quot;go&quot;,&quot;chromosome_name&quot;),
+      values=list(go, chrom), mart=ensembl)
+# listFilters(ensembl)[grep(listFilters(ensembl)$name,pattern =&quot;go&quot;),]  </code></pre>
+<p><strong>4.4 用INTERPRO蛋白域标识符注释Idenfier集</strong><br />
+在本例中，我们想用interpro蛋白质域标识符和蛋白质域的描述来注释以下两个refseq标识符：<strong>NM_005359</strong>和<strong>NM_000546</strong></p>
+<pre class="r"><code>refseqids = c(&quot;NM_005359&quot;,&quot;NM_000546&quot;)
+ipro = getBM(attributes=c(&quot;refseq_mrna&quot;,&quot;interpro&quot;,&quot;interpro_description&quot;), 
+             filters=&quot;refseq_mrna&quot;,
+             values=refseqids, 
+             mart=ensembl)
+ipro </code></pre>
+<p><strong>4.5 选择hgu133plus2 chip上16号染色体上坐标为1100000和1250000之间的全部Affymetrix ID和Ensembl基因ID</strong></p>
+<pre class="r"><code>getBM(attributes = c(&#39;affy_hg_u133_plus_2&#39;,&#39;ensembl_gene_id&#39;), 
+    filters = c(&#39;chromosome_name&#39;,&#39;start&#39;,&#39;end&#39;),
+    values = list(16,1100000,1250000), 
+    mart = ensembl)</code></pre>
+<p><strong>4.6 检索所有具有“map激酶活性”的GO term的entrzgene ID和hugo基因符号</strong></p>
+<pre class="r"><code>listAttributes(ensembl)[grep(listAttributes(ensembl)$name,pattern =&quot;entre&quot;),]
+getBM(attributes = c(&#39;entrezgene&#39;,&#39;hgnc_symbol&#39;), 
+    filters = &#39;go&#39;, 
+    values = &#39;GO:0004707&#39;, 
+    mart = ensembl)</code></pre>
+<p><strong>4.7 一个给定的entrezgene ID检索上游100bp启动子序列</strong> 可以使用<code>getSequence()</code>函数获得序列信息.<br />
+seqType参数可用选项如下: - <code>cdna</code><br />
+- <code>peptide</code> 蛋白序列<br />
+- <code>3utr</code> 3’ UTR序列<br />
+- <code>5urt</code> 5’ UTR序列<br />
+- <code>gene_exon</code> 外显子序列<br />
+- <code>transcript_exon</code> 转录本对应外显子序列<br />
+- <code>transcript_exon_intron</code> 转录本对应完整的未分割序列(外显子+内含子)<br />
+- <code>gene_exon_intron</code> 基因对应的序列(外显子+内含子)<br />
+- <code>coding</code> 编码序列<br />
+- <code>coding_transcript_flank</code> gives the flanking region of the transcript including the UTRs, this must be accompanied with a given value for the upstream or downstream attribute<br />
+- <code>coding_gene_flank</code> gives the flanking region of the gene including the UTRs, this must be accompanied with a given value for the upstream or downstream attribute<br />
+- <code>transcript_flank</code> gives the flanking region of the transcript exculding the UTRs, this must be accompanied with a given value for the upstream or downstream attribute<br />
+- <code>gene_flank</code> gives the flanking region of the gene excluding the UTRs, this must be accompanied with a given value for the upstream or downstream attribute</p>
+<pre class="r"><code>entrez=c(&quot;673&quot;,&quot;7157&quot;,&quot;837&quot;)
+getSequence(id = entrez, 
+            type=&quot;entrezgene&quot;,
+            seqType=&quot;coding_gene_flank&quot;,
+            upstream=100, 
+            mart=ensembl) </code></pre>
+<p><strong>4.8 检索位于3号染色体185514033和185535839之间所有基因的5’UTR序列</strong></p>
+<pre class="r"><code>utr5 = getSequence(chromosome=3, start=185514033, end=185535839,
+                   type=&quot;entrezgene&quot;,
+                   seqType=&quot;5utr&quot;, 
+                   mart=ensembl)
+utr5 </code></pre>
+<p><strong>4.9 检索给定的Entrzgene标识符列表的蛋白质序列</strong></p>
+<pre class="r"><code>protein = getSequence(id=c(100, 5728),
+                    type=&quot;entrezgene&quot;,
+                    seqType=&quot;peptide&quot;, 
+                    mart=ensembl)
+protein</code></pre>
+<p><strong>4.10 检索位于人类8号染色体148350和1486120之间的已知SNP</strong></p>
+<pre class="r"><code>snpmart = useMart(biomart = &quot;ENSEMBL_MART_SNP&quot;, dataset=&quot;hsapiens_snp&quot;)
+getBM(attributes = c(&#39;refsnp_id&#39;,&#39;allele&#39;,&#39;chrom_start&#39;,&#39;chrom_strand&#39;), 
+      filters = c(&#39;chr_name&#39;,&#39;start&#39;,&#39;end&#39;), 
+      values = list(8,148350,148612), 
+      mart = snpmart)</code></pre>
+<p><strong>4.11 给定人类基因TP53，检索该基因的人类染色体位置，并检索其同系物在小鼠中的染色体位置和RefSeq id</strong></p>
+<pre class="r"><code>human = useMart(&quot;ensembl&quot;, dataset = &quot;hsapiens_gene_ensembl&quot;)
+mouse = useMart(&quot;ensembl&quot;, dataset = &quot;mmusculus_gene_ensembl&quot;)
+getLDS(attributes = c(&quot;hgnc_symbol&quot;,&quot;chromosome_name&quot;, &quot;start_position&quot;),
+       filters = &quot;hgnc_symbol&quot;, values = &quot;TP53&quot;,mart = human,
+      attributesL = c(&quot;refseq_mrna&quot;,&quot;chromosome_name&quot;,&quot;start_position&quot;), martL = mouse) </code></pre>
+</div>
+<div id="ensembl" class="section level3">
+<h3>5 使用Ensembl的存档版本</h3>
+<p><strong>5.1 Using <code>archive = TRUE</code></strong></p>
+<pre class="r"><code>listMarts() 
+listMarts(archive = TRUE)
+
+ensembl = useMart(&quot;ensembl_mart_46&quot;, dataset=&quot;hsapiens_gene_ensembl&quot;, archive = TRUE)</code></pre>
+<p><strong>5.2 通过指定存档主机访问存档</strong><br />
+访问http://www.ensembl.org网站并进入页面底部。单击“view in Archive”，然后复制所需的存档的url地址。本例是查询Ensembl 54</p>
+<pre class="r"><code>listMarts(host=&#39;may2009.archive.ensembl.org&#39;) # http://may2009.archive.ensembl.org/index.html
+ensembl54=useMart(host=&#39;may2009.archive.ensembl.org&#39;, biomart=&#39;ENSEMBL_MART_ENSEMBL&#39;)
+ensembl54=useMart(host=&#39;may2009.archive.ensembl.org&#39;, biomart=&#39;ENSEMBL_MART_ENSEMBL&#39;, dataset=&#39;hsapiens_gene_ensembl&#39;)</code></pre>
+</div>
+<div id="ensemblbiomart" class="section level3">
+<h3>使用除了Ensembl外的的Biomart</h3>
+<pre class="r"><code>listMarts(host = &quot;parasite.wormbase.org&quot;)
+wormbase = useMart(biomart = &quot;parasite_mart&quot;, host = &quot;parasite.wormbase.org&quot;)
+listDatasets(wormbase)
+
+wormbase &lt;- useDataset(mart = wormbase, dataset = &quot;wbps_gene&quot;)
+head(listFilters(wormbase))
+head(listAttributes(wormbase))
+getBM(attributes = c(&quot;external_gene_id&quot;,&quot;ensembl_transcript_id&quot;,&quot;transcript_biotype&quot;), 
+      filters=&quot;gene_name&quot;, 
+      values=c(&quot;unc-26&quot;,&quot;his-33&quot;), 
+      mart=wormbase)</code></pre>
+</div>
+<div id="biomart" class="section level3">
+<h3>7 biomaRt帮助函数</h3>
+<p>** 7.1 <code>exportFASTA</code>**<br />
+<code>getSequence</code>函数获得的数据框可用<code>exportFASTA</code>函数导出为FASTA文件.</p>
+<p>** 7.2 了解有关<code>filter</code>的更多信息**<br />
+<strong>7.2.1 filterType</strong></p>
+<pre class="r"><code>filterType(&quot;with_affy_hg_u133_plus_2&quot;,ensembl)</code></pre>
+<p>** 7.2.2 filterOptions**</p>
+<pre class="r"><code>filterOptions(&quot;biotype&quot;,ensembl)</code></pre>
+<p>** 7.3 属性页**<br />
+在biomart属性数据库，页面是放在一起，如序列，特征, homologs等.</p>
+<pre class="r"><code>pages = attributePages(ensembl)
+pages
+head(listAttributes(ensembl))
+head(listAttributes(ensembl, page=&quot;feature_page&quot;))</code></pre>
+</div>
+<div id="biomart" class="section level3">
+<h3>8 本地化BioMart数据库</h3>
+<p>BioMart包可以与公共BioMart数据库的本地安装或本地开发的BioMart数据库和Web服务一起使用。为了让Biomart将数据库识别为Biomart，请确保您创建的本地数据库的名称与数据库的名称(其中数据库是数据库的名称，版本是版本号)一致。例如，一个可能的名称是EnsemblLocal_Mart_46。##本地数据库安装的最低要求有关安装生物艺术数据库的本地副本或开发您自己的生物艺术数据库和Web服务的详细信息，请访问http://www.biomart.org安装本地数据库后，您可以通过以下方式在此数据库上使用biomaRt：</p>
+<pre class="r"><code>listMarts(host=&quot;www.myLocalHost.org&quot;, path=&quot;/myPathToWebservice/martservice&quot;)
+mart=useMart(&quot;nameOfMyMart&quot;,dataset=&quot;nameOfMyDataset&quot;,host=&quot;www.myLocalHost.org&quot;, path=&quot;/myPathToWebservice/martservice&quot;)</code></pre>
+<p>有关如何安装公共生物艺术数据库的详细信息，请参阅：<a href="http://www.biomart.org/install.html，然后按照链接数据库进行操作" class="uri">http://www.biomart.org/install.html，然后按照链接数据库进行操作</a>。</p>
+</div>
+<div id="select" class="section level3">
+<h3>9 使用<code>select()</code></h3>
+<pre class="r"><code>mart &lt;- useMart(dataset=&quot;hsapiens_gene_ensembl&quot;,biomart=&#39;ensembl&#39;)
+head(keytypes(mart), n=3)
+
+head(columns(mart), n=3)
+
+k = keys(mart, keytype=&quot;chromosome_name&quot;)
+head(k, n=3)
+
+affy=c(&quot;202763_at&quot;,&quot;209310_s_at&quot;,&quot;207500_at&quot;)
+select(mart, keys=affy, columns=c(&#39;affy_hg_u133_plus_2&#39;,&#39;entrezgene&#39;),
+  keytype=&#39;affy_hg_u133_plus_2&#39;)</code></pre>
+<p>(<a href="http://bioconductor.org/packages/3.4/bioc/vignettes/biomaRt/inst/doc/biomaRt.html">来源</a>)</p>
+</div>
+
+	</article>
+</main>
+
+<div id="bottom-nav" class="text-center center-block">
+	<a href=" /" class="btn btn-default"><i class="fa fa-home"></i> Home</a>
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "shortcode-here" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'code-here', 'auto');
+    ga('send', 'pageview');
+    window.baseURL = "\/";
+  </script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+  
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+  
+  <script src="//js/App.js"></script>
+  
+</body>
+</html>

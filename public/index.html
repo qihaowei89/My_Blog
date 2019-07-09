@@ -12,7 +12,7 @@
     <meta property="og:url" content="/">
     <meta property="og:site_name" content="My Blog Site">
     
-    <meta name="generator" content="Hugo 0.50" />
+    <meta name="generator" content="Hugo 0.40.1" />
     <title>My Blog Site &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -118,25 +118,21 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="./post/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">GATK 使用笔记</a>
+			<a href="./post/r-package-install-debug/">r package install debug</a>
 			<br>
 			<small>
-				25 January 2019
+				17 May 2019
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		** read group ** samtools view -H sample.bam | grep &#39;@RG&#39; 显示如下： @RG ID:H0164.2 PL:illumina PU:H0164ALXX140820.2 LB:Solexa-272222 PI:0 DT:2014-08-20T00:00:00-0400 SM:NA12878 CN:BI ID = Read group identifier,此标记标识每个read属于哪个read group，因此每个r
-		
-			... <a href="./post/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">Read More</a>
+		plot(iris)遇到rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err) 解决： conda install cairo 安装git2r出错 install.packages(&#39;git2r&#39;, type=&#39;source&#39;, configure.vars=&#39;LIB_DIR=-L/home/wqh/miniconda3/lib/ INCLUDE_DIR=-I/home/wqh/miniconda3/include/&#39;)
 		
 	</div>
 	<div class="panel-footer">
 		
 		<small class="text-muted">
 			
-			
-				<a href="./tags/variant"><span class="label label-success">variant</span></a>
 			
 		</small>
 		
@@ -147,25 +143,23 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="./post/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/">docker 镜像制作</a>
+			<a href="./post/%E5%BC%80%E5%8F%91r-package/">开发R package</a>
 			<br>
 			<small>
-				8 January 2019
+				22 February 2019
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		docker build构建本地镜像 第一步 下载基础ubuntu镜像 # size = 86.7 Mb docker pull ubuntu 第二步 构建本地镜像 参考链接 mkdir dockerfile cd dockerfile vim Dockerfile 在Dockerfile中编辑： FROM
+		knitr::opts_chunk$set(echo = TRUE, eval = FALSE, include = TRUE, message = FALSE, warning = FALSE) # Build and Reload Package: &#39;Ctrl + Shift + B&#39; # Check Package: &#39;Ctrl + Shift + E&#39; # Test Package: &#39;Ctrl + Shift + T&#39; Week1 学习目标 了解R包的基础结构和用途 使用devtools包创
 		
-			... <a href="./post/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/">Read More</a>
+			... <a href="./post/%E5%BC%80%E5%8F%91r-package/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
 		
 		<small class="text-muted">
 			
-			
-				<a href="./tags/docker-images"><span class="label label-success">docker images</span></a>
 			
 		</small>
 		
@@ -176,25 +170,23 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="./post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/">使用R下载SRA数据</a>
+			<a href="./post/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8bioconductor%E6%B3%A8%E9%87%8A%E5%8C%85/">开始使用Bioconductor注释包</a>
 			<br>
 			<small>
-				26 December 2018
+				21 February 2019
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		library(SRAdb) setwd(&quot;/home/wqh/sra_download/SRR6660814&quot;) sra_dbname &lt;- &quot;../SRAmetadb.sqlite&quot; sra_con &lt;- dbConnect(dbDriver(&quot;SQLite&quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&quot;SRR6660815&quot;), sra_con, fileType=&#39;fastq&#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &lt;- &#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&#39;
+		吉姆·麦克唐纳是华盛顿大学环境和职业健康科学系的生物统计学家。他分析了从表达（微阵列，RNA序列）到基因组（SNP阵列，DNA序列，芯片序列
 		
-			... <a href="./post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/">Read More</a>
+			... <a href="./post/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8bioconductor%E6%B3%A8%E9%87%8A%E5%8C%85/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
 		
 		<small class="text-muted">
 			
-			
-				<a href="./tags/data-download"><span class="label label-success">data download</span></a>
 			
 		</small>
 		
@@ -205,23 +197,23 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="./post/python%E5%AD%A6%E4%B9%A0/">python学习</a>
+			<a href="./post/biomart%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/">Biomart用户指南</a>
 			<br>
 			<small>
-				26 December 2018
+				21 February 2019
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		目录操作 os.getcwd(): 获取当前所在目录 os.chdir(dir): 改变工作目录为“dir”
+		1 介绍 biomaRt软件包为越来越多的数据库提供了接口，这些数据库实现了biomaRt软件套件。该包支持以统一的方式检索大量数据，而无需了解
+		
+			... <a href="./post/biomart%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
 		
 		<small class="text-muted">
 			
-			
-				<a href="./tags/functions"><span class="label label-success">functions</span></a>
 			
 		</small>
 		
@@ -232,27 +224,23 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="./post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/">R网页爬虫</a>
+			<a href="./post/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/">了解基因组区域-annotatr</a>
 			<br>
 			<small>
-				21 December 2018
+				20 February 2019
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		常见的网页分为静态页面和AJAX增强的动态网页 1.静态页面 rvest + xml2 组合 xml2::read_html(x,encoding =,)：读取静态页面为xml对象 rvest::html_nodes(x
+		1 介绍 二代测序实验和生物信息学分析pipelines产生的基因组区域在注释基因组特征后更有意义。发生在exon或enhancer中的SNP可
 		
-			... <a href="./post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/">Read More</a>
+			... <a href="./post/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
 		
 		<small class="text-muted">
 			
-			
-				<a href="./tags/web-crawler"><span class="label label-success">Web crawler</span></a>
-			
-				<a href="./tags/data"><span class="label label-success">data</span></a>
 			
 		</small>
 		
@@ -266,12 +254,13 @@
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="./" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="./" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item disabled">
-    <a href="" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    class="disabled">
+    <a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -283,7 +272,8 @@
         
     
     
-    <li class="page-item active"><a class="page-link" href="./">1</a></li>
+    <li
+    class="active"><a href="./">1</a></li>
     
     
     
@@ -294,7 +284,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="./page/2/">2</a></li>
+    <li
+    ><a href="./page/2/">2</a></li>
     
     
     
@@ -305,7 +296,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="./page/3/">3</a></li>
+    <li
+    ><a href="./page/3/">3</a></li>
     
     
     
@@ -316,15 +308,28 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="./page/4/">4</a></li>
+    <li class="disabled"><span aria-hidden="true">&hellip;</span></li>
     
     
-    <li class="page-item">
-    <a href="./page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="./page/5/">5</a></li>
+    
+    
+    <li
+    >
+    <a href="./page/2/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="./page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="./page/5/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>

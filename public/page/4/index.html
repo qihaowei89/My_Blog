@@ -12,7 +12,7 @@
     <meta property="og:url" content="/">
     <meta property="og:site_name" content="My Blog Site">
     
-    <meta name="generator" content="Hugo 0.50" />
+    <meta name="generator" content="Hugo 0.40.1" />
     <title>My Blog Site &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -118,17 +118,17 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/quantification-transcript-level-salmon/">Quantification(transcript-level)--Salmon</a>
+			<a href="../../post/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/">Bioconductor&#43;CRAN镜像设定</a>
 			<br>
 			<small>
-				12 December 2018
+				18 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		Salmon是快速RNA-seq转录组定量工具。它需要提供一组目标转录本（参考转录本或者从头组装的转录本）进行定量。 两种模式： - quasi-mapping-based: 参考转录本
+		Select a CRAN Mirror 显示所有的镜像信息: getCRANmirrors(all = FALSE, local.only = FALSE) 选择镜像: ## CRAN mirror chooseCRANmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL, useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE), local.only = FALSE) ## CRAN mirror chooseBioCmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL, useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE), local.only = FALSE) 显示当前BioC_mirr
 		
-			... <a href="../../post/quantification-transcript-level-salmon/">Read More</a>
+			... <a href="../../post/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
@@ -136,9 +136,7 @@
 		<small class="text-muted">
 			
 			
-				<a href="../../tags/quantification"><span class="label label-success">quantification</span></a>
-			
-				<a href="../../tags/rna-seq"><span class="label label-success">RNA-seq</span></a>
+				<a href="../../tags/packages"><span class="label label-success">packages</span></a>
 			
 		</small>
 		
@@ -149,17 +147,17 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/">学习生物信息常用流程-1</a>
+			<a href="../../post/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-in-r/">函数式编程语言中常见的高阶函数(in R)</a>
 			<br>
 			<small>
-				7 December 2018
+				17 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacock
+		在列表对象上循环 lapply:输入list对象，返回与x等长的list对象 sapply:是lapply的用户友好版本，默认情况下，返回向量或
 		
-			... <a href="../../post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/">Read More</a>
+			... <a href="../../post/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-in-r/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
@@ -167,9 +165,34 @@
 		<small class="text-muted">
 			
 			
-				<a href="../../tags/rna-seq"><span class="label label-success">RNA-seq</span></a>
+				<a href="../../tags/programming"><span class="label label-success">programming</span></a>
 			
-				<a href="../../tags/pipeline"><span class="label label-success">pipeline</span></a>
+		</small>
+		
+	</div>
+</div>
+
+
+	<div class="panel panel-default">
+	<div class="panel-header">
+		<h3>
+			<a href="../../post/genomicranges/">GenomicRanges</a>
+			<br>
+			<small>
+				17 December 2018
+			</small>
+		</h3>
+	</div>
+	<div class="panel-body">
+		基因组集合操作union,intersect,setdiff 1. union取两个基因组区域的并集 x &lt;- GRanges(&quot;chr1&quot;, IRanges(c(2, 9) , c(7, 19)), strand=c(&quot;+&quot;, &quot;-&quot;)) y &lt;- GRanges(&quot;chr1&quot;, IRanges(5, 10), strand=&quot;-&quot;) union(x, y) union(x, y, ignore.strand=TRUE) 2. i
+		
+			... <a href="../../post/genomicranges/">Read More</a>
+		
+	</div>
+	<div class="panel-footer">
+		
+		<small class="text-muted">
+			
 			
 				<a href="../../tags/bioinfomatics"><span class="label label-success">bioinfomatics</span></a>
 			
@@ -182,17 +205,17 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/2018-12-04-r-rmarkdown/">R 博客搭建</a>
+			<a href="../../post/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">部署Shiny应用程序</a>
 			<br>
 			<small>
-				4 December 2018
+				14 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		1.1 安装 R RStudio IDE Pandoc (If not install RStudio) 1.1.1 安装 package—blogdown ## Install from CRAN install.packages(&quot;blogdown&quot;) ## Or, install from GitHub if (!requireNamespace(&quot;devtools&quot;)) install.packages(&quot;devtools&quot;) devtools::install_github(&quot;rstudio/blogdown&quot;) 1.1.2 安装 Hugo静态网站生成器 # helper function in blogdown to download and install it automatically on
+		当你构建完成一个shiny应用程序后，可以将其部署到本地，或者到web。 部署shiny应用到本地 一旦你编写了Shiny应用程序，你就可以把它
 		
-			... <a href="../../post/2018-12-04-r-rmarkdown/">Read More</a>
+			... <a href="../../post/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
@@ -200,9 +223,9 @@
 		<small class="text-muted">
 			
 			
-				<a href="../../tags/blogdown"><span class="label label-success">blogdown</span></a>
+				<a href="../../tags/shiny"><span class="label label-success">shiny</span></a>
 			
-				<a href="../../tags/web-page"><span class="label label-success">web page</span></a>
+				<a href="../../tags/shiny-server"><span class="label label-success">shiny-server</span></a>
 			
 		</small>
 		
@@ -213,17 +236,17 @@
 	<div class="panel panel-default">
 	<div class="panel-header">
 		<h3>
-			<a href="../../post/2018-11-23-r-rmarkdown/">Shiny Server 专业V1.5.10管理员指南</a>
+			<a href="../../post/alignment/">alignment</a>
 			<br>
 			<small>
-				23 November 2018
+				12 December 2018
 			</small>
 		</h3>
 	</div>
 	<div class="panel-body">
-		Shiny Server 专业V1.5.10管理员指南 Shiny Server使用户可以在互联网上搭建和管理Shiny app。 1.1 系统需求： RedHat or Ubuntu 1.2 安装: 1.2.1 Ubuntu 安装 R sudo apt-get install r-base 安
+		Hisat2 HISAT2是一个快速和敏感的比对程序，用于将下一代测序读数（全基因组、转录组和外显组测序数据）映射到人类基因组群体（以及单个参考基因组）
 		
-			... <a href="../../post/2018-11-23-r-rmarkdown/">Read More</a>
+			... <a href="../../post/alignment/">Read More</a>
 		
 	</div>
 	<div class="panel-footer">
@@ -231,11 +254,13 @@
 		<small class="text-muted">
 			
 			
-				<a href="../../tags/r-markdown"><span class="label label-success">R Markdown</span></a>
+				<a href="../../tags/align"><span class="label label-success">align</span></a>
 			
-				<a href="../../tags/shiny"><span class="label label-success">shiny</span></a>
+				<a href="../../tags/dna"><span class="label label-success">DNA</span></a>
 			
-				<a href="../../tags/shiny-server"><span class="label label-success">shiny-server</span></a>
+				<a href="../../tags/rna-seq"><span class="label label-success">RNA-seq</span></a>
+			
+				<a href="../../tags/hisat2"><span class="label label-success">HISAT2</span></a>
 			
 		</small>
 		
@@ -249,12 +274,13 @@
 
 <ul class="pagination">
     
-    <li class="page-item">
-        <a href="../../" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    <li>
+        <a href="../../" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
     </li>
     
-    <li class="page-item">
-    <a href="../../page/3/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    <li
+    >
+    <a href="../../page/3/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
     </li>
     
     
@@ -266,7 +292,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../">1</a></li>
+    <li
+    ><a href="../../">1</a></li>
     
     
     
@@ -277,7 +304,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../page/2/">2</a></li>
+    <li
+    ><a href="../../page/2/">2</a></li>
     
     
     
@@ -288,7 +316,8 @@
         
     
     
-    <li class="page-item"><a class="page-link" href="../../page/3/">3</a></li>
+    <li
+    ><a href="../../page/3/">3</a></li>
     
     
     
@@ -299,15 +328,29 @@
         
     
     
-    <li class="page-item active"><a class="page-link" href="../../page/4/">4</a></li>
+    <li
+    class="active"><a href="../../page/4/">4</a></li>
     
     
-    <li class="page-item disabled">
-    <a href="" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="../../page/5/">5</a></li>
+    
+    
+    <li
+    >
+    <a href="../../page/5/" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
-    <li class="page-item">
-        <a href="../../page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    <li>
+        <a href="../../page/5/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
