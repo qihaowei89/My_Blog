@@ -6,10 +6,37 @@
     <description>Recent content in Posts on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>miRNA 相关数据库使用</title>
+      <link>/post/mirna-%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 19 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mirna-%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8/</guid>
+      <description>已知miRNA预测其靶向作用的mRNA 1 数据库starBase 2 数据库targetScan get_miR_targetscan_DB 3 数据库mirDIP 4 数据库miRDB get_miR_miRDB_DB 已知mR</description>
+    </item>
+    
+    <item>
+      <title>使用Bioconductor软件包分析癌症基因组学和表观基因组学数据(基于TCGA数据库)</title>
+      <link>/post/%E4%BD%BF%E7%94%A8bioconductor%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%86%E6%9E%90%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E6%95%B0%E6%8D%AE-%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E4%BD%BF%E7%94%A8bioconductor%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%86%E6%9E%90%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E6%95%B0%E6%8D%AE-%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>该工作流程基于TCGA Workflow: Analyze cancer genomics and epigenomics data using Bioconductor packages 示例数据可以在TCGAWorkflowData包中找到 安装 if (!&amp;quot;BiocManager&amp;quot; %in% rownames(installed.packages())) install.packages(&amp;quot;BiocManager&amp;quot;) BiocManager::install(&amp;quot;TCGAWorkflow&amp;quot;)</description>
+    </item>
+    
+    <item>
+      <title>基于TCGA数据库的癌症基因组学和表观基因组学分析流程</title>
+      <link>/post/%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/</guid>
+      <description>该工作流程基于TCGA Workflow: Analyze cancer genomics and epigenomics data using Bioconductor packages 安装+加载包 if (!&amp;quot;BiocManager&amp;quot; %in% rownames(installed.packages())) install.packages(&amp;quot;BiocManager&amp;quot;) BiocManager::install(&amp;quot;TCGAWorkflow&amp;quot;) # library(TCGAWorkflow) library(TCGAWorkflowData) library(DT) 概括 癌症基因组图谱(TCGA)，DNA元素百科全书(ENCODE)</description>
+    </item>
     
     <item>
       <title>r package install debug</title>
@@ -80,7 +107,7 @@
       <pubDate>Tue, 08 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/</guid>
-      <description>docker build构建本地镜像 第一步 下载基础ubuntu镜像 # size = 86.7 Mb docker pull ubuntu 第二步 构建本地镜像 参考链接 mkdir dockerfile cd dockerfile vim Dockerfile 在Dockerfile中编辑： FROM</description>
+      <description>###docker build构建本地镜像 第一步 下载基础ubuntu镜像 # size = 86.7 Mb docker pull ubuntu 第二步 构建本地镜像 参考链接 mkdir dockerfile cd dockerfile vim Dockerfile 在Dockerfile中编辑： FROM</description>
     </item>
     
     <item>
@@ -98,7 +125,7 @@
       <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</guid>
-      <description>library(SRAdb) setwd(&amp;quot;/home/wqh/sra_download/SRR6660814&amp;quot;) sra_dbname &amp;lt;- &amp;quot;../SRAmetadb.sqlite&amp;quot; sra_con &amp;lt;- dbConnect(dbDriver(&amp;quot;SQLite&amp;quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&amp;quot;SRR6660815&amp;quot;), sra_con, fileType=&amp;#39;fastq&amp;#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &amp;lt;- &amp;#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&amp;#39; s1 &amp;lt;- Sys.</description>
+      <description>library(SRAdb) setwd(&amp;quot;/home/wqh/sra_download/SRR6660814&amp;quot;) sra_dbname &amp;lt;- &amp;quot;../SRAmetadb.sqlite&amp;quot; sra_con &amp;lt;- dbConnect(dbDriver(&amp;quot;SQLite&amp;quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&amp;quot;SRR6660815&amp;quot;), sra_con, fileType=&amp;#39;fastq&amp;#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &amp;lt;- &amp;#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&amp;#39;</description>
     </item>
     
     <item>

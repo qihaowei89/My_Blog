@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>File I/O on My Blog Site</title>
+    <title>file I/O on My Blog Site</title>
     <link>/tags/file-i/o/</link>
-    <description>Recent content in File I/O on My Blog Site</description>
+    <description>Recent content in file I/O on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Dec 2018 00:00:00 +0000</lastBuildDate>

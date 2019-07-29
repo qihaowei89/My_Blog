@@ -102,7 +102,8 @@ R子目录包含所有R代码，可以在单个文件中，也可以在多个文
 </div>
 <div id="devtools" class="section level3">
 <h3>3 devtools包</h3>
-<p><strong>devtools包</strong> HadleyWickham引入了一个名为<code>devtools</code>的包，包括各种各样的有助于R中R包的开发函数.掌握<code>devtools包</code>的最佳资源是HadleyWickham的<a href="http://r-pkgs.had.co.nz">书</a>。</p>
+<p><strong>devtools包</strong>
+HadleyWickham引入了一个名为<code>devtools</code>的包，包括各种各样的有助于R中R包的开发函数.掌握<code>devtools包</code>的最佳资源是HadleyWickham的<a href="http://r-pkgs.had.co.nz">书</a>。</p>
 <p>下面是<code>devtools</code>中包含的一些关键函数以及它们的功能，按照开发R包时可能使用它们的顺序排列：</p>
 <table>
 <thead>
@@ -225,7 +226,7 @@ R子目录包含所有R代码，可以在单个文件中，也可以在多个文
 <pre><code>---
 title: &quot;Vignette Title&quot;
 author: &quot;Vignette Author&quot;
-date: &quot;2019-05-17&quot;
+date: &quot;2019-07-28&quot;
 output: rmarkdown::html_vignette
 vignette: &gt;
   %\VignetteIndexEntry{Vignette Title}
@@ -372,12 +373,13 @@ hello_world &lt;- function(to_print = &quot;Hello world&quot;, excited = FALSE){
 </table>
 <p>在使用<code>roxygen2</code>编写帮助文件时，请记住以下几点：</p>
 <ul>
-<li><code>@example</code>和<code>@examples</code>的作用不同,<a href="mailto:应该始终使用@examples">应该始终使用@examples</a>(复数)标记作为示例代码，否则在构建文档时会出错</li>
+<li><code>@example</code>和<code>@examples</code>的作用不同,<a href="mailto:应该始终使用@examples" class="email">应该始终使用@examples</a>(复数)标记作为示例代码，否则在构建文档时会出错</li>
 <li><code>@inheritParams</code>函数可以节省大量时间，因为如果在包中的多个函数中使用相同的参数，则可以只在一个位置编写和编辑这些参数描述,但是，请记住，必须将<code>@inheritParams</code>指向最初的<code>@param</code>函数，而不是另外一个使用<code>@inheritParams</code>函数<br />
 </li>
 <li><code>@export</code>使用户能够直接使用该函数，因此必须在<code>roxygen2</code>文档中.如果已经编写了一个函数，但在尝试编译<code>README</code>文件或<code>vignette</code>时却没有找到它，那么很可能是忘记了<code>export</code>该函数</li>
 </ul>
-<p><code>roxygen2</code>文档中可以包含特定的格式(列表等)和公式 <a href="https://bookdown.org/rdpeng/RProgDA/documentation.html#common-roxygen2-formatting-tags">常用格式参考</a></p>
+<p><code>roxygen2</code>文档中可以包含特定的格式(列表等)和公式
+<a href="https://bookdown.org/rdpeng/RProgDA/documentation.html#common-roxygen2-formatting-tags">常用格式参考</a></p>
 <table>
 <thead>
 <tr class="header">
@@ -428,10 +430,10 @@ hello_world &lt;- function(to_print = &quot;Hello world&quot;, excited = FALSE){
 </li>
 <li>对于帮助文件中需要运行一段时间的示例，需要将示例代码包装在<code>\dontrun</code>中<br />
 </li>
-<li><p><code>\url</code>和<code>\href</code>都可以包含一个Web链接.两者的区别在于<code>\url</code>将在帮助文档中打印出网址，而<code>\href</code>允许使用网址以外的文本作为链接的锚文本.例如:</p>
-<pre><code>&quot;For more information, see \url{www.google.com}.&quot;
-&quot;For more information, \href{www.google.com}{Google it}.&quot;</code></pre></li>
+<li><code>\url</code>和<code>\href</code>都可以包含一个Web链接.两者的区别在于<code>\url</code>将在帮助文档中打印出网址，而<code>\href</code>允许使用网址以外的文本作为链接的锚文本.例如:</li>
 </ul>
+<pre><code>&quot;For more information, see \url{www.google.com}.&quot;
+&quot;For more information, \href{www.google.com}{Google it}.&quot;</code></pre>
 <p>除了给函数编写说明文档,还应该为包中的数据编写相应说明.为此，在包的<code>/R</code>文件夹中创建一个名为<code>data.R</code>的文件,用于记录包的所有数据集.使用<code>roxygen2</code>记录每个数据集，并用引号将每个数据集的名称概括在内.在下一节中有更多关于使用roxygen2记录包数据的详细信息。</p>
 </div>
 <div class="section level2">

@@ -6,67 +6,22 @@
     <description>Recent content in Tags on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Align</title>
-      <link>/tags/align/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      <title>variant</title>
+      <link>/tags/variant/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/align/</guid>
+      <guid>/tags/variant/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Bioinfomatics</title>
-      <link>/tags/bioinfomatics/</link>
-      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/bioinfomatics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Blogdown</title>
-      <link>/tags/blogdown/</link>
-      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/blogdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data</title>
-      <link>/tags/data/</link>
-      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Download</title>
-      <link>/tags/data-download/</link>
-      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-download/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dna</title>
-      <link>/tags/dna/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/dna/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Docker Images</title>
+      <title>docker images</title>
       <link>/tags/docker-images/</link>
       <pubDate>Tue, 08 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -75,16 +30,16 @@
     </item>
     
     <item>
-      <title>File I/O</title>
-      <link>/tags/file-i/o/</link>
-      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      <title>data download</title>
+      <link>/tags/data-download/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/file-i/o/</guid>
+      <guid>/tags/data-download/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Functions</title>
+      <title>functions</title>
       <link>/tags/functions/</link>
       <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
       
@@ -93,56 +48,29 @@
     </item>
     
     <item>
-      <title>Hisat2</title>
-      <link>/tags/hisat2/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      <title>Web crawler</title>
+      <link>/tags/web-crawler/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/hisat2/</guid>
+      <guid>/tags/web-crawler/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
+      <title>data</title>
+      <link>/tags/data/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/hugo/</guid>
+      <guid>/tags/data/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Packages</title>
-      <link>/tags/packages/</link>
-      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      <title>file I/O</title>
+      <link>/tags/file-i/o/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/packages/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pipeline</title>
-      <link>/tags/pipeline/</link>
-      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/pipeline/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Programming</title>
-      <link>/tags/programming/</link>
-      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Quantification</title>
-      <link>/tags/quantification/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/quantification/</guid>
+      <guid>/tags/file-i/o/</guid>
       <description></description>
     </item>
     
@@ -156,6 +84,132 @@
     </item>
     
     <item>
+      <title>trading with R</title>
+      <link>/tags/trading-with-r/</link>
+      <pubDate>Wed, 19 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/trading-with-r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packages</title>
+      <link>/tags/packages/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/packages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bioinfomatics</title>
+      <link>/tags/bioinfomatics/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/bioinfomatics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>/tags/programming/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shiny</title>
+      <link>/tags/shiny/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shiny-server</title>
+      <link>/tags/shiny-server/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shiny-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DNA</title>
+      <link>/tags/dna/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/dna/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HISAT2</title>
+      <link>/tags/hisat2/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hisat2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RNA-seq</title>
+      <link>/tags/rna-seq/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rna-seq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>align</title>
+      <link>/tags/align/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/align/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>quantification</title>
+      <link>/tags/quantification/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/quantification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pipeline</title>
+      <link>/tags/pipeline/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/pipeline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blogdown</title>
+      <link>/tags/blogdown/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/blogdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web page</title>
+      <link>/tags/web-page/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/web-page/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R Markdown</title>
       <link>/tags/r-markdown/</link>
       <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
@@ -165,83 +219,29 @@
     </item>
     
     <item>
-      <title>Rna Seq</title>
-      <link>/tags/rna-seq/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      <title>hugo</title>
+      <link>/tags/hugo/</link>
+      <pubDate>Fri, 04 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rna-seq/</guid>
+      <guid>/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Series</title>
+      <title>series</title>
       <link>/tags/series/</link>
-      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 04 Mar 2016 00:00:00 +0000</pubDate>
       
       <guid>/tags/series/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Shiny</title>
-      <link>/tags/shiny/</link>
-      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/shiny/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Shiny Server</title>
-      <link>/tags/shiny-server/</link>
-      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/shiny-server/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Trading With R</title>
-      <link>/tags/trading-with-r/</link>
-      <pubDate>Wed, 19 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/trading-with-r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tutorial</title>
+      <title>tutorial</title>
       <link>/tags/tutorial/</link>
-      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 04 Mar 2016 00:00:00 +0000</pubDate>
       
       <guid>/tags/tutorial/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Variant</title>
-      <link>/tags/variant/</link>
-      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/variant/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Web Crawler</title>
-      <link>/tags/web-crawler/</link>
-      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/web-crawler/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Web Page</title>
-      <link>/tags/web-page/</link>
-      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/web-page/</guid>
       <description></description>
     </item>
     

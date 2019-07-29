@@ -26,11 +26,13 @@ biocLite(&quot;annotatr&quot;)</code></pre>
 CpG岛是所有CpG注释的基础,并且由AnnotationHub包提供个物种的注释数据。<br />
 CpG shores位于CpG岛边界的上游/下游2kb<br />
 CpG shelves位于CpG shores边界的上游/下游2kb<br />
-其余的基因组区域构成了inter-CGI。 <img src="/post/2019-02-20-了解基因组区域-annotatr_files/CpG_island.jpeg" style="width:100.0%" style="height:100.0%" /></p>
+其余的基因组区域构成了inter-CGI。
+<img src="/post/2019-02-20-了解基因组区域-annotatr_files/CpG_island.jpeg" style="width:100.0%;height:100.0%" /></p>
 <p><strong>3.2 基因注释</strong><br />
 使用来自<code>GenomicFeatures</code>的函数和来自<code>TxDb.*</code>和<code>org.*.eg.db</code>包的数据进行基因注释<br />
 注释的区域包含TSS上游1-5Kb区域,启动子区域(&lt;1Kb TSS上游),5’UTR区域,第一外显子区域,外显子区域,内含子区域,CDS,3’UTR和内部区域(内部区域不包括前面的注释列表中的区域),下图表示了<code>GenomicFeatures</code>函数中各注释区域间的关系<br />
-<img src="/post/2019-02-20-了解基因组区域-annotatr_files/gene.jpeg" style="width:100.0%" style="height:100.0%" /> 基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上/下游)。需要注意的是，这些边界与基因链有关。</p>
+<img src="/post/2019-02-20-了解基因组区域-annotatr_files/gene.jpeg" style="width:100.0%;height:100.0%" />
+基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上/下游)。需要注意的是，这些边界与基因链有关。</p>
 <p><strong>3.3 FANTOM5 Permissive 增强子</strong><br />
 根据<a href="http://www.nature.com/nature/journal/v507/n7493/full/nature12787.html">Andersson等人</a>的双向笼式转录定义.并从<a href="http://fantom.gsc.riken.jp/5/datafiles/phase2.0/extra/Enhancers/">FANTOM5</a>源下载和处理hg19和mm9。使用<code>rtracklayer::liftOver()</code>函数可以将增强子版本从h19提升到hg38,mm9到mm10.</p>
 <p><strong>3.4 GENCODE lncRNA 转录本</strong><br />

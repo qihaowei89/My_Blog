@@ -13,7 +13,7 @@
     <meta property="og:url" content="/post/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8bioconductor%E6%B3%A8%E9%87%8A%E5%8C%85/">
     <meta property="og:site_name" content="My Blog Site">
     
-    <meta name="generator" content="Hugo 0.40.1" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <title>开始使用Bioconductor注释包 &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -116,10 +116,12 @@
 	</header>
 
 	<article>
-		<p>吉姆·麦克唐纳是华盛顿大学环境和职业健康科学系的生物统计学家。他分析了从表达（微阵列，RNA序列）到基因组（SNP阵列，DNA序列，芯片序列，甲基化阵列，BS-seq）和其他“组学”数据的HTS数据的范围。自成立以来，他一直致力于生物导体项目的发展，并提供和维护了大量的注释包。</p>
-<div class="section level2">
-<h2>基础包</h2>
-<p>介绍Bioconductor注释包中使用最多的基础包</p>
+		
+
+
+<p>吉姆·麦克唐纳是华盛顿大学环境和职业健康科学系的生物统计学家。他分析了从表达（微阵列，RNA序列）到基因组（SNP阵列，DNA序列，芯片序列，甲基化阵列，BS-seq）和其他“组学”数据的HTS数据的范围。自成立以来，他一直致力于生物导体项目的发展，并提供和维护了大量的注释包。</p>
+<p>##基础包
+介绍Bioconductor注释包中使用最多的基础包</p>
 <ul>
 <li><p><strong>OrgDb:</strong><br />
 <code>orgdb</code>包封装给定生物体基因的所有信息(除了<strong>位置信息</strong>).包括(GO terms and ontology, Entrez IDs, RefSeq ID, Ensembl IDs and many others).这些数据中的大多数都是由注释服务定期更新的；我们的半年度版本在发布日期“冻结”数据。这是我们在始终完全更新和能够基于一组静态注释生成可复制研究之间做出的权衡。</p></li>
@@ -136,7 +138,6 @@
 <li><p><strong>OrganismDb:</strong><br />
 在单个包装中封装多个注释包以启用包间查询,这些注释包有,<strong>GO.db</strong>提供Gene Ontology数据的映射,<strong>OrgDb</strong>和<strong>TxDb</strong></p></li>
 </ul>
-</div>
 <div class="section level2">
 <h2>常见任务</h2>
 <p>注释包支持的输入(<code>kyes</code>)和输出(<code>columns</code>).<br />
@@ -191,7 +192,7 @@ d.f</code></pre>
 
 
   <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     

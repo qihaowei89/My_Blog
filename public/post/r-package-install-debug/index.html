@@ -13,7 +13,7 @@
     <meta property="og:url" content="/post/r-package-install-debug/">
     <meta property="og:site_name" content="My Blog Site">
     
-    <meta name="generator" content="Hugo 0.40.1" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <title>r package install debug &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -116,11 +116,17 @@
 	</header>
 
 	<article>
-		<ul>
-<li><p><code>plot(iris)</code>遇到<code>rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err)</code><br />
-解决：</p>
-<pre><code>conda install cairo</code></pre></li>
-<li><p>安装<code>git2r</code>出错</p></li>
+		
+
+
+<ul>
+<li><code>plot(iris)</code>遇到<code>rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err)</code><br />
+解决：<br />
+</li>
+</ul>
+<pre><code>conda install cairo</code></pre>
+<ul>
+<li>安装<code>git2r</code>出错</li>
 </ul>
 <pre class="r"><code>install.packages(&#39;git2r&#39;, type=&#39;source&#39;, configure.vars=&#39;LIB_DIR=-L/home/wqh/miniconda3/lib/ INCLUDE_DIR=-I/home/wqh/miniconda3/include/&#39;)</code></pre>
 
@@ -133,7 +139,7 @@
 
 
   <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     

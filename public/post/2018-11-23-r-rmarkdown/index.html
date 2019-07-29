@@ -19,7 +19,7 @@
     
     <meta property="og:tags" content="shiny-server">
     
-    <meta name="generator" content="Hugo 0.40.1" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <title>Shiny Server 专业V1.5.10管理员指南 &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -120,7 +120,10 @@
 	</header>
 
 	<article>
-		<div id="shiny-server-v1.5.10" class="section level1">
+		
+
+
+<div id="shiny-server-v1.5.10" class="section level1">
 <h1>Shiny Server 专业V1.5.10管理员指南</h1>
 <p>Shiny Server使用户可以在互联网上搭建和管理Shiny app。</p>
 <div class="section level2">
@@ -239,7 +242,8 @@ statu shiny-server</code></pre>
 <h2>2 服务管理</h2>
 <div class="section level3">
 <h3>2.1 默认配置</h3>
-<p>有关每个可用设置和参数的详细信息可在<a href="http://docs.rstudio.com/shiny-server/#appendix">附录</a>中找到， 本节讨论默认在/etc/shiny-server/shiny-server.conf下的配置文件,shiny-server的默认配置文件如下：</p>
+<p>有关每个可用设置和参数的详细信息可在<a href="http://docs.rstudio.com/shiny-server/#appendix">附录</a>中找到，
+本节讨论默认在/etc/shiny-server/shiny-server.conf下的配置文件,shiny-server的默认配置文件如下：</p>
 <pre><code># Define the user we should use when spawning R Shiny processes
 run_as shiny;
 
@@ -356,7 +360,9 @@ admin 4151 {
 }   
 </code></pre>
 <p>以tim身份执行包含在该范围内的所有应用程序，tim相关的<code>.libPaths</code></p>
-<p>Bash shell 加载配置信息顺序 - 1 /etc/profile 在读取该文件之后，它查找下列文件，并读取并执行来自第一个文件并且是可读的命令（需要注意的是，这些文件中只有一个文件将被读取和执行）：<br />
+<p>Bash shell 加载配置信息顺序
+- 1 /etc/profile
+在读取该文件之后，它查找下列文件，并读取并执行来自第一个文件并且是可读的命令（需要注意的是，这些文件中只有一个文件将被读取和执行）：<br />
 - 2 ~/.bash_profile<br />
 - 2 ~/.bash_login<br />
 - 2 ~/.profile</p>
@@ -427,7 +433,8 @@ location /apps {
 </div>
 <div id="hosting-model" class="section level2">
 <h2>2.7 托管模式（Hosting Model）</h2>
-<p>目前有四种配置location的不同方法，其中三种用于Shiny应用程序（接下来介绍）。 第四种模式在<a href="http://docs.rstudio.com/shiny-server/#redirecting"><strong>Redirecting</strong></a>部分介绍.</p>
+<p>目前有四种配置location的不同方法，其中三种用于Shiny应用程序（接下来介绍）。
+第四种模式在<a href="http://docs.rstudio.com/shiny-server/#redirecting"><strong>Redirecting</strong></a>部分介绍.</p>
 <div class="section level3">
 <h3>2.7.1 托管包含多个应用程序的文件夹</h3>
 <p>location下指定site_dir将会托管完整的目录树–同时包含应用程序和静态资源。用于在Shiny Server的默认配置文件中/srv/shiny-server/中提供静态资源或应用程序的位置：</p>
@@ -485,7 +492,7 @@ location /specialApp {
 }
 
 </code></pre>
-<p>配置<strong>location</strong> 负责URL<strong>/specialApp</strong>的使用<strong>app_dir</strong>模式的路由，它服务于存储在目录<strong>/srv/shiny-server/myApp</strong>中的单个应用程序。配置完成后，如果目录<strong>/srv/shiny-server/myApp</strong>中同时存在<strong>server.R</strong>和<strong>ui.R</strong>，可以通过URL **<a href="http://server.com/specialApp**" class="uri">http://server.com/specialApp**</a>。</p>
+<p>配置<strong>location</strong> 负责URL<strong>/specialApp</strong>的使用<strong>app_dir</strong>模式的路由，它服务于存储在目录<strong>/srv/shiny-server/myApp</strong>中的单个应用程序。配置完成后，如果目录<strong>/srv/shiny-server/myApp</strong>中同时存在<strong>server.R</strong>和<strong>ui.R</strong>，可以通过URL <strong><a href="http://server.com/specialApp" class="uri">http://server.com/specialApp</a></strong>。</p>
 </div>
 <div class="section level3">
 <h3>2.7.3 按每个用户托管应用程序文件夹</h3>
@@ -504,7 +511,7 @@ location / {
 
 </code></pre>
 <p>任何在<strong>shinyUsers</strong>组的成员可以托管其目录** ~/ShinyApps<strong>下三任何程序。<br />
-例如，用户</strong>tina<strong>，他属于</strong>shinyUsers<strong>组，其家目录为</strong>/home/tina<strong>，目录</strong>/home/tina/ShinyApps/<strong>下有个名为</strong>shinyApp1<strong>的程序，那么这个程序可以通过URL</strong><a href="http://server.com/tina/shinyApp1**访问。而**" class="uri">http://server.com/tina/shinyApp1**访问。而**</a> /home/tina/ShinyApps/**目录下的其他应用同样可以以类似的URL访问。</p>
+例如，用户</strong>tina<strong>，他属于</strong>shinyUsers<strong>组，其家目录为</strong>/home/tina<strong>，目录</strong>/home/tina/ShinyApps/<strong>下有个名为</strong>shinyApp1<strong>的程序，那么这个程序可以通过URL</strong><a href="http://server.com/tina/shinyApp1" class="uri">http://server.com/tina/shinyApp1</a><strong>访问。而</strong> /home/tina/ShinyApps/**目录下的其他应用同样可以以类似的URL访问。</p>
 <p><strong>user_dirs</strong>模式的设置最终将覆盖<strong>user_apps</strong>模式下的设置，这两种模式非常相近，不同处在于对<strong>run_as</strong>的设置上，<strong>user_apps</strong>模式会直接忽略<strong>run_as</strong>的设置值，总在其所处的家目录中运行；而<strong>user_dirs</strong>模式接受<strong>run_as</strong>的设置值，可以通过指定<strong>run_as</strong>为<strong>:HOME_USER:</strong>达到<strong>user_apps</strong>模式同样的效果。如下两种配置有相同的效果：</p>
 <pre><code>location / {
 
@@ -537,7 +544,7 @@ location / {
   }
 }
 </code></pre>
-<p>任何精确匹配<strong>/shinyApp1</strong>路径的请求都会临时重定向到**<a href="http://server.com**" class="uri">http://server.com**</a>。</p>
+<p>任何精确匹配<strong>/shinyApp1</strong>路径的请求都会临时重定向到<strong><a href="http://server.com" class="uri">http://server.com</a></strong>。</p>
 </div>
 <div id="-virtual-hosts" class="section level2">
 <h2>2.9 虚拟主机 Virtual Hosts</h2>
@@ -578,10 +585,10 @@ server {
 <p>为了利用该特性，需要一个专用目录来存储模板；在本例中，我们假设<strong>/etc/shiny-server/templates/</strong>为模板文件夹.在这个目录中，放置网页的页面能启用句柄的HTML模板。</p>
 <p>当请求静态页面时，Shiny Server将尝试使用适当的模板进行响应。例如，如果遇到404错误，它将首先查看指定目录中是否提供了用于处理的404错误的特定模板（<strong>error-404.html</strong>）。如果找不到此文件，它将查找通用错误模板（<strong>error.html</strong>）。如果在模板目录中没找到合适的模板，那么它将依赖于Shiny Server（存储在<strong>/opt/shiny-server/templates</strong>中）提供的默认模板。</p>
 <p>在命名模板时，必须符合Shiny Server用于文件名的特定连字符分隔模式。所有错误页都以<strong>error</strong>开头，但是404错误页的文件名会在连字符之后添加一个附加的元素（404）: <strong>error-404</strong>。所有文件都需使用.html扩展名。</p>
-<table style="width:72%;">
+<table>
 <colgroup>
-<col width="19%" />
-<col width="52%" />
+<col width="26%" />
+<col width="74%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -630,7 +637,7 @@ cp /opt/shiny-server/templates/error.html /etc/shiny-server/templates/
 <pre><code>template_dir /etc/shiny-server/templates;   </code></pre>
 <p>重新启动服务器并访问错误页面时，所加载的页面上看到新文本或CSS样式。（尝试访问隐藏文件，如 <a href="http://server.com:3838/.hidden" class="uri">http://server.com:3838/.hidden</a> ，其中<strong>server.com</strong>是服务器的域名或IP地址，应该使用error-403或error模板。）同样，可以将<strong>directoryIndex.html</strong>模板复制到自定义目录并开始定制模板。</p>
 <p>出于性能原因，模板一旦加载了，则缓存在内存中。因此，在刷新页面时，会发现对模板的更改可能不会立即生效。可以通过重新启动或重新加载服务器（参见<a href="http://docs.rstudio.com/shiny-server/#stopping-and-starting">服务停止和启动</a>部分）清空缓存并强制Shiny Server加载更改的新模板。</p>
-<p>最后，请注意，这些模板目前仅适用于Shiny Server生成的HTML页面。Shiny包生成的HTML页面此时将不应用自定义模板。目前，最明显的是404错误。如果访问Shiny Server不能直接指向Shiny应用程序的URL（例如，<a href="http://server.com:3838/flargdarg，其中server.com是服务器的域名或IP地址" class="uri">http://server.com:3838/flargdarg，其中server.com是服务器的域名或IP地址</a>），将看到Shiny-Server生成的404错误页面，其中应用了定制模板（假设此<strong>server</strong>配置过自定义error-404.HTML或Error .HTML模板）。但是，如果访问的是有效应用程序中不存在的文件，则会看到未样式化的404页，该页没有利用自定义模板。例如，如果一个应用程序部署在**<a href="http://server.com:3838/myApp**，并且试图访问**http://server.com:3838/myApp/flargdarg**，请求将被发送到Shiny，然后Shiny查找该文件，如果没有找到，将返回404页。Shiny" class="uri">http://server.com:3838/myApp**，并且试图访问**http://server.com:3838/myApp/flargdarg**，请求将被发送到Shiny，然后Shiny查找该文件，如果没有找到，将返回404页。Shiny</a> Server会将此响应直接传递回客户端，因为它不是由Shiny Server生成的。</p>
+<p>最后，请注意，这些模板目前仅适用于Shiny Server生成的HTML页面。Shiny包生成的HTML页面此时将不应用自定义模板。目前，最明显的是404错误。如果访问Shiny Server不能直接指向Shiny应用程序的URL（例如，<a href="http://server.com:3838/flargdarg，其中server.com是服务器的域名或IP地址" class="uri">http://server.com:3838/flargdarg，其中server.com是服务器的域名或IP地址</a>），将看到Shiny-Server生成的404错误页面，其中应用了定制模板（假设此<strong>server</strong>配置过自定义error-404.HTML或Error .HTML模板）。但是，如果访问的是有效应用程序中不存在的文件，则会看到未样式化的404页，该页没有利用自定义模板。例如，如果一个应用程序部署在<strong><a href="http://server.com:3838/myApp" class="uri">http://server.com:3838/myApp</a></strong>，并且试图访问<strong><a href="http://server.com:3838/myApp/flargdarg" class="uri">http://server.com:3838/myApp/flargdarg</a></strong>，请求将被发送到Shiny，然后Shiny查找该文件，如果没有找到，将返回404页。Shiny Server会将此响应直接传递回客户端，因为它不是由Shiny Server生成的。</p>
 </div>
 <div id="shiny-server" class="section level2">
 <h2>2.12 shiny-server服务日志</h2>
@@ -642,7 +649,10 @@ cp /opt/shiny-server/templates/error.html /etc/shiny-server/templates/
 <p>使用<strong>access_log</strong>配置访问日志文件的全局参数，默认是没有记录访问日志的，这个设置能控制访问日志的位置和文件格式。访问日志可用于监视Shiny Server上发生的安全性和活动。可以对这些日志进行手动或自动监视，以检查各种资源被访问的频率，或者由谁（使用原始IP地址）访问它们。目前，整个Shiny Server进程创建一个访问日志，所有Shiny应用程序都共享这个访问日志。</p>
 <p>访问日志将使用 <a href="https://github.com/expressjs/morgan">morgan</a>日志库编写；更多细节可以在文档的<a href="https://github.com/expressjs/morgan#predefined-formats">Formats</a>部分找到。简言之，对于在上面引用的文档中指定的访问日志，有五种预定义的日志格式：<br />
 - <strong>combined</strong> ‘:remote-addr - - [:date] “:method :url HTTP/:http-version” :status :res[content-length] “:referrer” “:user-agent”’<br />
-- <strong>common</strong> ‘:remote-addr - - [:date] “:method :url HTTP/:http-version” :status :res[content-length]’ - <strong>short</strong> ‘:remote-addr - :method :url HTTP/:http-version :status :res[content-length] - :response-time ms’ - <strong>tiny</strong> ‘:method :url :status :res[content-length] - :response-time ms’ - <strong>dev</strong> 用于开发，有颜色的简单输出</p>
+- <strong>common</strong> ‘:remote-addr - - [:date] “:method :url HTTP/:http-version” :status :res[content-length]’
+- <strong>short</strong> ‘:remote-addr - :method :url HTTP/:http-version :status :res[content-length] - :response-time ms’
+- <strong>tiny</strong> ‘:method :url :status :res[content-length] - :response-time ms’
+- <strong>dev</strong> 用于开发，有颜色的简单输出</p>
 <p>例如，如下代码将会配置一个<strong>tiny</strong>格式的访问日志：</p>
 <pre><code>access_log /var/log/shiny-server/access.log tiny;
 
@@ -795,7 +805,7 @@ server {
 <p>Shiny Server的配置文件是<strong>/etc/shiny-server/shiny-server.conf</strong>，作为“快速启动”指南，我们在<strong>/opt/shiny-server/bin/deploy-example</strong>中提供了一个方便的可执行文件，可以将与此快速启动关联的示例配置文件复制到该位置，并安装示例应用程序的目录。<strong>请确保首先备份当前配置文件</strong>，然后运行以下命令：</p>
 <pre><code>sudo /opt/shiny-server/bin/deploy-example default</code></pre>
 <p>此配置要求Shiny应用程序托管在<strong>/srv/shiny-server/</strong>下，安装程序还将在<strong>/srv/shiny-server/sample-apps/hello/</strong>中放置一个示例应用程序。<br />
-默认情况下，Shiny Server侦听端口3838，因此可以通过URL<strong><a href="http://" class="uri">http://</a><server-address>:3838/sample-apps/hello/</strong>访问这个程序。若在本地运行URL**<a href="http://127.0.0.1:3838/sample-apps/hello/**" class="uri">http://127.0.0.1:3838/sample-apps/hello/**</a></p>
+默认情况下，Shiny Server侦听端口3838，因此可以通过URL<strong><a href="http://" class="uri">http://</a><server-address>:3838/sample-apps/hello/</strong>访问这个程序。若在本地运行URL<strong><a href="http://127.0.0.1:3838/sample-apps/hello/" class="uri">http://127.0.0.1:3838/sample-apps/hello/</a></strong></p>
 <p>可以修改<strong>/etc/shiny-server/shiny-server.conf</strong>配置文件的设置，<strong>listen 3838</strong>为<strong>listen 12345</strong>。然后重启server生效。</p>
 <p>现在，如果您使用的发行版支持Upstart（最近的发行版，包括Ubuntu 12和稍后的发行版以及CentOS 6），则将运行此命令：<code>sudo restart shiny-server</code></p>
 <p>如果您使用的是依赖init.d（例如CentOS 5）的旧系统，则将运行以下命令：<code>sudo /sbin/service shiny-server restart</code></p>
@@ -840,7 +850,7 @@ server {
 
 
   <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     

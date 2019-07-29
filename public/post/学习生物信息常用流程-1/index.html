@@ -19,7 +19,7 @@
     
     <meta property="og:tags" content="bioinfomatics">
     
-    <meta name="generator" content="Hugo 0.40.1" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <title>学习生物信息常用流程-1 &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -122,7 +122,10 @@
 	</header>
 
 	<article>
-		<div id="rnacocktailrna-seq" class="section level3">
+		
+
+
+<div id="rnacocktailrna-seq" class="section level3">
 <h3>RNACocktail:一种精确高效的RNA-seq分析框架</h3>
 <p>From：<a href="https://bioinform.github.io/rnacocktail/" class="uri">https://bioinform.github.io/rnacocktail/</a></p>
 <p>RNACocktail pipeline可对短read和长read进行广谱的RNA-Seq分析，以便能够从转录数据获得有意义的见解。它是在分析了各种RNA-Seq样品(从生殖系、癌症到干细胞数据集)以及使用多种工具组合来确定一个全面、快速和准确的pipeline的技术之后开发的。</p>
@@ -433,8 +436,8 @@ Docker镜像制作的Dockerfile<a href="https://github.com/bioinform/rnacocktail
 <table>
 <colgroup>
 <col width="24%" />
-<col width="18%" />
-<col width="22%" />
+<col width="17%" />
+<col width="21%" />
 <col width="35%" />
 </colgroup>
 <thead>
@@ -735,7 +738,8 @@ Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignm
     --ref_genome genome.GRCh37.fa \
     --IndelRealignment \
     --knownsites dbsnp_138.b37.vcf</code></pre>
-<p><strong>Example 15 (editing):</strong> Run of RNACocktail for RNA editing detection (GIREMI)</p>
+<p><strong>Example 15 (editing):</strong>
+Run of RNACocktail for RNA editing detection (GIREMI)</p>
 <pre><code>run_rnacocktail.py editing \
     --alignment work/gatk/A/bsqr.bam \
     --variant work/gatk/A/variants_filtered.vcf \
@@ -751,7 +755,8 @@ Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignm
     --sample A \
     --ref_genome genome.GRCh37.fa \
     --knownsites dbsnp_138.b37.vcf</code></pre>
-<p><strong>Example 16 (fusion):</strong> Run of RNACocktail for RNA fusion detection (FusionCatcher)</p>
+<p><strong>Example 16 (fusion):</strong>
+Run of RNACocktail for RNA fusion detection (FusionCatcher)</p>
 <pre><code>run_rnacocktail.py fusion \
     --data_dir /path/to/fusioncatcher/ensembl/data/directory/ \
     --input seq_1.fq.gz,seq_2.fq.gz \
@@ -760,7 +765,8 @@ Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignm
     --fusioncatcher /path/to/fusioncatcher \
     --threads 4 \
     --sample A</code></pre>
-<p><strong>Example 17 (all):</strong> Run all pipeline steps (Short-read example)</p>
+<p><strong>Example 17 (all):</strong>
+Run all pipeline steps (Short-read example)</p>
 <pre><code>run_rnacocktail.py all \
     --outdir out \
     --workdir work \
@@ -796,7 +802,8 @@ Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignm
     --lordec /path/to/lordec-correct \
     --sam2psl /path/to/sam2psl.py \
     --fusioncatcher /path/to/fusioncatcher</code></pre>
-<p><strong>Example 18 (all):</strong> Run all pipeline steps (long-read example)</p>
+<p><strong>Example 18 (all):</strong>
+Run all pipeline steps (long-read example)</p>
 <pre><code>run_rnacocktail.py all \
     --outdir out \
     --workdir work \
@@ -1350,7 +1357,7 @@ docker run -v=${PWD}/../:/work_dir/ marghoob/rnacocktail run_rnacocktail.py all 
 
 
   <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     

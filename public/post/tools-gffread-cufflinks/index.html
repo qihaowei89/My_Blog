@@ -15,7 +15,7 @@
     
     <meta property="og:tags" content="bioinfomatics">
     
-    <meta name="generator" content="Hugo 0.40.1" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <title>Tools-gffread(cufflinks) &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -118,7 +118,10 @@
 	</header>
 
 	<article>
-		<p><strong>gffread</strong><br />
+		
+
+
+<p><strong>gffread</strong><br />
 gffread这工具，官网的定义为used to generate a FASTA file with the DNA sequences for all transcripts in a GFF file,比如一个很常见的需求，对于stringtie组装后的gtf文件，想将组装后的转录本的序列从对应的参考基因组上提取出来，这时就可以用gffread这工具了，还是上述的小鼠为例：</p>
 <pre><code>gffread stringtie_merged.gtf  -g mm10.fa -w transcripts.fa 
 
@@ -150,7 +153,7 @@ Filters and/or converts GFF3/GTF2 records.
 
 
   <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     

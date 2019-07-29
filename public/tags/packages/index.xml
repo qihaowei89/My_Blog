@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Packages on My Blog Site</title>
+    <title>packages on My Blog Site</title>
     <link>/tags/packages/</link>
-    <description>Recent content in Packages on My Blog Site</description>
+    <description>Recent content in packages on My Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 18 Dec 2018 00:00:00 +0000</lastBuildDate>

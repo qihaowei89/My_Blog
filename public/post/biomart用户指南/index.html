@@ -13,7 +13,7 @@
     <meta property="og:url" content="/post/biomart%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/">
     <meta property="og:site_name" content="My Blog Site">
     
-    <meta name="generator" content="Hugo 0.40.1" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <title>Biomart用户指南 &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -116,7 +116,10 @@
 	</header>
 
 	<article>
-		<div class="section level3">
+		
+
+
+<div class="section level3">
 <h3>1 介绍</h3>
 <p><a href="http://bioconductor.org/packages/biomaRt">biomaRt</a>软件包为越来越多的数据库提供了接口，这些数据库实现了<a href="http://www.biomart.org/">biomaRt软件套件</a>。该包支持以统一的方式检索大量数据，而无需了解底层数据库模式或编写复杂的SQL查询。BioMart数据库的例子有Ensembl、UniProt和HapMap。这些主要数据库使Biomart用户能够直接访问各种数据集，并支持R提供的各种强大的在线查询。</p>
 </div>
@@ -193,8 +196,10 @@ getBM(attributes = c(&#39;entrezgene&#39;,&#39;hgnc_symbol&#39;),
     filters = &#39;go&#39;, 
     values = &#39;GO:0004707&#39;, 
     mart = ensembl)</code></pre>
-<p><strong>4.7 一个给定的entrezgene ID检索上游100bp启动子序列</strong> 可以使用<code>getSequence()</code>函数获得序列信息.<br />
-seqType参数可用选项如下: - <code>cdna</code><br />
+<p><strong>4.7 一个给定的entrezgene ID检索上游100bp启动子序列</strong>
+可以使用<code>getSequence()</code>函数获得序列信息.<br />
+seqType参数可用选项如下:
+- <code>cdna</code><br />
 - <code>peptide</code> 蛋白序列<br />
 - <code>3utr</code> 3’ UTR序列<br />
 - <code>5urt</code> 5’ UTR序列<br />
@@ -313,7 +318,7 @@ select(mart, keys=affy, columns=c(&#39;affy_hg_u133_plus_2&#39;,&#39;entrezgene&
 
 
   <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     

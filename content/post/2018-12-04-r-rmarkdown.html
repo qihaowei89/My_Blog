@@ -30,7 +30,8 @@ devtools::install_github(&quot;rstudio/blogdown&quot;)</code></pre>
 <h3>1.1.2 安装 <a href="https://gohugo.io">Hugo</a>静态网站生成器</h3>
 <pre class="r"><code># helper function in blogdown to download and install it automatically on major operating systems (Windows, macOS, and Linux)
 blogdown::install_hugo() </code></pre>
-<p>默认情况下，它安装最新版本的Hugo，但是可以通过<code>version</code>参数选择特定版本. 使用<code>blogdown::update_hugo()</code>升级或<code>install_hugo(force=TRUE)</code>重新安装Hugo，</p>
+<p>默认情况下，它安装最新版本的Hugo，但是可以通过<code>version</code>参数选择特定版本.
+使用<code>blogdown::update_hugo()</code>升级或<code>install_hugo(force=TRUE)</code>重新安装Hugo，</p>
 </div>
 </div>
 <div class="section level2">
@@ -127,7 +128,8 @@ theme = &quot;hugo-lithium&quot;
 # or file.edit(&quot;.Rprofile&quot;)</code></pre>
 <p>假使你倾向于使用<code>Rmd</code>(默认是<code>*.md</code>)托管博客，并且希望博客作者默认为‘Qihao Wei’，你可以使用如下配置文件设置：</p>
 <pre class="r"><code>options(blogdown.ext = &quot;.Rmd&quot;, blogdown.author = &quot;Qihao Wei&quot;)</code></pre>
-<p>R 只读取一个启动配置文件。如果你有一个配置<code>.Rprofile</code>在当前目录，一个全局配置位于<code>~/.Rprofile</code>,在当前目录启动R的时候执行的是前者。这可能使多个作者在同一网站项目上协作变得不方便，因为无法设置特定于作者的选项。 推荐做法是：</p>
+<p>R 只读取一个启动配置文件。如果你有一个配置<code>.Rprofile</code>在当前目录，一个全局配置位于<code>~/.Rprofile</code>,在当前目录启动R的时候执行的是前者。这可能使多个作者在同一网站项目上协作变得不方便，因为无法设置特定于作者的选项。
+推荐做法是：</p>
 <pre class="r"><code># in .Rprofile of the website project
 if (file.exists(&quot;~/.Rprofile&quot;)) {
   base::sys.source(&quot;~/.Rprofile&quot;, envir = environment())
@@ -164,7 +166,8 @@ blogdown::new_site(theme = &quot;gcushen/hugo-academic&quot;)</code></pre>
 <div class="section level2">
 <h2>1.7 一个参考流程</h2>
 <p>有很多方法可以搭建和发布一个网站，由于需要学习大量的技术来完全理解网站是如何工作的，所以我们要向初学者推荐一个工作流程，这样希望他们不需要完全理解本书的其余部分。这肯定不是最优的工作流，但是需要知道最少的技术细节。</p>
-<p>新建一个网站的流程： 1. 在<a href="http://themes.gohugo.io">hugo</a>找到GitHub repository链接，格式为<code>https://github.com/user/repo</code>。<br />
+<p>新建一个网站的流程：
+1. 在<a href="http://themes.gohugo.io">hugo</a>找到GitHub repository链接，格式为<code>https://github.com/user/repo</code>。<br />
 2. 在RStudio中创建一个新的项目，在R控制台中输入<code>blogdown::new_site(theme = 'user/repo')</code>,其中的<code>user/repo</code>来自第一步中的链接。<br />
 3. 如果对于新的主题不喜欢，可以重复上述步骤重新搭建或者编辑<code>config.toml</code>配置文件。如果对某个选项不理解，可以找到主题的手册（通常在Github的README中）。</p>
 <p>编辑一个网站的流程：<br />
@@ -172,7 +175,8 @@ blogdown::new_site(theme = &quot;gcushen/hugo-academic&quot;)</code></pre>
 2. 使用“New Post”插件来创建新的帖子或页面，然后编辑内容。<br />
 3. 使用“Update Metadata”插件修改YAML元数据（如果需要的话）。</p>
 <p>发布一个网站（如果对GIT和Gihub不熟悉）：<br />
-1. 重启R会话，运行<code>blogdown::hugo_build()</code>，将会在你项目的根目录生成一个<code>public/</code>文件夹。 2. 登陆<a href="https://www.netlify.com/">netify</a>（可以使用已有GitHub、Gitlab账户登陆）。如果这是你第一次发布这个网站，你可以创建一个新的网站，或者修改你现有网站。将<code>public/</code>文件夹从文件查看器拖放到Netlify网页的指示区域（显示“在这里用静态站点拖动文件夹”）。<br />
+1. 重启R会话，运行<code>blogdown::hugo_build()</code>，将会在你项目的根目录生成一个<code>public/</code>文件夹。
+2. 登陆<a href="https://www.netlify.com/">netify</a>（可以使用已有GitHub、Gitlab账户登陆）。如果这是你第一次发布这个网站，你可以创建一个新的网站，或者修改你现有网站。将<code>public/</code>文件夹从文件查看器拖放到Netlify网页的指示区域（显示“在这里用静态站点拖动文件夹”）。<br />
 3. 等待几秒钟，Netlify就可以部署这些文件了，它将给您分配<code>random-word-12345.netlify.com</code>一个随机子域。你可以把这个随机子域改变成更有意义的子域。</p>
 <p>如果你熟悉Git和GitHub，那么发布一个网站就容易多了。建议在Netlify上从GitHub存储库中创建一个包含网站源文件的新站点，以便可以连续部署，而不是每次都手动上传<code>public/</code>文件夹。通过这种方式，你不需要本地运行<code>blogdown::hugo_build()</code>，因为网站可以通过Hugo建立在Netlify上。详细信息见<a href="https://bookdown.org/yihui/blogdown/deployment.html#deployment">第三章</a></p>
 </div>
@@ -187,8 +191,9 @@ blogdown::new_site(theme = &quot;gcushen/hugo-academic&quot;)</code></pre>
 <p>我们选择Hugo有很多原因，最突出的优势是：与其他静态站点生成器不同，Hugo的安装非常简单，因为它为大多数操作系统提供了单个可执行文件，而没有依赖性（参见1.1节）。它能比其他静态网页生成器更快地渲染数百页内容，并且据报道可以在大约1毫秒内渲染单个页面。最后，Hugo用户在Hugo讨论论坛和GitHub问题上都很活跃。</p>
 <p>尽管我们认为Hugo是一个很棒的静态站点生成器，但是实际上最主要的一个主要缺点是：不支持R Markdown。但是R markdown是<code>blogdown</code>包的基础，没有这个功能会使得在网页上使用R代码比较困难。除此之外，Hugo的默认Markdown引擎是“Blackfriday”，它没有Pandoc功能强大。</p>
 <p>Hugo使用一个特定文件和文件夹结构来创建你的网站（如下图）。<br />
-<img src="/post/2018-12-04-r-rmarkdown_files/folder-structure.png" alt="FIGURE 2.1: Possible files and folders created when you create a new site using blogdown." style="width:100.0%" style="height:100.0%" /></p>
-<p>本章的其余部分将详细介绍下列文件和文件夹： - <code>config.toml</code><br />
+<img src="/post/2018-12-04-r-rmarkdown_files/folder-structure.png" alt="FIGURE 2.1: Possible files and folders created when you create a new site using blogdown." style="width:100.0%;height:100.0%" /></p>
+<p>本章的其余部分将详细介绍下列文件和文件夹：
+- <code>config.toml</code><br />
 - <code>content/</code><br />
 - <code>static/</code><br />
 - <code>themes/</code><br />
@@ -310,7 +315,7 @@ relativeURLs = true</code></pre>
 &lt;script async src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;
 &lt;/script&gt;</code></pre>
 <div class="figure">
-<img src="/post/2018-12-04-r-rmarkdown_files/jtleek-tweet.png" alt="FIGURE 2.2: A tweet by Jeff Leek." style="width:100.0%" style="height:100.0%" />
+<img src="/post/2018-12-04-r-rmarkdown_files/jtleek-tweet.png" alt="FIGURE 2.2: A tweet by Jeff Leek." style="width:100.0%;height:100.0%" />
 <p class="caption">FIGURE 2.2: A tweet by Jeff Leek.</p>
 </div>
 <p>如果使用上述短代码，则在Markdown源文件中编写：</p>

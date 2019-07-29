@@ -13,7 +13,7 @@
     <meta property="og:url" content="/post/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/">
     <meta property="og:site_name" content="My Blog Site">
     
-    <meta name="generator" content="Hugo 0.40.1" />
+    <meta name="generator" content="Hugo 0.55.6" />
     <title>了解基因组区域-annotatr &middot; My Blog Site</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -116,7 +116,10 @@
 	</header>
 
 	<article>
-		<p><strong>1 介绍</strong><br />
+		
+
+
+<p><strong>1 介绍</strong><br />
 二代测序实验和生物信息学分析pipelines产生的基因组区域在注释基因组特征后更有意义。发生在<strong>exon</strong>或<strong>enhancer</strong>中的SNP可能比发生在基因间区域的SNP更受关注。可能有兴趣发现一种特殊的转录因子绝大多数与启动子结合，而另一种主要与3’UTR结合。含有CpG岛的启动子的高甲基化可能表明在一种情况下与另一种情况下不同的调控机制。</p>
 <p><strong>2 安装</strong></p>
 <pre class="r"><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
@@ -126,11 +129,13 @@ biocLite(&quot;annotatr&quot;)</code></pre>
 CpG岛是所有CpG注释的基础,并且由AnnotationHub包提供个物种的注释数据。<br />
 CpG shores位于CpG岛边界的上游/下游2kb<br />
 CpG shelves位于CpG shores边界的上游/下游2kb<br />
-其余的基因组区域构成了inter-CGI。 <img src="../../post/2019-02-20-了解基因组区域-annotatr_files/CpG_island.jpeg" style="width:100.0%" style="height:100.0%" /></p>
+其余的基因组区域构成了inter-CGI。
+<img src="../../post/2019-02-20-了解基因组区域-annotatr_files/CpG_island.jpeg" style="width:100.0%;height:100.0%" /></p>
 <p><strong>3.2 基因注释</strong><br />
 使用来自<code>GenomicFeatures</code>的函数和来自<code>TxDb.*</code>和<code>org.*.eg.db</code>包的数据进行基因注释<br />
 注释的区域包含TSS上游1-5Kb区域,启动子区域(&lt;1Kb TSS上游),5’UTR区域,第一外显子区域,外显子区域,内含子区域,CDS,3’UTR和内部区域(内部区域不包括前面的注释列表中的区域),下图表示了<code>GenomicFeatures</code>函数中各注释区域间的关系<br />
-<img src="../../post/2019-02-20-了解基因组区域-annotatr_files/gene.jpeg" style="width:100.0%" style="height:100.0%" /> 基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上/下游)。需要注意的是，这些边界与基因链有关。</p>
+<img src="../../post/2019-02-20-了解基因组区域-annotatr_files/gene.jpeg" style="width:100.0%;height:100.0%" />
+基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上/下游)。需要注意的是，这些边界与基因链有关。</p>
 <p><strong>3.3 FANTOM5 Permissive 增强子</strong><br />
 根据<a href="http://www.nature.com/nature/journal/v507/n7493/full/nature12787.html">Andersson等人</a>的双向笼式转录定义.并从<a href="http://fantom.gsc.riken.jp/5/datafiles/phase2.0/extra/Enhancers/">FANTOM5</a>源下载和处理hg19和mm9。使用<code>rtracklayer::liftOver()</code>函数可以将增强子版本从h19提升到hg38,mm9到mm10.</p>
 <p><strong>3.4 GENCODE lncRNA 转录本</strong><br />
@@ -466,7 +471,7 @@ print(dm_vs_kg_cat)</code></pre>
 
 
   <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     

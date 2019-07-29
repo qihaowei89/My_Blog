@@ -15,9 +15,12 @@ scripts: []
 
 
 <ul>
-<li><p><code>plot(iris)</code>遇到<code>rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err)</code><br />
-解决：</p>
-<pre><code>conda install cairo</code></pre></li>
-<li><p>安装<code>git2r</code>出错</p></li>
+<li><code>plot(iris)</code>遇到<code>rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err)</code><br />
+解决：<br />
+</li>
+</ul>
+<pre><code>conda install cairo</code></pre>
+<ul>
+<li>安装<code>git2r</code>出错</li>
 </ul>
 <pre class="r"><code>install.packages(&#39;git2r&#39;, type=&#39;source&#39;, configure.vars=&#39;LIB_DIR=-L/home/wqh/miniconda3/lib/ INCLUDE_DIR=-I/home/wqh/miniconda3/include/&#39;)</code></pre>

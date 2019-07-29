@@ -329,8 +329,8 @@ Docker镜像制作的Dockerfile<a href="https://github.com/bioinform/rnacocktail
 <table>
 <colgroup>
 <col width="24%" />
-<col width="18%" />
-<col width="22%" />
+<col width="17%" />
+<col width="21%" />
 <col width="35%" />
 </colgroup>
 <thead>
@@ -631,7 +631,8 @@ Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignm
     --ref_genome genome.GRCh37.fa \
     --IndelRealignment \
     --knownsites dbsnp_138.b37.vcf</code></pre>
-<p><strong>Example 15 (editing):</strong> Run of RNACocktail for RNA editing detection (GIREMI)</p>
+<p><strong>Example 15 (editing):</strong>
+Run of RNACocktail for RNA editing detection (GIREMI)</p>
 <pre><code>run_rnacocktail.py editing \
     --alignment work/gatk/A/bsqr.bam \
     --variant work/gatk/A/variants_filtered.vcf \
@@ -647,7 +648,8 @@ Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignm
     --sample A \
     --ref_genome genome.GRCh37.fa \
     --knownsites dbsnp_138.b37.vcf</code></pre>
-<p><strong>Example 16 (fusion):</strong> Run of RNACocktail for RNA fusion detection (FusionCatcher)</p>
+<p><strong>Example 16 (fusion):</strong>
+Run of RNACocktail for RNA fusion detection (FusionCatcher)</p>
 <pre><code>run_rnacocktail.py fusion \
     --data_dir /path/to/fusioncatcher/ensembl/data/directory/ \
     --input seq_1.fq.gz,seq_2.fq.gz \
@@ -656,7 +658,8 @@ Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignm
     --fusioncatcher /path/to/fusioncatcher \
     --threads 4 \
     --sample A</code></pre>
-<p><strong>Example 17 (all):</strong> Run all pipeline steps (Short-read example)</p>
+<p><strong>Example 17 (all):</strong>
+Run all pipeline steps (Short-read example)</p>
 <pre><code>run_rnacocktail.py all \
     --outdir out \
     --workdir work \
@@ -692,7 +695,8 @@ Run of RNACocktail for RNA-Seq variant calling (GATK) with enabled IndelRealignm
     --lordec /path/to/lordec-correct \
     --sam2psl /path/to/sam2psl.py \
     --fusioncatcher /path/to/fusioncatcher</code></pre>
-<p><strong>Example 18 (all):</strong> Run all pipeline steps (long-read example)</p>
+<p><strong>Example 18 (all):</strong>
+Run all pipeline steps (long-read example)</p>
 <pre><code>run_rnacocktail.py all \
     --outdir out \
     --workdir work \
