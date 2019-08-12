@@ -299,32 +299,37 @@
   </url>
   
   <url>
-    <loc>/tutorial/getting-started/</loc>
-    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
+    <loc>/tutorial/custom-css/</loc>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tutorial/</loc>
-    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/hugo/</loc>
-    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/series/</loc>
-    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/tutorial/</loc>
-    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2016-03-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tutorial/getting-started/</loc>
+    <lastmod>2016-03-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>

@@ -72,6 +72,11 @@ docker ps -a
 # 7ed84537456d  872a7a87f4f0  "/bin/bash" 6 minutes ago Exited (0) 8 seconds ago  vibrant_allen
 ```   
 
+复制容器中文件到宿主机中   
+```
+docker cp [OPTIONS] [CONTAINER_ID]:[SRC_PATH] [DEST_PATH]
+```   
+
 提交修改的容器，并生成新的镜像 
 ```
 docker commit <CONTAINER ID > <新镜像名称>

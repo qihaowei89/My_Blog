@@ -158,6 +158,8 @@ EXPOSE 80</code></pre>
 
 # CONTAINER ID    IMAGE         COMMAND     CREATED                  STATUS        ORTS NAMES
 # 7ed84537456d  872a7a87f4f0  &quot;/bin/bash&quot; 6 minutes ago Exited (0) 8 seconds ago  vibrant_allen</code></pre>
+<p>复制容器中文件到宿主机中</p>
+<pre><code>docker cp [OPTIONS] [CONTAINER_ID]:[SRC_PATH] [DEST_PATH]</code></pre>
 <p>提交修改的容器，并生成新的镜像</p>
 <pre><code>docker commit &lt;CONTAINER ID &gt; &lt;新镜像名称&gt;
 </code></pre>
