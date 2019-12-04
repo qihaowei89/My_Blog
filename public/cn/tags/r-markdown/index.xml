@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Markdown on Example YinYong Blog</title>
+    <link>/cn/tags/r-markdown/</link>
+    <description>Recent content in R Markdown on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Shiny Server 专业V1.5.10管理员指南</title>
+      <link>/cn/posts/2018-11-23-r-rmarkdown/</link>
+      <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/2018-11-23-r-rmarkdown/</guid>
+      <description>Shiny Server 专业V1.5.10管理员指南 Shiny Server使用户可以在互联网上搭建和管理Shiny app。
+1.1 系统需求： RedHat or Ubuntu
+ 1.2 安装: 1.2.1 Ubuntu 安装 R
+sudo apt-get install r-base  安装 shiny-server
+sudo apt-get install gdebi-core sudo gdebi shiny-server-&amp;lt;version&amp;gt;.deb  1.2.2 RedHat ## R sudo yum install R ## shiny-server sudo yum install --nogpgcheck shiny-server-&amp;lt;version&amp;gt;.rpm   1.2.3 Install Shiny 安装Shiny-server之前需要在系统中安装shiny包，需要使用sudo在管理员权限下安装。
+ ### Install The Shiny Package sudo su - -c &amp;quot;R -e \&amp;quot;install.packages(&amp;#39;shiny&amp;#39;,repos=&amp;#39;https://cran.rstudio.com/&amp;#39;)\&amp;quot;&amp;quot;   1.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,277 @@
+---
+title: Biomart用户指南
+author: ''
+date: '2019-02-21'
+slug: biomart用户指南
+categories:
+  - R
+  - Bioinfomatics
+tags: []
+css: []
+description: ''
+highlight: yes
+index: no
+scripts: []
+---
+
+
+### 1 介绍   
+[biomaRt](http://bioconductor.org/packages/biomaRt)软件包为越来越多的数据库提供了接口，这些数据库实现了[biomaRt软件套件](http://www.biomart.org/)。该包支持以统一的方式检索大量数据，而无需了解底层数据库模式或编写复杂的SQL查询。BioMart数据库的例子有Ensembl、UniProt和HapMap。这些主要数据库使Biomart用户能够直接访问各种数据集，并支持R提供的各种强大的在线查询。   
+
+### 2 选择BioMart数据库和数据集   
+选择BioMart database  使用`biomaRt::listMarts()`列出可用数据库   
+链接BioMart database  使用`ensembl=biomaRt::useMart("ensembl")`链接可以数据库,`biomaRt::useMart()`(遇到代理问题`Sys.setenv("http_proxy" = "http://my.proxy.org:9999")`or`options(RCurlOptions = list(proxy="uscache.kcc.com:80",proxyuserpwd="------:-------"))`)   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+ensembl=useMart("ensembl")
+listDatasets(ensembl)
+ensembl = useDataset("hsapiens_gene_ensembl",mart=ensembl)
+```
+或者   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+ensembl = useMart("ensembl",dataset="hsapiens_gene_ensembl")
+```
+
+### 3 如何构建查询   
+`getBM()`函数输入三个参数:   
+- `filters`: 用于查询(输入),`listFilters()`列出选定的数据库中可用的`filters`    
+- `attributes`: 显示结果(输出),`listAttributes()`函数列出选定的数据库中可用的`attributes`     
+- `values`: 过滤器值的矢量。如果使用多个筛选器，values参数需要一个值列表，其中列表中的每个位置对应于filters参数中筛选器的位置（参见下面的示例）。   
+- `mart`: Mart对象,通过`useMart()`函数创建     
+
+备注: 常见的Ensembl查询有封装好的函数可以使用:`getGene()`和`getSequence()`   
+
+**简单练习**   
+我们有一个来自U133PLUS2平台的`Affymetrix ID`列表，我们希望使用Ensembl映射来检索相应的`EntrzGene ID`。   
+`filter(input)`: **u133plus2 platform**    
+`attributes(output)`: **EntrezGene ID**,**u133plus2 ID**
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+ensembl = useMart("ensembl",dataset="hsapiens_gene_ensembl")
+affyids=c("202763_at","209310_s_at","207500_at")
+getBM(attributes=c('affy_hg_u133_plus_2', 'entrezgene'), 
+      filters = 'affy_hg_u133_plus_2', 
+      values = affyids, 
+      mart = ensembl)
+```
+
+### 4 biomaRt查询示例   
+**4.1 用`Hugo symbol`和相应基因的染色体位置信息注释一组Affymetrix ID**   
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+listAttributes(ensembl)[grep(listAttributes(ensembl)$name,pattern ="u133"),]
+listAttributes(ensembl)[grep(listAttributes(ensembl)$name,pattern ="entre"),]
+listFilters(ensembl)[grep(listFilters(ensembl)$name,pattern ="u133"),] 
+
+affyids=c("202763_at","209310_s_at","207500_at")
+getBM(attributes = c("affy_hg_u133_plus_2","hgnc_symbol","chromosome_name","start_position","end_position","band"),
+      filters = "affy_hg_u133_plus_2",
+      values = affyids, mart = ensembl)
+```
+
+**4.2 用`go注释`对一组`entrzgene ID`进行注释**   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+entrez=c("673","837")
+goids = getBM(attributes = c('entrezgene', 'go_id'), 
+              filters = 'entrezgene', 
+              values = entrez, 
+              mart = ensembl)
+head(goids)
+```
+
+
+
+
+**4.3 检索位于染色体17、20或Y上的所有与特定GO术语相关的基因的Hugo基因 symbols**   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+go=c("GO:0051330","GO:0000080","GO:0000114","GO:0000082")
+chrom=c(17,20,"Y")
+getBM(attributes= "hgnc_symbol",
+      filters=c("go","chromosome_name"),
+      values=list(go, chrom), mart=ensembl)
+# listFilters(ensembl)[grep(listFilters(ensembl)$name,pattern ="go"),]  
+```
+
+**4.4 用INTERPRO蛋白域标识符注释Idenfier集**   
+在本例中，我们想用interpro蛋白质域标识符和蛋白质域的描述来注释以下两个refseq标识符：**NM_005359**和**NM_000546**    
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+refseqids = c("NM_005359","NM_000546")
+ipro = getBM(attributes=c("refseq_mrna","interpro","interpro_description"), 
+             filters="refseq_mrna",
+             values=refseqids, 
+             mart=ensembl)
+ipro 
+```
+**4.5 选择hgu133plus2 chip上16号染色体上坐标为1100000和1250000之间的全部Affymetrix ID和Ensembl基因ID**   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+getBM(attributes = c('affy_hg_u133_plus_2','ensembl_gene_id'), 
+    filters = c('chromosome_name','start','end'),
+    values = list(16,1100000,1250000), 
+    mart = ensembl)
+```
+
+**4.6 检索所有具有“map激酶活性”的GO term的entrzgene ID和hugo基因符号**   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+listAttributes(ensembl)[grep(listAttributes(ensembl)$name,pattern ="entre"),]
+getBM(attributes = c('entrezgene','hgnc_symbol'), 
+    filters = 'go', 
+    values = 'GO:0004707', 
+    mart = ensembl)
+```
+
+**4.7 一个给定的entrezgene ID检索上游100bp启动子序列**
+可以使用`getSequence()`函数获得序列信息.     
+seqType参数可用选项如下:
+- `cdna`   
+- `peptide` 蛋白序列   
+- `3utr` 3’ UTR序列   
+- `5urt` 5’ UTR序列   
+- `gene_exon` 外显子序列   
+- `transcript_exon` 转录本对应外显子序列   
+- `transcript_exon_intron` 转录本对应完整的未分割序列(外显子+内含子)   
+- `gene_exon_intron` 基因对应的序列(外显子+内含子)   
+- `coding` 编码序列   
+- `coding_transcript_flank` gives the flanking region of the transcript including the UTRs, this must be accompanied with a given value for the upstream or downstream attribute   
+- `coding_gene_flank` gives the flanking region of the gene including the UTRs, this must be accompanied with a given value for the upstream or downstream attribute   
+- `transcript_flank` gives the flanking region of the transcript exculding the UTRs, this must be accompanied with a given value for the upstream or downstream attribute   
+- `gene_flank` gives the flanking region of the gene excluding the UTRs, this must be accompanied with a given value for the upstream or downstream attribute   
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+entrez=c("673","7157","837")
+getSequence(id = entrez, 
+            type="entrezgene",
+            seqType="coding_gene_flank",
+            upstream=100, 
+            mart=ensembl) 
+```
+
+**4.8 检索位于3号染色体185514033和185535839之间所有基因的5’UTR序列**   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+utr5 = getSequence(chromosome=3, start=185514033, end=185535839,
+                   type="entrezgene",
+                   seqType="5utr", 
+                   mart=ensembl)
+utr5 
+```
+
+**4.9 检索给定的Entrzgene标识符列表的蛋白质序列**    
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+protein = getSequence(id=c(100, 5728),
+                    type="entrezgene",
+                    seqType="peptide", 
+                    mart=ensembl)
+protein
+```
+
+**4.10 检索位于人类8号染色体148350和1486120之间的已知SNP**   
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+snpmart = useMart(biomart = "ENSEMBL_MART_SNP", dataset="hsapiens_snp")
+getBM(attributes = c('refsnp_id','allele','chrom_start','chrom_strand'), 
+      filters = c('chr_name','start','end'), 
+      values = list(8,148350,148612), 
+      mart = snpmart)
+```
+
+
+**4.11 给定人类基因TP53，检索该基因的人类染色体位置，并检索其同系物在小鼠中的染色体位置和RefSeq id**   
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+human = useMart("ensembl", dataset = "hsapiens_gene_ensembl")
+mouse = useMart("ensembl", dataset = "mmusculus_gene_ensembl")
+getLDS(attributes = c("hgnc_symbol","chromosome_name", "start_position"),
+       filters = "hgnc_symbol", values = "TP53",mart = human,
+      attributesL = c("refseq_mrna","chromosome_name","start_position"), martL = mouse) 
+```
+
+
+
+### 5 使用Ensembl的存档版本   
+**5.1 Using `archive = TRUE`**    
+
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+listMarts() 
+listMarts(archive = TRUE)
+
+ensembl = useMart("ensembl_mart_46", dataset="hsapiens_gene_ensembl", archive = TRUE)
+
+```
+
+
+**5.2 通过指定存档主机访问存档**    
+访问http://www.ensembl.org网站并进入页面底部。单击“view in Archive”，然后复制所需的存档的url地址。本例是查询Ensembl 54    
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+listMarts(host='may2009.archive.ensembl.org') # http://may2009.archive.ensembl.org/index.html
+ensembl54=useMart(host='may2009.archive.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL')
+ensembl54=useMart(host='may2009.archive.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL', dataset='hsapiens_gene_ensembl')
+```
+
+### 使用除了Ensembl外的的Biomart   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+listMarts(host = "parasite.wormbase.org")
+wormbase = useMart(biomart = "parasite_mart", host = "parasite.wormbase.org")
+listDatasets(wormbase)
+
+wormbase <- useDataset(mart = wormbase, dataset = "wbps_gene")
+head(listFilters(wormbase))
+head(listAttributes(wormbase))
+getBM(attributes = c("external_gene_id","ensembl_transcript_id","transcript_biotype"), 
+      filters="gene_name", 
+      values=c("unc-26","his-33"), 
+      mart=wormbase)
+```
+
+
+### 7 biomaRt帮助函数   
+** 7.1 `exportFASTA`**  
+`getSequence`函数获得的数据框可用`exportFASTA`函数导出为FASTA文件.
+
+** 7.2 了解有关`filter`的更多信息**   
+**7.2.1 filterType**
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+filterType("with_affy_hg_u133_plus_2",ensembl)
+```
+** 7.2.2 filterOptions**   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+
+filterOptions("biotype",ensembl)
+```
+
+** 7.3 属性页**   
+在biomart属性数据库，页面是放在一起，如序列，特征, homologs等.   
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+pages = attributePages(ensembl)
+pages
+head(listAttributes(ensembl))
+head(listAttributes(ensembl, page="feature_page"))
+
+```
+
+### 8 本地化BioMart数据库   
+BioMart包可以与公共BioMart数据库的本地安装或本地开发的BioMart数据库和Web服务一起使用。为了让Biomart将数据库识别为Biomart，请确保您创建的本地数据库的名称与数据库的名称(其中数据库是数据库的名称，版本是版本号)一致。例如，一个可能的名称是EnsemblLocal_Mart_46。##本地数据库安装的最低要求有关安装生物艺术数据库的本地副本或开发您自己的生物艺术数据库和Web服务的详细信息，请访问http://www.biomart.org安装本地数据库后，您可以通过以下方式在此数据库上使用biomaRt：   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+listMarts(host="www.myLocalHost.org", path="/myPathToWebservice/martservice")
+mart=useMart("nameOfMyMart",dataset="nameOfMyDataset",host="www.myLocalHost.org", path="/myPathToWebservice/martservice")
+```
+有关如何安装公共生物艺术数据库的详细信息，请参阅：http://www.biomart.org/install.html，然后按照链接数据库进行操作。
+
+
+### 9 使用`select()`   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+mart <- useMart(dataset="hsapiens_gene_ensembl",biomart='ensembl')
+head(keytypes(mart), n=3)
+
+head(columns(mart), n=3)
+
+k = keys(mart, keytype="chromosome_name")
+head(k, n=3)
+
+affy=c("202763_at","209310_s_at","207500_at")
+select(mart, keys=affy, columns=c('affy_hg_u133_plus_2','entrezgene'),
+  keytype='affy_hg_u133_plus_2')
+```
+
+
+([来源](http://bioconductor.org/packages/3.4/bioc/vignettes/biomaRt/inst/doc/biomaRt.html))

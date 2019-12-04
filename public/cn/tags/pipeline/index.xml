@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pipeline on Example YinYong Blog</title>
+    <link>/cn/tags/pipeline/</link>
+    <description>Recent content in pipeline on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/pipeline/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>学习生物信息常用流程-1</title>
+      <link>/cn/posts/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
+      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacocktail/
+RNACocktail pipeline可对短read和长read进行广谱的RNA-Seq分析，以便能够从转录数据获得有意义的见解。它是在分析了各种RNA-Seq样品(从生殖系、癌症到干细胞数据集)以及使用多种工具组合来确定一个全面、快速和准确的pipeline的技术之后开发的。
+  short-read long-read    alignment error correction  transcriptome reconstruction alignment  denovo transcriptome assembly transcriptome reconstruction  alignment-free quantification fusion prediction  differential expression analysis   fusion prediction   variant calling   RNA editing prediction      1 下载RNACocktail 最新版本下载地址
+历史版本下载地址
+ 2 RNACocktail Docker镜像 rnacocktail Docker镜像下载地址
+Docker镜像制作的Dockerfile下载地址
+ 3 系统要求 安装Python 2.7 以及下面的py包：
+  Tool Version tested Pipeline modes used in    pybedtools 0.</description>
+    </item>
+    
+  </channel>
+</rss>

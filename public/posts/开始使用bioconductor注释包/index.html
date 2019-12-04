@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/posts/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8bioconductor%E6%B3%A8%E9%87%8A%E5%8C%85/" />
+  <link rel="canonical" href="../../posts/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8bioconductor%E6%B3%A8%E9%87%8A%E5%8C%85/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "posts",
+      "name" : "开始使用Bioconductor注释包",
+      "headline" : "开始使用Bioconductor注释包",
+      "description" : "吉姆·麦克唐纳是华盛顿大学环境和职业健康科学系的生物统计学家。他分析了从表达（微阵列，RNA序列）到基因组（SNP阵列，DNA序列，芯片序列，甲基化阵列，BS-seq）和其他“组学”数据的HTS数据的范围。自成立以来，他一直致力于生物导体项目的发展，并提供和维护了大量的注释包。\n##基础包 介绍Bioconductor注释包中使用最多的基础包\n OrgDb:\norgdb包封装给定生物体基因的所有信息(除了位置信息).包括(GO terms and ontology, Entrez IDs, RefSeq ID, Ensembl IDs and many others).这些数据中的大多数都是由注释服务定期更新的；我们的半年度版本在发布日期“冻结”数据。这是我们在始终完全更新和能够基于一组静态注释生成可复制研究之间做出的权衡。\n ChipDb:\nchipdb包含probe ID到Entrez gene ID的映射\n TxDbL:\ntxdb包含转录本,基因,外显子,和其他基因关联的的特征的位置信息\n BSgenome:\nBSgenome包含全基因组的序列\n SNPlocs:\n包含SNP位置信息和等位基因信息(基于dbSNP)\n AnnotationHub:\n这个包提供了一个浏览和下载大量注释包和单个资源的接口。许多数据被预先解析成R\/Bioconductor对象。\n OrganismDb:\n在单个包装中封装多个注释包以启用包间查询,这些注释包有,GO.db提供Gene Ontology数据的映射,OrgDb和TxDb\n  常见任务 注释包支持的输入(kyes)和输出(columns).\nkyestypes函数会列出可以作为输入的所有类型.\nlibrary(org.Hs.eg.db) keytypes(org.Hs.eg.db) 列出给定类型keytype的所有keys\nhead(keys(org.Hs.eg.db, \x26quot;ENSEMBLPROT\x26quot;)) head(keys(org.Hs.eg.db, \x26quot;ENSEMBLTRANS\x26quot;)) 查看所有支持的输出列\ncolumns(org.Hs.eg.db) 映射制造商ID到gene symbol\n常见的任务是注释微阵列实验,讲制造商id映射到HUGO gene symbol或者NCBI(Gene, GenBank, RefSeq, UniGene)或者Ensembl (Ensembl gene, Ensembl transcript) ID\n例如,映射Human Gene 1.",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-02-21 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-02-21 00:00:00 \x2b0000 UTC",
+      "url" : "\/posts\/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8bioconductor%E6%B3%A8%E9%87%8A%E5%8C%85\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>开始使用Bioconductor注释包 - Qihao&#39; Blog</title>
+  <meta property="og:title" content="开始使用Bioconductor注释包 - Qihao&#39; Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content="吉姆·麦克唐纳是华盛顿大学环境和职业健康科学系的生物统计学家。他分析了从表达（微阵列，RNA序列）到基因组（SNP阵列，DNA序列，芯片序列，甲基化阵列，BS-seq）和其他“组学”数据的HTS数据的范围。自成立以来，他一直致力于生物导体项目的发展，并提供和维护了大量的注释包。
+##基础包 介绍Bioconductor注释包中使用最多的基础包
+ OrgDb:
+orgdb包封装给定生物体基因的所有信息(除了位置信息).包括(GO terms and ontology, Entrez IDs, RefSeq ID, Ensembl IDs and many others).这些数据中的大多数都是由注释服务定期更新的；我们的半年度版本在发布日期“冻结”数据。这是我们在始终完全更新和能够基于一组静态注释生成可复制研究之间做出的权衡。
+ ChipDb:
+chipdb包含probe ID到Entrez gene ID的映射
+ TxDbL:
+txdb包含转录本,基因,外显子,和其他基因关联的的特征的位置信息
+ BSgenome:
+BSgenome包含全基因组的序列
+ SNPlocs:
+包含SNP位置信息和等位基因信息(基于dbSNP)
+ AnnotationHub:
+这个包提供了一个浏览和下载大量注释包和单个资源的接口。许多数据被预先解析成R/Bioconductor对象。
+ OrganismDb:
+在单个包装中封装多个注释包以启用包间查询,这些注释包有,GO.db提供Gene Ontology数据的映射,OrgDb和TxDb
+  常见任务 注释包支持的输入(kyes)和输出(columns).
+kyestypes函数会列出可以作为输入的所有类型.
+library(org.Hs.eg.db) keytypes(org.Hs.eg.db) 列出给定类型keytype的所有keys
+head(keys(org.Hs.eg.db, &quot;ENSEMBLPROT&quot;)) head(keys(org.Hs.eg.db, &quot;ENSEMBLTRANS&quot;)) 查看所有支持的输出列
+columns(org.Hs.eg.db) 映射制造商ID到gene symbol
+常见的任务是注释微阵列实验,讲制造商id映射到HUGO gene symbol或者NCBI(Gene, GenBank, RefSeq, UniGene)或者Ensembl (Ensembl gene, Ensembl transcript) ID
+例如,映射Human Gene 1." />
+
+  <link rel="stylesheet" href="../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../css/index.css">
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Qihao&#39; Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post 中文版" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  <div class="lang-switch col-xs-3 col-xs-offset-9">
+    <a href="../../en/">English</a>
+  </div>
+  
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">开始使用Bioconductor注释包</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2019-02-21 00:00:00 UTC">
+                21 Feb 2019
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="../../">@Qihao Wei</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<p>吉姆·麦克唐纳是华盛顿大学环境和职业健康科学系的生物统计学家。他分析了从表达（微阵列，RNA序列）到基因组（SNP阵列，DNA序列，芯片序列，甲基化阵列，BS-seq）和其他“组学”数据的HTS数据的范围。自成立以来，他一直致力于生物导体项目的发展，并提供和维护了大量的注释包。</p>
+<p>##基础包
+介绍Bioconductor注释包中使用最多的基础包</p>
+<ul>
+<li><p><strong>OrgDb:</strong><br />
+<code>orgdb</code>包封装给定生物体基因的所有信息(除了<strong>位置信息</strong>).包括(GO terms and ontology, Entrez IDs, RefSeq ID, Ensembl IDs and many others).这些数据中的大多数都是由注释服务定期更新的；我们的半年度版本在发布日期“冻结”数据。这是我们在始终完全更新和能够基于一组静态注释生成可复制研究之间做出的权衡。</p></li>
+<li><p><strong>ChipDb:</strong><br />
+<code>chipdb</code>包含<code>probe ID</code>到<code>Entrez gene ID</code>的映射</p></li>
+<li><p><strong>TxDbL:</strong><br />
+<code>txdb</code>包含转录本,基因,外显子,和其他基因关联的的特征的<strong>位置信息</strong></p></li>
+<li><p><strong>BSgenome:</strong><br />
+<code>BSgenome</code>包含全基因组的序列</p></li>
+<li><p><strong>SNPlocs:</strong><br />
+包含SNP位置信息和等位基因信息(基于dbSNP)</p></li>
+<li><p><strong>AnnotationHub:</strong><br />
+这个包提供了一个浏览和下载大量注释包和单个资源的接口。许多数据被预先解析成R/Bioconductor对象。</p></li>
+<li><p><strong>OrganismDb:</strong><br />
+在单个包装中封装多个注释包以启用包间查询,这些注释包有,<strong>GO.db</strong>提供Gene Ontology数据的映射,<strong>OrgDb</strong>和<strong>TxDb</strong></p></li>
+</ul>
+<div id="常见任务" class="section level2">
+<h2>常见任务</h2>
+<p>注释包支持的输入(<code>kyes</code>)和输出(<code>columns</code>).<br />
+<code>kyestypes</code>函数会列出可以作为输入的所有类型.</p>
+<pre class="r"><code>library(org.Hs.eg.db)
+keytypes(org.Hs.eg.db)</code></pre>
+<p>列出给定类型<code>keytype</code>的所有<code>keys</code></p>
+<pre class="r"><code>head(keys(org.Hs.eg.db, &quot;ENSEMBLPROT&quot;))
+
+head(keys(org.Hs.eg.db, &quot;ENSEMBLTRANS&quot;))</code></pre>
+<p>查看所有支持的输出列</p>
+<pre class="r"><code>columns(org.Hs.eg.db)</code></pre>
+<p><strong>映射制造商ID到gene symbol</strong><br />
+常见的任务是注释微阵列实验,讲制造商id映射到HUGO gene symbol或者NCBI(Gene, GenBank, RefSeq, UniGene)或者Ensembl (Ensembl gene, Ensembl transcript) ID<br />
+例如,映射Human Gene 1.0 ST array的Affymetirx ID到相应的HUGO symbol.</p>
+<pre class="r"><code>library(hugene10sttranscriptcluster.db)
+hugene &lt;- hugene10sttranscriptcluster.db
+select(hugene, &quot;8012257&quot;, &quot;SYMBOL&quot;)
+
+ids &lt;- keys(hugene)[15000:15005]
+annot &lt;- c(&quot;SYMBOL&quot;,&quot;ENTREZID&quot;)
+select(hugene, ids, annot)</code></pre>
+<p>以上结果请注意三点。<br />
+首先，返回的<code>data.frame</code>中的<code>probeid</code>列与输入id的顺序相同。<br />
+第二，一些AffymetrixID映射到多个基因。<br />
+第三，如果其中一个键没有注释（最后一个），则返回NA值。</p>
+<p>如果我们想保证返回的数据的顺序和长度与输入键向量相同，我们可以使用<code>mapid</code>代替。但是，<code>mapid</code>一次只能执行一个<code>keytype</code>，并返回向量或列表，而不是<code>data.frame</code>。与具有keytype默认值的<code>select</code>不同，<code>mapid</code>需要第四个参数，指定要使用的键的<code>keytype</code>。</p>
+<pre class="r"><code>mapIds(hugene, ids, &quot;SYMBOL&quot;, &quot;PROBEID&quot;)
+d.f &lt;- as.data.frame(lapply(annot, function(x) mapIds(hugene, ids, x, &quot;PROBEID&quot;)))
+names(d.f) &lt;- annot
+d.f</code></pre>
+<p>mapid的默认值是对任何1:many映射使用第一个实例。对于某些用例（例如，refseq id）来说，这是很好的，但是对于我们希望返回所有值的其他情况（例如，go id），这就不那么有用了。</p>
+<p>我们可以使用multials参数来控制返回的内容。</p>
+<pre class="r"><code>mapIds(hugene, ids, &quot;SYMBOL&quot;, &quot;PROBEID&quot;, multiVals = &quot;list&quot;)</code></pre>
+<p>如果我们想为注释使用矩形格式，在这里我们保留所有1:many映射，同时确保每一行直接映射到表达式值数组，那么我们可以使用一个数据帧，告诉mapid返回一个字符列表。</p>
+<pre class="r"><code>lst &lt;- lapply(annot, function(x) mapIds(hugene, ids, x, &quot;PROBEID&quot;, multiVals = &quot;CharacterList&quot;))
+d.f &lt;- as(lst, &quot;DataFrame&quot;)
+names(d.f) &lt;- annot
+d.f</code></pre>
+<p><strong>映射 Entrez gene ID 到TRPV2 chromosomal location</strong><br />
+如果对TRPV2基因感兴趣,想知道它的染色体坐标,可以使用<code>Homo.sapiens</code>包得到信息.可以用基因的HUGO symbol来得到坐标信息,但是建议使用Entrez Gene ID(唯一ID)</p>
+<pre class="r"><code>select(Homo.sapiens, &quot;51393&quot;, c(&quot;TXCHROM&quot;,&quot;TXSTART&quot;,&quot;TXEND&quot;), &quot;SYMBOL&quot;)</code></pre>
+<p>(<a href="http://www.bioconductor.org/help/newsletters/2016_January/#design-matrices-for-differential-gene-expression">来源</a>)</p>
+</div>
+
+        </div>
+        
+
+        
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://github.com/qihaowei89/My_Blog" target="_blank">GitHub</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="../../" target="_blank">HomePage</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

@@ -1,51 +1,33 @@
-baseurl = "/"
-theme = "hugo-geo"
-relativeURLs = true
-hasCJKLanguage = true
+baseURL = "/"
 languageCode = "en-us"
-title = "My Blog Site"
-disqusShortname = "shortcode-here"
-paginate = 5
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
-[taxonomies]
-	tag = "tags"
-	tutorial = "tutorials"
+title = "Qihao' Blog"
+theme = "hugo-theme-yinyang"
+DefaultContentLanguage = "cn"
+
+[author]
+  name = "Qihao Wei"
+  homepage = "/"
+
+[languages]
+  [languages.en]
+    contentDir = "content/en"
+    languageName = "English"
+    weight = 1
+  [languages.cn]
+    contentDir = "content/cn"
+    languageName = "中文版"
+    weight = 2
 
 [params]
-	showglobe = true
+headTitle = "Qihao Wei"
+#disqus = "joway" # disqus account name
+extraHead = ''
+mainSections = ["posts"]
 
-	favicon = "favicon.ico"
-	
-	analytics = "code-here"
+[[params.socials]]
+name = "GitHub"
+link = "https://github.com/qihaowei89/My_Blog"
 
-	email = "weiqihao08@gmail.com"
-
-	profilepic = "img/profile.png"
-	
-	title = "Qihao Wei's Home"
-	subtitle = "MY HUGO BLOG"
-
-	# Social buttons for sidebar
-	# Each of these are optional
-	[[params.socialbuttons]]
-	faicon = "github"
-	url = "https://github.com/qihaowei89"
-	[[params.socialbuttons]]
-	faicon = "twitter"
-	url = "https://twitter.com/alexanderurq"
-	[[params.socialbuttons]]
-	faicon = "linkedin"
-	url = "https://linkedin.com"
-	[[params.socialbuttons]]
-	faicon = "google-plus"
-	url = "https://plus.google.com/+YourID"
-
-	[[params.navlinks]]
-	name = "About"
-	url = "about"
-	
-	
-	[[params.navlinks]]
-	name = "Tutorials"
-	url = "tutorial/"
-  
+[[params.socials]]
+name = "HomePage"
+link = "/"

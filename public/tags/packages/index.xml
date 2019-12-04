@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>packages on My Blog Site</title>
+    <title>packages on Qihao&#39; Blog</title>
     <link>/tags/packages/</link>
-    <description>Recent content in packages on My Blog Site</description>
+    <description>Recent content in packages on Qihao&#39; Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 18 Dec 2018 00:00:00 +0000</lastBuildDate>
@@ -13,11 +13,16 @@
     
     <item>
       <title>Bioconductor&#43;CRAN镜像设定</title>
-      <link>/post/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/</link>
+      <link>/posts/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/</link>
       <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/</guid>
-      <description>Select a CRAN Mirror 显示所有的镜像信息: getCRANmirrors(all = FALSE, local.only = FALSE) 选择镜像: ## CRAN mirror chooseCRANmirror(graphics = getOption(&amp;quot;menu.graphics&amp;quot;), ind = NULL, useHTTPS = getOption(&amp;quot;useHTTPS&amp;quot;, TRUE), local.only = FALSE) ## CRAN mirror chooseBioCmirror(graphics = getOption(&amp;quot;menu.graphics&amp;quot;), ind = NULL, useHTTPS = getOption(&amp;quot;useHTTPS&amp;quot;, TRUE), local.only = FALSE) 显示当前BioC_mirr</description>
+      <guid>/posts/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/</guid>
+      <description> Select a CRAN Mirror
+显示所有的镜像信息:
+getCRANmirrors(all = FALSE, local.only = FALSE) 选择镜像:
+## CRAN mirror chooseCRANmirror(graphics = getOption(&amp;quot;menu.graphics&amp;quot;), ind = NULL, useHTTPS = getOption(&amp;quot;useHTTPS&amp;quot;, TRUE), local.only = FALSE) ## CRAN mirror chooseBioCmirror(graphics = getOption(&amp;quot;menu.graphics&amp;quot;), ind = NULL, useHTTPS = getOption(&amp;quot;useHTTPS&amp;quot;, TRUE), local.only = FALSE) 显示当前BioC_mirror，options(&amp;quot;BioC_mirror&amp;quot;) 显示当前CRAN mirror, options(&amp;quot;repos&amp;quot;)和getOption(&amp;quot;repos&amp;quot;)
+安装旧版本包
+packageurl &amp;lt;- &amp;quot;http://bioconductor.org/packages/3.4/bioc/src/contrib/DESeq2_1.14.1.tar.gz&amp;quot; install.packages(packageurl, repos=NULL, type=&amp;quot;source&amp;quot;) </description>
     </item>
     
   </channel>

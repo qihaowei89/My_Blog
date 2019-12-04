@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Example YinYong Blog</title>
+    <link>/cn/tags/</link>
+    <description>Recent content in Tags on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>variant</title>
+      <link>/cn/tags/variant/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/variant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker images</title>
+      <link>/cn/tags/docker-images/</link>
+      <pubDate>Tue, 08 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/docker-images/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data download</title>
+      <link>/cn/tags/data-download/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/data-download/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>functions</title>
+      <link>/cn/tags/functions/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data</title>
+      <link>/cn/tags/data/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web crawler</title>
+      <link>/cn/tags/web-crawler/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/web-crawler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>file I/O</title>
+      <link>/cn/tags/file-i/o/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/file-i/o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>/cn/tags/r/</link>
+      <pubDate>Wed, 19 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>trading with R</title>
+      <link>/cn/tags/trading-with-r/</link>
+      <pubDate>Wed, 19 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/trading-with-r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packages</title>
+      <link>/cn/tags/packages/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/packages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bioinfomatics</title>
+      <link>/cn/tags/bioinfomatics/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/bioinfomatics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>/cn/tags/programming/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shiny</title>
+      <link>/cn/tags/shiny/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shiny-server</title>
+      <link>/cn/tags/shiny-server/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/shiny-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>align</title>
+      <link>/cn/tags/align/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/align/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DNA</title>
+      <link>/cn/tags/dna/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/dna/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HISAT2</title>
+      <link>/cn/tags/hisat2/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/hisat2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>quantification</title>
+      <link>/cn/tags/quantification/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/quantification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RNA-seq</title>
+      <link>/cn/tags/rna-seq/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/rna-seq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pipeline</title>
+      <link>/cn/tags/pipeline/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/pipeline/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blogdown</title>
+      <link>/cn/tags/blogdown/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/blogdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web page</title>
+      <link>/cn/tags/web-page/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/web-page/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R Markdown</title>
+      <link>/cn/tags/r-markdown/</link>
+      <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/tags/r-markdown/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

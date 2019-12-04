@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/cn/posts/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/" />
+  <link rel="canonical" href="../../../cn/posts/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "posts",
+      "name" : "Bioconductor\x2bCRAN镜像设定",
+      "headline" : "Bioconductor\x2bCRAN镜像设定",
+      "description" : " Select a CRAN Mirror\n显示所有的镜像信息:\ngetCRANmirrors(all = FALSE, local.only = FALSE) 选择镜像:\n## CRAN mirror chooseCRANmirror(graphics = getOption(\x26quot;menu.graphics\x26quot;), ind = NULL, useHTTPS = getOption(\x26quot;useHTTPS\x26quot;, TRUE), local.only = FALSE) ## CRAN mirror chooseBioCmirror(graphics = getOption(\x26quot;menu.graphics\x26quot;), ind = NULL, useHTTPS = getOption(\x26quot;useHTTPS\x26quot;, TRUE), local.only = FALSE) 显示当前BioC_mirror，options(\x26quot;BioC_mirror\x26quot;) 显示当前CRAN mirror, options(\x26quot;repos\x26quot;)和getOption(\x26quot;repos\x26quot;)\n安装旧版本包\npackageurl \x26lt;- \x26quot;http:\/\/bioconductor.org\/packages\/3.4\/bioc\/src\/contrib\/DESeq2_1.14.1.tar.gz\x26quot; install.packages(packageurl, repos=NULL, type=\x26quot;source\x26quot;) ",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-12-18 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2018-12-18 00:00:00 \x2b0000 UTC",
+      "url" : "\/cn\/posts\/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A\/",
+      "keywords" : [ "packages", ]
+  }
+</script>
+<title>Bioconductor&#43;CRAN镜像设定 - Example YinYong Blog</title>
+  <meta property="og:title" content="Bioconductor&#43;CRAN镜像设定 - Example YinYong Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content=" Select a CRAN Mirror
+显示所有的镜像信息:
+getCRANmirrors(all = FALSE, local.only = FALSE) 选择镜像:
+## CRAN mirror chooseCRANmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL, useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE), local.only = FALSE) ## CRAN mirror chooseBioCmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL, useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE), local.only = FALSE) 显示当前BioC_mirror，options(&quot;BioC_mirror&quot;) 显示当前CRAN mirror, options(&quot;repos&quot;)和getOption(&quot;repos&quot;)
+安装旧版本包
+packageurl &lt;- &quot;http://bioconductor.org/packages/3.4/bioc/src/contrib/DESeq2_1.14.1.tar.gz&quot; install.packages(packageurl, repos=NULL, type=&quot;source&quot;) " />
+
+  <link rel="stylesheet" href="../../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../../css/index.css">
+  <link href="../../../index.xml" rel="alternate" type="application/rss+xml" title="Example YinYong Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post Chinese" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../../cn/">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  
+  <div class="lang-switch col-xs-3 col-xs-offset-9">
+    <a href="../../../en/">English</a>
+  </div>
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">Bioconductor&#43;CRAN镜像设定</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2018-12-18 00:00:00 UTC">
+                18 Dec 2018
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="../../../">@Qihao Wei</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<p><strong>Select a CRAN Mirror</strong></p>
+<p>显示所有的镜像信息:</p>
+<pre class="r"><code>getCRANmirrors(all = FALSE, local.only = FALSE)</code></pre>
+<p>选择镜像:</p>
+<pre class="r"><code>## CRAN mirror
+chooseCRANmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL,
+                 useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE),
+                 local.only = FALSE)
+
+## CRAN mirror
+chooseBioCmirror(graphics = getOption(&quot;menu.graphics&quot;), ind = NULL,
+                 useHTTPS = getOption(&quot;useHTTPS&quot;, TRUE),
+                 local.only = FALSE)</code></pre>
+<p>显示当前<strong>BioC_mirror</strong>，<code>options(&quot;BioC_mirror&quot;)</code>
+显示当前<strong>CRAN mirror</strong>, <code>options(&quot;repos&quot;)</code>和<code>getOption(&quot;repos&quot;)</code></p>
+<p><strong>安装旧版本包</strong></p>
+<pre class="r"><code>packageurl &lt;- &quot;http://bioconductor.org/packages/3.4/bioc/src/contrib/DESeq2_1.14.1.tar.gz&quot;
+install.packages(packageurl, repos=NULL, type=&quot;source&quot;)</code></pre>
+
+        </div>
+        
+
+        
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://joway.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+        
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="../../../index.xml" target="_blank">RSS</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="https://joway.io" target="_blank">About</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/cn/posts/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/" />
+  <link rel="canonical" href="../../../cn/posts/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "posts",
+      "name" : "docker 镜像制作",
+      "headline" : "docker 镜像制作",
+      "description" : "###docker build构建本地镜像 第一步 下载基础ubuntu镜像\n# size = 86.7 Mb docker pull ubuntu 第二步 构建本地镜像\n参考链接\nmkdir dockerfile cd dockerfile vim Dockerfile 在Dockerfile中编辑：\nFROM ubuntu MAINTAINER by wqh RUN apt update RUN apt-get install -y r-base RUN apt-get install -y python RUN wget --quiet https:\/\/repo.anaconda.com\/miniconda\/Miniconda3-latest-Linux-x86_64.sh -O ~\/conda.sh \x26amp;\x26amp; \\ \/bin\/bash ~\/conda.sh -b -p \/opt\/conda \x26amp;\x26amp; \\ rm ~\/conda.sh \x26amp;\x26amp; \\ echo \x26quot;export PATH=\/opt\/conda\/bin:$PATH\x26quot; \x26gt;\x26gt; ~\/.bashrc # \x26lt;源路径\x26gt;必须是上下文根目录的相对路径！\x26lt;目标路径\x26gt; 可以是容器内的绝对路径，也可以是相对路径 COPY \x26lt;源路径\x26gt; \x26lt;目标路径\x26gt; # ADD与COPY指令在功能上十分相似,\x26lt;源路径\x26gt;可以是一个指向一个网络文件的URL，这种情况下，Docker引擎会试图下载这个URL指向的文件到\x26lt;目标路径\x26gt;去。ADD指令如果 \x26lt;源路径\x26gt; 为一个tar压缩文件的话，ADD 指令将会自动解压缩这个压缩文件到 \x26lt;目标路径\x26gt; ADD \x26lt;源路径\x26gt; \x26lt;目标路径\x26gt; EXPOSE 80 开始构建docker镜像",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-01-08 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-01-08 00:00:00 \x2b0000 UTC",
+      "url" : "\/cn\/posts\/docker-%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C\/",
+      "keywords" : [ "docker images", ]
+  }
+</script>
+<title>docker 镜像制作 - Example YinYong Blog</title>
+  <meta property="og:title" content="docker 镜像制作 - Example YinYong Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content="###docker build构建本地镜像 第一步 下载基础ubuntu镜像
+# size = 86.7 Mb docker pull ubuntu 第二步 构建本地镜像
+参考链接
+mkdir dockerfile cd dockerfile vim Dockerfile 在Dockerfile中编辑：
+FROM ubuntu MAINTAINER by wqh RUN apt update RUN apt-get install -y r-base RUN apt-get install -y python RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/conda.sh &amp;&amp; \ /bin/bash ~/conda.sh -b -p /opt/conda &amp;&amp; \ rm ~/conda.sh &amp;&amp; \ echo &quot;export PATH=/opt/conda/bin:$PATH&quot; &gt;&gt; ~/.bashrc # &lt;源路径&gt;必须是上下文根目录的相对路径！&lt;目标路径&gt; 可以是容器内的绝对路径，也可以是相对路径 COPY &lt;源路径&gt; &lt;目标路径&gt; # ADD与COPY指令在功能上十分相似,&lt;源路径&gt;可以是一个指向一个网络文件的URL，这种情况下，Docker引擎会试图下载这个URL指向的文件到&lt;目标路径&gt;去。ADD指令如果 &lt;源路径&gt; 为一个tar压缩文件的话，ADD 指令将会自动解压缩这个压缩文件到 &lt;目标路径&gt; ADD &lt;源路径&gt; &lt;目标路径&gt; EXPOSE 80 开始构建docker镜像" />
+
+  <link rel="stylesheet" href="../../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../../css/index.css">
+  <link href="../../../index.xml" rel="alternate" type="application/rss+xml" title="Example YinYong Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post Chinese" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../../cn/">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  
+  <div class="lang-switch col-xs-3 col-xs-offset-9">
+    <a href="../../../en/">English</a>
+  </div>
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">docker 镜像制作</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2019-01-08 00:00:00 UTC">
+                08 Jan 2019
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="../../../">@Qihao Wei</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<p>###<strong>docker build构建本地镜像</strong>
+<strong>第一步 下载基础ubuntu镜像</strong></p>
+<pre><code># size = 86.7 Mb
+docker pull ubuntu</code></pre>
+<p><strong>第二步 构建本地镜像</strong><br />
+参考<a href="https://www.jianshu.com/p/0cb3c75e1521">链接</a></p>
+<pre><code>mkdir dockerfile 
+cd dockerfile
+vim Dockerfile</code></pre>
+<p>在Dockerfile中编辑：</p>
+<pre><code>FROM ubuntu
+MAINTAINER by wqh
+RUN apt update
+RUN apt-get install -y r-base 
+RUN apt-get install -y python
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/conda.sh &amp;&amp; \
+    /bin/bash ~/conda.sh -b -p /opt/conda &amp;&amp; \
+    rm ~/conda.sh &amp;&amp; \
+    echo &quot;export PATH=/opt/conda/bin:$PATH&quot; &gt;&gt; ~/.bashrc
+    
+# &lt;源路径&gt;必须是上下文根目录的相对路径！&lt;目标路径&gt; 可以是容器内的绝对路径，也可以是相对路径
+COPY &lt;源路径&gt; &lt;目标路径&gt; 
+
+# ADD与COPY指令在功能上十分相似,&lt;源路径&gt;可以是一个指向一个网络文件的URL，这种情况下，Docker引擎会试图下载这个URL指向的文件到&lt;目标路径&gt;去。ADD指令如果 &lt;源路径&gt; 为一个tar压缩文件的话，ADD 指令将会自动解压缩这个压缩文件到 &lt;目标路径&gt; 
+ADD &lt;源路径&gt; &lt;目标路径&gt; 
+EXPOSE 80</code></pre>
+<p>开始构建docker镜像</p>
+<pre><code>docker build -t test:ubuntu .</code></pre>
+<p>列出docker镜像</p>
+<pre><code>docker image ls -a </code></pre>
+<p>尝试运行初次构建的镜像并安装相关依赖软件</p>
+<pre><code>docker run -v=/home/wqh/:/home/wqh/ -it &lt;IMAGE ID&gt;</code></pre>
+<p>列出容器快照找到最近修改保存的<CONTAINER ID></p>
+<pre><code>docker ps -a
+
+# CONTAINER ID    IMAGE         COMMAND     CREATED                  STATUS        ORTS NAMES
+# 7ed84537456d  872a7a87f4f0  &quot;/bin/bash&quot; 6 minutes ago Exited (0) 8 seconds ago  vibrant_allen</code></pre>
+<p>复制容器中文件到宿主机中</p>
+<pre><code>docker cp [OPTIONS] [CONTAINER_ID]:[SRC_PATH] [DEST_PATH]</code></pre>
+<p>提交修改的容器，并生成新的镜像</p>
+<pre><code>docker commit &lt;CONTAINER ID &gt; &lt;新镜像名称&gt;
+</code></pre>
+<p>查看保存的镜像能否运行</p>
+<pre><code>docker run -v=/home/wqh/:/home/wqh/ -it &lt;IMAGE ID&gt;</code></pre>
+<p>常用参数解释：<br />
+<code>-v</code> 挂载本地文件夹到镜像中
+<code>-t</code> 让Docker分配一个伪终端并绑定到容器的标准输入上<br />
+<code>-i</code> 让容器的标准输入保持打开<br />
+<code>-d</code> 以守护方式打开（即非交互模式，后台运行）<br />
+还有一个比较常用的，做网络配置时端口映射的参数-p，例如下面的命令将宿主机的3222端口映射到容器的22端口、将宿主机的3280端口映射到容器的22端口，用法如下：</p>
+<pre><code>#-p 设置端口映射 -p 宿主机端口:容器端口  
+sudo docker run -v=/home/wqh/:/home/ -ti -p 3222:22 -p 3280:80 87e5b6b3ccc1 /bin/bash</code></pre>
+<p>###<strong>docker镜像导出/导入</strong></p>
+<pre><code>docker save -o &lt;name to save&gt;.tar &lt;REPOSITORY&gt;
+docker load -i &lt;&gt;
+# 这时导入的镜像是没有TAG的可以使用下面命令重新命名
+docker tag &lt;IAMGE_ID&gt; &lt;REPOSITORY:TAG&gt;</code></pre>
+<p>###<strong>docker管理</strong>
+<strong>1. 移除所有docker对象(container,images,networks)</strong><br />
+<code>docker system prune</code>删除所有容器、镜像和networks<br />
+<code>docker system prune -f</code> 跳过提示的tags<br />
+<code>docker system prune --volumes</code> 删除所有未使用的卷</p>
+<p><strong>2. 移除所有dockercontainer</strong></p>
+<pre><code># 列出docker容器   
+docker container  ls -a  
+
+# 列出停止的容器 
+docker container ls -a --filter status=exited --filter status=created 
+
+# 列出停止docker容器ID   
+docker container stop $(docker container ls -aq)
+
+# 移除docker容器  
+docker container rm &lt;CONTAINER ID 1&gt;  
+
+# 设置过滤选项删除容器  
+docker container prune --filter &quot;until=12h&quot;   
+
+# 移除所有停止的容器 
+docker container rm $(docker container ls -aq) 
+ </code></pre>
+<p><strong>3. 移除docker镜像</strong></p>
+<pre><code># 列出所有镜像
+docker image ls -a 
+
+# 移除镜像
+docker image  rm &lt;IMAGE ID&gt;
+
+# 移除所有未挂载镜像
+docker image  prune 
+
+# 移除所有镜像
+docker image prune -a
+
+# 移除符合过滤参数的镜像
+docker image prune -a --filter &quot;until=12h&quot;
+
+# 如果出现错误：Can’t delete image with children
+docker inspect --format=&#39;{{.Id}} {{.Parent}}&#39; $(docker images --filter since=&lt;image_id&gt; -q)
+docker rmi {sub_image_id}</code></pre>
+<p><strong>4 移除volume</strong></p>
+<pre><code>docker volume ls 
+docker volume rm &lt;VOLUME NAME&gt;
+docker volume prune &lt;-f or --force 不提示tag&gt;
+</code></pre>
+<p><strong>5 移除Networks</strong></p>
+<pre><code>docker network ls 
+docker network rm &lt;NETWORK ID&gt;
+docker network prune
+docker network prune -a --filter &quot;until=12h&quot;</code></pre>
+
+        </div>
+        
+
+        
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://joway.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+        
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="../../../index.xml" target="_blank">RSS</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="https://joway.io" target="_blank">About</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

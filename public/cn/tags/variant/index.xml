@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>variant on Example YinYong Blog</title>
+    <link>/cn/tags/variant/</link>
+    <description>Recent content in variant on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/variant/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GATK 使用笔记</title>
+      <link>/cn/posts/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <description>** read group **
+samtools view -H sample.bam | grep &amp;#39;@RG&amp;#39; 显示如下：
+@RG ID:H0164.2 PL:illumina PU:H0164ALXX140820.2 LB:Solexa-272222 PI:0 DT:2014-08-20T00:00:00-0400 SM:NA12878 CN:BI ID = Read group identifier,此标记标识每个read属于哪个read group，因此每个read group的ID必须是唯一的。它在文件头（以@RG开头）的read group定义行和每个read记录的RG:Z标记中被引用。
+PU = Platform Unit,这个标记表示三类信息，{FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}.
+SM = Sample,在此read group中样本的名称。gatk工具将具有相同SM值的所有read group 视为包含相同sample的序列数据，这也是VCF文件中sample列的名称。
+PL = Platform/technology used to produce the read,测序平台的名称，如： ILLUMINA, SOLID, LS454, HELICOS and PACBIO
+LB = DNA preparation library identifier, DNA文库标识符, MarkDuplicates通过LB来判别哪些read groups 可能包含分子重复（同一个DNA库在多个通道上被测序）。
+如果BAM文件缺少必需的字段或没有区分字段中的相关因素，可以使用Picard’s的AddOrReplaceReadGroups添加，或者重命名read group字段。</description>
+    </item>
+    
+  </channel>
+</rss>

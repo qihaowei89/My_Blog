@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TCGA on Qihao&#39; Blog</title>
+    <link>/categories/tcga/</link>
+    <description>Recent content in TCGA on Qihao&#39; Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 16 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/tcga/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Bioconductor软件包分析癌症基因组学和表观基因组学数据(基于TCGA数据库)</title>
+      <link>/posts/%E4%BD%BF%E7%94%A8bioconductor%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%86%E6%9E%90%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E6%95%B0%E6%8D%AE-%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/%E4%BD%BF%E7%94%A8bioconductor%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%86%E6%9E%90%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E6%95%B0%E6%8D%AE-%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>该工作流程基于TCGA Workflow: Analyze cancer genomics and epigenomics data using Bioconductor packages 
+ 示例数据可以在TCGAWorkflowData包中找到 安装 if (!&amp;quot;BiocManager&amp;quot; %in% rownames(installed.packages())) install.packages(&amp;quot;BiocManager&amp;quot;) BiocManager::install(&amp;quot;TCGAWorkflow&amp;quot;) </description>
+    </item>
+    
+    <item>
+      <title>基于TCGA数据库的癌症基因组学和表观基因组学分析流程</title>
+      <link>/posts/%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/</guid>
+      <description>该工作流程基于TCGA Workflow: Analyze cancer genomics and epigenomics data using Bioconductor packages
+安装+加载包 if (!&amp;quot;BiocManager&amp;quot; %in% rownames(installed.packages())) install.packages(&amp;quot;BiocManager&amp;quot;) BiocManager::install(&amp;quot;TCGAWorkflow&amp;quot;) # library(TCGAWorkflow) library(TCGAWorkflowData) library(DT)  概括 癌症基因组图谱(TCGA)，DNA元素百科全书(ENCODE)和NIH路线图表观基因组学绘图联盟(Roadmap)等公开数据库导致公开数据的爆炸式增长,Bioconductor提供1000多个开源软件和统计软件包，用于分析高通量基因组数据,大多数软件包都是针对特定数据类型(例如表达，表观遗传学，基因组学)而设计的,没有一种综合工具能够对所有三个公共项目提供的资源和数据进行全面的综合分析.本流程描述了如何下载，处理和准备TCGA数据，并利用几个关键的Bioconductor包，描述了使用Roadmap和ENCODE数据如何提取具有生物学意义的基因组和表观基因组数据。
+这里描述了一个综合工作流程，它集成了许多Bioconductor软件包，以便在大规模癌症数据集中分析和整合多个分子观察层。基于网络的策略最近已成为发现作为癌症表型主要调节因子的功能性疾病驱动因素的有效框架。
+ 癌症基因组图谱(TCGA) : TCGA联盟是美国国立卫生研究院(NIH)倡议，为30多种人类癌症提供公开的分子和临床信息，外显子组(变异分析)，单核苷酸多态性(SNP)，DNA甲基化，转录组(mRNA)，microRNA(miRNA)和蛋白质组。 TCGA提供的样本类型包括：原发性实体瘤，复发性实体瘤，血液来源正常和肿瘤，转移性和实体组织正常(Weinstein等，2013)
+ DNA元素百科全书(ENCODE) : 由美国国家人类基因组研究所(NHGRI)于2003年创建，该项目旨在建立一个全面的功能元素列表，这些功能元素在基因组中发挥着积极作用，包括控制基因表达的调控元素。生物组包括永生细胞系、组织、原代细胞和干细胞(Consortium和其他2011)
+ NIH表观基因组图谱绘制联盟:该组织成立的目的是为分析生物学和面向疾病的研究提供人类表观基因组数据的公共资源。Roadmap绘制了干细胞和主要体外组织中的DNA甲基化、组蛋白修饰、染色质可及性和小RNA转录本(Fingerman等，2011;Bernstein等，2010)
+   方法 TCGA数据数据可以使用 NCI Genomic Data Commons(GDC)提供对使用GDC生物信息学管道与GRCh38(hg38)协调的TCGA数据子集的访问，该管道提供了生物样本和临床数据标准化的方法，DNA和RNA序列数据与公共数据的重新比对参考基因组构建GRCh38，并生成派生数据
+GDC Legacy Archive可以访问以前存储在CGHub中的未经修改的数据副本 (Wilks等人，2014年)
+TCGA数据协调中心(DCC)主持的TCGA数据门户，其中使用GRCh37(hg19)和GRCh36(hg18)作为参考
+Bioconductor package TCGAbiolinks可以访问GDC data portal和GDC Legacy Archive提供的数据，而使用Bioconductor package RTCGAToolbox可以访问Firehose提供的数据
+从TCGA数据门户下载数据 TCGAbiolinks有三个功能：GDCquery：搜索，GDCdownload：下载，GDC：加载数据为R对象,详细使用手册
+GDCqueryGDC API 搜索给定项目和数据类别的数据，并根据用户请求的样本，样本类型，文件类型和其他功能过滤结果.函数返回一个带有摘要表的对象，其中包含找到的结果(样本，文件和其他有用信息)以及查询中使用的参数
+project指定下载的GDC project (TCGA-USC，TCGA-LGG，TARGET-AML等)
+data.category指定下载数据保存的类别信息(Transcriptome Profiling, Copy Number Variation, DNA methylation, Gene expression，等)</description>
+    </item>
+    
+  </channel>
+</rss>

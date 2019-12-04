@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Example YinYong Blog</title>
+    <link>/cn/categories/r/</link>
+    <description>Recent content in R on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 16 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Bioconductor软件包分析癌症基因组学和表观基因组学数据(基于TCGA数据库)</title>
+      <link>/cn/posts/%E4%BD%BF%E7%94%A8bioconductor%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%86%E6%9E%90%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E6%95%B0%E6%8D%AE-%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E4%BD%BF%E7%94%A8bioconductor%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%86%E6%9E%90%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E6%95%B0%E6%8D%AE-%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>该工作流程基于TCGA Workflow: Analyze cancer genomics and epigenomics data using Bioconductor packages 
+ 示例数据可以在TCGAWorkflowData包中找到 安装 if (!&amp;quot;BiocManager&amp;quot; %in% rownames(installed.packages())) install.packages(&amp;quot;BiocManager&amp;quot;) BiocManager::install(&amp;quot;TCGAWorkflow&amp;quot;) </description>
+    </item>
+    
+    <item>
+      <title>基于TCGA数据库的癌症基因组学和表观基因组学分析流程</title>
+      <link>/cn/posts/%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E5%9F%BA%E4%BA%8Etcga%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%99%8C%E7%97%87%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%92%8C%E8%A1%A8%E8%A7%82%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%AD%A6%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/</guid>
+      <description>该工作流程基于TCGA Workflow: Analyze cancer genomics and epigenomics data using Bioconductor packages
+安装+加载包 if (!&amp;quot;BiocManager&amp;quot; %in% rownames(installed.packages())) install.packages(&amp;quot;BiocManager&amp;quot;) BiocManager::install(&amp;quot;TCGAWorkflow&amp;quot;) # library(TCGAWorkflow) library(TCGAWorkflowData) library(DT)  概括 癌症基因组图谱(TCGA)，DNA元素百科全书(ENCODE)和NIH路线图表观基因组学绘图联盟(Roadmap)等公开数据库导致公开数据的爆炸式增长,Bioconductor提供1000多个开源软件和统计软件包，用于分析高通量基因组数据,大多数软件包都是针对特定数据类型(例如表达，表观遗传学，基因组学)而设计的,没有一种综合工具能够对所有三个公共项目提供的资源和数据进行全面的综合分析.本流程描述了如何下载，处理和准备TCGA数据，并利用几个关键的Bioconductor包，描述了使用Roadmap和ENCODE数据如何提取具有生物学意义的基因组和表观基因组数据。
+这里描述了一个综合工作流程，它集成了许多Bioconductor软件包，以便在大规模癌症数据集中分析和整合多个分子观察层。基于网络的策略最近已成为发现作为癌症表型主要调节因子的功能性疾病驱动因素的有效框架。
+ 癌症基因组图谱(TCGA) : TCGA联盟是美国国立卫生研究院(NIH)倡议，为30多种人类癌症提供公开的分子和临床信息，外显子组(变异分析)，单核苷酸多态性(SNP)，DNA甲基化，转录组(mRNA)，microRNA(miRNA)和蛋白质组。 TCGA提供的样本类型包括：原发性实体瘤，复发性实体瘤，血液来源正常和肿瘤，转移性和实体组织正常(Weinstein等，2013)
+ DNA元素百科全书(ENCODE) : 由美国国家人类基因组研究所(NHGRI)于2003年创建，该项目旨在建立一个全面的功能元素列表，这些功能元素在基因组中发挥着积极作用，包括控制基因表达的调控元素。生物组包括永生细胞系、组织、原代细胞和干细胞(Consortium和其他2011)
+ NIH表观基因组图谱绘制联盟:该组织成立的目的是为分析生物学和面向疾病的研究提供人类表观基因组数据的公共资源。Roadmap绘制了干细胞和主要体外组织中的DNA甲基化、组蛋白修饰、染色质可及性和小RNA转录本(Fingerman等，2011;Bernstein等，2010)
+   方法 TCGA数据数据可以使用 NCI Genomic Data Commons(GDC)提供对使用GDC生物信息学管道与GRCh38(hg38)协调的TCGA数据子集的访问，该管道提供了生物样本和临床数据标准化的方法，DNA和RNA序列数据与公共数据的重新比对参考基因组构建GRCh38，并生成派生数据
+GDC Legacy Archive可以访问以前存储在CGHub中的未经修改的数据副本 (Wilks等人，2014年)
+TCGA数据协调中心(DCC)主持的TCGA数据门户，其中使用GRCh37(hg19)和GRCh36(hg18)作为参考
+Bioconductor package TCGAbiolinks可以访问GDC data portal和GDC Legacy Archive提供的数据，而使用Bioconductor package RTCGAToolbox可以访问Firehose提供的数据
+从TCGA数据门户下载数据 TCGAbiolinks有三个功能：GDCquery：搜索，GDCdownload：下载，GDC：加载数据为R对象,详细使用手册
+GDCqueryGDC API 搜索给定项目和数据类别的数据，并根据用户请求的样本，样本类型，文件类型和其他功能过滤结果.函数返回一个带有摘要表的对象，其中包含找到的结果(样本，文件和其他有用信息)以及查询中使用的参数
+project指定下载的GDC project (TCGA-USC，TCGA-LGG，TARGET-AML等)
+data.category指定下载数据保存的类别信息(Transcriptome Profiling, Copy Number Variation, DNA methylation, Gene expression，等)</description>
+    </item>
+    
+    <item>
+      <title>r package install debug</title>
+      <link>/cn/posts/r-package-install-debug/</link>
+      <pubDate>Fri, 17 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/r-package-install-debug/</guid>
+      <description>  plot(iris)遇到rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err)
+解决：
+  conda install cairo  安装git2r出错  install.packages(&amp;#39;git2r&amp;#39;, type=&amp;#39;source&amp;#39;, configure.vars=&amp;#39;LIB_DIR=-L/home/wqh/miniconda3/lib/ INCLUDE_DIR=-I/home/wqh/miniconda3/include/&amp;#39;) </description>
+    </item>
+    
+    <item>
+      <title>Biomart用户指南</title>
+      <link>/cn/posts/biomart%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Thu, 21 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/biomart%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/</guid>
+      <description>1 介绍 biomaRt软件包为越来越多的数据库提供了接口，这些数据库实现了biomaRt软件套件。该包支持以统一的方式检索大量数据，而无需了解底层数据库模式或编写复杂的SQL查询。BioMart数据库的例子有Ensembl、UniProt和HapMap。这些主要数据库使Biomart用户能够直接访问各种数据集，并支持R提供的各种强大的在线查询。
+ 2 选择BioMart数据库和数据集 选择BioMart database 使用biomaRt::listMarts()列出可用数据库
+链接BioMart database 使用ensembl=biomaRt::useMart(&amp;quot;ensembl&amp;quot;)链接可以数据库,biomaRt::useMart()(遇到代理问题Sys.setenv(&amp;quot;http_proxy&amp;quot; = &amp;quot;http://my.proxy.org:9999&amp;quot;)oroptions(RCurlOptions = list(proxy=&amp;quot;uscache.kcc.com:80&amp;quot;,proxyuserpwd=&amp;quot;------:-------&amp;quot;)))
+ensembl=useMart(&amp;quot;ensembl&amp;quot;) listDatasets(ensembl) ensembl = useDataset(&amp;quot;hsapiens_gene_ensembl&amp;quot;,mart=ensembl) 或者
+ensembl = useMart(&amp;quot;ensembl&amp;quot;,dataset=&amp;quot;hsapiens_gene_ensembl&amp;quot;)  3 如何构建查询 getBM()函数输入三个参数:
+- filters: 用于查询(输入),listFilters()列出选定的数据库中可用的filters
+- attributes: 显示结果(输出),listAttributes()函数列出选定的数据库中可用的attributes
+- values: 过滤器值的矢量。如果使用多个筛选器，values参数需要一个值列表，其中列表中的每个位置对应于filters参数中筛选器的位置（参见下面的示例）。
+- mart: Mart对象,通过useMart()函数创建
+备注: 常见的Ensembl查询有封装好的函数可以使用:getGene()和getSequence()
+简单练习
+我们有一个来自U133PLUS2平台的Affymetrix ID列表，我们希望使用Ensembl映射来检索相应的EntrzGene ID。
+filter(input): u133plus2 platform
+attributes(output): EntrezGene ID,u133plus2 ID
+ensembl = useMart(&amp;quot;ensembl&amp;quot;,dataset=&amp;quot;hsapiens_gene_ensembl&amp;quot;) affyids=c(&amp;quot;202763_at&amp;quot;,&amp;quot;209310_s_at&amp;quot;,&amp;quot;207500_at&amp;quot;) getBM(attributes=c(&amp;#39;affy_hg_u133_plus_2&amp;#39;, &amp;#39;entrezgene&amp;#39;), filters = &amp;#39;affy_hg_u133_plus_2&amp;#39;, values = affyids, mart = ensembl)  4 biomaRt查询示例 4.</description>
+    </item>
+    
+    <item>
+      <title>了解基因组区域-annotatr</title>
+      <link>/cn/posts/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/</link>
+      <pubDate>Wed, 20 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/</guid>
+      <description>1 介绍
+二代测序实验和生物信息学分析pipelines产生的基因组区域在注释基因组特征后更有意义。发生在exon或enhancer中的SNP可能比发生在基因间区域的SNP更受关注。可能有兴趣发现一种特殊的转录因子绝大多数与启动子结合，而另一种主要与3’UTR结合。含有CpG岛的启动子的高甲基化可能表明在一种情况下与另一种情况下不同的调控机制。
+2 安装
+source(&amp;quot;https://bioconductor.org/biocLite.R&amp;quot;) biocLite(&amp;quot;annotatr&amp;quot;) 3 注释
+3.1 CpG注释
+CpG岛是所有CpG注释的基础,并且由AnnotationHub包提供个物种的注释数据。
+CpG shores位于CpG岛边界的上游/下游2kb
+CpG shelves位于CpG shores边界的上游/下游2kb
+其余的基因组区域构成了inter-CGI。 3.2 基因注释
+使用来自GenomicFeatures的函数和来自TxDb.*和org.*.eg.db包的数据进行基因注释
+注释的区域包含TSS上游1-5Kb区域,启动子区域(&amp;lt;1Kb TSS上游),5’UTR区域,第一外显子区域,外显子区域,内含子区域,CDS,3’UTR和内部区域(内部区域不包括前面的注释列表中的区域),下图表示了GenomicFeatures函数中各注释区域间的关系
+基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上/下游)。需要注意的是，这些边界与基因链有关。
+3.3 FANTOM5 Permissive 增强子
+根据Andersson等人的双向笼式转录定义.并从FANTOM5源下载和处理hg19和mm9。使用rtracklayer::liftOver()函数可以将增强子版本从h19提升到hg38,mm9到mm10.
+3.4 GENCODE lncRNA 转录本
+长非编码RNA(lncRNA)的注释来自GENCODE网站,有hg19,hg38,mm19.目前包含lncRNA的转录本信息,在以后计划包含lncRNA的内含子/外显子信息.
+3.5 ChromHMM 染色质状态
+由chromHMM(Ernst和Kellis(2012)确定的9个细胞系(Gm12878、H1hesc、Hepg2、Hmec、Hsmm、Huvec、K562、Nhek和Nhlf)染色质状态(hg19)可通过ucsc基因组浏览器轨迹访问.所有状态的注释都可以使用一个快捷方式（如hg19_Gm12878-chromatin）来构建，或者特定的染色质状态可以通过诸如hg19_chromatin_Gm12878-StrongEnhancer或hg19_chromatin_Gm12878-Repressed之类的代码来访问。
+3.6 AnnotationHub注释
+AnnotationHub包是AnnotationHub网页资源的客户端.AnnotationHub Web资源提供了一个中心位置，在那里可以发现基因组文件（如VCF、BED、WIG）和标准位置（如UCSC、ENSEMBL）的其他资源。资源包括每个资源的元数据，例如文本描述、标记和修改日期。客户机创建和管理用户检索到的文件的本地缓存，有助于快速和可复制的访问。
+使用build_ah_annots()函数,可以将任何来源的GRanges对象转换为注释，以便在annotatr中使用。例如,创建一个Gm12878和H1-hesc细胞的H3K4me3 ChIP-seq peaks注释:
+# Create a named vector for the AnnotationHub accession codes with desired names h3k4me3_codes = c(&amp;#39;Gm12878&amp;#39; = &amp;#39;AH23256&amp;#39;) # Fetch ah_codes from AnnotationHub and create annotations annotatr understands build_ah_annots(genome = &amp;#39;hg19&amp;#39;, ah_codes = h3k4me3_codes, annotation_class = &amp;#39;H3K4me3&amp;#39;) # The annotations as they appear in annotatr_cache ah_names = c(&amp;#39;hg19_H3K4me3_Gm12878&amp;#39;) print(annotatr_cache$get(&amp;#39;hg19_H3K4me3_Gm12878&amp;#39;)) 3.</description>
+    </item>
+    
+    <item>
+      <title>AnnotationDbi : Bioconductor Annotation 包的使用介绍</title>
+      <link>/cn/posts/annotationdbi-bioconductor-annotation-%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/annotationdbi-bioconductor-annotation-%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</guid>
+      <description>Bioconductor网站提供了大量的注释资源，包括gene centric和genome centric。如果想了解如何创建新的注释相关的R包，参考AnnotationForge包中的vignetteCreating select Interfaces for custom Annotation resources。
+AnnotationDbi包中与Gene centric相关的注释数据库如下：
+ Organism 水平: 如，org.Mm.eg.db
+ Platform 水平: 如，hgu133plus2.db, hgu133plus2.probes, hgu133plus2.cdf.
+ Homology 水平: 如，hom.Dm.inp.db.
+ System-biology 水平: 如，GO.db  AnnotationDbi包中与Genome centric相关的注释数据库如下：
+ Transcriptome 水平: 如，TxDb.Hsapiens.UCSC.hg19.knownGene, EnsDb.Hsapiens.v75
+ Generic genome features: 可以通过GenomicFeatures生成  基于Web的资源，通过Biomart包访问biomart：
+ 查询基于Biomart-Web的资源中基因、序列、单核苷酸多态性等。  这些注释包可以使用四种方法来访问内容：columns,keytypes,keys,select.这些方法目前可以与所有的chip, organism TxDb包以及流行的GO.db包一起使用。
+载入数据库
+samplefile &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;hg19_knownGene_sample.sqlite&amp;quot;, package=&amp;quot;GenomicFeatures&amp;quot;) txdb &amp;lt;- loadDb(samplefile) #或者 library(TxDb.Hsapiens.UCSC.hg19.knownGene) txdb &amp;lt;- TxDb.Hsapiens.UCSC.hg19.knownGene #shorthand (for convenience) txdb 1 AnnotationDB对象和Select方法</description>
+    </item>
+    
+    <item>
+      <title>使用R下载SRA数据</title>
+      <link>/cn/posts/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</guid>
+      <description>library(SRAdb) setwd(&amp;quot;/home/wqh/sra_download/SRR6660814&amp;quot;) sra_dbname &amp;lt;- &amp;quot;../SRAmetadb.sqlite&amp;quot; sra_con &amp;lt;- dbConnect(dbDriver(&amp;quot;SQLite&amp;quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&amp;quot;SRR6660815&amp;quot;), sra_con, fileType=&amp;#39;fastq&amp;#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &amp;lt;- &amp;#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.</description>
+    </item>
+    
+    <item>
+      <title>R网页爬虫</title>
+      <link>/cn/posts/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/</guid>
+      <description>常见的网页分为静态页面和AJAX增强的动态网页
+1.静态页面 rvest + xml2 组合
+xml2::read_html(x,encoding =,)：读取静态页面为xml对象
+rvest::html_nodes(x=,css=/xpath=)：提取xml对象中符合要求的所有节点
+css选择器语法：html_nodes(pages,css = &amp;quot;body#ensembl-webpage div.account_holder&amp;quot;)
+其中body为待提取html标签名称,#ensembl-webpage中的#对应ID属性，.account_holder中的.对应class属性, 属性名称间的空格使用.代替（span class=&amp;quot;_ht ht，css格式 span._ht.ht）
+xpath选择器语法：可以直接通过浏览器复制（略）
+双斜杠//表示相对路径，允许节点间的“跳转”，例如xpath=&amp;quot;//p/i&amp;quot; 通配符(*)能匹配任何单个在对应位置上任意名字的节点，例如xpath=&amp;quot;/html/body/div/*/i&amp;quot;
+操作符.可以在选定的节点集里面选择当前节点(或者自身轴)，在使用谓语时也偶尔有用
+操作符..可以选择当前节点向上一级的节点。例如xpath=//title/..
+管道操作符|可以指定多个路径，这些路径会被逐个分析并一起返回，例如xpath= &amp;quot;//address | //title&amp;quot;(另一种方法在XML包中的xpathSApply包中是吧XPath查询保存在向量里queries &amp;lt;- c(address=&amp;quot;//address&amp;quot;,title=&amp;quot;//title&amp;quot;) , xpath=queries)
+rvest::html_table():获取table标签中的表格 rvest::html_text():获取标签下包含的文本 rvest::html_attrs():获取指定节点中所有属性及对应属性值 rvest::html_children():获取指定节点下的子节点
+以爬取esembl网站上snp信息为例：
+packages &amp;lt;- c(&amp;quot;xml2&amp;quot;,&amp;quot;rvest&amp;quot;,&amp;quot;magrittr&amp;quot;) lapply(packages, FUN = function(p) require(p,quietly = T,character.only = T)) # ---------- step1 ---------# url &amp;lt;- &amp;quot;http://grch37.ensembl.org/Homo_sapiens/Variation/Explore?db=core;r=9:22125003-22126003;v=rs1333049;vdb=variation;vf=909181&amp;quot; # 读取HTML网页到xml_document对象 pages &amp;lt;- read_html(url) # 从xml_document对象中选择节点 #ensembl_panel_1 &amp;gt; div.content &amp;gt; div &amp;gt; div &amp;gt; div:nth-child(3) &amp;gt; div.</description>
+    </item>
+    
+    <item>
+      <title>R中文件读写函数</title>
+      <link>/cn/posts/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/</guid>
+      <description>示例数据1 (50 MB)
+require(data.table) # Demo speed-up n = 1e6 DT = data.table( a=sample(1:1000,n,replace=TRUE), b=sample(1:1000,n,replace=TRUE), c=rnorm(n), d=sample(c(&amp;quot;foo&amp;quot;,&amp;quot;bar&amp;quot;,&amp;quot;baz&amp;quot;,&amp;quot;qux&amp;quot;,&amp;quot;quux&amp;quot;),n,replace=TRUE), e=rnorm(n), f=sample(1:1000,n,replace=TRUE) ) DT[2,b:=NA_integer_] DT[4,c:=NA_real_] DT[3,d:=NA_character_] DT[5,d:=&amp;quot;&amp;quot;] DT[2,e:=+Inf] DT[3,e:=-Inf] system.time(write.table(DT,&amp;quot;test.csv&amp;quot;,sep=&amp;quot;,&amp;quot;,row.names=FALSE,quote=FALSE)) cat(&amp;quot;File size (MB):&amp;quot;, round(file.info(&amp;quot;test.csv&amp;quot;)$size/1024^2),&amp;quot;\n&amp;quot;) # 50 MB (1e6 rows x 6 columns) 使用read.csv读入
+# 第一次读入 system.time(DF1 &amp;lt;- read.csv(&amp;quot;test.csv&amp;quot;,stringsAsFactors=FALSE)) # 5.8 sec (first time in fresh R session) # 第二次读入 system.time(DF1 &amp;lt;- read.csv(&amp;quot;test.csv&amp;quot;,stringsAsFactors=FALSE)) # 3.5 sec (immediate repeat is faster, varies) 使用read.table读入
+system.time(DF2 &amp;lt;- read.</description>
+    </item>
+    
+    <item>
+      <title>R实用函数备忘录</title>
+      <link>/cn/posts/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/</guid>
+      <description>within(SQLDF,{b&amp;lt;-as.integer(b);c&amp;lt;-as.numeric(c)}) ip &amp;lt;- installed.packages() pkgs.to.remove &amp;lt;- ip[!(ip[,&amp;quot;Priority&amp;quot;] %in% c(&amp;quot;base&amp;quot;, &amp;quot;recommended&amp;quot;)), 1] sapply(pkgs.to.remove, remove.packages) # vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercontig or contig https://cran.r-project.org/web/packages/vcfR/vignettes/intro_to_vcfR.html pkg &amp;lt;- &amp;quot;pinfsc50&amp;quot; vcf_file &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;pinf_sc50.vcf&amp;quot;, package = pkg) dna_file &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;pinf_sc50.fasta&amp;quot;, package = pkg) gff_file &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;pinf_sc50.gff&amp;quot;, package = pkg) library(vcfR) vcf &amp;lt;- read.vcfR( vcf_file, verbose = FALSE ) # 基因组参考序列文件通常是fasta格式的文件。这些可以使用包ape读取。 dna &amp;lt;- ape::read.dna(dna_file, format = &amp;quot;fasta&amp;quot;) # 注释文件（我们目前支持gff），包含注释坐标（如基因的起点和终点）的文件是表格文件，可以用典型的r函数读取。 gff &amp;lt;- read.table(gff_file, sep=&amp;quot;\t&amp;quot;, quote=&amp;quot;&amp;quot;) # 创建 a chromR 对象 chrom &amp;lt;- create.</description>
+    </item>
+    
+    <item>
+      <title>自动化交易基础--知识点扫盲</title>
+      <link>/cn/posts/%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A1%80-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/</link>
+      <pubDate>Wed, 19 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BA%A4%E6%98%93%E5%9F%BA%E7%A1%80-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%AB%E7%9B%B2/</guid>
+      <description>配套代码
+净值曲线
+是交易账户的价值随时间变化的曲线，它刻画了现金加上投资组合的价值总和随时间的变化。若账户的投资金额不变，我们希望它呈直线上升；若是复利投资，我们希望它成指数上升。
+净值曲线的特征
+为了研究净值曲线，我们引入一些符号：
+- 定义\(P_{t_0}\) 为调整前证券投资组合的价值
+- 定义\(P_{t_1}\) 为调整后的价值
+- \(t = 0,1,...,T\), 其中 \(t=0\) 表示开始模拟的时刻，\(t=T\) 表示当前时刻，每个 \(t\) 都有对应的 \(P_{t_0}\) 和 \(P_{t_1}\)
+假设投资组合调整（或者交易）是瞬间发生，\(P\) 从 \(P_{t_0}\) 到 \(P_{t_1}\) 的变化代表由于调整所带来的价值变化，而\(P\) 从\((t-1)_1\)时刻到\(t_0\)时刻的变化代表基于投资组合，其资产的市场价格的变化。当一个自动交易算法调整投资组合时，从\(t_0\)（调整前状态）到\(t_1\)（调整后状态）的转变瞬时发生。随时间先后顺序，\(t\)逐步取值\((0_0,0_1)...(t_0,t_1)...(T_0,T_1)\).
+我们定义\(C_0\)为初始资金，\(C_{t_0}\)和\(C_{t_1}\)分别为\(t_0,t_1\)时刻的未投资资金，\(K_t\)为从\(t_0\)瞬时调整至\(t_1\)发生的交易费用。\(t_0\)时刻的股票曲线如下：
+\[E_{t_0} = C_{t_0} + P_{t_0} = C_{0} + \sum_{i=1}^t (P_{i_0} - P_{(i-1)_1} - K_{i-1})\] 注意到在\(t=0\)时，\(C=C_{t_0}\),此外\(E_{t_0}\)与\(E_{t_1}\)之差反映的是从\(t_0\)至\(t_1\)调整期间的所有交易费用的总和。
+当绘制净值曲线并对其进行风险收益计算时，只需要使用\(E_{t_1}\)其中，\(t = 0,1,...,T\)，因为\(E_{t_1}\)能反映交易费用（如佣金）在净值曲线中的影响。
+收益序列
+收益率序列包含每个时间段的收益。收益率取决于交易的资产，与账户规模无关，因此是否复利投资不影响收益率。
+收益序列的特性
+定义\(V_t\)为\(t_0\)时刻的可交易资金，该值由交易者设定。投资者的投入总金额不能超过\(V_t\),</description>
+    </item>
+    
+    <item>
+      <title>Bioconductor&#43;CRAN镜像设定</title>
+      <link>/cn/posts/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/</link>
+      <pubDate>Tue, 18 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/bioconductor%E9%95%9C%E5%83%8F%E8%AE%BE%E5%AE%9A/</guid>
+      <description> Select a CRAN Mirror
+显示所有的镜像信息:
+getCRANmirrors(all = FALSE, local.only = FALSE) 选择镜像:
+## CRAN mirror chooseCRANmirror(graphics = getOption(&amp;quot;menu.graphics&amp;quot;), ind = NULL, useHTTPS = getOption(&amp;quot;useHTTPS&amp;quot;, TRUE), local.only = FALSE) ## CRAN mirror chooseBioCmirror(graphics = getOption(&amp;quot;menu.graphics&amp;quot;), ind = NULL, useHTTPS = getOption(&amp;quot;useHTTPS&amp;quot;, TRUE), local.only = FALSE) 显示当前BioC_mirror，options(&amp;quot;BioC_mirror&amp;quot;) 显示当前CRAN mirror, options(&amp;quot;repos&amp;quot;)和getOption(&amp;quot;repos&amp;quot;)
+安装旧版本包
+packageurl &amp;lt;- &amp;quot;http://bioconductor.org/packages/3.4/bioc/src/contrib/DESeq2_1.14.1.tar.gz&amp;quot; install.packages(packageurl, repos=NULL, type=&amp;quot;source&amp;quot;) </description>
+    </item>
+    
+    <item>
+      <title>GenomicRanges</title>
+      <link>/cn/posts/genomicranges/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/genomicranges/</guid>
+      <description> 基因组集合操作union,intersect,setdiff
+1. union取两个基因组区域的并集
+x &amp;lt;- GRanges(&amp;quot;chr1&amp;quot;, IRanges(c(2, 9) , c(7, 19)), strand=c(&amp;quot;+&amp;quot;, &amp;quot;-&amp;quot;)) y &amp;lt;- GRanges(&amp;quot;chr1&amp;quot;, IRanges(5, 10), strand=&amp;quot;-&amp;quot;) union(x, y) union(x, y, ignore.strand=TRUE) 2. intersect取两个基因组区域的交集
+intersect(x, y) intersect(x, y, ignore.strand=TRUE) 3. setdiff取两个基因组区域中不同区域
+setdiff(x, y) setdiff(x, y, ignore.strand=TRUE)  4.GRangesList对象同样适用
+gr1 &amp;lt;- GRanges(seqnames=&amp;quot;chr2&amp;quot;, ranges=IRanges(3, 6)) gr2 &amp;lt;- GRanges(seqnames=c(&amp;quot;chr1&amp;quot;, &amp;quot;chr1&amp;quot;), ranges=IRanges(c(7,13), width = 3), strand=c(&amp;quot;+&amp;quot;, &amp;quot;-&amp;quot;)) gr3 &amp;lt;- GRanges(seqnames=c(&amp;quot;chr1&amp;quot;, &amp;quot;chr2&amp;quot;), ranges=IRanges(c(1, 4), c(3, 9)), strand=c(&amp;quot;-&amp;quot;, &amp;quot;-&amp;quot;)) grlist &amp;lt;- GRangesList(gr1=gr1, gr2=gr2, gr3=gr3) union(grlist, shift(grlist, 3)) intersect(grlist, shift(grlist, 3)) setdiff(grlist, shift(grlist, 3))  </description>
+    </item>
+    
+    <item>
+      <title>函数式编程语言中常见的高阶函数(in R)</title>
+      <link>/cn/posts/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-in-r/</link>
+      <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0-in-r/</guid>
+      <description>在列表对象上循环
+lapply:输入list对象，返回与x等长的list对象
+sapply:是lapply的用户友好版本，默认情况下，返回向量或矩阵。
+endoapply 与mendoapply类似于lapply和sapply，不过返回的对象与输入对象的类型一致，而不是list
+revElements(x,i):倒序输入list对象x，i指定list index
+pc:返回与输入对象具有相同长度的列表或List对象。
+List对象的函数编程方法
+FROM: ?base::Reduce
+# Usage Reduce(f,x,init,right = FALSE,accumulate = FALSE) Filter(f,x) Find(f,x,right = FALSE, nomatch = NULL) Map(f) Negate(f) Position(f, x, right = FALSE, nomatch = NA_integer_) Arguments
+    args description    f a function of the appropriate arity (binary for Reduce, unary for Filter, Find and Position, k-ary for Map if this is called with k arguments).</description>
+    </item>
+    
+    <item>
+      <title>部署Shiny应用程序</title>
+      <link>/cn/posts/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</guid>
+      <description>当你构建完成一个shiny应用程序后，可以将其部署到本地，或者到web。
+部署shiny应用到本地 一旦你编写了Shiny应用程序，你就可以把它分发给其他人，让他们在自己的电脑上运行——他们可以用一个R命令下载和运行Shiny应用程序。
+Gist
+将代码放到gist(GitHub提供的代码粘贴服务).一个例子https://gist.github.com/jcheng5/3239667
+下载使用这个shiny app需要先安装R和Shiny包，然后只需输入以下命令运行应用程序：
+shiny::runGist(&amp;#39;3239667&amp;#39;) 根据自己app对应的gist’s ID 来替换3239667，或者可以使用完整链接e.g.&#39;https://gist.github.com/jcheng5/3239667&#39;
+GitHub仓库
+如果您的项目存储在GitHub上的git存储库中，其他人可以直接下载并运行应用程序。一个示例https://github.com/rstudio/shiny_example。以下命令将下载并运行应用程序：
+shiny::runGitHub(&amp;#39;shiny_example&amp;#39;, &amp;#39;rstudio&amp;#39;) 在这个示例中，GitHub帐户是“rstudio”，存储库是“shiny_example”；您需要用帐户和存储库名称替换它们。
+Zip压缩文件，通过web传送
+如果将项目的zip或tar文件存储在Web或FTP服务器上，用户可以下载并使用如下命令运行该项目：
+runUrl(&amp;#39;https://github.com/rstudio/shiny_example/archive/master.zip&amp;#39;) Zip压缩文件，通过复制
+复制，解压缩文件后通过命令shiny::runApp运行程序，
+封装成R软件包
+如果您的Shiny应用程序对更广泛的受众有用，那么将其转换成R包可能是值得的。将Shiny应用程序目录放在包的inst目录下，然后通过以下代码内容的函数来创建包：
+shiny::runApp(system.file(&amp;#39;appdir&amp;#39;, package=&amp;#39;packagename&amp;#39;)) 其中appdir是inst中应用程序的子目录的名称，packagename是包的名称。
+ 部署shiny应用到网络 Shinyapps.io(可以免费部署5个程序)
+Shinyapps.io是用于托管Shiny web应用程序的平台，下面将展示如何创建一个shinyapps.io帐户并将第一个应用程序部署到云中。
+安装rsconnect
+通过rsconnect包将应用程序部署到shinyapps.io服务。rsconnect包现在托管在CRAN上。可以通过运行R命令来安装它：
+install.packages(&amp;#39;rsconnect&amp;#39;) library(rsconnect) 创建一个shinyapps.io账户
+链接
+配置rsconnect
+一旦在shinyapps.io中设置了帐户，就可以配置rsconnect包以使用您的帐户。shinyapps.io自动为您生成一个令牌和密码,rsconnect包可以使用该令牌和密码来访问您的帐户。令牌在Shiyapps仪表板右上角菜单中的Tokens下。
+复制rsconnect::setAccountInfo函数到RStudio命令行运行。
+A Demo app
+install.packages(c(&amp;#39;ggplot2&amp;#39;,&amp;#39;shiny&amp;#39;)) library(shiny) library(ggplot2) dataset &amp;lt;- diamonds ui &amp;lt;- fluidPage( titlePanel(&amp;quot;Diamonds Explorer&amp;quot;), sidebarPanel( sliderInput(&amp;#39;sampleSize&amp;#39;, &amp;#39;Sample Size&amp;#39;, min=1, max=nrow(dataset), value=min(1000, nrow(dataset)), step=500, round=0), selectInput(&amp;#39;x&amp;#39;, &amp;#39;X&amp;#39;, names(dataset)), selectInput(&amp;#39;y&amp;#39;, &amp;#39;Y&amp;#39;, names(dataset), names(dataset)[[2]]), selectInput(&amp;#39;color&amp;#39;, &amp;#39;Color&amp;#39;, c(&amp;#39;None&amp;#39;, names(dataset))), checkboxInput(&amp;#39;jitter&amp;#39;, &amp;#39;Jitter&amp;#39;), checkboxInput(&amp;#39;smooth&amp;#39;, &amp;#39;Smooth&amp;#39;), selectInput(&amp;#39;facet_row&amp;#39;, &amp;#39;Facet Row&amp;#39;, c(None=&amp;#39;.</description>
+    </item>
+    
+    <item>
+      <title>R 博客搭建</title>
+      <link>/cn/posts/2018-12-04-r-rmarkdown/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/2018-12-04-r-rmarkdown/</guid>
+      <description>1.1 安装  R RStudio IDE Pandoc (If not install RStudio)  1.1.1 安装 package—blogdown ## Install from CRAN install.packages(&amp;quot;blogdown&amp;quot;) ## Or, install from GitHub if (!requireNamespace(&amp;quot;devtools&amp;quot;)) install.packages(&amp;quot;devtools&amp;quot;) devtools::install_github(&amp;quot;rstudio/blogdown&amp;quot;)  1.1.2 安装 Hugo静态网站生成器 # helper function in blogdown to download and install it automatically on major operating systems (Windows, macOS, and Linux) blogdown::install_hugo()  默认情况下，它安装最新版本的Hugo，但是可以通过version参数选择特定版本. 使用blogdown::update_hugo()升级或install_hugo(force=TRUE)重新安装Hugo，
+  1.2 一个快速的例子 在空文件夹中打开Rstudio IDE(File -&amp;gt; New Project),再R控制台调用下面的函数：
+blogdown::new_site() # 生成一个例子网站 blogdown::serve_site() # 托管网站 blogdown::stop_server() # 停止托管网站 现在，应该看到RStudio项目或当前工作目录下的一系列目录和文件。在解释这些新的目录和文件之前，我们首先介绍一项重要且有用的技术：LiveReload。这意味着当你修改并保存网站的任何源文件时，你的网站将自动重建并重新载入你的浏览器.</description>
+    </item>
+    
+    <item>
+      <title>Shiny Server 专业V1.5.10管理员指南</title>
+      <link>/cn/posts/2018-11-23-r-rmarkdown/</link>
+      <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/2018-11-23-r-rmarkdown/</guid>
+      <description>Shiny Server 专业V1.5.10管理员指南 Shiny Server使用户可以在互联网上搭建和管理Shiny app。
+1.1 系统需求： RedHat or Ubuntu
+ 1.2 安装: 1.2.1 Ubuntu 安装 R
+sudo apt-get install r-base  安装 shiny-server
+sudo apt-get install gdebi-core sudo gdebi shiny-server-&amp;lt;version&amp;gt;.deb  1.2.2 RedHat ## R sudo yum install R ## shiny-server sudo yum install --nogpgcheck shiny-server-&amp;lt;version&amp;gt;.rpm   1.2.3 Install Shiny 安装Shiny-server之前需要在系统中安装shiny包，需要使用sudo在管理员权限下安装。
+ ### Install The Shiny Package sudo su - -c &amp;quot;R -e \&amp;quot;install.packages(&amp;#39;shiny&amp;#39;,repos=&amp;#39;https://cran.rstudio.com/&amp;#39;)\&amp;quot;&amp;quot;   1.</description>
+    </item>
+    
+  </channel>
+</rss>

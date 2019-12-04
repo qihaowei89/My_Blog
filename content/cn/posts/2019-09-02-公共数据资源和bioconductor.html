@@ -1,0 +1,558 @@
+---
+title: 公共数据资源和Bioconductor
+author: ''
+date: '2019-09-02'
+slug: 公共数据资源和bioconductor
+categories: []
+tags: []
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+
+
+<div id="目标" class="section level2">
+<h2>目标</h2>
+<p>学会利用Bioconductor软件包，用于查找，访问和使用大规模公共数据资源包括：</p>
+<ul>
+<li>Gene Expression Omnibus，即<a href="https://www.ncbi.nlm.nih.gov/geo">GEO数据库</a><br />
+</li>
+<li>Sequence Read Archive，即<a href="https://www.ncbi.nlm.nih.gov/sra">SRA数据库</a><br />
+</li>
+<li>Genomic Data Commons，即<a href="https://portal.gdc.cancer.gov/">GDC数据库</a></li>
+<li>PharmacoDB用于托管宏基因组是精选数据资源和药物基因组学，即<a href="http://pharmacodb.ca/">PharmacoDB</a><br />
+</li>
+<li>The Cancer Genome Atlas，即<a href="https://portal.gdc.cancer.gov/">TCGA数据库</a></li>
+</ul>
+</div>
+<div id="对应rbioconductor封装的软件包" class="section level2">
+<h2>对应R/Bioconductor封装的软件包</h2>
+<ul>
+<li><a href="http://bioconductor.org/packages/GEOquery">GEOquery</a>: 访问NCBI中的GEO数据库—基因表达（主要是微阵列）数据的公共存储库。<br />
+</li>
+<li><a href="http://bioconductor.org/packages/GenomicDataCommons">GenomicDataCommons</a>: 访问NIH / NCI Genomic Data Commons RESTful服务<br />
+</li>
+<li><a href="https://github.com/seandavi/SRAdbV2">SRAdbV2</a>: NCBI Sequence Read Archive是二代测序平台的最大的测序数据公共存储库<br />
+</li>
+<li><a href="http://bioconductor.org/packages/curatedTCGAData">curatedTCGAData</a>: 从癌症基因组图谱(TCGA)整理的数据作为多重分析实验对象<br />
+</li>
+<li><a href="http://bioconductor.org/packages/curatedMetagenomicData">curatedMetagenomicData</a>: 人类微生物组的策划宏基因组数据<br />
+</li>
+<li><a href="http://bioconductor.org/packages/HMP16SData">HMP16SData</a>: 人类微生物组的策划宏基因组数据<br />
+</li>
+<li><a href="PharmacoGx">PharmacoGx</a>: 大规模临床前药物基因组数据和基本分析工具</li>
+</ul>
+<div id="开始操作之前需要安装如下软件包" class="section level3">
+<h3>开始操作之前需要安装如下软件包</h3>
+<pre class="r"><code>required_pkgs = c(
+  &quot;TCGAbiolinks&quot;, 
+  &quot;GEOquery&quot;, 
+  &quot;GenomicDataCommons&quot;,
+  &quot;limma&quot;,
+  &quot;curatedTCGAData&quot;,
+  &quot;recount&quot;,
+  &quot;curatedMetagenomicData&quot;,
+  &quot;phyloseq&quot;,
+  &quot;HMP16SData&quot;,
+  &quot;caTools&quot;,
+  &quot;piano&quot;,
+  &quot;isa&quot;,
+  &quot;VennDiagram&quot;,
+  &quot;downloader&quot;,
+  &quot;gdata&quot;,
+  &quot;AnnotationDbi&quot;,
+  &quot;hgu133a.db&quot;,
+  &quot;PharmacoGx&quot;)
+BiocManager::install(required_pkgs)</code></pre>
+</div>
+<div id="利用geoquery包下载geo数据库数据" class="section level3">
+<h3>1.利用<code>GEOquery</code>包下载GEO数据库数据</h3>
+<p>数据集包括：单、双通道微阵列的mRNA表达数据、基因组DNA和蛋白质丰度以及非微阵列技术数据–基因表达系列分析(SAGE)、质谱蛋白质组学数据和高通量测序数据</p>
+<div id="geo数据库概述" class="section level4">
+<h4>1.1 GEO数据库概述</h4>
+<p>GEO有四种基本实体类型：前三个（Samples，Platforms和Series）由用户提供; 第四个数据集由GEO工作人员根据用户提交的数据进行编译和策划</p>
+<div id="platforms" class="section level5">
+<h5>1.1.1 Platforms</h5>
+<p>平台记录描述阵列上的元素列表(例如，cDNAs、寡核苷酸probeset、ORFs、抗体)或可在该实验中检测和量化的元素列表(例如，SAGE标记、多肽),每个平台记录都分配有唯一且稳定的GEO登记号(GPLxxx)，Platforms可以参考多个提交者提交的许多Samples</p>
+</div>
+<div id="samples" class="section level5">
+<h5>1.1.2 Samples</h5>
+<p>Samples记录描述了处理单个样本的条件、对其进行的操作以及从中派生的每个元素的丰度测量，Samples被分配一个惟一且稳定的GEO登录号(GSMxxx)。示例实体必须只引用一个Platforms，但可以包含在多个Series中。</p>
+</div>
+<div id="series" class="section level5">
+<h5>1.1.3 Series</h5>
+<p>Series记录定义了一组相关样本、这些样本之间的关系以及它们的顺序，每个Series记录都被分配一个唯一且稳定的GEO登录号(GSExxx)</p>
+</div>
+</div>
+<div id="geoquery使用入门" class="section level4">
+<h4>1.2 <code>GEOquery</code>使用入门</h4>
+<p>示例： 我们要访问来自<a href="https://doi.org/10.1158/1055-9965.EPI-17-0461">文献</a>的数据<code>GSE103512</code><br />
+在这个小练习中,我们主要进行如下操作</p>
+<ul>
+<li>使用GEOquery包访问公共组学数据<br />
+</li>
+<li>将公共组学数据转换为<code>SummarizedExperiment</code>对象<br />
+</li>
+<li>执行简单的无监督分析以可视化这些公共数据</li>
+</ul>
+<pre class="r"><code>library(GEOquery)
+gse = getGEO(&quot;GSE103512&quot;)[[1]]
+# 注意获取的gse变量是&#39;ExpressionSet&#39;对象--旧Bioconductor数据结构，需要转换成&#39;SummarizedExperiment&#39;
+
+library(SummarizedExperiment)
+se = as(gse, &quot;SummarizedExperiment&quot;)
+
+# 检查两个感兴趣的变量，癌症类型和肿瘤/正常状态。
+with(colData(se),table(`cancer.type.ch1`,`normal.ch1`))
+
+# 通过方差过滤基因表达以找到最具信息性的基因
+sds = apply(assay(se, &#39;exprs&#39;),1,sd)
+dat = assay(se, &#39;exprs&#39;)[order(sds,decreasing = TRUE)[1:500],]
+
+
+# 执行多维缩放
+mdsvals = cmdscale(dist(t(dat)))
+mdsvals = as.data.frame(mdsvals)
+head(mdsvals)
+mdsvals$Type=factor(colData(se)[,&#39;cancer.type.ch1&#39;])
+mdsvals$Normal = factor(colData(se)[,&#39;normal.ch1&#39;])
+head(mdsvals)
+
+
+# 准备绘图
+library(ggplot2)
+ggplot(mdsvals, aes(x=V1,y=V2,shape=Normal,color=Type)) + 
+    geom_point( alpha=0.6) + theme(text=element_text(size = 18))</code></pre>
+<p>从GEO访问原始数据<code>getGEOSuppFiles</code></p>
+</div>
+</div>
+<div id="下载genomic-data-commonsgdc数据库数据" class="section level3">
+<h3>2.下载Genomic Data Commons(GDC)数据库数据</h3>
+<p>美国国家癌症研究所（NCI）的基因组数据共享（GDC）是一个数据共享平台，可促进肿瘤学中的精准医学。它不仅仅是一个数据库或工具; 它是一个可扩展的知识网络，支持癌症研究计划的基因组和临床数据的导入和标准化。GDC包含来自一些最大和最全面的癌症基因组数据集的NCI生成的数据，包括癌症基因组图谱（TCGA）和用于产生有效治疗的治疗适用性研究（TARGET）。这些数据集首次使用一套通用的生物信息学管道进行协调，因此可以直接比较数据。作为一个不断发展的癌症知识体系，GDC还使研究人员能够提交数据并协调这些数据，以便导入GDC。</p>
+<p>GDC的数据模型概述图，如下：
+<img src="all_nodes_040318.png" alt="Caption" /></p>
+<div id="安装genomicdatacommons包" class="section level4">
+<h4>2.1 安装<code>GenomicDataCommons</code>包</h4>
+<pre class="r"><code>install.packages(&#39;BiocManager&#39;)
+BiocManager::install(&#39;GenomicDataCommons&#39;)
+library(GenomicDataCommons)</code></pre>
+</div>
+<div id="检查连接和状态" class="section level4">
+<h4>2.2 检查连接和状态</h4>
+<pre class="r"><code>GenomicDataCommons::status()</code></pre>
+</div>
+<div id="查找数据" class="section level4">
+<h4>2.3 查找数据</h4>
+<p>以下构建了一个可用于指导原始数据下载代码的manifest。在此，使用HTSeq卵巢癌患者量化为原始计数的基因表达文件</p>
+<pre class="r"><code>ge_manifest = files() %&gt;%
+    filter( ~ cases.project.project_id == &#39;TCGA-OV&#39; &amp;
+                type == &#39;gene_expression&#39; &amp;
+                analysis.workflow_type == &#39;HTSeq - Counts&#39;) %&gt;%
+    manifest()</code></pre>
+</div>
+<div id="下载数据" class="section level4">
+<h4>2.4 下载数据</h4>
+<p>从前面步骤查询到379个基因表达文件后，可以使用多线程进行下载。第一次下载数据时，R要求创建缓存目录(<code>?gdc_cache</code>查看帮助)，生成的下载文件将储存在缓存目录。相同文件将直接访问缓存，从而减轻下载次数。</p>
+<pre class="r"><code>fnames = lapply(ge_manifest$id[1:20],gdcdata)</code></pre>
+<p><strong>如果下载包含受控访问数据,则上面的下载需要包含一个<code>token</code></strong></p>
+</div>
+<div id="元数据查询" class="section level4">
+<h4>2.5 元数据查询</h4>
+<p><code>GenomicDataCommons</code>包可以访问NCI GDC中包含的重要临床，人口统计学，生物样本和注释信息</p>
+<pre class="r"><code>expands = c(&quot;diagnoses&quot;,&quot;annotations&quot;, &quot;demographic&quot;,&quot;exposures&quot;)
+projResults = projects() %&gt;% results(size=10)
+str(projResults,list.len=5)
+names(projResults)</code></pre>
+</div>
+<div id="基本设计" class="section level4">
+<h4>2.6 基本设计</h4>
+<p>这个包设计与<code>dplyr</code>的<code>hadleyverse</code>方法有一些相似之处，查找和访问文件和元数据的功能可分为：</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>基于GDC API端点的简单查询构造函数<br />
+</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>应用一组谓词，调整筛选、字段选择和面板(用于聚合的字段)，并生成一个新的查询对象(自同构)<br />
+</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>应用一组执行查询并从GDC返回结果的谓词</li>
+</ol></li>
+</ul>
+<p>函数功能概述:</p>
+<ul>
+<li>创建查询
+<ul>
+<li><code>projects()</code><br />
+</li>
+<li><code>cases()</code><br />
+</li>
+<li><code>files()</code><br />
+</li>
+<li><code>annotations()</code><br />
+</li>
+</ul></li>
+<li>操纵查询
+<ul>
+<li><code>filter()</code><br />
+</li>
+<li><code>facet()</code><br />
+</li>
+<li><code>select()</code><br />
+</li>
+</ul></li>
+<li>GDC API字段上的内省
+<ul>
+<li><code>mapping()</code><br />
+</li>
+<li><code>available_fields()</code><br />
+</li>
+<li><code>default_fields()</code><br />
+</li>
+<li><code>grep_fields()</code><br />
+</li>
+<li><code>field_picker()</code><br />
+</li>
+<li><code>available_values()</code><br />
+</li>
+<li><code>available_expand()</code><br />
+</li>
+</ul></li>
+<li>执行API调用来检索查询结果
+<ul>
+<li><code>results()</code><br />
+</li>
+<li><code>count()</code><br />
+</li>
+<li><code>response()</code><br />
+</li>
+</ul></li>
+<li>原始数据文件下载
+<ul>
+<li><code>gdcdata()</code><br />
+</li>
+<li><code>transfer()</code><br />
+</li>
+<li><code>gdc_client()</code><br />
+</li>
+</ul></li>
+<li>汇总和聚合字段值(面化)
+<ul>
+<li><code>aggregations()</code><br />
+</li>
+</ul></li>
+<li>身份验证
+<ul>
+<li><code>gdc_token()</code><br />
+</li>
+</ul></li>
+<li>BAM文件切片
+<ul>
+<li><code>slicing()</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="使用方法" class="section level4">
+<h4>2.7 使用方法</h4>
+<p>在使用NCI GDC时有两类主要操作：<br />
+- 1. <a href="https://bioconductor.github.io/BiocWorkshops/public-data-resources-and-bioconductor.html#querying-metadata">查询元数据和查找数据文件</a>(例如，查找所有结肠癌患者的所有基因表达量化数据文件)<br />
+- 2. <a href="https://bioconductor.github.io/BiocWorkshops/public-data-resources-and-bioconductor.html#datafile-access-and-download">将原始数据或已处理数据</a>从GDC 传输到另一台计算机(例如，下载原始数据或已处理数据)</p>
+<div id="查询元数据" class="section level5">
+<h5>2.7.1 查询元数据</h5>
+<p>通过NCI GDC API可获得大量关于病例(基本上是病人)，文件，项目和注释的元数据</p>
+<div id="创建查询" class="section level6">
+<h6>2.7.1.1 创建查询</h6>
+<p><code>GenomicDataCommons</code>包访问与GDC网站相同的API。因此，对于对于初学者，可以检查GDC存储库页面上可用的过滤器，以找到合适的过滤标准，，将这些复选框转换为一个<code>GenomicDataCommons</code>的<code>query</code>相对简单。注意，默认情况下，只有一小部分<code>available_fields()</code>在网站上可用。<br />
+有四个方便的函数，每个函数都创建GDCQuery对象(实际上是GDCQuery的特定子类)</p>
+<ul>
+<li><code>projects()</code><br />
+</li>
+<li><code>cases()</code><br />
+</li>
+<li><code>files()</code><br />
+</li>
+<li><code>annotations()</code></li>
+</ul>
+<pre class="r"><code>pquery = projects()
+str(pquery)</code></pre>
+<p><code>pquery</code>对象现在是一个S3类–<code>GDCQuery</code>(<code>gdc_projects</code>和<code>list</code>),包含下列元素：</p>
+<ul>
+<li>fields: 这是检索数据时将返回的字段的字符向量，如果没有指定字段，例如<code>projects()</code>函数，则使用GDC中的默认字段(见<code>default_fields()</code>)<br />
+</li>
+<li>filters: 将用于在检索时过滤结果<br />
+</li>
+<li>facets: 字段名的字符向量，用于在调用<code>aggregations()</code>时聚合数据<br />
+</li>
+<li>archive: “default”或“legacy”<br />
+</li>
+<li>token: 来自GDC的字符令牌,但是请注意，一般情况下，元数据查询和检索不需要令牌，只在实际的数据下载需要。</li>
+</ul>
+</div>
+<div id="检索结果" class="section level6">
+<h6>2.7.1.2 检索结果</h6>
+<p><a href="https://docs.gdc.cancer.gov/API/Users_Guide/Search_and_Retrieval/#size-and-from">GDC官网的API</a><br />
+<code>count()</code>可以获得满足过滤条件的简单记录，由于我们尚未设置任何过滤器，因此<code>count()</code>将回得到GDC中’default’存档中公开提供的所有记录</p>
+<pre class="r"><code># pcount = count(pquery)
+# or
+pcount = pquery %&gt;% count()
+pcount
+
+# results()方法将获取实际结果 
+presults = pquery %&gt;% results()
+# str()方法对于快速浏览数据非常有用
+str(presults)
+?results</code></pre>
+<p>默认只返回其中10条记录，我们可以使用<code>results()</code>的<code>size</code>和<code>from</code>参数来浏览结果或更改返回结果的数量,有一种方便的方法，<code>results_all()</code>它将获取给定查询的所有可用结果,在调用<code>results all()</code>之前，可能需要结合使用<code>count()</code>和<code>results()</code>来了解预期的数据大小</p>
+<pre class="r"><code>length(ids(presults))
+presults = pquery %&gt;% results_all()
+length(ids(presults))
+length(ids(presults)) == count(pquery)</code></pre>
+</div>
+<div id="字段和值" class="section level6">
+<h6>2.7.1.3 字段和值</h6>
+<p><a href="https://docs.gdc.cancer.gov/API/Users_Guide/Search_and_Retrieval/#fields">GDC<code>fields</code>文件</a><br />
+从GDC查询和检索数据的核心是能够返回的指定要的字段，按字段和值过滤以及分面或聚合
+<code>GenomicDataCommons</code>包有两个简单的函数，<code>available_fields()</code>和<code>default_fields()</code>,能操作“cases”, “files”, “annotations”, or “projects”或者一个<code>GDCQuery</code>对象</p>
+<pre class="r"><code>default_fields(&#39;files&#39;)
+length(available_fields(&#39;files&#39;))
+head(available_fields(&#39;files&#39;))</code></pre>
+<p>函数的作用是:重置GDCQuery的字段槽;注意，这与dplyr <code>select()</code>谓词不太相似，后者限制了已经存在的字段。在<code>GDCQuery</code>上使用<code>select(</code>)时，完全替换了字段</p>
+<pre class="r"><code># Default fields here
+# default_fields(&#39;cases&#39;)
+qcases = cases()
+qcases$fields
+
+# set up query to use ALL available fields
+# Note that checking of fields is done by select()
+qcases = cases() %&gt;% GenomicDataCommons::select(available_fields(&#39;cases&#39;))
+head(qcases$fields)</code></pre>
+<p>查找感兴趣的字段是常见的操作，因此<code>GenomicDataCommons</code>包括<code>grep fields()</code>函数和<code>field_picker()</code>小部件</p>
+</div>
+<div id="facets-and-aggregation" class="section level6">
+<h6>2.7.1.4 Facets and aggregation</h6>
+<p><a href="https://docs.gdc.cancer.gov/API/Users_Guide/Search_and_Retrieval/#facets">GDC <code>facet</code> API 手册</a><br />
+GDC API提供称为聚合或分面的功能。 通过指定一个或多个（适当类型）字段，GDC可以向我们返回与每个匹配的记录数量的计数， 可以一次返回多个字段，但GDC API没有交叉制表功能; 一次聚合只在一个字段上。调用<code>aggregation()</code>返回的结果为<code>data.frames</code>列表(准确来说是<code>tibbles</code>)</p>
+<pre class="r"><code># total number of files of a specific type
+res = files() %&gt;% facet(c(&#39;type&#39;,&#39;data_type&#39;)) %&gt;% aggregations()
+res$type
+res$data_type</code></pre>
+</div>
+<div id="filtering" class="section level6">
+<h6>2.7.1.5 Filtering</h6>
+<p><a href="https://docs.gdc.cancer.gov/API/Users_Guide/Search_and_Retrieval/#filters-specifying-the-query">GDC <code>filtering</code> 手册</a></p>
+<pre class="r"><code>qfiles = files()
+qfiles %&gt;% count() # all files
+
+# To limit the file type
+qfiles = files() %&gt;% filter(~ type == &#39;gene_expression&#39;)
+# here is what the filter looks like after translation
+str(get_filter(qfiles))</code></pre>
+<p>如果我们想要根据项目创建过滤器（例如’TCGA-OVCA’）</p>
+<pre class="r"><code>grep(&#39;pro&#39;,available_fields(&#39;files&#39;),value=TRUE)
+
+files() %&gt;% facet(&#39;cases.project.project_id&#39;) %&gt;% aggregations()</code></pre>
+<p>可以看到使用<code>cases.project.project_id</code>是合适的，并且发现<code>TCGA-OV</code>才是正确的project_id,而不是<code>TCGA_OVCA</code></p>
+<pre class="r"><code>qfiles = files() %&gt;%
+    filter( ~ cases.project.project_id == &#39;TCGA-OV&#39; &amp; type == &#39;gene_expression&#39;)
+str(get_filter(qfiles))
+qfiles %&gt;% count()</code></pre>
+<p>为批量下载生成清单与从当前查询请求清单一样简单</p>
+<pre class="r"><code>manifest_df = qfiles %&gt;% manifest()
+head(manifest_df)</code></pre>
+<p>查看文件名，候选文件可能包含“FPKM”，“FPKM-UQ”或“counts”，<br />
+运行<code>grep('type',available_fields('files'),value=TRUE)</code>和<code>files() %&gt;% facet('analysis.workflow_type') %&gt;% aggregations()</code>发现<code>analysis.workflow_type</code>下的关键词包含“FPKM”，“FPKM-UQ”或“counts”</p>
+<pre class="r"><code>qfiles = files() %&gt;% filter( ~ cases.project.project_id == &#39;TCGA-OV&#39; &amp;
+                            type == &#39;gene_expression&#39; &amp;
+                            analysis.workflow_type == &#39;HTSeq - Counts&#39;)
+manifest_df = qfiles %&gt;% manifest()
+nrow(manifest_df)</code></pre>
+</div>
+<div id="认证" class="section level6">
+<h6>2.7.2 认证</h6>
+<p><a href="https://docs.gdc.cancer.gov/API/Users_Guide/Search_and_Retrieval/#facets">GDC Authentication 文件</a><br />
+GDC提供“受控访问”和“开放”数据，受控访问数据仅在完成<a href="https://gdc.cancer.gov/access-data/obtaining-access-controlled-data">获取访问的过程</a>后才可用。</p>
+<pre class="r"><code>token = gdc_token()
+transfer(...,token=token)
+# or
+transfer(...,token=get_token())</code></pre>
+</div>
+<div id="数据文件访问和下载" class="section level6">
+<h6>2.7.3 数据文件访问和下载</h6>
+<pre class="r"><code>fnames = gdcdata(manifest_df$id[1:2],progress=F)</code></pre>
+<p>请注意，对于受控访问数据，需要GDC <a href="https://bioconductor.github.io/BiocWorkshops/public-data-resources-and-bioconductor.html#authentication">身份验证令牌</a>。 <code>BiocParallel</code>包对于大量小文件并行下载是有用的</p>
+<pre class="r"><code>fnames = gdcdata(manifest_df$id[3:10], access_method = &#39;client&#39;)</code></pre>
+<p>批量下载功能仅对相对较大的文件有效（从GDC数据传输工具的v1.2.0开始），因此仅在传输BAM文件或更大的VCF文件时使用此方法</p>
+</div>
+</div>
+</div>
+</div>
+<div id="sra网站的数据" class="section level3">
+<h3>3 SRA网站的数据</h3>
+<p><code>SRAdbV2</code>包目前可以从GitHub上获得，并且正在积极开发中。可以使用<code>devtools</code>包或<code>BiocManager</code>包轻松安装</p>
+<pre class="r"><code>install.packages(&#39;BiocManager&#39;)
+BiocManager::install(&#39;seandavi/SRAdbV2&#39;)
+library(SRAdbV2)</code></pre>
+<div id="omicidx" class="section level4">
+<h4>3.1 Omicidx</h4>
+<p>使用SRAdbV2系统入口点是<code>Omicidx</code>–一个R6类。首先，创建一个新的实例类</p>
+<pre class="r"><code>oidx = Omicidx$new()</code></pre>
+</div>
+<div id="查询" class="section level4">
+<h4>3.2 查询</h4>
+<p>创建<code>Omicidx</code>实例后，可以通过<code>oidx$search()</code>使用搜索功能，有用的参数为<code>q</code>，此参数采用格式化为Lucene查询字符串。查询语法见<a href="https://bioconductor.github.io/BiocWorkshops/public-data-resources-and-bioconductor.html#query-syntax">Query syntax</a></p>
+<pre class="r"><code>query=paste(
+  paste0(&#39;sample_taxon_id:&#39;, 10116),
+  &#39;AND experiment_library_strategy:&quot;rna seq&quot;&#39;,
+  &#39;AND experiment_library_source:transcriptomic&#39;,
+  &#39;AND experiment_platform:illumina&#39;)
+z = oidx$search(q=query,entity=&#39;full&#39;,size=100L)</code></pre>
+<p><code>entity</code>参数是通过API提供的SRA实体类型之一<br />
+<code>size</code>参数是将在每个“chunk”中返回的记录数</p>
+</div>
+<div id="获取结果" class="section level4">
+<h4>3.3 获取结果</h4>
+<p>因为结果集可能很大，我们有一个特殊的方法，允许我们“滚动”结果或简单地得到它们。 然后，结果检索的第一步是获得一个<code>Scroller</code>。</p>
+<pre class="r"><code>s = z$scroll()
+s$count()</code></pre>
+<p>诸如<code>s$count</code>之类的方法允许对可用的结果数进行查看，在本例中为8886条记录</p>
+<p><code>Scroller</code>提供了两种访问结果数据的不同方法。<br />
+##### 3.3.1 整理整个结果集<br />
+第一种方法:将查询结果返回到R中是最方便的，但对于大型结果集，如果网络连接速度很慢，将整个数据集会加载到内存中，可能需要很长时间。</p>
+<pre class="r"><code># for VERY large result sets, this may take
+# quite a bit of time and/or memory. An
+# alternative is to use s$chunk() to retrieve
+# one batch of records at a time and process
+# incrementally.
+res = s$collate(limit = 1000)
+head(res)</code></pre>
+<p>注意，<code>scroller</code>现在报告它已经获取了1000条记录。<br />
+要重用<code>Scroller</code>，我们必须先重置它。</p>
+<pre class="r"><code>s$reset()
+s</code></pre>
+<div id="yielding-chunks" class="section level5">
+<h5>3.3.2 Yielding chunks</h5>
+<p>第二种方法:使用<code>yield</code>方法迭代结果。这种方法允许用户在数据块到达R时对其进行处理。<br />
+这种方法允许用户在数据块到达R时对其进行处理。</p>
+<pre class="r"><code>j = 0
+## fetch only 500 records, but
+## `yield` will return NULL
+## after ALL records have been fetched
+while(s$fetched &lt; 500) {
+    res = s$yield()
+    # do something interesting with `res` here if you like
+    j = j + 1
+    message(sprintf(&#39;total of %d fetched records, loop iteration # %d&#39;, s$fetched, j))
+}
+#&gt; total of 100 fetched records, loop iteration # 1
+#&gt; total of 200 fetched records, loop iteration # 2
+#&gt; total of 300 fetched records, loop iteration # 3
+#&gt; total of 400 fetched records, loop iteration # 4
+#&gt; total of 500 fetched records, loop iteration # 5</code></pre>
+<p>Scroller还有一个has next()方法，如果没有完全获取结果集，该方法将报告TRUE。使用reset()方法将光标移回结果集的开头</p>
+</div>
+</div>
+<div id="query-syntax" class="section level4">
+<h4>3.4 Query syntax</h4>
+<div id="术语" class="section level5">
+<h5>3.4.1 术语</h5>
+<p>查询分为术语和运算符。 有两种类型的术语：单一术语和短语。 单个术语是单个词，例如“test”或“hello”。 短语是由双引号括起来的一组单词，例如“hello dolly”。 多个术语可以与布尔运算符组合在一起，形成更复杂的查询（见下文）</p>
+</div>
+<div id="字段" class="section level5">
+<h5>3.4.2 字段</h5>
+<p>查询支持字段数据。执行搜索时，可以指定字段，也可以使用默认字段。字段名和默认字段是特定于实现的。您可以通过在字段名后面加上冒号:以及您要查找的术语来搜索任何字段。例如，让我们假设Lucene索引包含两个字段，title和abstract。如果您想找到标题为“正确的方式”的文档，其中包含文本，请不要在摘要中这样做，您可以输入:</p>
+<pre class="r"><code>title:&quot;The Right Way&quot; AND abstract:go</code></pre>
+<p>注意:该字段只对它直接放在前面的术语有效，因此查询</p>
+</div>
+<div id="通配符" class="section level5">
+<h5>3.4.3 通配符</h5>
+<p>Lucene支持单个术语内的单个和多个字符通配符搜索（不在短语查询中）。 要执行单字符通配符搜索，请使用“？”符号。 要执行多字符通配符搜索，请使用“*”符号。单字符通配符搜索查找与替换单个字符匹配的术语。例如，要搜索“text”或“test”，您可以使用搜索<code>te?t</code><br />
+多个字符通配符搜索查找0个或多个字符。例如，要搜索test、tests或tester，您可以使用搜索:<code>test*</code><br />
+您还可以在术语的中间使用通配符搜索:<code>te*t</code></p>
+</div>
+<div id="模糊查询" class="section level5">
+<h5>3.4.4 模糊查询</h5>
+<p>Lucene支持基于Levenshtein距离或编辑距离算法的模糊搜索。要进行模糊搜索，请在单个单词项的末尾使用波浪号、~和符号。例如，要搜索与漫游拼写相似的词，可以使用模糊搜索<code>roam~</code><br />
+从Lucene 1.9开始，一个附加的(可选的)参数可以指定所需的相似性。该值介于0和1之间，如果值接近1，则只匹配相似度较高的项。例如:<code>roam~0.8</code></p>
+</div>
+<div id="邻近查询" class="section level5">
+<h5>3.4.5 邻近查询</h5>
+<p>Lucene支持查找特定距离内的单词。要进行邻近查询，请在短语的末尾使用波浪号、~和符号。例如，要在文档中搜索彼此10个单词内的“apache”和“jakarta”，请使用以下搜索：<code>&quot;jakarta apache&quot;~10</code></p>
+</div>
+<div id="范围查询" class="section level5">
+<h5>3.4.5 范围查询</h5>
+<p>范围查询允许匹配其字段值在范围查询指定的下限和上限之间的文档。 范围查询可以是包含的，也可以不包括上限和下限。 排序按字典顺序完成<code>mod_date:[20020101 TO 20030101]</code>这将找到其<code>mod_date</code>字段的值介于<code>20020101</code>和<code>20030101</code>之间的文档。 请注意，范围查询不是为日期字段保留的,还可以将范围查询与非日期字段一起使用：<code>title:{Aida TO Carmen}</code>这将找到标题在Aida和Carmen之间的所有文档，但不包括Aida和Carmen<br />
+包含范围查询用<code>[]</code>表示。排他范围查询用<code>{}</code>表示</p>
+</div>
+<div id="布尔操作符" class="section level5">
+<h5>3.4.6 布尔操作符</h5>
+<p>布尔运算符允许通过逻辑运算符组合术语。Lucene支持<code>AND</code>、<code>+</code>、<code>OR</code>、<code>NOT</code>和<code>-</code>作为布尔运算符(注意:布尔运算符必须全部大写)</p>
+<ul>
+<li><p><code>OR</code>:要搜索包含<code>jakarta apache</code>或仅包含<code>jakarta</code>的文档，请使用该查询:<code>&quot;jakarta apache&quot; jakarta</code>或者<code>&quot;jakarta apache&quot; OR jakarta</code></p></li>
+<li><p><code>AND</code>:操作符匹配单个文档文本中两个术语都存在的文档。这等价于使用集合的交集。符号<code>&amp;&amp;</code>可以用来代替单词<code>AND</code>。要搜索包含<code>jakarta apache</code>和<code>Apache</code> Lucene的文档，请使用该查询:<code>“jakarta apache” AND “Apache Lucene”</code></p></li>
+<li><p><code>+</code>:<code>+</code>或<code>required</code>操作符要求<code>+</code>符号后面的术语存在于文档字段的某个位置。要搜索必须包含<code>jakarta</code>且可能包含<code>lucene</code>的文档，请使用该查询:<code>+jakarta lucene</code></p></li>
+<li><p><code>NOT</code>:<code>NOT</code>操作符排除包含<code>NOT</code>之后的字段的文档。<code>!</code>可以用来代替<code>NOT</code>这个词。要搜索包含<code>jakarta apache</code>但不包含<code>apache Lucene</code>的文档，请使用该查询:<code>&quot;jakarta apache&quot; NOT &quot;Apache Lucene&quot;</code>注意:<code>NOT</code>操作符不能单独使用。例如，下面的搜索将不会返回任何结果:<code>NOT &quot;jakarta apache&quot;</code></p></li>
+<li><p><code>-</code>:<code>-</code>排除符号包含<code>-</code>后面字段的文档。要搜索包含<code>jakarta apache</code>但不包含<code>apache Lucene</code>的文档，请使用该查询:<code>&quot;jakarta apache&quot; -&quot;Apache Lucene&quot;</code></p></li>
+</ul>
+</div>
+<div id="分组" class="section level5">
+<h5>3.4.7 分组</h5>
+<p>Lucene支持使用括号将子句分组以形成子查询。 如果要控制查询的布尔逻辑，这可能非常有用。 要搜索<code>“jakarta”或“apache”</code>和<code>“website”</code>，请使用以下查询:<code>(jakarta OR apache) AND website</code><br />
+要搜索标题<code>title</code>中同时包含单词<code>return</code>和短语<code>pink panther</code>，可以使用查询:<code>title:(+return +&quot;pink panther&quot;)</code></p>
+</div>
+<div id="转义特殊字符" class="section level5">
+<h5>3.4.8 转义特殊字符</h5>
+<p>Lucene支持转义查询语法中的特殊字符。当前列表中的特殊字符是:<code>+ - &amp;&amp; || ! ( ) { } [ ] ^ &quot; ~ * ? : \</code><br />
+例如搜索<code>(1+1):2</code>使用查询:<code>\(1\+1\)\:2</code></p>
+</div>
+</div>
+<div id="使用不带rbioconductor的原始api" class="section level4">
+<h4>3.5 使用不带R/Bioconductor的原始API</h4>
+<p>SRAdbV2是基于Web的高性能API的客户端。Web API可以从一个简单页面的测试:<code>sra_browse_API()</code></p>
+</div>
+</div>
+<div id="访问癌症基因组图谱tcga" class="section level3">
+<h3>4 访问癌症基因组图谱(TCGA)</h3>
+<p>两种访问TCGA数据的方法：</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li><a href="http://bioconductor.org/packages/TCGAbiolinks">TCGAbiolinks</a>:<br />
+</li>
+</ol>
+<ul>
+<li>a.通过<a href="http://bioconductor.org/packages/GenomicDataCommons">GenomicDataCommons</a>访问数据<br />
+</li>
+<li>b.提供来自TCGA出版物使用的传统Firehose管道的数据（基于hg18和hg19版本8的对齐）以及GDC协调的GRCh38管道<br />
+</li>
+<li>c.从<code>Genomic Data Commons</code>下载文件，并尽可能转换为<code>(Ranged)SummarizedExperiment</code><br />
+</li>
+</ul></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li><a href="http://bioconductor.org/packages/curatedTCGAData">curatedTCGAData</a>:<br />
+</li>
+</ol>
+<ul>
+<li>a.通过<a href="http://bioconductor.org/packages/ExperimentHub">ExperimentHub</a>访问数据<br />
+</li>
+<li>b.提供来自传统Firehose管道的数据<br />
+</li>
+<li>c.提供单独的分析<code>(Ranged)SummarizedExperiment</code>和<code>RaggedExperiment</code>，使用<code>MultiAssayExperiment</code>在癌症类型内部和之间整合多种分析</li>
+</ul></li>
+</ul>
+<div id="tcgabiolinks" class="section level4">
+<h4>4.1 <code>TCGAbiolinks</code></h4>
+<p>在此演示了从肾上腺皮质癌(ACC)生成RNA-seq数据的<code>RangedSummarizedExperiment</code>。有关其他信息和选项，请参阅<a href="https://bioconductor.org/packages/release/bioc/vignettes/TCGAbiolinks/inst/doc/download_prepare.html"><code>TCGAbiolinks vignettes</code></a></p>
+<pre class="r"><code>library(TCGAbiolinks)
+library(SummarizedExperiment)
+query &lt;- GDCquery(project = &quot;TCGA-ACC&quot;,
+                           data.category = &quot;Gene expression&quot;,
+                           data.type = &quot;Gene expression quantification&quot;,
+                           platform = &quot;Illumina HiSeq&quot;, 
+                           file.type  = &quot;normalized_results&quot;,
+                           experimental.strategy = &quot;RNA-Seq&quot;,
+                           legacy = TRUE)</code></pre>
+</div>
+</div>
+</div>

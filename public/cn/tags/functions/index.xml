@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>functions on Example YinYong Blog</title>
+    <link>/cn/tags/functions/</link>
+    <description>Recent content in functions on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/functions/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python学习</title>
+      <link>/cn/posts/python%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/python%E5%AD%A6%E4%B9%A0/</guid>
+      <description>目录操作
+os.getcwd(): 获取当前所在目录
+os.chdir(dir): 改变工作目录为“dir”</description>
+    </item>
+    
+    <item>
+      <title>R实用函数备忘录</title>
+      <link>/cn/posts/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/</guid>
+      <description>within(SQLDF,{b&amp;lt;-as.integer(b);c&amp;lt;-as.numeric(c)}) ip &amp;lt;- installed.packages() pkgs.to.remove &amp;lt;- ip[!(ip[,&amp;quot;Priority&amp;quot;] %in% c(&amp;quot;base&amp;quot;, &amp;quot;recommended&amp;quot;)), 1] sapply(pkgs.to.remove, remove.packages) # vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercontig or contig https://cran.r-project.org/web/packages/vcfR/vignettes/intro_to_vcfR.html pkg &amp;lt;- &amp;quot;pinfsc50&amp;quot; vcf_file &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;pinf_sc50.vcf&amp;quot;, package = pkg) dna_file &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;pinf_sc50.fasta&amp;quot;, package = pkg) gff_file &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;pinf_sc50.gff&amp;quot;, package = pkg) library(vcfR) vcf &amp;lt;- read.vcfR( vcf_file, verbose = FALSE ) # 基因组参考序列文件通常是fasta格式的文件。这些可以使用包ape读取。 dna &amp;lt;- ape::read.dna(dna_file, format = &amp;quot;fasta&amp;quot;) # 注释文件（我们目前支持gff），包含注释坐标（如基因的起点和终点）的文件是表格文件，可以用典型的r函数读取。 gff &amp;lt;- read.table(gff_file, sep=&amp;quot;\t&amp;quot;, quote=&amp;quot;&amp;quot;) # 创建 a chromR 对象 chrom &amp;lt;- create.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>quantification on Example YinYong Blog</title>
+    <link>/cn/tags/quantification/</link>
+    <description>Recent content in quantification on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/quantification/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Quantification(transcript-level)--Salmon</title>
+      <link>/cn/posts/quantification-transcript-level-salmon/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/quantification-transcript-level-salmon/</guid>
+      <description>Salmon是快速RNA-seq转录组定量工具。它需要提供一组目标转录本（参考转录本或者从头组装的转录本）进行定量。
+两种模式：
+- quasi-mapping-based: 参考转录本FASTA文件 + FASTA/FASTQ文件
+- alignment-based : 参考转录本FASTA文件 + SAM/BAM文件
+第一步：建立参考转录组的索引
+salmon index -t</description>
+    </item>
+    
+  </channel>
+</rss>

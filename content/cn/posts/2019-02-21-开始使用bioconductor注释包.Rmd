@@ -1,0 +1,114 @@
+---
+title: 开始使用Bioconductor注释包
+author: Jim MacDonald
+date: '2019-02-21'
+slug: 开始使用bioconductor注释包
+categories: []
+tags: []
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+
+吉姆·麦克唐纳是华盛顿大学环境和职业健康科学系的生物统计学家。他分析了从表达（微阵列，RNA序列）到基因组（SNP阵列，DNA序列，芯片序列，甲基化阵列，BS-seq）和其他“组学”数据的HTS数据的范围。自成立以来，他一直致力于生物导体项目的发展，并提供和维护了大量的注释包。   
+
+##基础包 
+介绍Bioconductor注释包中使用最多的基础包   
+
+- **OrgDb:**   
+`orgdb`包封装给定生物体基因的所有信息(除了**位置信息**).包括(GO terms and ontology, Entrez IDs, RefSeq ID, Ensembl IDs and many others).这些数据中的大多数都是由注释服务定期更新的；我们的半年度版本在发布日期“冻结”数据。这是我们在始终完全更新和能够基于一组静态注释生成可复制研究之间做出的权衡。
+
+- **ChipDb:**   
+`chipdb`包含`probe ID`到`Entrez gene ID`的映射
+
+- **TxDbL:**   
+`txdb`包含转录本,基因,外显子,和其他基因关联的的特征的**位置信息**    
+
+- **BSgenome:**   
+`BSgenome`包含全基因组的序列   
+
+- **SNPlocs:**   
+包含SNP位置信息和等位基因信息(基于dbSNP)
+
+- **AnnotationHub:**   
+这个包提供了一个浏览和下载大量注释包和单个资源的接口。许多数据被预先解析成R/Bioconductor对象。   
+
+- **OrganismDb:**  
+在单个包装中封装多个注释包以启用包间查询,这些注释包有,**GO.db**提供Gene Ontology数据的映射,**OrgDb**和**TxDb**
+
+
+## 常见任务   
+注释包支持的输入(`kyes`)和输出(`columns`).   
+`kyestypes`函数会列出可以作为输入的所有类型.   
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+library(org.Hs.eg.db)
+keytypes(org.Hs.eg.db)
+
+```
+列出给定类型`keytype`的所有`keys`   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+head(keys(org.Hs.eg.db, "ENSEMBLPROT"))
+
+head(keys(org.Hs.eg.db, "ENSEMBLTRANS"))
+```
+查看所有支持的输出列   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+columns(org.Hs.eg.db)
+```
+
+**映射制造商ID到gene symbol**   
+常见的任务是注释微阵列实验,讲制造商id映射到HUGO gene symbol或者NCBI(Gene, GenBank, RefSeq, UniGene)或者Ensembl (Ensembl gene, Ensembl transcript) ID  
+例如,映射Human Gene 1.0 ST array的Affymetirx ID到相应的HUGO symbol.   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+library(hugene10sttranscriptcluster.db)
+hugene <- hugene10sttranscriptcluster.db
+select(hugene, "8012257", "SYMBOL")
+
+ids <- keys(hugene)[15000:15005]
+annot <- c("SYMBOL","ENTREZID")
+select(hugene, ids, annot)
+```
+
+以上结果请注意三点。   
+首先，返回的`data.frame`中的`probeid`列与输入id的顺序相同。   
+第二，一些AffymetrixID映射到多个基因。   
+第三，如果其中一个键没有注释（最后一个），则返回NA值。   
+
+如果我们想保证返回的数据的顺序和长度与输入键向量相同，我们可以使用`mapid`代替。但是，`mapid`一次只能执行一个`keytype`，并返回向量或列表，而不是`data.frame`。与具有keytype默认值的`select`不同，`mapid`需要第四个参数，指定要使用的键的`keytype`。
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+mapIds(hugene, ids, "SYMBOL", "PROBEID")
+d.f <- as.data.frame(lapply(annot, function(x) mapIds(hugene, ids, x, "PROBEID")))
+names(d.f) <- annot
+d.f
+```
+
+
+mapid的默认值是对任何1:many映射使用第一个实例。对于某些用例（例如，refseq id）来说，这是很好的，但是对于我们希望返回所有值的其他情况（例如，go id），这就不那么有用了。
+
+我们可以使用multials参数来控制返回的内容。   
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+mapIds(hugene, ids, "SYMBOL", "PROBEID", multiVals = "list")
+```
+
+如果我们想为注释使用矩形格式，在这里我们保留所有1:many映射，同时确保每一行直接映射到表达式值数组，那么我们可以使用一个数据帧，告诉mapid返回一个字符列表。
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+lst <- lapply(annot, function(x) mapIds(hugene, ids, x, "PROBEID", multiVals = "CharacterList"))
+d.f <- as(lst, "DataFrame")
+names(d.f) <- annot
+d.f
+```
+
+
+**映射 Entrez gene ID 到TRPV2 chromosomal location**   
+如果对TRPV2基因感兴趣,想知道它的染色体坐标,可以使用`Homo.sapiens`包得到信息.可以用基因的HUGO symbol来得到坐标信息,但是建议使用Entrez Gene ID(唯一ID)   
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+select(Homo.sapiens, "51393", c("TXCHROM","TXSTART","TXEND"), "SYMBOL")
+
+```
+
+([来源](http://www.bioconductor.org/help/newsletters/2016_January/#design-matrices-for-differential-gene-expression))

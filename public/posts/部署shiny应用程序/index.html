@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/posts/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" />
+  <link rel="canonical" href="../../posts/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "posts",
+      "name" : "部署Shiny应用程序",
+      "headline" : "部署Shiny应用程序",
+      "description" : "当你构建完成一个shiny应用程序后，可以将其部署到本地，或者到web。\n部署shiny应用到本地 一旦你编写了Shiny应用程序，你就可以把它分发给其他人，让他们在自己的电脑上运行——他们可以用一个R命令下载和运行Shiny应用程序。\nGist\n将代码放到gist(GitHub提供的代码粘贴服务).一个例子https:\/\/gist.github.com\/jcheng5\/3239667\n下载使用这个shiny app需要先安装R和Shiny包，然后只需输入以下命令运行应用程序：\nshiny::runGist(\x26#39;3239667\x26#39;) 根据自己app对应的gist’s ID 来替换3239667，或者可以使用完整链接e.g.\x27https:\/\/gist.github.com\/jcheng5\/3239667\x27\nGitHub仓库\n如果您的项目存储在GitHub上的git存储库中，其他人可以直接下载并运行应用程序。一个示例https:\/\/github.com\/rstudio\/shiny_example。以下命令将下载并运行应用程序：\nshiny::runGitHub(\x26#39;shiny_example\x26#39;, \x26#39;rstudio\x26#39;) 在这个示例中，GitHub帐户是“rstudio”，存储库是“shiny_example”；您需要用帐户和存储库名称替换它们。\nZip压缩文件，通过web传送\n如果将项目的zip或tar文件存储在Web或FTP服务器上，用户可以下载并使用如下命令运行该项目：\nrunUrl(\x26#39;https:\/\/github.com\/rstudio\/shiny_example\/archive\/master.zip\x26#39;) Zip压缩文件，通过复制\n复制，解压缩文件后通过命令shiny::runApp运行程序，\n封装成R软件包\n如果您的Shiny应用程序对更广泛的受众有用，那么将其转换成R包可能是值得的。将Shiny应用程序目录放在包的inst目录下，然后通过以下代码内容的函数来创建包：\nshiny::runApp(system.file(\x26#39;appdir\x26#39;, package=\x26#39;packagename\x26#39;)) 其中appdir是inst中应用程序的子目录的名称，packagename是包的名称。\n 部署shiny应用到网络 Shinyapps.io(可以免费部署5个程序)\nShinyapps.io是用于托管Shiny web应用程序的平台，下面将展示如何创建一个shinyapps.io帐户并将第一个应用程序部署到云中。\n安装rsconnect\n通过rsconnect包将应用程序部署到shinyapps.io服务。rsconnect包现在托管在CRAN上。可以通过运行R命令来安装它：\ninstall.packages(\x26#39;rsconnect\x26#39;) library(rsconnect) 创建一个shinyapps.io账户\n链接\n配置rsconnect\n一旦在shinyapps.io中设置了帐户，就可以配置rsconnect包以使用您的帐户。shinyapps.io自动为您生成一个令牌和密码,rsconnect包可以使用该令牌和密码来访问您的帐户。令牌在Shiyapps仪表板右上角菜单中的Tokens下。\n复制rsconnect::setAccountInfo函数到RStudio命令行运行。\nA Demo app\ninstall.packages(c(\x26#39;ggplot2\x26#39;,\x26#39;shiny\x26#39;)) library(shiny) library(ggplot2) dataset \x26lt;- diamonds ui \x26lt;- fluidPage( titlePanel(\x26quot;Diamonds Explorer\x26quot;), sidebarPanel( sliderInput(\x26#39;sampleSize\x26#39;, \x26#39;Sample Size\x26#39;, min=1, max=nrow(dataset), value=min(1000, nrow(dataset)), step=500, round=0), selectInput(\x26#39;x\x26#39;, \x26#39;X\x26#39;, names(dataset)), selectInput(\x26#39;y\x26#39;, \x26#39;Y\x26#39;, names(dataset), names(dataset)[[2]]), selectInput(\x26#39;color\x26#39;, \x26#39;Color\x26#39;, c(\x26#39;None\x26#39;, names(dataset))), checkboxInput(\x26#39;jitter\x26#39;, \x26#39;Jitter\x26#39;), checkboxInput(\x26#39;smooth\x26#39;, \x26#39;Smooth\x26#39;), selectInput(\x26#39;facet_row\x26#39;, \x26#39;Facet Row\x26#39;, c(None=\x26#39;.",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-12-14 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2018-12-14 00:00:00 \x2b0000 UTC",
+      "url" : "\/posts\/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F\/",
+      "keywords" : [ "shiny","shiny-server", ]
+  }
+</script>
+<title>部署Shiny应用程序 - Qihao&#39; Blog</title>
+  <meta property="og:title" content="部署Shiny应用程序 - Qihao&#39; Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content="当你构建完成一个shiny应用程序后，可以将其部署到本地，或者到web。
+部署shiny应用到本地 一旦你编写了Shiny应用程序，你就可以把它分发给其他人，让他们在自己的电脑上运行——他们可以用一个R命令下载和运行Shiny应用程序。
+Gist
+将代码放到gist(GitHub提供的代码粘贴服务).一个例子https://gist.github.com/jcheng5/3239667
+下载使用这个shiny app需要先安装R和Shiny包，然后只需输入以下命令运行应用程序：
+shiny::runGist(&#39;3239667&#39;) 根据自己app对应的gist’s ID 来替换3239667，或者可以使用完整链接e.g.&#39;https://gist.github.com/jcheng5/3239667&#39;
+GitHub仓库
+如果您的项目存储在GitHub上的git存储库中，其他人可以直接下载并运行应用程序。一个示例https://github.com/rstudio/shiny_example。以下命令将下载并运行应用程序：
+shiny::runGitHub(&#39;shiny_example&#39;, &#39;rstudio&#39;) 在这个示例中，GitHub帐户是“rstudio”，存储库是“shiny_example”；您需要用帐户和存储库名称替换它们。
+Zip压缩文件，通过web传送
+如果将项目的zip或tar文件存储在Web或FTP服务器上，用户可以下载并使用如下命令运行该项目：
+runUrl(&#39;https://github.com/rstudio/shiny_example/archive/master.zip&#39;) Zip压缩文件，通过复制
+复制，解压缩文件后通过命令shiny::runApp运行程序，
+封装成R软件包
+如果您的Shiny应用程序对更广泛的受众有用，那么将其转换成R包可能是值得的。将Shiny应用程序目录放在包的inst目录下，然后通过以下代码内容的函数来创建包：
+shiny::runApp(system.file(&#39;appdir&#39;, package=&#39;packagename&#39;)) 其中appdir是inst中应用程序的子目录的名称，packagename是包的名称。
+ 部署shiny应用到网络 Shinyapps.io(可以免费部署5个程序)
+Shinyapps.io是用于托管Shiny web应用程序的平台，下面将展示如何创建一个shinyapps.io帐户并将第一个应用程序部署到云中。
+安装rsconnect
+通过rsconnect包将应用程序部署到shinyapps.io服务。rsconnect包现在托管在CRAN上。可以通过运行R命令来安装它：
+install.packages(&#39;rsconnect&#39;) library(rsconnect) 创建一个shinyapps.io账户
+链接
+配置rsconnect
+一旦在shinyapps.io中设置了帐户，就可以配置rsconnect包以使用您的帐户。shinyapps.io自动为您生成一个令牌和密码,rsconnect包可以使用该令牌和密码来访问您的帐户。令牌在Shiyapps仪表板右上角菜单中的Tokens下。
+复制rsconnect::setAccountInfo函数到RStudio命令行运行。
+A Demo app
+install.packages(c(&#39;ggplot2&#39;,&#39;shiny&#39;)) library(shiny) library(ggplot2) dataset &lt;- diamonds ui &lt;- fluidPage( titlePanel(&quot;Diamonds Explorer&quot;), sidebarPanel( sliderInput(&#39;sampleSize&#39;, &#39;Sample Size&#39;, min=1, max=nrow(dataset), value=min(1000, nrow(dataset)), step=500, round=0), selectInput(&#39;x&#39;, &#39;X&#39;, names(dataset)), selectInput(&#39;y&#39;, &#39;Y&#39;, names(dataset), names(dataset)[[2]]), selectInput(&#39;color&#39;, &#39;Color&#39;, c(&#39;None&#39;, names(dataset))), checkboxInput(&#39;jitter&#39;, &#39;Jitter&#39;), checkboxInput(&#39;smooth&#39;, &#39;Smooth&#39;), selectInput(&#39;facet_row&#39;, &#39;Facet Row&#39;, c(None=&#39;." />
+
+  <link rel="stylesheet" href="../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../css/index.css">
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Qihao&#39; Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post 中文版" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  <div class="lang-switch col-xs-3 col-xs-offset-9">
+    <a href="../../en/">English</a>
+  </div>
+  
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">部署Shiny应用程序</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2018-12-14 00:00:00 UTC">
+                14 Dec 2018
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="../../">@Qihao Wei</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<p>当你构建完成一个<strong>shiny应用程序</strong>后，可以将其部署到本地，或者到web。</p>
+<div id="部署shiny应用到本地" class="section level3">
+<h3>部署shiny应用到本地</h3>
+<p>一旦你编写了Shiny应用程序，你就可以把它分发给其他人，让他们在自己的电脑上运行——他们可以用一个R命令下载和运行Shiny应用程序。</p>
+<p><strong>Gist</strong><br />
+将代码放到<a href="gist.github.com">gist</a>(GitHub提供的代码粘贴服务).<a href="https://gist.github.com/jcheng5/3239667">一个例子https://gist.github.com/jcheng5/3239667</a></p>
+<p>下载使用这个shiny app需要先安装R和Shiny包，然后只需输入以下命令运行应用程序：</p>
+<pre class="r"><code>shiny::runGist(&#39;3239667&#39;)</code></pre>
+<p>根据自己app对应的gist’s ID 来替换<code>3239667</code>，或者可以使用完整链接e.g.<code>'https://gist.github.com/jcheng5/3239667'</code></p>
+<p><strong>GitHub仓库</strong><br />
+如果您的项目存储在GitHub上的git存储库中，其他人可以直接下载并运行应用程序。一个示例https://github.com/rstudio/shiny_example。以下命令将下载并运行应用程序：</p>
+<pre class="r"><code>shiny::runGitHub(&#39;shiny_example&#39;, &#39;rstudio&#39;)</code></pre>
+<p>在这个示例中，GitHub帐户是“rstudio”，存储库是“shiny_example”；您需要用帐户和存储库名称替换它们。</p>
+<p><strong>Zip压缩文件，通过web传送</strong><br />
+如果将项目的zip或tar文件存储在Web或FTP服务器上，用户可以下载并使用如下命令运行该项目：</p>
+<pre class="r"><code>runUrl(&#39;https://github.com/rstudio/shiny_example/archive/master.zip&#39;)</code></pre>
+<p><strong>Zip压缩文件，通过复制</strong><br />
+复制，解压缩文件后通过命令<code>shiny::runApp</code>运行程序，</p>
+<p><strong>封装成R软件包</strong><br />
+如果您的Shiny应用程序对更广泛的受众有用，那么将其转换成R包可能是值得的。将Shiny应用程序目录放在包的<code>inst</code>目录下，然后通过以下代码内容的函数来创建包：</p>
+<pre class="r"><code>shiny::runApp(system.file(&#39;appdir&#39;, package=&#39;packagename&#39;))</code></pre>
+<p>其中<code>appdir</code>是<code>inst</code>中应用程序的子目录的名称，<code>packagename</code>是包的名称。</p>
+</div>
+<div id="部署shiny应用到网络" class="section level3">
+<h3>部署shiny应用到网络</h3>
+<p><strong>Shinyapps.io(可以免费部署5个程序)</strong><br />
+<code>Shinyapps.io</code>是用于托管Shiny web应用程序的平台，下面将展示如何创建一个<code>shinyapps.io</code>帐户并将第一个应用程序部署到云中。</p>
+<p><strong>安装<code>rsconnect</code></strong><br />
+通过<code>rsconnect</code>包将应用程序部署到<code>shinyapps.io</code>服务。<code>rsconnect</code>包现在托管在CRAN上。可以通过运行R命令来安装它：</p>
+<pre class="r"><code>install.packages(&#39;rsconnect&#39;)
+library(rsconnect)</code></pre>
+<p><strong>创建一个<code>shinyapps.io</code>账户</strong><br />
+<a href="https://www.shinyapps.io/">链接</a></p>
+<p><strong>配置<code>rsconnect</code></strong><br />
+一旦在<code>shinyapps.io</code>中设置了帐户，就可以配置<code>rsconnect</code>包以使用您的帐户。<code>shinyapps.io</code>自动为您生成一个令牌和密码,<code>rsconnect</code>包可以使用该令牌和密码来访问您的帐户。令牌在Shiyapps仪表板右上角菜单中的<code>Tokens</code>下。</p>
+<p>复制<code>rsconnect::setAccountInfo</code>函数到RStudio命令行运行。</p>
+<p><strong>A Demo app</strong></p>
+<pre class="r"><code>install.packages(c(&#39;ggplot2&#39;,&#39;shiny&#39;))
+
+library(shiny)
+library(ggplot2)
+
+dataset &lt;- diamonds
+ui &lt;- fluidPage(
+
+  titlePanel(&quot;Diamonds Explorer&quot;),
+
+  sidebarPanel(
+
+    sliderInput(&#39;sampleSize&#39;, &#39;Sample Size&#39;, min=1, max=nrow(dataset),
+                value=min(1000, nrow(dataset)), step=500, round=0),
+
+    selectInput(&#39;x&#39;, &#39;X&#39;, names(dataset)),
+    selectInput(&#39;y&#39;, &#39;Y&#39;, names(dataset), names(dataset)[[2]]),
+    selectInput(&#39;color&#39;, &#39;Color&#39;, c(&#39;None&#39;, names(dataset))),
+
+    checkboxInput(&#39;jitter&#39;, &#39;Jitter&#39;),
+    checkboxInput(&#39;smooth&#39;, &#39;Smooth&#39;),
+
+    selectInput(&#39;facet_row&#39;, &#39;Facet Row&#39;, c(None=&#39;.&#39;, names(dataset))),
+    selectInput(&#39;facet_col&#39;, &#39;Facet Column&#39;, c(None=&#39;.&#39;, names(dataset)))
+  ),
+
+  mainPanel(
+    plotOutput(&#39;plot&#39;)
+  )
+)
+
+
+server &lt;- function(input, output) {
+
+  dataset &lt;- reactive({
+    diamonds[sample(nrow(diamonds), input$sampleSize),]
+  })
+
+  output$plot &lt;- renderPlot({
+
+    p &lt;- ggplot(dataset(), aes_string(x=input$x, y=input$y)) + geom_point()
+
+    if (input$color != &#39;None&#39;)
+      p &lt;- p + aes_string(color=input$color)
+
+    facets &lt;- paste(input$facet_row, &#39;~&#39;, input$facet_col)
+    if (facets != &#39;. ~ .&#39;)
+      p &lt;- p + facet_grid(facets)
+
+    if (input$jitter)
+      p &lt;- p + geom_jitter()
+    if (input$smooth)
+      p &lt;- p + geom_smooth()
+
+    print(p)
+
+  }, height=700)
+
+}
+
+
+shinyApp(ui, server)</code></pre>
+<p><strong>部署应用</strong></p>
+<pre class="r"><code>library(rsconnect)
+deployApp()</code></pre>
+<p>或者使用RStudio IDE的<code>Publish</code>按钮部署应用</p>
+</div>
+
+        </div>
+        
+
+        
+
+<div class="releated-content">
+  <h3>Related Posts</h3>
+  <ul>
+    
+    <li><a href="../../posts/2018-11-23-r-rmarkdown/">Shiny Server 专业V1.5.10管理员指南</a></li>
+    
+  </ul>
+</div>
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://github.com/qihaowei89/My_Blog" target="_blank">GitHub</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="../../" target="_blank">HomePage</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

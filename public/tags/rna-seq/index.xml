@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>RNA-seq on My Blog Site</title>
+    <title>RNA-seq on Qihao&#39; Blog</title>
     <link>/tags/rna-seq/</link>
-    <description>Recent content in RNA-seq on My Blog Site</description>
+    <description>Recent content in RNA-seq on Qihao&#39; Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 12 Dec 2018 00:00:00 +0000</lastBuildDate>
@@ -12,30 +12,47 @@
     
     
     <item>
-      <title>Quantification(transcript-level)--Salmon</title>
-      <link>/post/quantification-transcript-level-salmon/</link>
+      <title>alignment</title>
+      <link>/posts/alignment/</link>
       <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/quantification-transcript-level-salmon/</guid>
-      <description>Salmon是快速RNA-seq转录组定量工具。它需要提供一组目标转录本（参考转录本或者从头组装的转录本）进行定量。 两种模式： - quasi-mapping-based: 参考转录本</description>
+      <guid>/posts/alignment/</guid>
+      <description>Hisat2 HISAT2是一个快速和敏感的比对程序，用于将下一代测序读数（全基因组、转录组和外显组测序数据）映射到人类基因组群体（以及单个参考基因组）。基于BWT for graphs [Sirén et al. 2014]的方法，设计和实现的一种独创的方法graph FM index (GFM)。除了使用代表群体的的全局GFM的index外，HISAT2还使用局部GFM的index，他们共同覆盖整个基因组，每个index代表56Kbp的区域，一共有55000个index。这种新的索引策略称为层次graph FM index（HGFM）
+HISAT2中包含人类参考基因组和1230万个常见SNPs位点的index大小为6.2G。SNPs包括1100万个单核苷酸多态性、72.8万缺失和55.5万个插入。这个索引中的插入和删除片段都很小(通常小于20bp)。计划将结构变化(SV)合并到这个索引中。
+Alignment summary
+summary for unpaired reads
+20000 reads; of these: 20000 (100.00%) were unpaired; of these: 1247 (6.24%) aligned 0 times 18739 (93.69%) aligned exactly 1 time 14 (0.07%) aligned &amp;gt;1 times 93.77% overall alignment rate summary for paired reads
+10000 reads; of these: 10000 (100.00%) were paired; of these: 650 (6.50%) aligned concordantly 0 times 8823 (88.</description>
     </item>
     
     <item>
-      <title>alignment</title>
-      <link>/post/alignment/</link>
+      <title>Quantification(transcript-level)--Salmon</title>
+      <link>/posts/quantification-transcript-level-salmon/</link>
       <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/alignment/</guid>
-      <description>Hisat2 HISAT2是一个快速和敏感的比对程序，用于将下一代测序读数（全基因组、转录组和外显组测序数据）映射到人类基因组群体（以及单个参考基因组）</description>
+      <guid>/posts/quantification-transcript-level-salmon/</guid>
+      <description>Salmon是快速RNA-seq转录组定量工具。它需要提供一组目标转录本（参考转录本或者从头组装的转录本）进行定量。
+两种模式：
+- quasi-mapping-based: 参考转录本FASTA文件 + FASTA/FASTQ文件
+- alignment-based : 参考转录本FASTA文件 + SAM/BAM文件
+第一步：建立参考转录组的索引
+salmon index -t</description>
     </item>
     
     <item>
       <title>学习生物信息常用流程-1</title>
-      <link>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
+      <link>/posts/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
       <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
-      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacock</description>
+      <guid>/posts/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
+      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacocktail/
+RNACocktail pipeline可对短read和长read进行广谱的RNA-Seq分析，以便能够从转录数据获得有意义的见解。它是在分析了各种RNA-Seq样品(从生殖系、癌症到干细胞数据集)以及使用多种工具组合来确定一个全面、快速和准确的pipeline的技术之后开发的。
+  short-read long-read    alignment error correction  transcriptome reconstruction alignment  denovo transcriptome assembly transcriptome reconstruction  alignment-free quantification fusion prediction  differential expression analysis   fusion prediction   variant calling   RNA editing prediction      1 下载RNACocktail 最新版本下载地址
+历史版本下载地址
+ 2 RNACocktail Docker镜像 rnacocktail Docker镜像下载地址
+Docker镜像制作的Dockerfile下载地址
+ 3 系统要求 安装Python 2.7 以及下面的py包：
+  Tool Version tested Pipeline modes used in    pybedtools 0.</description>
     </item>
     
   </channel>

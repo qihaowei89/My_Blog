@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on My Blog Site</title>
+    <title>Tags on Qihao&#39; Blog</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on My Blog Site</description>
+    <description>Recent content in Tags on Qihao&#39; Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
@@ -48,20 +48,20 @@
     </item>
     
     <item>
-      <title>Web crawler</title>
-      <link>/tags/web-crawler/</link>
-      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/web-crawler/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>data</title>
       <link>/tags/data/</link>
       <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web crawler</title>
+      <link>/tags/web-crawler/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/web-crawler/</guid>
       <description></description>
     </item>
     
@@ -138,6 +138,15 @@
     </item>
     
     <item>
+      <title>align</title>
+      <link>/tags/align/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/align/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>DNA</title>
       <link>/tags/dna/</link>
       <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
@@ -156,29 +165,20 @@
     </item>
     
     <item>
-      <title>RNA-seq</title>
-      <link>/tags/rna-seq/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rna-seq/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>align</title>
-      <link>/tags/align/</link>
-      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/align/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>quantification</title>
       <link>/tags/quantification/</link>
       <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/quantification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RNA-seq</title>
+      <link>/tags/rna-seq/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rna-seq/</guid>
       <description></description>
     </item>
     
@@ -215,33 +215,6 @@
       <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/r-markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>series</title>
-      <link>/tags/series/</link>
-      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/series/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tutorial</title>
-      <link>/tags/tutorial/</link>
-      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/tutorial/</guid>
       <description></description>
     </item>
     

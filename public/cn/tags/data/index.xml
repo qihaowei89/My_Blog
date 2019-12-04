@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data on Example YinYong Blog</title>
+    <link>/cn/tags/data/</link>
+    <description>Recent content in data on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>R网页爬虫</title>
+      <link>/cn/posts/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Fri, 21 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/</guid>
+      <description>常见的网页分为静态页面和AJAX增强的动态网页
+1.静态页面 rvest + xml2 组合
+xml2::read_html(x,encoding =,)：读取静态页面为xml对象
+rvest::html_nodes(x=,css=/xpath=)：提取xml对象中符合要求的所有节点
+css选择器语法：html_nodes(pages,css = &amp;quot;body#ensembl-webpage div.account_holder&amp;quot;)
+其中body为待提取html标签名称,#ensembl-webpage中的#对应ID属性，.account_holder中的.对应class属性, 属性名称间的空格使用.代替（span class=&amp;quot;_ht ht，css格式 span._ht.ht）
+xpath选择器语法：可以直接通过浏览器复制（略）
+双斜杠//表示相对路径，允许节点间的“跳转”，例如xpath=&amp;quot;//p/i&amp;quot; 通配符(*)能匹配任何单个在对应位置上任意名字的节点，例如xpath=&amp;quot;/html/body/div/*/i&amp;quot;
+操作符.可以在选定的节点集里面选择当前节点(或者自身轴)，在使用谓语时也偶尔有用
+操作符..可以选择当前节点向上一级的节点。例如xpath=//title/..
+管道操作符|可以指定多个路径，这些路径会被逐个分析并一起返回，例如xpath= &amp;quot;//address | //title&amp;quot;(另一种方法在XML包中的xpathSApply包中是吧XPath查询保存在向量里queries &amp;lt;- c(address=&amp;quot;//address&amp;quot;,title=&amp;quot;//title&amp;quot;) , xpath=queries)
+rvest::html_table():获取table标签中的表格 rvest::html_text():获取标签下包含的文本 rvest::html_attrs():获取指定节点中所有属性及对应属性值 rvest::html_children():获取指定节点下的子节点
+以爬取esembl网站上snp信息为例：
+packages &amp;lt;- c(&amp;quot;xml2&amp;quot;,&amp;quot;rvest&amp;quot;,&amp;quot;magrittr&amp;quot;) lapply(packages, FUN = function(p) require(p,quietly = T,character.only = T)) # ---------- step1 ---------# url &amp;lt;- &amp;quot;http://grch37.ensembl.org/Homo_sapiens/Variation/Explore?db=core;r=9:22125003-22126003;v=rs1333049;vdb=variation;vf=909181&amp;quot; # 读取HTML网页到xml_document对象 pages &amp;lt;- read_html(url) # 从xml_document对象中选择节点 #ensembl_panel_1 &amp;gt; div.content &amp;gt; div &amp;gt; div &amp;gt; div:nth-child(3) &amp;gt; div.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data download on Example YinYong Blog</title>
+    <link>/cn/tags/data-download/</link>
+    <description>Recent content in data download on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/data-download/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用R下载SRA数据</title>
+      <link>/cn/posts/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</guid>
+      <description>library(SRAdb) setwd(&amp;quot;/home/wqh/sra_download/SRR6660814&amp;quot;) sra_dbname &amp;lt;- &amp;quot;../SRAmetadb.sqlite&amp;quot; sra_con &amp;lt;- dbConnect(dbDriver(&amp;quot;SQLite&amp;quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&amp;quot;SRR6660815&amp;quot;), sra_con, fileType=&amp;#39;fastq&amp;#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &amp;lt;- &amp;#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.</description>
+    </item>
+    
+  </channel>
+</rss>

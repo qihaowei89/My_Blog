@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>bioinfomatics on My Blog Site</title>
+    <title>bioinfomatics on Qihao&#39; Blog</title>
     <link>/tags/bioinfomatics/</link>
-    <description>Recent content in bioinfomatics on My Blog Site</description>
+    <description>Recent content in bioinfomatics on Qihao&#39; Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 17 Dec 2018 00:00:00 +0000</lastBuildDate>
@@ -13,29 +13,43 @@
     
     <item>
       <title>GenomicRanges</title>
-      <link>/post/genomicranges/</link>
+      <link>/posts/genomicranges/</link>
       <pubDate>Mon, 17 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/genomicranges/</guid>
-      <description>基因组集合操作union,intersect,setdiff 1. union取两个基因组区域的并集 x &amp;lt;- GRanges(&amp;quot;chr1&amp;quot;, IRanges(c(2, 9) , c(7, 19)), strand=c(&amp;quot;+&amp;quot;, &amp;quot;-&amp;quot;)) y &amp;lt;- GRanges(&amp;quot;chr1&amp;quot;, IRanges(5, 10), strand=&amp;quot;-&amp;quot;) union(x, y) union(x, y, ignore.strand=TRUE) 2. i</description>
+      <guid>/posts/genomicranges/</guid>
+      <description> 基因组集合操作union,intersect,setdiff
+1. union取两个基因组区域的并集
+x &amp;lt;- GRanges(&amp;quot;chr1&amp;quot;, IRanges(c(2, 9) , c(7, 19)), strand=c(&amp;quot;+&amp;quot;, &amp;quot;-&amp;quot;)) y &amp;lt;- GRanges(&amp;quot;chr1&amp;quot;, IRanges(5, 10), strand=&amp;quot;-&amp;quot;) union(x, y) union(x, y, ignore.strand=TRUE) 2. intersect取两个基因组区域的交集
+intersect(x, y) intersect(x, y, ignore.strand=TRUE) 3. setdiff取两个基因组区域中不同区域
+setdiff(x, y) setdiff(x, y, ignore.strand=TRUE)  4.GRangesList对象同样适用
+gr1 &amp;lt;- GRanges(seqnames=&amp;quot;chr2&amp;quot;, ranges=IRanges(3, 6)) gr2 &amp;lt;- GRanges(seqnames=c(&amp;quot;chr1&amp;quot;, &amp;quot;chr1&amp;quot;), ranges=IRanges(c(7,13), width = 3), strand=c(&amp;quot;+&amp;quot;, &amp;quot;-&amp;quot;)) gr3 &amp;lt;- GRanges(seqnames=c(&amp;quot;chr1&amp;quot;, &amp;quot;chr2&amp;quot;), ranges=IRanges(c(1, 4), c(3, 9)), strand=c(&amp;quot;-&amp;quot;, &amp;quot;-&amp;quot;)) grlist &amp;lt;- GRangesList(gr1=gr1, gr2=gr2, gr3=gr3) union(grlist, shift(grlist, 3)) intersect(grlist, shift(grlist, 3)) setdiff(grlist, shift(grlist, 3))  </description>
     </item>
     
     <item>
       <title>Tools-gffread(cufflinks)</title>
-      <link>/post/tools-gffread-cufflinks/</link>
+      <link>/posts/tools-gffread-cufflinks/</link>
       <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/tools-gffread-cufflinks/</guid>
-      <description>gffread gffread这工具，官网的定义为used to generate a FASTA file with the DNA sequences for all transcripts in a GFF file,比如一个很常见的需求，对于stringtie组装后的gt</description>
+      <guid>/posts/tools-gffread-cufflinks/</guid>
+      <description> gffread
+gffread这工具，官网的定义为used to generate a FASTA file with the DNA sequences for all transcripts in a GFF file,比如一个很常见的需求，对于stringtie组装后的gtf文件，想将组装后的转录本的序列从对应的参考基因组上提取出来，这时就可以用gffread这工具了，还是上述的小鼠为例：
+gffread stringtie_merged.gtf -g mm10.fa -w transcripts.fa Usage: gffread &amp;lt;input_gff&amp;gt; \ [-g &amp;lt;genomic_seqs_fasta&amp;gt; | &amp;lt;dir&amp;gt;] \ [-s &amp;lt;seq_info.fsize&amp;gt;] \ [-o &amp;lt;outfile.gff&amp;gt;] \ [-t &amp;lt;tname&amp;gt;] \ [-r [[&amp;lt;strand&amp;gt;]&amp;lt;chr&amp;gt;:]&amp;lt;start&amp;gt;..&amp;lt;end&amp;gt; [-R]] [-CTVNJMKQAFGUBHZWTOLE] [-w &amp;lt;exons.fa&amp;gt;] [-x &amp;lt;cds.fa&amp;gt;] [-y &amp;lt;tr_cds.fa&amp;gt;] [-i &amp;lt;maxintron&amp;gt;] Filters and/or converts GFF3/GTF2 records. &amp;lt;input_gff&amp;gt; is a GFF file, use &amp;#39;-&amp;#39; if the GFF records will be given at stdin  </description>
     </item>
     
     <item>
       <title>学习生物信息常用流程-1</title>
-      <link>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
+      <link>/posts/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
       <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
-      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacock</description>
+      <guid>/posts/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
+      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacocktail/
+RNACocktail pipeline可对短read和长read进行广谱的RNA-Seq分析，以便能够从转录数据获得有意义的见解。它是在分析了各种RNA-Seq样品(从生殖系、癌症到干细胞数据集)以及使用多种工具组合来确定一个全面、快速和准确的pipeline的技术之后开发的。
+  short-read long-read    alignment error correction  transcriptome reconstruction alignment  denovo transcriptome assembly transcriptome reconstruction  alignment-free quantification fusion prediction  differential expression analysis   fusion prediction   variant calling   RNA editing prediction      1 下载RNACocktail 最新版本下载地址
+历史版本下载地址
+ 2 RNACocktail Docker镜像 rnacocktail Docker镜像下载地址
+Docker镜像制作的Dockerfile下载地址
+ 3 系统要求 安装Python 2.7 以及下面的py包：
+  Tool Version tested Pipeline modes used in    pybedtools 0.</description>
     </item>
     
   </channel>

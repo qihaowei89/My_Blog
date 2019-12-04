@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bioinfomatics on Example YinYong Blog</title>
+    <link>/cn/categories/bioinfomatics/</link>
+    <description>Recent content in Bioinfomatics on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/categories/bioinfomatics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Biomart用户指南</title>
+      <link>/cn/posts/biomart%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Thu, 21 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/biomart%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97/</guid>
+      <description>1 介绍 biomaRt软件包为越来越多的数据库提供了接口，这些数据库实现了biomaRt软件套件。该包支持以统一的方式检索大量数据，而无需了解底层数据库模式或编写复杂的SQL查询。BioMart数据库的例子有Ensembl、UniProt和HapMap。这些主要数据库使Biomart用户能够直接访问各种数据集，并支持R提供的各种强大的在线查询。
+ 2 选择BioMart数据库和数据集 选择BioMart database 使用biomaRt::listMarts()列出可用数据库
+链接BioMart database 使用ensembl=biomaRt::useMart(&amp;quot;ensembl&amp;quot;)链接可以数据库,biomaRt::useMart()(遇到代理问题Sys.setenv(&amp;quot;http_proxy&amp;quot; = &amp;quot;http://my.proxy.org:9999&amp;quot;)oroptions(RCurlOptions = list(proxy=&amp;quot;uscache.kcc.com:80&amp;quot;,proxyuserpwd=&amp;quot;------:-------&amp;quot;)))
+ensembl=useMart(&amp;quot;ensembl&amp;quot;) listDatasets(ensembl) ensembl = useDataset(&amp;quot;hsapiens_gene_ensembl&amp;quot;,mart=ensembl) 或者
+ensembl = useMart(&amp;quot;ensembl&amp;quot;,dataset=&amp;quot;hsapiens_gene_ensembl&amp;quot;)  3 如何构建查询 getBM()函数输入三个参数:
+- filters: 用于查询(输入),listFilters()列出选定的数据库中可用的filters
+- attributes: 显示结果(输出),listAttributes()函数列出选定的数据库中可用的attributes
+- values: 过滤器值的矢量。如果使用多个筛选器，values参数需要一个值列表，其中列表中的每个位置对应于filters参数中筛选器的位置（参见下面的示例）。
+- mart: Mart对象,通过useMart()函数创建
+备注: 常见的Ensembl查询有封装好的函数可以使用:getGene()和getSequence()
+简单练习
+我们有一个来自U133PLUS2平台的Affymetrix ID列表，我们希望使用Ensembl映射来检索相应的EntrzGene ID。
+filter(input): u133plus2 platform
+attributes(output): EntrezGene ID,u133plus2 ID
+ensembl = useMart(&amp;quot;ensembl&amp;quot;,dataset=&amp;quot;hsapiens_gene_ensembl&amp;quot;) affyids=c(&amp;quot;202763_at&amp;quot;,&amp;quot;209310_s_at&amp;quot;,&amp;quot;207500_at&amp;quot;) getBM(attributes=c(&amp;#39;affy_hg_u133_plus_2&amp;#39;, &amp;#39;entrezgene&amp;#39;), filters = &amp;#39;affy_hg_u133_plus_2&amp;#39;, values = affyids, mart = ensembl)  4 biomaRt查询示例 4.</description>
+    </item>
+    
+    <item>
+      <title>了解基因组区域-annotatr</title>
+      <link>/cn/posts/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/</link>
+      <pubDate>Wed, 20 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/</guid>
+      <description>1 介绍
+二代测序实验和生物信息学分析pipelines产生的基因组区域在注释基因组特征后更有意义。发生在exon或enhancer中的SNP可能比发生在基因间区域的SNP更受关注。可能有兴趣发现一种特殊的转录因子绝大多数与启动子结合，而另一种主要与3’UTR结合。含有CpG岛的启动子的高甲基化可能表明在一种情况下与另一种情况下不同的调控机制。
+2 安装
+source(&amp;quot;https://bioconductor.org/biocLite.R&amp;quot;) biocLite(&amp;quot;annotatr&amp;quot;) 3 注释
+3.1 CpG注释
+CpG岛是所有CpG注释的基础,并且由AnnotationHub包提供个物种的注释数据。
+CpG shores位于CpG岛边界的上游/下游2kb
+CpG shelves位于CpG shores边界的上游/下游2kb
+其余的基因组区域构成了inter-CGI。 3.2 基因注释
+使用来自GenomicFeatures的函数和来自TxDb.*和org.*.eg.db包的数据进行基因注释
+注释的区域包含TSS上游1-5Kb区域,启动子区域(&amp;lt;1Kb TSS上游),5’UTR区域,第一外显子区域,外显子区域,内含子区域,CDS,3’UTR和内部区域(内部区域不包括前面的注释列表中的区域),下图表示了GenomicFeatures函数中各注释区域间的关系
+基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上/下游)。需要注意的是，这些边界与基因链有关。
+3.3 FANTOM5 Permissive 增强子
+根据Andersson等人的双向笼式转录定义.并从FANTOM5源下载和处理hg19和mm9。使用rtracklayer::liftOver()函数可以将增强子版本从h19提升到hg38,mm9到mm10.
+3.4 GENCODE lncRNA 转录本
+长非编码RNA(lncRNA)的注释来自GENCODE网站,有hg19,hg38,mm19.目前包含lncRNA的转录本信息,在以后计划包含lncRNA的内含子/外显子信息.
+3.5 ChromHMM 染色质状态
+由chromHMM(Ernst和Kellis(2012)确定的9个细胞系(Gm12878、H1hesc、Hepg2、Hmec、Hsmm、Huvec、K562、Nhek和Nhlf)染色质状态(hg19)可通过ucsc基因组浏览器轨迹访问.所有状态的注释都可以使用一个快捷方式（如hg19_Gm12878-chromatin）来构建，或者特定的染色质状态可以通过诸如hg19_chromatin_Gm12878-StrongEnhancer或hg19_chromatin_Gm12878-Repressed之类的代码来访问。
+3.6 AnnotationHub注释
+AnnotationHub包是AnnotationHub网页资源的客户端.AnnotationHub Web资源提供了一个中心位置，在那里可以发现基因组文件（如VCF、BED、WIG）和标准位置（如UCSC、ENSEMBL）的其他资源。资源包括每个资源的元数据，例如文本描述、标记和修改日期。客户机创建和管理用户检索到的文件的本地缓存，有助于快速和可复制的访问。
+使用build_ah_annots()函数,可以将任何来源的GRanges对象转换为注释，以便在annotatr中使用。例如,创建一个Gm12878和H1-hesc细胞的H3K4me3 ChIP-seq peaks注释:
+# Create a named vector for the AnnotationHub accession codes with desired names h3k4me3_codes = c(&amp;#39;Gm12878&amp;#39; = &amp;#39;AH23256&amp;#39;) # Fetch ah_codes from AnnotationHub and create annotations annotatr understands build_ah_annots(genome = &amp;#39;hg19&amp;#39;, ah_codes = h3k4me3_codes, annotation_class = &amp;#39;H3K4me3&amp;#39;) # The annotations as they appear in annotatr_cache ah_names = c(&amp;#39;hg19_H3K4me3_Gm12878&amp;#39;) print(annotatr_cache$get(&amp;#39;hg19_H3K4me3_Gm12878&amp;#39;)) 3.</description>
+    </item>
+    
+    <item>
+      <title>AnnotationDbi : Bioconductor Annotation 包的使用介绍</title>
+      <link>/cn/posts/annotationdbi-bioconductor-annotation-%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Tue, 12 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/annotationdbi-bioconductor-annotation-%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</guid>
+      <description>Bioconductor网站提供了大量的注释资源，包括gene centric和genome centric。如果想了解如何创建新的注释相关的R包，参考AnnotationForge包中的vignetteCreating select Interfaces for custom Annotation resources。
+AnnotationDbi包中与Gene centric相关的注释数据库如下：
+ Organism 水平: 如，org.Mm.eg.db
+ Platform 水平: 如，hgu133plus2.db, hgu133plus2.probes, hgu133plus2.cdf.
+ Homology 水平: 如，hom.Dm.inp.db.
+ System-biology 水平: 如，GO.db  AnnotationDbi包中与Genome centric相关的注释数据库如下：
+ Transcriptome 水平: 如，TxDb.Hsapiens.UCSC.hg19.knownGene, EnsDb.Hsapiens.v75
+ Generic genome features: 可以通过GenomicFeatures生成  基于Web的资源，通过Biomart包访问biomart：
+ 查询基于Biomart-Web的资源中基因、序列、单核苷酸多态性等。  这些注释包可以使用四种方法来访问内容：columns,keytypes,keys,select.这些方法目前可以与所有的chip, organism TxDb包以及流行的GO.db包一起使用。
+载入数据库
+samplefile &amp;lt;- system.file(&amp;quot;extdata&amp;quot;, &amp;quot;hg19_knownGene_sample.sqlite&amp;quot;, package=&amp;quot;GenomicFeatures&amp;quot;) txdb &amp;lt;- loadDb(samplefile) #或者 library(TxDb.Hsapiens.UCSC.hg19.knownGene) txdb &amp;lt;- TxDb.Hsapiens.UCSC.hg19.knownGene #shorthand (for convenience) txdb 1 AnnotationDB对象和Select方法</description>
+    </item>
+    
+    <item>
+      <title>GATK 使用笔记</title>
+      <link>/cn/posts/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/gatk-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <description>** read group **
+samtools view -H sample.bam | grep &amp;#39;@RG&amp;#39; 显示如下：
+@RG ID:H0164.2 PL:illumina PU:H0164ALXX140820.2 LB:Solexa-272222 PI:0 DT:2014-08-20T00:00:00-0400 SM:NA12878 CN:BI ID = Read group identifier,此标记标识每个read属于哪个read group，因此每个read group的ID必须是唯一的。它在文件头（以@RG开头）的read group定义行和每个read记录的RG:Z标记中被引用。
+PU = Platform Unit,这个标记表示三类信息，{FLOWCELL_BARCODE}.{LANE}.{SAMPLE_BARCODE}.
+SM = Sample,在此read group中样本的名称。gatk工具将具有相同SM值的所有read group 视为包含相同sample的序列数据，这也是VCF文件中sample列的名称。
+PL = Platform/technology used to produce the read,测序平台的名称，如： ILLUMINA, SOLID, LS454, HELICOS and PACBIO
+LB = DNA preparation library identifier, DNA文库标识符, MarkDuplicates通过LB来判别哪些read groups 可能包含分子重复（同一个DNA库在多个通道上被测序）。
+如果BAM文件缺少必需的字段或没有区分字段中的相关因素，可以使用Picard’s的AddOrReplaceReadGroups添加，或者重命名read group字段。</description>
+    </item>
+    
+    <item>
+      <title>使用R下载SRA数据</title>
+      <link>/cn/posts/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Wed, 26 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/</guid>
+      <description>library(SRAdb) setwd(&amp;quot;/home/wqh/sra_download/SRR6660814&amp;quot;) sra_dbname &amp;lt;- &amp;quot;../SRAmetadb.sqlite&amp;quot; sra_con &amp;lt;- dbConnect(dbDriver(&amp;quot;SQLite&amp;quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&amp;quot;SRR6660815&amp;quot;), sra_con, fileType=&amp;#39;fastq&amp;#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &amp;lt;- &amp;#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/.</description>
+    </item>
+    
+    <item>
+      <title>alignment</title>
+      <link>/cn/posts/alignment/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/alignment/</guid>
+      <description>Hisat2 HISAT2是一个快速和敏感的比对程序，用于将下一代测序读数（全基因组、转录组和外显组测序数据）映射到人类基因组群体（以及单个参考基因组）。基于BWT for graphs [Sirén et al. 2014]的方法，设计和实现的一种独创的方法graph FM index (GFM)。除了使用代表群体的的全局GFM的index外，HISAT2还使用局部GFM的index，他们共同覆盖整个基因组，每个index代表56Kbp的区域，一共有55000个index。这种新的索引策略称为层次graph FM index（HGFM）
+HISAT2中包含人类参考基因组和1230万个常见SNPs位点的index大小为6.2G。SNPs包括1100万个单核苷酸多态性、72.8万缺失和55.5万个插入。这个索引中的插入和删除片段都很小(通常小于20bp)。计划将结构变化(SV)合并到这个索引中。
+Alignment summary
+summary for unpaired reads
+20000 reads; of these: 20000 (100.00%) were unpaired; of these: 1247 (6.24%) aligned 0 times 18739 (93.69%) aligned exactly 1 time 14 (0.07%) aligned &amp;gt;1 times 93.77% overall alignment rate summary for paired reads
+10000 reads; of these: 10000 (100.00%) were paired; of these: 650 (6.50%) aligned concordantly 0 times 8823 (88.</description>
+    </item>
+    
+    <item>
+      <title>Quantification(transcript-level)--Salmon</title>
+      <link>/cn/posts/quantification-transcript-level-salmon/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/quantification-transcript-level-salmon/</guid>
+      <description>Salmon是快速RNA-seq转录组定量工具。它需要提供一组目标转录本（参考转录本或者从头组装的转录本）进行定量。
+两种模式：
+- quasi-mapping-based: 参考转录本FASTA文件 + FASTA/FASTQ文件
+- alignment-based : 参考转录本FASTA文件 + SAM/BAM文件
+第一步：建立参考转录组的索引
+salmon index -t</description>
+    </item>
+    
+    <item>
+      <title>Tools-gffread(cufflinks)</title>
+      <link>/cn/posts/tools-gffread-cufflinks/</link>
+      <pubDate>Wed, 12 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/tools-gffread-cufflinks/</guid>
+      <description> gffread
+gffread这工具，官网的定义为used to generate a FASTA file with the DNA sequences for all transcripts in a GFF file,比如一个很常见的需求，对于stringtie组装后的gtf文件，想将组装后的转录本的序列从对应的参考基因组上提取出来，这时就可以用gffread这工具了，还是上述的小鼠为例：
+gffread stringtie_merged.gtf -g mm10.fa -w transcripts.fa Usage: gffread &amp;lt;input_gff&amp;gt; \ [-g &amp;lt;genomic_seqs_fasta&amp;gt; | &amp;lt;dir&amp;gt;] \ [-s &amp;lt;seq_info.fsize&amp;gt;] \ [-o &amp;lt;outfile.gff&amp;gt;] \ [-t &amp;lt;tname&amp;gt;] \ [-r [[&amp;lt;strand&amp;gt;]&amp;lt;chr&amp;gt;:]&amp;lt;start&amp;gt;..&amp;lt;end&amp;gt; [-R]] [-CTVNJMKQAFGUBHZWTOLE] [-w &amp;lt;exons.fa&amp;gt;] [-x &amp;lt;cds.fa&amp;gt;] [-y &amp;lt;tr_cds.fa&amp;gt;] [-i &amp;lt;maxintron&amp;gt;] Filters and/or converts GFF3/GTF2 records. &amp;lt;input_gff&amp;gt; is a GFF file, use &amp;#39;-&amp;#39; if the GFF records will be given at stdin  </description>
+    </item>
+    
+    <item>
+      <title>学习生物信息常用流程-1</title>
+      <link>/cn/posts/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</link>
+      <pubDate>Fri, 07 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E5%AD%A6%E4%B9%A0%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B-1/</guid>
+      <description>RNACocktail:一种精确高效的RNA-seq分析框架 From：https://bioinform.github.io/rnacocktail/
+RNACocktail pipeline可对短read和长read进行广谱的RNA-Seq分析，以便能够从转录数据获得有意义的见解。它是在分析了各种RNA-Seq样品(从生殖系、癌症到干细胞数据集)以及使用多种工具组合来确定一个全面、快速和准确的pipeline的技术之后开发的。
+  short-read long-read    alignment error correction  transcriptome reconstruction alignment  denovo transcriptome assembly transcriptome reconstruction  alignment-free quantification fusion prediction  differential expression analysis   fusion prediction   variant calling   RNA editing prediction      1 下载RNACocktail 最新版本下载地址
+历史版本下载地址
+ 2 RNACocktail Docker镜像 rnacocktail Docker镜像下载地址
+Docker镜像制作的Dockerfile下载地址
+ 3 系统要求 安装Python 2.7 以及下面的py包：
+  Tool Version tested Pipeline modes used in    pybedtools 0.</description>
+    </item>
+    
+  </channel>
+</rss>

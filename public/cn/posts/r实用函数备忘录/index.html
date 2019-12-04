@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/cn/posts/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/" />
+  <link rel="canonical" href="../../../cn/posts/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "posts",
+      "name" : "R实用函数备忘录",
+      "headline" : "R实用函数备忘录",
+      "description" : "within(SQLDF,{b\x26lt;-as.integer(b);c\x26lt;-as.numeric(c)}) ip \x26lt;- installed.packages() pkgs.to.remove \x26lt;- ip[!(ip[,\x26quot;Priority\x26quot;] %in% c(\x26quot;base\x26quot;, \x26quot;recommended\x26quot;)), 1] sapply(pkgs.to.remove, remove.packages) # vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercontig or contig https:\/\/cran.r-project.org\/web\/packages\/vcfR\/vignettes\/intro_to_vcfR.html pkg \x26lt;- \x26quot;pinfsc50\x26quot; vcf_file \x26lt;- system.file(\x26quot;extdata\x26quot;, \x26quot;pinf_sc50.vcf\x26quot;, package = pkg) dna_file \x26lt;- system.file(\x26quot;extdata\x26quot;, \x26quot;pinf_sc50.fasta\x26quot;, package = pkg) gff_file \x26lt;- system.file(\x26quot;extdata\x26quot;, \x26quot;pinf_sc50.gff\x26quot;, package = pkg) library(vcfR) vcf \x26lt;- read.vcfR( vcf_file, verbose = FALSE ) # 基因组参考序列文件通常是fasta格式的文件。这些可以使用包ape读取。 dna \x26lt;- ape::read.dna(dna_file, format = \x26quot;fasta\x26quot;) # 注释文件（我们目前支持gff），包含注释坐标（如基因的起点和终点）的文件是表格文件，可以用典型的r函数读取。 gff \x26lt;- read.table(gff_file, sep=\x26quot;\\t\x26quot;, quote=\x26quot;\x26quot;) # 创建 a chromR 对象 chrom \x26lt;- create.",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-12-20 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2018-12-20 00:00:00 \x2b0000 UTC",
+      "url" : "\/cn\/posts\/r%E5%AE%9E%E7%94%A8%E5%87%BD%E6%95%B0%E5%A4%87%E5%BF%98%E5%BD%95\/",
+      "keywords" : [ "functions", ]
+  }
+</script>
+<title>R实用函数备忘录 - Example YinYong Blog</title>
+  <meta property="og:title" content="R实用函数备忘录 - Example YinYong Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content="within(SQLDF,{b&lt;-as.integer(b);c&lt;-as.numeric(c)}) ip &lt;- installed.packages() pkgs.to.remove &lt;- ip[!(ip[,&quot;Priority&quot;] %in% c(&quot;base&quot;, &quot;recommended&quot;)), 1] sapply(pkgs.to.remove, remove.packages) # vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercontig or contig https://cran.r-project.org/web/packages/vcfR/vignettes/intro_to_vcfR.html pkg &lt;- &quot;pinfsc50&quot; vcf_file &lt;- system.file(&quot;extdata&quot;, &quot;pinf_sc50.vcf&quot;, package = pkg) dna_file &lt;- system.file(&quot;extdata&quot;, &quot;pinf_sc50.fasta&quot;, package = pkg) gff_file &lt;- system.file(&quot;extdata&quot;, &quot;pinf_sc50.gff&quot;, package = pkg) library(vcfR) vcf &lt;- read.vcfR( vcf_file, verbose = FALSE ) # 基因组参考序列文件通常是fasta格式的文件。这些可以使用包ape读取。 dna &lt;- ape::read.dna(dna_file, format = &quot;fasta&quot;) # 注释文件（我们目前支持gff），包含注释坐标（如基因的起点和终点）的文件是表格文件，可以用典型的r函数读取。 gff &lt;- read.table(gff_file, sep=&quot;\t&quot;, quote=&quot;&quot;) # 创建 a chromR 对象 chrom &lt;- create." />
+
+  <link rel="stylesheet" href="../../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../../css/index.css">
+  <link href="../../../index.xml" rel="alternate" type="application/rss+xml" title="Example YinYong Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post Chinese" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../../cn/">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  
+  <div class="lang-switch col-xs-3 col-xs-offset-9">
+    <a href="../../../en/">English</a>
+  </div>
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">R实用函数备忘录</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2018-12-20 00:00:00 UTC">
+                20 Dec 2018
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="../../../">@Qihao Wei</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<pre class="r"><code>within(SQLDF,{b&lt;-as.integer(b);c&lt;-as.numeric(c)})
+
+
+ip &lt;- installed.packages()
+pkgs.to.remove &lt;- ip[!(ip[,&quot;Priority&quot;] %in% c(&quot;base&quot;, &quot;recommended&quot;)), 1]
+sapply(pkgs.to.remove, remove.packages)
+
+# vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercontig or contig
+https://cran.r-project.org/web/packages/vcfR/vignettes/intro_to_vcfR.html
+
+pkg &lt;- &quot;pinfsc50&quot;
+vcf_file &lt;- system.file(&quot;extdata&quot;, &quot;pinf_sc50.vcf&quot;, package = pkg)
+dna_file &lt;- system.file(&quot;extdata&quot;, &quot;pinf_sc50.fasta&quot;, package = pkg)
+gff_file &lt;- system.file(&quot;extdata&quot;, &quot;pinf_sc50.gff&quot;, package = pkg)
+library(vcfR)
+vcf &lt;- read.vcfR( vcf_file, verbose = FALSE )
+
+# 基因组参考序列文件通常是fasta格式的文件。这些可以使用包ape读取。
+dna &lt;- ape::read.dna(dna_file, format = &quot;fasta&quot;)
+
+# 注释文件（我们目前支持gff），包含注释坐标（如基因的起点和终点）的文件是表格文件，可以用典型的r函数读取。
+gff &lt;- read.table(gff_file, sep=&quot;\t&quot;, quote=&quot;&quot;)
+
+# 创建 a chromR 对象
+chrom &lt;- create.chromR(name=&#39;Supercontig&#39;, vcf=vcf, seq=dna, ann=gff)
+
+# 将vcf转换成chromR 对象
+vcfR2chromR()
+# 将seq转换成chromR 对象
+seq2chromR()
+# 将gtf转换成chromR 对象
+ann2chromR()
+
+plot(chrom)
+# read depth (DP) 在这里我们看到一个峰，它可能代表基倍体区域，但我们也看到一个长尾巴，它可能代表CNV。
+# mapping qualities (MQ) 集中在60左右，如果需要设置参数过滤，可考虑这个阈值
+#  qualities (QUAL) 质量（qual）的解释似乎不那么简单,不是一个理想的过滤参数
+# No SNP densities  接下来使用 proc_chromR() 分析生成
+
+# 请注意，由不同变体调用软件创建的VCF数据可能具有或不具有这些字段，或者它们的范围可能不同。例如，这里的映射质量峰值为60。其他软件可以创建映射质量峰值为20或其他值的文件。这就是为什么可视化数据分布是很重要的，这样您就可以了解数据的属性。
+
+#我们可以使用masker()函数来尝试过滤掉我们不信任的数据。
+chrom &lt;- masker(chrom, min_QUAL = 1, min_DP = 300, max_DP = 700, min_MQ = 59.9,  max_MQ = 60.1)
+plot(chrom)
+# 过滤后的数据可以使用proc.chromR()函数调用多个函数来处理变量、序列和注释数据以实现可视化
+proc.chromR()
+
+# regex.win() 得到序列（a、c、g和t）出现的位置以及不明确核苷酸出现的位置（n）的矩形
+# 函数var.win（）对数据执行窗口分析。目前，它总结了每个窗口的变量计数以及每个窗口的G/C内容。
+chrom &lt;- proc.chromR(chrom, verbose=TRUE)
+plot(chrom)
+
+# 数据可视化 
+#函数chromoqc()使用r函数layout()生成数据的组合图。这些图可以包括条形图和具有染色体坐标的散点图。
+
+chromoqc(chrom, dp.alpha=20)
+# 我们还可以使用xlim参数放大感兴趣的区间
+chromoqc(chrom, xlim=c(5e+05, 6e+05))
+
+# 文件输出
+#可以使用函数write.vcf()来完成被确定为具有足够质量的变量的过滤和输出。此函数接受一个VCFR对象，并可以选择使用在前面步骤中创建的掩码将其子集，然后将其输出到（gzip）VCF文件
+
+# 将vcfr和chromr转换为其他r包中支持的对象包含在vignette“转换数据”中。 
+# https://cran.r-project.org/web/packages/vcfR/vignettes/converting_data.html</code></pre>
+
+        </div>
+        
+
+        
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        <div class="post-comments">
+          <div id="disqus_thread"></div>
+<script>
+  window.addEventListener("load", () => {
+    (function() {
+      
+      var d = document,
+        s = d.createElement("script");
+      s.src = "https://joway.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  });
+</script>
+<noscript
+  >Please enable JavaScript to view the
+  <a href="https://disqus.com/?ref_noscript"
+    >comments powered by Disqus.</a
+  ></noscript
+>
+
+        </div>
+        
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="../../../index.xml" target="_blank">RSS</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="https://joway.io" target="_blank">About</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

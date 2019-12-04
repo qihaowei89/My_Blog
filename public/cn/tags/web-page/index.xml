@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web page on Example YinYong Blog</title>
+    <link>/cn/tags/web-page/</link>
+    <description>Recent content in web page on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/web-page/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>R 博客搭建</title>
+      <link>/cn/posts/2018-12-04-r-rmarkdown/</link>
+      <pubDate>Tue, 04 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/2018-12-04-r-rmarkdown/</guid>
+      <description>1.1 安装  R RStudio IDE Pandoc (If not install RStudio)  1.1.1 安装 package—blogdown ## Install from CRAN install.packages(&amp;quot;blogdown&amp;quot;) ## Or, install from GitHub if (!requireNamespace(&amp;quot;devtools&amp;quot;)) install.packages(&amp;quot;devtools&amp;quot;) devtools::install_github(&amp;quot;rstudio/blogdown&amp;quot;)  1.1.2 安装 Hugo静态网站生成器 # helper function in blogdown to download and install it automatically on major operating systems (Windows, macOS, and Linux) blogdown::install_hugo()  默认情况下，它安装最新版本的Hugo，但是可以通过version参数选择特定版本. 使用blogdown::update_hugo()升级或install_hugo(force=TRUE)重新安装Hugo，
+  1.2 一个快速的例子 在空文件夹中打开Rstudio IDE(File -&amp;gt; New Project),再R控制台调用下面的函数：
+blogdown::new_site() # 生成一个例子网站 blogdown::serve_site() # 托管网站 blogdown::stop_server() # 停止托管网站 现在，应该看到RStudio项目或当前工作目录下的一系列目录和文件。在解释这些新的目录和文件之前，我们首先介绍一项重要且有用的技术：LiveReload。这意味着当你修改并保存网站的任何源文件时，你的网站将自动重建并重新载入你的浏览器.</description>
+    </item>
+    
+  </channel>
+</rss>

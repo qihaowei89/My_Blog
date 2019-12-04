@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shiny-server on Example YinYong Blog</title>
+    <link>/cn/tags/shiny-server/</link>
+    <description>Recent content in shiny-server on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/shiny-server/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>部署Shiny应用程序</title>
+      <link>/cn/posts/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Fri, 14 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/%E9%83%A8%E7%BD%B2shiny%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</guid>
+      <description>当你构建完成一个shiny应用程序后，可以将其部署到本地，或者到web。
+部署shiny应用到本地 一旦你编写了Shiny应用程序，你就可以把它分发给其他人，让他们在自己的电脑上运行——他们可以用一个R命令下载和运行Shiny应用程序。
+Gist
+将代码放到gist(GitHub提供的代码粘贴服务).一个例子https://gist.github.com/jcheng5/3239667
+下载使用这个shiny app需要先安装R和Shiny包，然后只需输入以下命令运行应用程序：
+shiny::runGist(&amp;#39;3239667&amp;#39;) 根据自己app对应的gist’s ID 来替换3239667，或者可以使用完整链接e.g.&#39;https://gist.github.com/jcheng5/3239667&#39;
+GitHub仓库
+如果您的项目存储在GitHub上的git存储库中，其他人可以直接下载并运行应用程序。一个示例https://github.com/rstudio/shiny_example。以下命令将下载并运行应用程序：
+shiny::runGitHub(&amp;#39;shiny_example&amp;#39;, &amp;#39;rstudio&amp;#39;) 在这个示例中，GitHub帐户是“rstudio”，存储库是“shiny_example”；您需要用帐户和存储库名称替换它们。
+Zip压缩文件，通过web传送
+如果将项目的zip或tar文件存储在Web或FTP服务器上，用户可以下载并使用如下命令运行该项目：
+runUrl(&amp;#39;https://github.com/rstudio/shiny_example/archive/master.zip&amp;#39;) Zip压缩文件，通过复制
+复制，解压缩文件后通过命令shiny::runApp运行程序，
+封装成R软件包
+如果您的Shiny应用程序对更广泛的受众有用，那么将其转换成R包可能是值得的。将Shiny应用程序目录放在包的inst目录下，然后通过以下代码内容的函数来创建包：
+shiny::runApp(system.file(&amp;#39;appdir&amp;#39;, package=&amp;#39;packagename&amp;#39;)) 其中appdir是inst中应用程序的子目录的名称，packagename是包的名称。
+ 部署shiny应用到网络 Shinyapps.io(可以免费部署5个程序)
+Shinyapps.io是用于托管Shiny web应用程序的平台，下面将展示如何创建一个shinyapps.io帐户并将第一个应用程序部署到云中。
+安装rsconnect
+通过rsconnect包将应用程序部署到shinyapps.io服务。rsconnect包现在托管在CRAN上。可以通过运行R命令来安装它：
+install.packages(&amp;#39;rsconnect&amp;#39;) library(rsconnect) 创建一个shinyapps.io账户
+链接
+配置rsconnect
+一旦在shinyapps.io中设置了帐户，就可以配置rsconnect包以使用您的帐户。shinyapps.io自动为您生成一个令牌和密码,rsconnect包可以使用该令牌和密码来访问您的帐户。令牌在Shiyapps仪表板右上角菜单中的Tokens下。
+复制rsconnect::setAccountInfo函数到RStudio命令行运行。
+A Demo app
+install.packages(c(&amp;#39;ggplot2&amp;#39;,&amp;#39;shiny&amp;#39;)) library(shiny) library(ggplot2) dataset &amp;lt;- diamonds ui &amp;lt;- fluidPage( titlePanel(&amp;quot;Diamonds Explorer&amp;quot;), sidebarPanel( sliderInput(&amp;#39;sampleSize&amp;#39;, &amp;#39;Sample Size&amp;#39;, min=1, max=nrow(dataset), value=min(1000, nrow(dataset)), step=500, round=0), selectInput(&amp;#39;x&amp;#39;, &amp;#39;X&amp;#39;, names(dataset)), selectInput(&amp;#39;y&amp;#39;, &amp;#39;Y&amp;#39;, names(dataset), names(dataset)[[2]]), selectInput(&amp;#39;color&amp;#39;, &amp;#39;Color&amp;#39;, c(&amp;#39;None&amp;#39;, names(dataset))), checkboxInput(&amp;#39;jitter&amp;#39;, &amp;#39;Jitter&amp;#39;), checkboxInput(&amp;#39;smooth&amp;#39;, &amp;#39;Smooth&amp;#39;), selectInput(&amp;#39;facet_row&amp;#39;, &amp;#39;Facet Row&amp;#39;, c(None=&amp;#39;.</description>
+    </item>
+    
+    <item>
+      <title>Shiny Server 专业V1.5.10管理员指南</title>
+      <link>/cn/posts/2018-11-23-r-rmarkdown/</link>
+      <pubDate>Fri, 23 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/2018-11-23-r-rmarkdown/</guid>
+      <description>Shiny Server 专业V1.5.10管理员指南 Shiny Server使用户可以在互联网上搭建和管理Shiny app。
+1.1 系统需求： RedHat or Ubuntu
+ 1.2 安装: 1.2.1 Ubuntu 安装 R
+sudo apt-get install r-base  安装 shiny-server
+sudo apt-get install gdebi-core sudo gdebi shiny-server-&amp;lt;version&amp;gt;.deb  1.2.2 RedHat ## R sudo yum install R ## shiny-server sudo yum install --nogpgcheck shiny-server-&amp;lt;version&amp;gt;.rpm   1.2.3 Install Shiny 安装Shiny-server之前需要在系统中安装shiny包，需要使用sudo在管理员权限下安装。
+ ### Install The Shiny Package sudo su - -c &amp;quot;R -e \&amp;quot;install.packages(&amp;#39;shiny&amp;#39;,repos=&amp;#39;https://cran.rstudio.com/&amp;#39;)\&amp;quot;&amp;quot;   1.</description>
+    </item>
+    
+  </channel>
+</rss>

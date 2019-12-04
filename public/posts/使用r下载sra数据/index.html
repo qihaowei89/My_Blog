@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/posts/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/" />
+  <link rel="canonical" href="../../posts/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "posts",
+      "name" : "使用R下载SRA数据",
+      "headline" : "使用R下载SRA数据",
+      "description" : "library(SRAdb) setwd(\x26quot;\/home\/wqh\/sra_download\/SRR6660814\x26quot;) sra_dbname \x26lt;- \x26quot;..\/SRAmetadb.sqlite\x26quot; sra_con \x26lt;- dbConnect(dbDriver(\x26quot;SQLite\x26quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(\x26quot;SRR6660815\x26quot;), sra_con, fileType=\x26#39;fastq\x26#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD \x26lt;- \x26#39;\/home\/wqh\/.aspera\/connect\/bin\/ascp -QT -l 300m -P 33001 -i \/home\/wqh\/.",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-12-26 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2018-12-26 00:00:00 \x2b0000 UTC",
+      "url" : "\/posts\/%E4%BD%BF%E7%94%A8r%E4%B8%8B%E8%BD%BDsra%E6%95%B0%E6%8D%AE\/",
+      "keywords" : [ "data download", ]
+  }
+</script>
+<title>使用R下载SRA数据 - Qihao&#39; Blog</title>
+  <meta property="og:title" content="使用R下载SRA数据 - Qihao&#39; Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content="library(SRAdb) setwd(&quot;/home/wqh/sra_download/SRR6660814&quot;) sra_dbname &lt;- &quot;../SRAmetadb.sqlite&quot; sra_con &lt;- dbConnect(dbDriver(&quot;SQLite&quot;), sra_dbname) # For Failed to open TCP Connection # iptables -I INPUT -p tcp --dport 33001 -j ACCEPT # iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT ## Download sra files from NCBI SRA using ftp protocol: getSRAfile( c(&quot;SRR6660815&quot;), sra_con, fileType=&#39;fastq&#39;) ## Download fastq files from EBI ftp siteusing fasp protocol: ascpCMD &lt;- &#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m -P 33001 -i /home/wqh/." />
+
+  <link rel="stylesheet" href="../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../css/index.css">
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Qihao&#39; Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post 中文版" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  <div class="lang-switch col-xs-3 col-xs-offset-9">
+    <a href="../../en/">English</a>
+  </div>
+  
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">使用R下载SRA数据</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2018-12-26 00:00:00 UTC">
+                26 Dec 2018
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="../../">@Qihao Wei</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<pre class="r"><code>library(SRAdb)
+setwd(&quot;/home/wqh/sra_download/SRR6660814&quot;)
+sra_dbname &lt;- &quot;../SRAmetadb.sqlite&quot;
+sra_con &lt;- dbConnect(dbDriver(&quot;SQLite&quot;), sra_dbname)
+
+# For Failed to open TCP Connection
+# iptables -I INPUT -p tcp --dport 33001 -j ACCEPT
+# iptables -I OUTPUT -p tcp --dport 33001 -j ACCEPT
+
+
+## Download sra files from NCBI SRA using ftp protocol:
+getSRAfile( c(&quot;SRR6660815&quot;), sra_con, fileType=&#39;fastq&#39;)
+
+
+## Download fastq files from EBI  ftp siteusing fasp protocol:
+ascpCMD &lt;-  &#39;/home/wqh/.aspera/connect/bin/ascp -QT -l 300m  -P 33001 -i /home/wqh/.aspera/connect/etc/asperaweb_id_dsa.openssh&#39;
+s1 &lt;- Sys.time()
+getSRAfile(c(&quot;SRR6660814&quot;), sra_con = sra_con, fileType = &quot;fastq&quot;, srcType = &quot;fasp&quot;,ascpCMD = ascpCMD )
+s2 &lt;- Sys.time()
+
+
+
+## Start IGV from R if no IGV running
+## Not run: startIGV(memory=&#39;mm&#39;)
+
+## load BAM files to IGV
+## Not run: 
+exampleBams = file.path(system.file(&#39;extdata&#39;,package=&#39;SRAdb&#39;), dir(system.file(&#39;extdata&#39;,package=&#39;SRAdb&#39;),pattern=&#39;bam$&#39;))
+sock &lt;- IGVsocket()
+IGVload(sock,exampleBams)
+
+
+## End(Not run)
+## Change the IGV genome
+## Not run: 
+IGVgenome(sock,genome=&#39;hg18&#39;)
+
+## End(Not run)
+## Go to a specified region in IGV
+## Not run: 
+IGVgoto(sock,&#39;chr1:1-10000&#39;)
+IGVgoto(sock,&#39;TP53&#39;)
+
+## End(Not run)
+
+## Make a snapshot of the current IGV window
+## Not run:   
+IGVsnapshot(sock)
+dir()
+
+## End(Not run)
+
+
+## create a graphNEL object from SRA accessions, which are full text search results of terms &#39;primary thyroid cell line&#39;
+g &lt;- sraGraph(&#39;primary thyroid cell line&#39;, sra_con)
+
+## Not run: 
+library(Rgraphviz)
+attrs &lt;- getDefaultAttrs(list(node=list(fillcolor=&#39;lightblue&#39;, shape=&#39;ellipse&#39;)))
+plot(g, attrs=attrs)
+
+## End(Not run)
+
+dbDisconnect(sra_con) 
+
+} else {
+  print(&quot;use getSRAdbFile() to get a copy of the SRAmetadb.sqlite file
+and then rerun the example&quot;)
+}</code></pre>
+
+        </div>
+        
+
+        
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://github.com/qihaowei89/My_Blog" target="_blank">GitHub</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="../../" target="_blank">HomePage</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

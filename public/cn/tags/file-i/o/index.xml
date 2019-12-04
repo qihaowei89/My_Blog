@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>file I/O on Example YinYong Blog</title>
+    <link>/cn/tags/file-i/o/</link>
+    <description>Recent content in file I/O on Example YinYong Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Dec 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/cn/tags/file-i/o/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>R中文件读写函数</title>
+      <link>/cn/posts/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/cn/posts/r%E4%B8%AD%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%87%BD%E6%95%B0/</guid>
+      <description>示例数据1 (50 MB)
+require(data.table) # Demo speed-up n = 1e6 DT = data.table( a=sample(1:1000,n,replace=TRUE), b=sample(1:1000,n,replace=TRUE), c=rnorm(n), d=sample(c(&amp;quot;foo&amp;quot;,&amp;quot;bar&amp;quot;,&amp;quot;baz&amp;quot;,&amp;quot;qux&amp;quot;,&amp;quot;quux&amp;quot;),n,replace=TRUE), e=rnorm(n), f=sample(1:1000,n,replace=TRUE) ) DT[2,b:=NA_integer_] DT[4,c:=NA_real_] DT[3,d:=NA_character_] DT[5,d:=&amp;quot;&amp;quot;] DT[2,e:=+Inf] DT[3,e:=-Inf] system.time(write.table(DT,&amp;quot;test.csv&amp;quot;,sep=&amp;quot;,&amp;quot;,row.names=FALSE,quote=FALSE)) cat(&amp;quot;File size (MB):&amp;quot;, round(file.info(&amp;quot;test.csv&amp;quot;)$size/1024^2),&amp;quot;\n&amp;quot;) # 50 MB (1e6 rows x 6 columns) 使用read.csv读入
+# 第一次读入 system.time(DF1 &amp;lt;- read.csv(&amp;quot;test.csv&amp;quot;,stringsAsFactors=FALSE)) # 5.8 sec (first time in fresh R session) # 第二次读入 system.time(DF1 &amp;lt;- read.csv(&amp;quot;test.csv&amp;quot;,stringsAsFactors=FALSE)) # 3.5 sec (immediate repeat is faster, varies) 使用read.table读入
+system.time(DF2 &amp;lt;- read.</description>
+    </item>
+    
+  </channel>
+</rss>
