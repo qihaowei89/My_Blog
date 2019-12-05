@@ -1,0 +1,84 @@
+---
+title: R实用函数备忘录
+author: ''
+date: '2018-12-20'
+slug: r实用函数备忘录
+categories:
+  - R
+tags:
+  - functions
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+within(SQLDF,{b<-as.integer(b);c<-as.numeric(c)})
+
+
+ip <- installed.packages()
+pkgs.to.remove <- ip[!(ip[,"Priority"] %in% c("base", "recommended")), 1]
+sapply(pkgs.to.remove, remove.packages)
+
+# vcR是一个旨在帮助可视化、操作和质量过滤vcf文件中的数据的包,被设计用于处理单个染色体或者supercontig or contig
+https://cran.r-project.org/web/packages/vcfR/vignettes/intro_to_vcfR.html
+
+pkg <- "pinfsc50"
+vcf_file <- system.file("extdata", "pinf_sc50.vcf", package = pkg)
+dna_file <- system.file("extdata", "pinf_sc50.fasta", package = pkg)
+gff_file <- system.file("extdata", "pinf_sc50.gff", package = pkg)
+library(vcfR)
+vcf <- read.vcfR( vcf_file, verbose = FALSE )
+
+# 基因组参考序列文件通常是fasta格式的文件。这些可以使用包ape读取。
+dna <- ape::read.dna(dna_file, format = "fasta")
+
+# 注释文件（我们目前支持gff），包含注释坐标（如基因的起点和终点）的文件是表格文件，可以用典型的r函数读取。
+gff <- read.table(gff_file, sep="\t", quote="")
+
+# 创建 a chromR 对象
+chrom <- create.chromR(name='Supercontig', vcf=vcf, seq=dna, ann=gff)
+
+# 将vcf转换成chromR 对象
+vcfR2chromR()
+# 将seq转换成chromR 对象
+seq2chromR()
+# 将gtf转换成chromR 对象
+ann2chromR()
+
+plot(chrom)
+# read depth (DP) 在这里我们看到一个峰，它可能代表基倍体区域，但我们也看到一个长尾巴，它可能代表CNV。
+# mapping qualities (MQ) 集中在60左右，如果需要设置参数过滤，可考虑这个阈值
+#  qualities (QUAL) 质量（qual）的解释似乎不那么简单,不是一个理想的过滤参数
+# No SNP densities  接下来使用 proc_chromR() 分析生成
+
+# 请注意，由不同变体调用软件创建的VCF数据可能具有或不具有这些字段，或者它们的范围可能不同。例如，这里的映射质量峰值为60。其他软件可以创建映射质量峰值为20或其他值的文件。这就是为什么可视化数据分布是很重要的，这样您就可以了解数据的属性。
+
+#我们可以使用masker()函数来尝试过滤掉我们不信任的数据。
+chrom <- masker(chrom, min_QUAL = 1, min_DP = 300, max_DP = 700, min_MQ = 59.9,  max_MQ = 60.1)
+plot(chrom)
+# 过滤后的数据可以使用proc.chromR()函数调用多个函数来处理变量、序列和注释数据以实现可视化
+proc.chromR()
+
+# regex.win() 得到序列（a、c、g和t）出现的位置以及不明确核苷酸出现的位置（n）的矩形
+# 函数var.win（）对数据执行窗口分析。目前，它总结了每个窗口的变量计数以及每个窗口的G/C内容。
+chrom <- proc.chromR(chrom, verbose=TRUE)
+plot(chrom)
+
+# 数据可视化 
+#函数chromoqc()使用r函数layout()生成数据的组合图。这些图可以包括条形图和具有染色体坐标的散点图。
+
+chromoqc(chrom, dp.alpha=20)
+# 我们还可以使用xlim参数放大感兴趣的区间
+chromoqc(chrom, xlim=c(5e+05, 6e+05))
+
+# 文件输出
+#可以使用函数write.vcf()来完成被确定为具有足够质量的变量的过滤和输出。此函数接受一个VCFR对象，并可以选择使用在前面步骤中创建的掩码将其子集，然后将其输出到（gzip）VCF文件
+
+# 将vcfr和chromr转换为其他r包中支持的对象包含在vignette“转换数据”中。 
+# https://cran.r-project.org/web/packages/vcfR/vignettes/converting_data.html
+```
+
+

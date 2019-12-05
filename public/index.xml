@@ -6,10 +6,25 @@
     <description>Recent content on Qihao&#39; Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WIN10下linux子系统图形界面显示</title>
+      <link>/posts/2019-12-4-win10%E4%B8%8Blinux%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2019-12-4-win10%E4%B8%8Blinux%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA/</guid>
+      <description> 问题 在WIN10自带Linux子系统中运行Cytoscape等需要JAVA支持的有图形界面的软件时，系统会自动调取X11服务，但是在WIN10的bash中没有这个服务，所以在运行的时候会报错：
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.   解决  下载并安装WIN版的Xming
+ 进入WIN10的bash子系统中的命令行
+ 安装图形化驱动：sudo apt-get install x11-apps
+ 在程序前添加DISPLAY=:0,比如DISPLAY=:0 python plot_demo.py,或者将export DISPLAY=:0添加到~/.bashrc中   扩展: 在WIN10的linux的子系统中运行图形界面  安装GIMP,sudo apt-get install gimp
+ 安装xfce4,sudo apt-get install xfce4
+ 安装xubuntu桌面,sudo apt-get install xubuntu-desktop   </description>
+    </item>
     
     <item>
       <title>公共数据资源和Bioconductor</title>
@@ -487,6 +502,37 @@ blogdown::new_site() # 生成一个例子网站 blogdown::serve_site() # 托管�
 sudo apt-get install r-base  安装 shiny-server
 sudo apt-get install gdebi-core sudo gdebi shiny-server-&amp;lt;version&amp;gt;.deb  1.2.2 RedHat ## R sudo yum install R ## shiny-server sudo yum install --nogpgcheck shiny-server-&amp;lt;version&amp;gt;.rpm   1.2.3 Install Shiny 安装Shiny-server之前需要在系统中安装shiny包，需要使用sudo在管理员权限下安装。
  ### Install The Shiny Package sudo su - -c &amp;quot;R -e \&amp;quot;install.packages(&amp;#39;shiny&amp;#39;,repos=&amp;#39;https://cran.rstudio.com/&amp;#39;)\&amp;quot;&amp;quot;   1.</description>
+    </item>
+    
+    <item>
+      <title>Compiling Custom CSS</title>
+      <link>/tutorial/custom-css/</link>
+      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/custom-css/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet molestie mauris nec tempor. Sed non lacus massa. Aliquam ut convallis velit. Etiam dictum mollis mi, a vestibulum ex suscipit ut. Proin viverra lacinia urna at interdum. Sed eu quam sit amet metus fermentum pharetra id a sem. Pellentesque lorem dolor, venenatis sed felis non, fringilla ornare felis. Donec nisi lorem, dignissim id interdum vel, cursus malesuada quam. Integer tempus consectetur tellus, nec sagittis est mattis vel.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started With hugo-geo</title>
+      <link>/tutorial/getting-started/</link>
+      <pubDate>Fri, 04 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/getting-started/</guid>
+      <description>&lt;p&gt;Setting up and configuring hugo-geo is as simple as changing a few values in your site &lt;code&gt;config.toml&lt;/code&gt;. Lets look at this example site&#39;s config and go over what
+each of hugo-geo&#39;s site &lt;code&gt;[params]&lt;/code&gt; do.&lt;/p&gt;
+&lt;p&gt;If this guide doesn&#39;t answer your question it may be covered in the &lt;a href=&#34;http://gohugo.io/overview/configuration/&#34;&gt;Hugo documentation&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>About Hugo</title>
+      <link>/about/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Hugo is the world’s fastest framework for building websites. It is written in Go.
+It makes use of a variety of open source projects including:
+ https://github.com/russross/blackfriday https://github.com/alecthomas/chroma https://github.com/muesli/smartcrop https://github.com/spf13/cobra https://github.com/spf13/viper  Learn more and contribute on GitHub.</description>
     </item>
     
   </channel>

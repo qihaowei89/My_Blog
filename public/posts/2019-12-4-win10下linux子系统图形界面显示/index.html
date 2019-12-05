@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/posts/2019-12-4-win10%E4%B8%8Blinux%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA/" />
+  <link rel="canonical" href="../../posts/2019-12-4-win10%E4%B8%8Blinux%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "posts",
+      "name" : "WIN10下linux子系统图形界面显示",
+      "headline" : "WIN10下linux子系统图形界面显示",
+      "description" : " 问题 在WIN10自带Linux子系统中运行Cytoscape等需要JAVA支持的有图形界面的软件时，系统会自动调取X11服务，但是在WIN10的bash中没有这个服务，所以在运行的时候会报错：\nNo X11 DISPLAY variable was set, but this program performed an operation which requires it.   解决  下载并安装WIN版的Xming\n 进入WIN10的bash子系统中的命令行\n 安装图形化驱动：sudo apt-get install x11-apps\n 在程序前添加DISPLAY=:0,比如DISPLAY=:0 python plot_demo.py,或者将export DISPLAY=:0添加到~\/.bashrc中   扩展: 在WIN10的linux的子系统中运行图形界面  安装GIMP,sudo apt-get install gimp\n 安装xfce4,sudo apt-get install xfce4\n 安装xubuntu桌面,sudo apt-get install xubuntu-desktop   ",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-12-04 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-12-04 00:00:00 \x2b0000 UTC",
+      "url" : "\/posts\/2019-12-4-win10%E4%B8%8Blinux%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA\/",
+      "keywords" : [ "Linu","WIN10","bash", ]
+  }
+</script>
+<title>WIN10下linux子系统图形界面显示 - Qihao&#39; Blog</title>
+  <meta property="og:title" content="WIN10下linux子系统图形界面显示 - Qihao&#39; Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content=" 问题 在WIN10自带Linux子系统中运行Cytoscape等需要JAVA支持的有图形界面的软件时，系统会自动调取X11服务，但是在WIN10的bash中没有这个服务，所以在运行的时候会报错：
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.   解决  下载并安装WIN版的Xming
+ 进入WIN10的bash子系统中的命令行
+ 安装图形化驱动：sudo apt-get install x11-apps
+ 在程序前添加DISPLAY=:0,比如DISPLAY=:0 python plot_demo.py,或者将export DISPLAY=:0添加到~/.bashrc中   扩展: 在WIN10的linux的子系统中运行图形界面  安装GIMP,sudo apt-get install gimp
+ 安装xfce4,sudo apt-get install xfce4
+ 安装xubuntu桌面,sudo apt-get install xubuntu-desktop   " />
+
+  <link rel="stylesheet" href="../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../css/index.css">
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Qihao&#39; Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post 中文版" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">WIN10下linux子系统图形界面显示</h1>
+          
+          <div class="row post-desc">
+            <div class="col-xs-6">
+              
+              <time class="post-date" datetime="2019-12-04 00:00:00 UTC">
+                04 Dec 2019
+              </time>
+              
+            </div>
+            <div class="col-xs-6">
+              
+              <div class="post-author">
+                <a target="_blank" href="../../">@Qihao Wei</a>
+              </div>
+              
+            </div>
+          </div>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<div id="问题" class="section level2">
+<h2>问题</h2>
+<p>在WIN10自带Linux子系统中运行Cytoscape等需要JAVA支持的有图形界面的软件时，系统会自动调取X11服务，但是在WIN10的bash中没有这个服务，所以在运行的时候会报错：</p>
+<pre><code>No X11 DISPLAY variable was set, but this program performed an operation which requires it. </code></pre>
+</div>
+<div id="解决" class="section level2">
+<h2>解决</h2>
+<ul>
+<li>下载并安装WIN版的Xming<br />
+</li>
+<li>进入WIN10的bash子系统中的命令行<br />
+</li>
+<li>安装图形化驱动：<code>sudo apt-get install x11-apps</code><br />
+</li>
+<li>在程序前添加<code>DISPLAY=:0</code>,比如<code>DISPLAY=:0 python plot_demo.py</code>,或者将<code>export DISPLAY=:0</code>添加到<code>~/.bashrc</code>中</li>
+</ul>
+</div>
+<div id="扩展-在win10的linux的子系统中运行图形界面" class="section level2">
+<h2>扩展: 在WIN10的linux的子系统中运行图形界面</h2>
+<ul>
+<li>安装GIMP,<code>sudo apt-get install gimp</code><br />
+</li>
+<li>安装xfce4,<code>sudo apt-get install xfce4</code><br />
+</li>
+<li>安装xubuntu桌面,<code>sudo apt-get install xubuntu-desktop</code></li>
+</ul>
+</div>
+
+        </div>
+        
+
+        
+
+
+        
+        
+        <div style="height: 50px;"></div>
+        
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://github.com/qihaowei89/My_Blog" target="_blank">GitHub</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="../../" target="_blank">HomePage</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bash on Qihao&#39; Blog</title>
+    <link>/tags/bash/</link>
+    <description>Recent content in bash on Qihao&#39; Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>WIN10下linux子系统图形界面显示</title>
+      <link>/posts/2019-12-4-win10%E4%B8%8Blinux%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2019-12-4-win10%E4%B8%8Blinux%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E6%98%BE%E7%A4%BA/</guid>
+      <description> 问题 在WIN10自带Linux子系统中运行Cytoscape等需要JAVA支持的有图形界面的软件时，系统会自动调取X11服务，但是在WIN10的bash中没有这个服务，所以在运行的时候会报错：
+No X11 DISPLAY variable was set, but this program performed an operation which requires it.   解决  下载并安装WIN版的Xming
+ 进入WIN10的bash子系统中的命令行
+ 安装图形化驱动：sudo apt-get install x11-apps
+ 在程序前添加DISPLAY=:0,比如DISPLAY=:0 python plot_demo.py,或者将export DISPLAY=:0添加到~/.bashrc中   扩展: 在WIN10的linux的子系统中运行图形界面  安装GIMP,sudo apt-get install gimp
+ 安装xfce4,sudo apt-get install xfce4
+ 安装xubuntu桌面,sudo apt-get install xubuntu-desktop   </description>
+    </item>
+    
+  </channel>
+</rss>

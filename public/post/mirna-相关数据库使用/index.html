@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/post/mirna-%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8/" />
+  <link rel="canonical" href="../../post/mirna-%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "post",
+      "name" : "miRNA 相关数据库使用",
+      "headline" : "miRNA 相关数据库使用",
+      "description" : " 已知miRNA预测其靶向作用的mRNA  1 数据库starBase  2 数据库targetScan get_miR_targetscan_DB\n 3 数据库mirDIP  4 数据库miRDB get_miR_miRDB_DB\n 已知mRNA预测其靶向作用的miRNA  1 数据库starBase  2 数据库targetScan  3 数据库mirDIP  4 数据库miRDB get_miR_miRDB_DB(待完善)\n miRNA表达情况  1 miRCancer数据库 miRCancerDB = data.table::fread(\x26quot;http:\/\/mircancer.ecu.edu\/downloads\/miRCancer18February2019.txt\x26quot;) save(miRCancerDB,file = \x26quot;\/mnt\/hgfs\/E\/工作\/miRNADB\/miRCancerDB_mmu_hsa.RData\x26quot;)  2 dbDEMC2.0数据库 dbDEMC_h = data.table::fread(\x26quot;http:\/\/www.picb.ac.cn\/dbDEMC\/download\/miRExpAll.txt\x26quot;) save(dbDEMC_h,file = \x26quot;\/mnt\/hgfs\/E\/工作\/miRNADB\/dbDEMC_hsa_high_throughput.RData\x26quot;) dbDEMC_l = data.table::fread(\x26quot;http:\/\/www.picb.ac.cn\/dbDEMC\/download\/validation.txt\x26quot;) save(dbDEMC_l,file = \x26quot;\/mnt\/hgfs\/E\/工作\/miRNADB\/dbDEMC_hsa_low_throughput.RData\x26quot;) dbDEMC_DBList = data.table::fread(\x26quot;http:\/\/www.picb.ac.cn\/dbDEMC\/download\/datasets.txt\x26quot;) save(dbDEMC_DBList,file = \x26quot;\/mnt\/hgfs\/E\/工作\/miRNADB\/dbDEMC_datasets_include.RData\x26quot;)  ",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-07-19 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-07-19 00:00:00 \x2b0000 UTC",
+      "url" : "\/post\/mirna-%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>miRNA 相关数据库使用 - Qihao&#39; Blog</title>
+  <meta property="og:title" content="miRNA 相关数据库使用 - Qihao&#39; Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content=" 已知miRNA预测其靶向作用的mRNA  1 数据库starBase  2 数据库targetScan get_miR_targetscan_DB
+ 3 数据库mirDIP  4 数据库miRDB get_miR_miRDB_DB
+ 已知mRNA预测其靶向作用的miRNA  1 数据库starBase  2 数据库targetScan  3 数据库mirDIP  4 数据库miRDB get_miR_miRDB_DB(待完善)
+ miRNA表达情况  1 miRCancer数据库 miRCancerDB = data.table::fread(&quot;http://mircancer.ecu.edu/downloads/miRCancer18February2019.txt&quot;) save(miRCancerDB,file = &quot;/mnt/hgfs/E/工作/miRNADB/miRCancerDB_mmu_hsa.RData&quot;)  2 dbDEMC2.0数据库 dbDEMC_h = data.table::fread(&quot;http://www.picb.ac.cn/dbDEMC/download/miRExpAll.txt&quot;) save(dbDEMC_h,file = &quot;/mnt/hgfs/E/工作/miRNADB/dbDEMC_hsa_high_throughput.RData&quot;) dbDEMC_l = data.table::fread(&quot;http://www.picb.ac.cn/dbDEMC/download/validation.txt&quot;) save(dbDEMC_l,file = &quot;/mnt/hgfs/E/工作/miRNADB/dbDEMC_hsa_low_throughput.RData&quot;) dbDEMC_DBList = data.table::fread(&quot;http://www.picb.ac.cn/dbDEMC/download/datasets.txt&quot;) save(dbDEMC_DBList,file = &quot;/mnt/hgfs/E/工作/miRNADB/dbDEMC_datasets_include.RData&quot;)  " />
+
+  <link rel="stylesheet" href="../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../css/index.css">
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Qihao&#39; Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post 中文版" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">miRNA 相关数据库使用</h1>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<div id="已知mirna预测其靶向作用的mrna" class="section level2">
+<h2>已知<strong>miRNA</strong>预测其靶向作用的mRNA</h2>
+</div>
+<div id="数据库starbase" class="section level2">
+<h2>1 数据库<a href="http://starbase.sysu.edu.cn/starbase2/targetSite.php">starBase</a></h2>
+</div>
+<div id="数据库targetscan" class="section level2">
+<h2>2 数据库<a href="http://www.targetscan.org/vert_71/">targetScan</a></h2>
+<p><code>get_miR_targetscan_DB</code></p>
+</div>
+<div id="数据库mirdip" class="section level2">
+<h2>3 数据库<a href="http://ophid.utoronto.ca/mirDIP/">mirDIP</a></h2>
+</div>
+<div id="数据库mirdb" class="section level2">
+<h2>4 数据库<a href="http://mirdb.org/">miRDB</a></h2>
+<p><code>get_miR_miRDB_DB</code></p>
+</div>
+<div id="已知mrna预测其靶向作用的mirna" class="section level2">
+<h2>已知<strong>mRNA</strong>预测其靶向作用的miRNA</h2>
+</div>
+<div id="数据库starbase-1" class="section level2">
+<h2>1 数据库<a href="http://starbase.sysu.edu.cn/starbase2/targetSite.php">starBase</a></h2>
+</div>
+<div id="数据库targetscan-1" class="section level2">
+<h2>2 数据库<a href="http://www.targetscan.org/vert_71/">targetScan</a></h2>
+</div>
+<div id="数据库mirdip-1" class="section level2">
+<h2>3 数据库<a href="http://ophid.utoronto.ca/mirDIP/">mirDIP</a></h2>
+</div>
+<div id="数据库mirdb-1" class="section level2">
+<h2>4 数据库<a href="http://mirdb.org/">miRDB</a></h2>
+<p><code>get_miR_miRDB_DB</code>(待完善)</p>
+</div>
+<div id="mirna表达情况" class="section level2">
+<h2>miRNA表达情况</h2>
+</div>
+<div id="mircancer数据库" class="section level2">
+<h2>1 <a href="http://mircancer.ecu.edu/search.jsp">miRCancer数据库</a></h2>
+<pre class="r"><code>miRCancerDB = data.table::fread(&quot;http://mircancer.ecu.edu/downloads/miRCancer18February2019.txt&quot;)
+save(miRCancerDB,file = &quot;/mnt/hgfs/E/工作/miRNADB/miRCancerDB_mmu_hsa.RData&quot;)</code></pre>
+</div>
+<div id="dbdemc2.0数据库" class="section level2">
+<h2>2 <a href="http://www.picb.ac.cn/dbDEMC/search.html">dbDEMC2.0数据库</a></h2>
+<pre class="r"><code>dbDEMC_h = data.table::fread(&quot;http://www.picb.ac.cn/dbDEMC/download/miRExpAll.txt&quot;)
+save(dbDEMC_h,file = &quot;/mnt/hgfs/E/工作/miRNADB/dbDEMC_hsa_high_throughput.RData&quot;)
+
+dbDEMC_l = data.table::fread(&quot;http://www.picb.ac.cn/dbDEMC/download/validation.txt&quot;)
+save(dbDEMC_l,file = &quot;/mnt/hgfs/E/工作/miRNADB/dbDEMC_hsa_low_throughput.RData&quot;)
+
+dbDEMC_DBList = data.table::fread(&quot;http://www.picb.ac.cn/dbDEMC/download/datasets.txt&quot;)
+save(dbDEMC_DBList,file = &quot;/mnt/hgfs/E/工作/miRNADB/dbDEMC_datasets_include.RData&quot;)</code></pre>
+</div>
+
+        </div>
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://github.com/qihaowei89/My_Blog" target="_blank">GitHub</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="../../" target="_blank">HomePage</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

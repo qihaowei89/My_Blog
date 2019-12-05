@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/" />
+  <link rel="canonical" href="../../post/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "post",
+      "name" : "R网页爬虫",
+      "headline" : "R网页爬虫",
+      "description" : "常见的网页分为静态页面和AJAX增强的动态网页\n1.静态页面 rvest \x2b xml2 组合\nxml2::read_html(x,encoding =,)：读取静态页面为xml对象\nrvest::html_nodes(x=,css=\/xpath=)：提取xml对象中符合要求的所有节点\ncss选择器语法：html_nodes(pages,css = \x26quot;body#ensembl-webpage div.account_holder\x26quot;)\n其中body为待提取html标签名称,#ensembl-webpage中的#对应ID属性，.account_holder中的.对应class属性, 属性名称间的空格使用.代替（span class=\x26quot;_ht ht，css格式 span._ht.ht）\nxpath选择器语法：可以直接通过浏览器复制（略）\n双斜杠\/\/表示相对路径，允许节点间的“跳转”，例如xpath=\x26quot;\/\/p\/i\x26quot; 通配符(*)能匹配任何单个在对应位置上任意名字的节点，例如xpath=\x26quot;\/html\/body\/div\/*\/i\x26quot;\n操作符.可以在选定的节点集里面选择当前节点(或者自身轴)，在使用谓语时也偶尔有用\n操作符..可以选择当前节点向上一级的节点。例如xpath=\/\/title\/..\n管道操作符|可以指定多个路径，这些路径会被逐个分析并一起返回，例如xpath= \x26quot;\/\/address | \/\/title\x26quot;(另一种方法在XML包中的xpathSApply包中是吧XPath查询保存在向量里queries \x26lt;- c(address=\x26quot;\/\/address\x26quot;,title=\x26quot;\/\/title\x26quot;) , xpath=queries)\nrvest::html_table():获取table标签中的表格 rvest::html_text():获取标签下包含的文本 rvest::html_attrs():获取指定节点中所有属性及对应属性值 rvest::html_children():获取指定节点下的子节点\n以爬取esembl网站上snp信息为例：\npackages \x26lt;- c(\x26quot;xml2\x26quot;,\x26quot;rvest\x26quot;,\x26quot;magrittr\x26quot;) lapply(packages, FUN = function(p) require(p,quietly = T,character.only = T)) # ---------- step1 ---------# url \x26lt;- \x26quot;http:\/\/grch37.ensembl.org\/Homo_sapiens\/Variation\/Explore?db=core;r=9:22125003-22126003;v=rs1333049;vdb=variation;vf=909181\x26quot; # 读取HTML网页到xml_document对象 pages \x26lt;- read_html(url) # 从xml_document对象中选择节点 #ensembl_panel_1 \x26gt; div.content \x26gt; div \x26gt; div \x26gt; div:nth-child(3) \x26gt; div.",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2018",
+      "datePublished": "2018-12-21 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2018-12-21 00:00:00 \x2b0000 UTC",
+      "url" : "\/post\/r%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB\/",
+      "keywords" : [ "Web crawler","data", ]
+  }
+</script>
+<title>R网页爬虫 - Qihao&#39; Blog</title>
+  <meta property="og:title" content="R网页爬虫 - Qihao&#39; Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content="常见的网页分为静态页面和AJAX增强的动态网页
+1.静态页面 rvest &#43; xml2 组合
+xml2::read_html(x,encoding =,)：读取静态页面为xml对象
+rvest::html_nodes(x=,css=/xpath=)：提取xml对象中符合要求的所有节点
+css选择器语法：html_nodes(pages,css = &quot;body#ensembl-webpage div.account_holder&quot;)
+其中body为待提取html标签名称,#ensembl-webpage中的#对应ID属性，.account_holder中的.对应class属性, 属性名称间的空格使用.代替（span class=&quot;_ht ht，css格式 span._ht.ht）
+xpath选择器语法：可以直接通过浏览器复制（略）
+双斜杠//表示相对路径，允许节点间的“跳转”，例如xpath=&quot;//p/i&quot; 通配符(*)能匹配任何单个在对应位置上任意名字的节点，例如xpath=&quot;/html/body/div/*/i&quot;
+操作符.可以在选定的节点集里面选择当前节点(或者自身轴)，在使用谓语时也偶尔有用
+操作符..可以选择当前节点向上一级的节点。例如xpath=//title/..
+管道操作符|可以指定多个路径，这些路径会被逐个分析并一起返回，例如xpath= &quot;//address | //title&quot;(另一种方法在XML包中的xpathSApply包中是吧XPath查询保存在向量里queries &lt;- c(address=&quot;//address&quot;,title=&quot;//title&quot;) , xpath=queries)
+rvest::html_table():获取table标签中的表格 rvest::html_text():获取标签下包含的文本 rvest::html_attrs():获取指定节点中所有属性及对应属性值 rvest::html_children():获取指定节点下的子节点
+以爬取esembl网站上snp信息为例：
+packages &lt;- c(&quot;xml2&quot;,&quot;rvest&quot;,&quot;magrittr&quot;) lapply(packages, FUN = function(p) require(p,quietly = T,character.only = T)) # ---------- step1 ---------# url &lt;- &quot;http://grch37.ensembl.org/Homo_sapiens/Variation/Explore?db=core;r=9:22125003-22126003;v=rs1333049;vdb=variation;vf=909181&quot; # 读取HTML网页到xml_document对象 pages &lt;- read_html(url) # 从xml_document对象中选择节点 #ensembl_panel_1 &gt; div.content &gt; div &gt; div &gt; div:nth-child(3) &gt; div." />
+
+  <link rel="stylesheet" href="../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../css/index.css">
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Qihao&#39; Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post 中文版" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">R网页爬虫</h1>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<p><strong>常见的网页分为静态页面和AJAX增强的动态网页</strong></p>
+<p><strong>1.静态页面 <code>rvest</code> + <code>xml2</code> 组合</strong></p>
+<p><code>xml2::read_html(x,encoding =,)</code>：读取静态页面为<code>xml对象</code><br />
+<code>rvest::html_nodes(x=,css=/xpath=)</code>：提取<code>xml对象</code>中符合要求的所有节点</p>
+<p>css选择器语法：<code>html_nodes(pages,css = &quot;body#ensembl-webpage div.account_holder&quot;)</code><br />
+其中<strong>body</strong>为待提取html标签名称,<strong>#ensembl-webpage</strong>中的<code>#</code>对应<code>ID</code>属性，<strong>.account_holder</strong>中的<code>.</code>对应<code>class</code>属性, 属性名称间的空格使用<code>.</code>代替（<code>span class=&quot;_ht ht</code>，css格式 <code>span._ht.ht</code>）</p>
+<p>xpath选择器语法：可以直接通过浏览器复制（略）<br />
+双斜杠<code>//</code>表示相对路径，允许节点间的“跳转”，例如<code>xpath=&quot;//p/i&quot;</code> 　　　
+通配符(<code>*</code>)能匹配任何单个在对应位置上任意名字的节点，例如<code>xpath=&quot;/html/body/div/*/i&quot;</code><br />
+操作符<code>.</code>可以在选定的节点集里面选择当前节点(或者自身轴)，在使用谓语时也偶尔有用<br />
+操作符<code>..</code>可以选择当前节点向上一级的节点。例如<code>xpath=//title/..</code><br />
+管道操作符<code>|</code>可以指定多个路径，这些路径会被逐个分析并一起返回，例如<code>xpath= &quot;//address | //title&quot;</code>(另一种方法在XML包中的xpathSApply包中是吧XPath查询保存在向量里<code>queries &lt;- c(address=&quot;//address&quot;,title=&quot;//title&quot;)</code> , <code>xpath=queries</code>)<br />
+<img src="../../post/2018-12-21-r网页爬虫_files/捕获.PNG" /></p>
+<p><code>rvest::html_table()</code>:获取<code>table</code>标签中的表格
+<code>rvest::html_text()</code>:获取标签下包含的文本
+<code>rvest::html_attrs()</code>:获取指定节点中所有属性及对应属性值
+<code>rvest::html_children()</code>:获取指定节点下的子节点</p>
+<p>以爬取esembl网站上snp信息为例：</p>
+<pre class="r"><code>packages &lt;- c(&quot;xml2&quot;,&quot;rvest&quot;,&quot;magrittr&quot;)
+lapply(packages, FUN = function(p) require(p,quietly = T,character.only = T))
+# ---------- step1 ---------#
+url &lt;- &quot;http://grch37.ensembl.org/Homo_sapiens/Variation/Explore?db=core;r=9:22125003-22126003;v=rs1333049;vdb=variation;vf=909181&quot;
+# 读取HTML网页到xml_document对象
+pages &lt;- read_html(url)  
+
+# 从xml_document对象中选择节点
+#ensembl_panel_1 &gt; div.content &gt; div &gt; div &gt; div:nth-child(3) &gt; div.rhs &gt; p &gt; span:nth-child(4)
+## 通过css选择
+
+nodes_css   &lt;- html_nodes(pages,css = &quot;body#ensembl-webpage div.rhs&quot;)  %&gt;% html_nodes(css = &quot;span&quot;) %&gt;%  &#39;[&#39;(20) %&gt;% html_text() %&gt;% &#39;[[&#39;(1)
+nodes_xpath &lt;- html_nodes(pages,xpath = &quot;//*[@class=\&quot;rhs\&quot;]/p/span[4]&quot;) %&gt;% html_text()</code></pre>
+<p><strong>2.AJAX动态页面 <code>RSelenium</code> + <code>rvest</code></strong><br />
+<a href="https://rpubs.com/johndharrison/RSelenium-Basics">RSelenium详细介绍</a>　　　
+<a href="%5B利用RSelenium抓取动态页面%5D(https://zhuanlan.zhihu.com/p/24772389)">中文参考</a></p>
+<p>准备：　　　
+- 浏览器驱动(<a href="https://sites.google.com/a/chromium.org/chromedriver/">ChromeDriver</a>)<br />
+- <a href="https://selenium-release.storage.googleapis.com/index.html">Selenium Server</a></p>
+<p>步骤：<br />
+- 命令行输入<code>java -jar /home/wqh/selenium/selenium-server-standalone-3.9.1.jar -port 4322</code>开启selenuim服务<br />
+- 开启RStudio IDE输入：</p>
+<pre class="r"><code>#install.packages(&quot;RSelenium&quot;)
+library(RSelenium)
+library(rvest)
+# 连接selenuim server
+remDr &lt;- remoteDriver(remoteServerAddr = &quot;127.0.0.1&quot;, 
+                      port = 4322, 
+                      browserName = &quot;chrome&quot;)
+# 打开浏览器
+remDr$open()
+url &lt;- &quot;https://cancer.sanger.ac.uk/cosmic/fusion/overview?fid=2&amp;amp;gid=75087&quot;
+
+# 加载网页
+remDr$navigate(url)
+
+# 通过Xpath获取选项位置,模拟鼠标单击
+remDr$findElement(using = &quot;xpath&quot;, xpath)$clickElement()
+
+# 获取需要提取的文本信息
+web_cite &lt;- remDr$findElement(using = &quot;xpath&quot;, click_xpath)$getElementText()[[1]]
+
+# 输入文本信息
+to_search &lt;- remDr$findElement(using = &quot;xpath&quot;,input_xpath)
+to_search$clearElement()
+# 输入文本
+search_enter &lt;- list(&quot;输入内容&quot;,key=&#39;enter&#39;)
+to_search$sendKeysToElement(search_enter) 
+
+# 获取标签属性值，例如“id”
+to_ids &lt;- remDr$findElement(using = &quot;xpath&quot;,&#39;//*[@id=&quot;searchfrm&quot;]/div/table&#39;)
+ids &lt;- to_ids$getElementAttribute(&quot;outerHTML&quot;)[[1]] %&gt;% read_html() %&gt;% html_nodes(&quot;tr a&quot;) %&gt;% html_attr(&quot;id&quot;) %&gt;% unique()</code></pre>
+
+        </div>
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://github.com/qihaowei89/My_Blog" target="_blank">GitHub</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="../../" target="_blank">HomePage</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/post/r-package-install-debug/" />
+  <link rel="canonical" href="../../post/r-package-install-debug/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "post",
+      "name" : "r package install debug",
+      "headline" : "r package install debug",
+      "description" : "  plot(iris)遇到rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err)\n解决：\n  conda install cairo  安装git2r出错  install.packages(\x26#39;git2r\x26#39;, type=\x26#39;source\x26#39;, configure.vars=\x26#39;LIB_DIR=-L\/home\/wqh\/miniconda3\/lib\/ INCLUDE_DIR=-I\/home\/wqh\/miniconda3\/include\/\x26#39;) ",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-05-17 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-05-17 00:00:00 \x2b0000 UTC",
+      "url" : "\/post\/r-package-install-debug\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>r package install debug - Qihao&#39; Blog</title>
+  <meta property="og:title" content="r package install debug - Qihao&#39; Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content="  plot(iris)遇到rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err)
+解决：
+  conda install cairo  安装git2r出错  install.packages(&#39;git2r&#39;, type=&#39;source&#39;, configure.vars=&#39;LIB_DIR=-L/home/wqh/miniconda3/lib/ INCLUDE_DIR=-I/home/wqh/miniconda3/include/&#39;) " />
+
+  <link rel="stylesheet" href="../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../css/index.css">
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Qihao&#39; Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post 中文版" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">r package install debug</h1>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<ul>
+<li><code>plot(iris)</code>遇到<code>rstudio - Error in RStudioGD() : Shadow graphics device error: r error 4 (R code execution err)</code><br />
+解决：<br />
+</li>
+</ul>
+<pre><code>conda install cairo</code></pre>
+<ul>
+<li>安装<code>git2r</code>出错</li>
+</ul>
+<pre class="r"><code>install.packages(&#39;git2r&#39;, type=&#39;source&#39;, configure.vars=&#39;LIB_DIR=-L/home/wqh/miniconda3/lib/ INCLUDE_DIR=-I/home/wqh/miniconda3/include/&#39;)</code></pre>
+
+        </div>
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://github.com/qihaowei89/My_Blog" target="_blank">GitHub</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="../../" target="_blank">HomePage</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

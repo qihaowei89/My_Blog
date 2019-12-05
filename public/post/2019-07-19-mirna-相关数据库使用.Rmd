@@ -1,0 +1,57 @@
+---
+title: miRNA 相关数据库使用
+author: ''
+date: '2019-07-19'
+slug: mirna-相关数据库使用
+categories: []
+tags: []
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+## 已知**miRNA**预测其靶向作用的mRNA   
+## 1 数据库[starBase](http://starbase.sysu.edu.cn/starbase2/targetSite.php)   
+## 2 数据库[targetScan](http://www.targetscan.org/vert_71/)   
+`get_miR_targetscan_DB`
+
+
+## 3 数据库[mirDIP](http://ophid.utoronto.ca/mirDIP/)   
+## 4 数据库[miRDB](http://mirdb.org/)   
+
+`get_miR_miRDB_DB` 
+
+## 已知**mRNA**预测其靶向作用的miRNA   
+## 1 数据库[starBase](http://starbase.sysu.edu.cn/starbase2/targetSite.php)   
+## 2 数据库[targetScan](http://www.targetscan.org/vert_71/)   
+## 3 数据库[mirDIP](http://ophid.utoronto.ca/mirDIP/)   
+## 4 数据库[miRDB](http://mirdb.org/) 
+`get_miR_miRDB_DB`(待完善)
+
+
+
+## miRNA表达情况   
+## 1 [miRCancer数据库](http://mircancer.ecu.edu/search.jsp)      
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+miRCancerDB = data.table::fread("http://mircancer.ecu.edu/downloads/miRCancer18February2019.txt")
+save(miRCancerDB,file = "/mnt/hgfs/E/工作/miRNADB/miRCancerDB_mmu_hsa.RData")
+
+```
+
+## 2 [dbDEMC2.0数据库](http://www.picb.ac.cn/dbDEMC/search.html)
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+dbDEMC_h = data.table::fread("http://www.picb.ac.cn/dbDEMC/download/miRExpAll.txt")
+save(dbDEMC_h,file = "/mnt/hgfs/E/工作/miRNADB/dbDEMC_hsa_high_throughput.RData")
+
+dbDEMC_l = data.table::fread("http://www.picb.ac.cn/dbDEMC/download/validation.txt")
+save(dbDEMC_l,file = "/mnt/hgfs/E/工作/miRNADB/dbDEMC_hsa_low_throughput.RData")
+
+dbDEMC_DBList = data.table::fread("http://www.picb.ac.cn/dbDEMC/download/datasets.txt")
+save(dbDEMC_DBList,file = "/mnt/hgfs/E/工作/miRNADB/dbDEMC_datasets_include.RData")
+```
+
+
+
+
+

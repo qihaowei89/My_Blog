@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Hugo 0.60.1" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Qihao Wei" />
+  <meta property="og:url" content="/post/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/" />
+  <link rel="canonical" href="../../post/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr/" /><script type="application/ld+json">
+  {
+      "@context" : "http://schema.org",
+      "@type" : "BlogPosting",
+      "mainEntityOfPage": {
+           "@type": "WebPage",
+           "@id": "\/"
+      },
+      "articleSection" : "post",
+      "name" : "了解基因组区域-annotatr",
+      "headline" : "了解基因组区域-annotatr",
+      "description" : "1 介绍\n二代测序实验和生物信息学分析pipelines产生的基因组区域在注释基因组特征后更有意义。发生在exon或enhancer中的SNP可能比发生在基因间区域的SNP更受关注。可能有兴趣发现一种特殊的转录因子绝大多数与启动子结合，而另一种主要与3’UTR结合。含有CpG岛的启动子的高甲基化可能表明在一种情况下与另一种情况下不同的调控机制。\n2 安装\nsource(\x26quot;https:\/\/bioconductor.org\/biocLite.R\x26quot;) biocLite(\x26quot;annotatr\x26quot;) 3 注释\n3.1 CpG注释\nCpG岛是所有CpG注释的基础,并且由AnnotationHub包提供个物种的注释数据。\nCpG shores位于CpG岛边界的上游\/下游2kb\nCpG shelves位于CpG shores边界的上游\/下游2kb\n其余的基因组区域构成了inter-CGI。 3.2 基因注释\n使用来自GenomicFeatures的函数和来自TxDb.*和org.*.eg.db包的数据进行基因注释\n注释的区域包含TSS上游1-5Kb区域,启动子区域(\x26lt;1Kb TSS上游),5’UTR区域,第一外显子区域,外显子区域,内含子区域,CDS,3’UTR和内部区域(内部区域不包括前面的注释列表中的区域),下图表示了GenomicFeatures函数中各注释区域间的关系\n基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上\/下游)。需要注意的是，这些边界与基因链有关。\n3.3 FANTOM5 Permissive 增强子\n根据Andersson等人的双向笼式转录定义.并从FANTOM5源下载和处理hg19和mm9。使用rtracklayer::liftOver()函数可以将增强子版本从h19提升到hg38,mm9到mm10.\n3.4 GENCODE lncRNA 转录本\n长非编码RNA(lncRNA)的注释来自GENCODE网站,有hg19,hg38,mm19.目前包含lncRNA的转录本信息,在以后计划包含lncRNA的内含子\/外显子信息.\n3.5 ChromHMM 染色质状态\n由chromHMM(Ernst和Kellis(2012)确定的9个细胞系(Gm12878、H1hesc、Hepg2、Hmec、Hsmm、Huvec、K562、Nhek和Nhlf)染色质状态(hg19)可通过ucsc基因组浏览器轨迹访问.所有状态的注释都可以使用一个快捷方式（如hg19_Gm12878-chromatin）来构建，或者特定的染色质状态可以通过诸如hg19_chromatin_Gm12878-StrongEnhancer或hg19_chromatin_Gm12878-Repressed之类的代码来访问。\n3.6 AnnotationHub注释\nAnnotationHub包是AnnotationHub网页资源的客户端.AnnotationHub Web资源提供了一个中心位置，在那里可以发现基因组文件（如VCF、BED、WIG）和标准位置（如UCSC、ENSEMBL）的其他资源。资源包括每个资源的元数据，例如文本描述、标记和修改日期。客户机创建和管理用户检索到的文件的本地缓存，有助于快速和可复制的访问。\n使用build_ah_annots()函数,可以将任何来源的GRanges对象转换为注释，以便在annotatr中使用。例如,创建一个Gm12878和H1-hesc细胞的H3K4me3 ChIP-seq peaks注释:\n# Create a named vector for the AnnotationHub accession codes with desired names h3k4me3_codes = c(\x26#39;Gm12878\x26#39; = \x26#39;AH23256\x26#39;) # Fetch ah_codes from AnnotationHub and create annotations annotatr understands build_ah_annots(genome = \x26#39;hg19\x26#39;, ah_codes = h3k4me3_codes, annotation_class = \x26#39;H3K4me3\x26#39;) # The annotations as they appear in annotatr_cache ah_names = c(\x26#39;hg19_H3K4me3_Gm12878\x26#39;) print(annotatr_cache$get(\x26#39;hg19_H3K4me3_Gm12878\x26#39;)) 3.",
+      "inLanguage" : "en-US",
+      "author" : "Qihao Wei",
+      "creator" : "Qihao Wei",
+      "publisher": "Qihao Wei",
+      "accountablePerson" : "Qihao Wei",
+      "copyrightHolder" : "Qihao Wei",
+      "copyrightYear" : "2019",
+      "datePublished": "2019-02-20 00:00:00 \x2b0000 UTC",
+      "dateModified" : "2019-02-20 00:00:00 \x2b0000 UTC",
+      "url" : "\/post\/%E4%BA%86%E8%A7%A3%E5%9F%BA%E5%9B%A0%E7%BB%84%E5%8C%BA%E5%9F%9F-annotatr\/",
+      "keywords" : [  ]
+  }
+</script>
+<title>了解基因组区域-annotatr - Qihao&#39; Blog</title>
+  <meta property="og:title" content="了解基因组区域-annotatr - Qihao&#39; Blog" />
+  <meta property="og:type" content="article" />
+  <meta name="description" content="1 介绍
+二代测序实验和生物信息学分析pipelines产生的基因组区域在注释基因组特征后更有意义。发生在exon或enhancer中的SNP可能比发生在基因间区域的SNP更受关注。可能有兴趣发现一种特殊的转录因子绝大多数与启动子结合，而另一种主要与3’UTR结合。含有CpG岛的启动子的高甲基化可能表明在一种情况下与另一种情况下不同的调控机制。
+2 安装
+source(&quot;https://bioconductor.org/biocLite.R&quot;) biocLite(&quot;annotatr&quot;) 3 注释
+3.1 CpG注释
+CpG岛是所有CpG注释的基础,并且由AnnotationHub包提供个物种的注释数据。
+CpG shores位于CpG岛边界的上游/下游2kb
+CpG shelves位于CpG shores边界的上游/下游2kb
+其余的基因组区域构成了inter-CGI。 3.2 基因注释
+使用来自GenomicFeatures的函数和来自TxDb.*和org.*.eg.db包的数据进行基因注释
+注释的区域包含TSS上游1-5Kb区域,启动子区域(&lt;1Kb TSS上游),5’UTR区域,第一外显子区域,外显子区域,内含子区域,CDS,3’UTR和内部区域(内部区域不包括前面的注释列表中的区域),下图表示了GenomicFeatures函数中各注释区域间的关系
+基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上/下游)。需要注意的是，这些边界与基因链有关。
+3.3 FANTOM5 Permissive 增强子
+根据Andersson等人的双向笼式转录定义.并从FANTOM5源下载和处理hg19和mm9。使用rtracklayer::liftOver()函数可以将增强子版本从h19提升到hg38,mm9到mm10.
+3.4 GENCODE lncRNA 转录本
+长非编码RNA(lncRNA)的注释来自GENCODE网站,有hg19,hg38,mm19.目前包含lncRNA的转录本信息,在以后计划包含lncRNA的内含子/外显子信息.
+3.5 ChromHMM 染色质状态
+由chromHMM(Ernst和Kellis(2012)确定的9个细胞系(Gm12878、H1hesc、Hepg2、Hmec、Hsmm、Huvec、K562、Nhek和Nhlf)染色质状态(hg19)可通过ucsc基因组浏览器轨迹访问.所有状态的注释都可以使用一个快捷方式（如hg19_Gm12878-chromatin）来构建，或者特定的染色质状态可以通过诸如hg19_chromatin_Gm12878-StrongEnhancer或hg19_chromatin_Gm12878-Repressed之类的代码来访问。
+3.6 AnnotationHub注释
+AnnotationHub包是AnnotationHub网页资源的客户端.AnnotationHub Web资源提供了一个中心位置，在那里可以发现基因组文件（如VCF、BED、WIG）和标准位置（如UCSC、ENSEMBL）的其他资源。资源包括每个资源的元数据，例如文本描述、标记和修改日期。客户机创建和管理用户检索到的文件的本地缓存，有助于快速和可复制的访问。
+使用build_ah_annots()函数,可以将任何来源的GRanges对象转换为注释，以便在annotatr中使用。例如,创建一个Gm12878和H1-hesc细胞的H3K4me3 ChIP-seq peaks注释:
+# Create a named vector for the AnnotationHub accession codes with desired names h3k4me3_codes = c(&#39;Gm12878&#39; = &#39;AH23256&#39;) # Fetch ah_codes from AnnotationHub and create annotations annotatr understands build_ah_annots(genome = &#39;hg19&#39;, ah_codes = h3k4me3_codes, annotation_class = &#39;H3K4me3&#39;) # The annotations as they appear in annotatr_cache ah_names = c(&#39;hg19_H3K4me3_Gm12878&#39;) print(annotatr_cache$get(&#39;hg19_H3K4me3_Gm12878&#39;)) 3." />
+
+  <link rel="stylesheet" href="../../css/flexboxgrid-6.3.1.min.css" />
+  <link rel="stylesheet"
+    href="../../css/github-markdown.min.css" />
+  <link rel="stylesheet" href="../../css/highlight/tomorrow.min.css" />
+  <link rel="stylesheet" href="../../css/index.css">
+  <link href="../../index.xml" rel="alternate" type="application/rss+xml" title="Qihao&#39; Blog">
+  
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Permanent+Marker" rel="stylesheet">
+  
+  
+
+  
+</head>
+
+
+<body>
+  <article class="post 中文版" id="article">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <div class="site-header">
+          
+<header>
+  <div class="signatures site-title">
+    <a href="../../">Qihao Wei</a>
+  </div>
+</header>
+<div class="row end-xs">
+  
+  
+</div>
+<div class="header-line"></div>
+
+        </div>
+        <header class="post-header">
+          <h1 class="post-title">了解基因组区域-annotatr</h1>
+          
+        </header>
+
+        <div class="post-content markdown-body">
+          
+
+
+<p><strong>1 介绍</strong><br />
+二代测序实验和生物信息学分析pipelines产生的基因组区域在注释基因组特征后更有意义。发生在<strong>exon</strong>或<strong>enhancer</strong>中的SNP可能比发生在基因间区域的SNP更受关注。可能有兴趣发现一种特殊的转录因子绝大多数与启动子结合，而另一种主要与3’UTR结合。含有CpG岛的启动子的高甲基化可能表明在一种情况下与另一种情况下不同的调控机制。</p>
+<p><strong>2 安装</strong></p>
+<pre class="r"><code>source(&quot;https://bioconductor.org/biocLite.R&quot;)
+biocLite(&quot;annotatr&quot;)</code></pre>
+<p><strong>3 注释</strong><br />
+<strong>3.1 CpG注释</strong><br />
+CpG岛是所有CpG注释的基础,并且由AnnotationHub包提供个物种的注释数据。<br />
+CpG shores位于CpG岛边界的上游/下游2kb<br />
+CpG shelves位于CpG shores边界的上游/下游2kb<br />
+其余的基因组区域构成了inter-CGI。
+<img src="../../post/2019-02-20-了解基因组区域-annotatr_files/CpG_island.jpeg" style="width:100.0%;height:100.0%" /></p>
+<p><strong>3.2 基因注释</strong><br />
+使用来自<code>GenomicFeatures</code>的函数和来自<code>TxDb.*</code>和<code>org.*.eg.db</code>包的数据进行基因注释<br />
+注释的区域包含TSS上游1-5Kb区域,启动子区域(&lt;1Kb TSS上游),5’UTR区域,第一外显子区域,外显子区域,内含子区域,CDS,3’UTR和内部区域(内部区域不包括前面的注释列表中的区域),下图表示了<code>GenomicFeatures</code>函数中各注释区域间的关系<br />
+<img src="../../post/2019-02-20-了解基因组区域-annotatr_files/gene.jpeg" style="width:100.0%;height:100.0%" />
+基因注释中还包括了内含子和外显子边界区域(外显子和内含子200bp上/下游)。需要注意的是，这些边界与基因链有关。</p>
+<p><strong>3.3 FANTOM5 Permissive 增强子</strong><br />
+根据<a href="http://www.nature.com/nature/journal/v507/n7493/full/nature12787.html">Andersson等人</a>的双向笼式转录定义.并从<a href="http://fantom.gsc.riken.jp/5/datafiles/phase2.0/extra/Enhancers/">FANTOM5</a>源下载和处理hg19和mm9。使用<code>rtracklayer::liftOver()</code>函数可以将增强子版本从h19提升到hg38,mm9到mm10.</p>
+<p><strong>3.4 GENCODE lncRNA 转录本</strong><br />
+长非编码RNA(lncRNA)的注释来自<a href="https://www.gencodegenes.org/">GENCODE</a>网站,有hg19,hg38,mm19.目前包含lncRNA的转录本信息,在以后计划包含lncRNA的内含子/外显子信息.</p>
+<p><strong>3.5 ChromHMM 染色质状态</strong><br />
+由chromHMM(Ernst和Kellis(2012)确定的9个细胞系(Gm12878、H1hesc、Hepg2、Hmec、Hsmm、Huvec、K562、Nhek和Nhlf)染色质状态(hg19)可通过ucsc基因组浏览器轨迹访问.所有状态的注释都可以使用一个快捷方式（如<code>hg19_Gm12878-chromatin</code>）来构建，或者特定的染色质状态可以通过诸如<code>hg19_chromatin_Gm12878-StrongEnhancer</code>或<code>hg19_chromatin_Gm12878-Repressed</code>之类的代码来访问。</p>
+<p><strong>3.6 <code>AnnotationHub</code>注释</strong><br />
+<code>AnnotationHub</code>包是AnnotationHub网页资源的客户端.AnnotationHub Web资源提供了一个中心位置，在那里可以发现基因组文件（如VCF、BED、WIG）和标准位置（如UCSC、ENSEMBL）的其他资源。资源包括每个资源的元数据，例如文本描述、标记和修改日期。客户机创建和管理用户检索到的文件的本地缓存，有助于快速和可复制的访问。</p>
+<p>使用<code>build_ah_annots()</code>函数,可以将任何来源的<code>GRanges</code>对象转换为注释，以便在<code>annotatr</code>中使用。例如,创建一个Gm12878和H1-hesc细胞的H3K4me3 ChIP-seq peaks注释:</p>
+<pre class="r"><code># Create a named vector for the AnnotationHub accession codes with desired names
+h3k4me3_codes = c(&#39;Gm12878&#39; = &#39;AH23256&#39;)
+# Fetch ah_codes from AnnotationHub and create annotations annotatr understands
+build_ah_annots(genome = &#39;hg19&#39;, ah_codes = h3k4me3_codes, annotation_class = &#39;H3K4me3&#39;)
+# The annotations as they appear in annotatr_cache
+ah_names = c(&#39;hg19_H3K4me3_Gm12878&#39;)
+
+print(annotatr_cache$get(&#39;hg19_H3K4me3_Gm12878&#39;))</code></pre>
+<p><strong>3.7 自定义注释</strong><br />
+可以使用<code>read_annotations()</code>函数(使用rtracklayer::import()函数)从BED文件中加载注释信息.输出是包含<code>mcols()</code>(<code>id</code>,<code>tx_id</code>,<code>gene_id</code>,<code>symbol</code>,<code>type</code>)的<code>GRanges</code>对象,如果用户希望在其自定义注释中包含tx_id、gene_id和/或符号，则可以将它们作为额外的列包含在bed6输入文件中。</p>
+<pre class="r"><code># Use ENCODE ChIP-seq peaks for EZH2 in GM12878
+## These files contain chr, start, and end columns
+ezh2_file = system.file(&#39;extdata&#39;, &#39;Gm12878_Ezh2_peak_annotations.txt.gz&#39;, package = &#39;annotatr&#39;)
+
+## Custom annotation objects are given names of the form genome_custom_name
+read_annotations(con = ezh2_file, genome = &#39;hg19&#39;, name = &#39;ezh2&#39;, format = &#39;bed&#39;)
+
+print(annotatr_cache$get(&#39;hg19_custom_ezh2&#39;))
+
+##To see what is in the annotatr_cache environment, do the following:
+
+print(annotatr_cache$list_env())</code></pre>
+<p><strong>4 使用方法</strong><br />
+下面的例子是基于使用<a href="https://github.com/sartorlab/methylSig">methylSig</a>对两种条件下基因组区域的差异甲基化的测试结果。文件(<code>inst/extdata/idh2mut_v_nbm_multi_data_chr9.txt.gz</code>)包含染色体位置列，以及分类特征列和数字数据列，并提供了展示<code>annotatr</code>灵活性的良好示例。</p>
+<p><strong>4.1 读取基因组区域</strong><br />
+<code>read_regions()</code>函数使用<code>rtracklayer::import()</code>读取BED文件,并转换成<code>GRangs</code>对象,<code>extraCols</code>可以将任意数量的分类和数字数据列附加到BED6文件中。<code>rename_name</code>和<code>rename_score</code>列允许用户为这些列提供更多描述性名称。</p>
+<pre class="r"><code># This file in inst/extdata represents regions tested for differential
+# methylation between two conditions. Additionally, there are columns
+# reporting the p-value on the test for differential meth., the
+# meth. difference between the two groups, and the group meth. rates.
+dm_file = system.file(&#39;extdata&#39;, &#39;IDH2mut_v_NBM_multi_data_chr9.txt.gz&#39;, package = &#39;annotatr&#39;)
+extraCols = c(diff_meth = &#39;numeric&#39;, mu0 = &#39;numeric&#39;, mu1 = &#39;numeric&#39;)
+dm_regions = read_regions(con = dm_file, genome = &#39;hg19&#39;, extraCols = extraCols, format = &#39;bed&#39;,
+    rename_name = &#39;DM_status&#39;, rename_score = &#39;pval&#39;)
+# Use less regions to speed things up
+dm_regions = dm_regions[1:2000]
+print(dm_regions)</code></pre>
+<p><strong>4.2 注释区域</strong><br />
+用户可以选择<code>builtin_annotations()</code>列出注释信息,或者shortcuts或者使用自定义的注释信息。<br />
+<code>hg19_basicgenes</code>shortcut注释区域包含1-5Kb, promoters, 5’UTRs, exons, introns, and 3’UTRs区域.<br />
+<code>hg19_cpgs</code> shortcut注释区域包含CpG islands, CpG shores, CpG shelves, and inter-CGI区域.<br />
+其他基因组(<code>builtin_genomes()</code>列出的)shortcuts可以使用相同方式访问.</p>
+<pre class="r"><code># Select annotations for intersection with regions
+# Note inclusion of custom annotation, and use of shortcuts
+annots = c(&#39;hg19_cpgs&#39;, &#39;hg19_basicgenes&#39;, &#39;hg19_genes_intergenic&#39;, &#39;hg19_genes_intronexonboundaries&#39;, &#39;hg19_custom_ezh2&#39;, &#39;hg19_H3K4me3_Gm12878&#39;)
+
+# Build the annotations (a single GRanges object)
+annotations = build_annotations(genome = &#39;hg19&#39;, annotations = annots)
+
+# Intersect the regions we read in with the annotations
+dm_annotated = annotate_regions(
+    regions = dm_regions,
+    annotations = annotations,
+    ignore.strand = TRUE,
+    quiet = FALSE)
+# A GRanges object is returned
+print(dm_annotated)
+
+
+# The annotate_regions() function returns a GRanges, but it may be more convenient
+# to manipulate a coerced data.frame. For example, 
+# Coerce to a data.frame
+df_dm_annotated = data.frame(dm_annotated)
+
+# See the GRanges column of dm_annotaed expanded
+print(head(df_dm_annotated))
+
+# Subset based on a gene symbol, in this case NOTCH1
+notch1_subset = subset(df_dm_annotated, annot.symbol == &#39;NOTCH1&#39;)
+print(head(notch1_subset))</code></pre>
+<p><strong>4.3 随机区域</strong><br />
+给定一组带注释的区域，了解其如何与随机区域的注释进行比较是很重要的。<br />
+<code>randomize_regions()</code>函数是对<code>regioneR</code>包中<code>regioneR::randomizeRegions()</code>函数的包装,能基于给定的<code>GRanges</code>对象产生随机区域集.生产随机区域集后使用<code>annotate_regions()</code>进行注释.仅<code>builtin_genomes()</code>能在包装后的函数中使用,能操作注释后随机区域集的函数包括:<code>summarize_annotations()</code>,<code>plot_annotation()</code>,<code>plot_categorical()</code>.</p>
+<p>注意,<code>randomize_regions()</code>会忽略区域的特征,因此对于有特定特征的区域应该使用<code>universe</code>和<code>regioneR::resampleRegions()</code></p>
+<pre class="r"><code># Randomize the input regions
+dm_random_regions = randomize_regions(
+    regions = dm_regions,
+    allow.overlaps = TRUE,
+    per.chromosome = TRUE)
+
+# Annotate the random regions using the same annotations as above
+# These will be used in later functions
+dm_random_annotated = annotate_regions(
+    regions = dm_random_regions,
+    annotations = annotations,
+    ignore.strand = TRUE,
+    quiet = TRUE)
+
+# Find the number of regions per annotation type
+dm_annsum = summarize_annotations(
+  annotated_regions = dm_annotated,
+  quiet = TRUE)
+print(dm_annsum)
+
+
+# Find the number of regions per annotation type
+# and the number of random regions per annotation type
+dm_annsum_rnd = summarize_annotations(
+  annotated_regions = dm_annotated,
+  annotated_random = dm_random_annotated,
+  quiet = TRUE)
+print(dm_annsum_rnd)
+
+
+# Take the mean of the diff_meth column across all regions
+# occurring in an annotation.
+dm_numsum = summarize_numerical(
+  annotated_regions = dm_annotated,
+  by = c(&#39;annot.type&#39;, &#39;annot.id&#39;),
+  over = c(&#39;diff_meth&#39;),
+  quiet = TRUE)
+print(dm_numsum)
+
+
+
+# Count the occurrences of classifications in the DM_status
+# column across the annotation types.
+dm_catsum = summarize_categorical(
+  annotated_regions = dm_annotated,
+  by = c(&#39;annot.type&#39;, &#39;DM_status&#39;),
+  quiet = TRUE)
+print(dm_catsum)</code></pre>
+<p><strong>4.5 绘图</strong><br />
+绘图函数返回的<code>ggplot</code>对象可使用<code>print</code>查看,<code>ggsave</code>保存,<code>ggplot2</code>修改code.</p>
+<p><strong>4.5.1 按每个注释类型画图</strong></p>
+<pre class="r"><code># View the number of regions per annotation. This function
+# is useful when there is no classification or data
+# associated with the regions.
+annots_order = c(
+    &#39;hg19_custom_ezh2&#39;,
+    &#39;hg19_H3K4me3_Gm12878&#39;,
+    &#39;hg19_genes_1to5kb&#39;,
+    &#39;hg19_genes_promoters&#39;,
+    &#39;hg19_genes_5UTRs&#39;,
+    &#39;hg19_genes_exons&#39;,
+    &#39;hg19_genes_intronexonboundaries&#39;,
+    &#39;hg19_genes_introns&#39;,
+    &#39;hg19_genes_3UTRs&#39;,
+    &#39;hg19_genes_intergenic&#39;)
+dm_vs_kg_annotations = plot_annotation(
+    annotated_regions = dm_annotated,
+    annotation_order = annots_order,
+    plot_title = &#39;# of Sites Tested for DM annotated on chr9&#39;,
+    x_label = &#39;knownGene Annotations&#39;,
+    y_label = &#39;Count&#39;)
+print(dm_vs_kg_annotations)
+
+
+# View the number of regions per annotation and include the annotation
+# of randomized regions
+annots_order = c(
+    &#39;hg19_custom_ezh2&#39;,
+    &#39;hg19_H3K4me3_Gm12878&#39;,
+    &#39;hg19_genes_1to5kb&#39;,
+    &#39;hg19_genes_promoters&#39;,
+    &#39;hg19_genes_5UTRs&#39;,
+    &#39;hg19_genes_exons&#39;,
+    &#39;hg19_genes_intronexonboundaries&#39;,
+    &#39;hg19_genes_introns&#39;,
+    &#39;hg19_genes_3UTRs&#39;,
+    &#39;hg19_genes_intergenic&#39;)
+dm_vs_kg_annotations_wrandom = plot_annotation(
+    annotated_regions = dm_annotated,
+    annotated_random = dm_random_annotated,
+    annotation_order = annots_order,
+    plot_title = &#39;Dist. of Sites Tested for DM (with rndm.)&#39;,
+    x_label = &#39;Annotations&#39;,
+    y_label = &#39;Count&#39;)
+print(dm_vs_kg_annotations_wrandom)</code></pre>
+<p><strong>4.5.2 绘制注释中成对出现的区域</strong></p>
+<pre class="r"><code># View a heatmap of regions occurring in pairs of annotations
+annots_order = c(
+    &#39;hg19_custom_ezh2&#39;,
+    &#39;hg19_H3K4me3_Gm12878&#39;,
+    &#39;hg19_genes_promoters&#39;,
+    &#39;hg19_genes_5UTRs&#39;,
+    &#39;hg19_genes_exons&#39;,
+    &#39;hg19_genes_introns&#39;,
+    &#39;hg19_genes_3UTRs&#39;,
+    &#39;hg19_genes_intergenic&#39;)
+dm_vs_coannotations = plot_coannotations(
+    annotated_regions = dm_annotated,
+    annotation_order = annots_order,
+    axes_label = &#39;Annotations&#39;,
+    plot_title = &#39;Regions in Pairs of Annotations&#39;)
+print(dm_vs_coannotations)</code></pre>
+<p><strong>4.5.3 绘制注释数字数据</strong><br />
+对于数值数据，<code>plot_numeric()</code>函数在区域水平对所选分类变量进行绘制单个变量(柱状图)或两个变量(散点图)。有可能包括两个分类变量来进行面转换（见下文）。注意，当图是一个柱状图时，所有区域的分布都绘制在每个方面内。</p>
+<pre class="r"><code>dm_vs_regions_annot = plot_numerical(
+    annotated_regions = dm_annotated,
+    x = &#39;mu0&#39;,
+    facet = &#39;annot.type&#39;,
+    facet_order = c(&#39;hg19_genes_1to5kb&#39;,&#39;hg19_genes_promoters&#39;,
+        &#39;hg19_genes_5UTRs&#39;,&#39;hg19_genes_3UTRs&#39;, &#39;hg19_custom_ezh2&#39;,
+        &#39;hg19_genes_intergenic&#39;, &#39;hg19_cpg_islands&#39;),
+    bin_width = 5,
+    plot_title = &#39;Group 0 Region Methylation In Genes&#39;,
+    x_label = &#39;Group 0&#39;)
+print(dm_vs_regions_annot)
+
+dm_vs_regions_annot2 = plot_numerical(
+    annotated_regions = dm_annotated,
+    x = &#39;diff_meth&#39;,
+    facet = c(&#39;annot.type&#39;,&#39;DM_status&#39;),
+    facet_order = list(c(&#39;hg19_genes_promoters&#39;,&#39;hg19_genes_5UTRs&#39;,&#39;hg19_cpg_islands&#39;), c(&#39;hyper&#39;,&#39;hypo&#39;,&#39;none&#39;)),
+    bin_width = 5,
+    plot_title = &#39;Group 0 Region Methylation In Genes&#39;,
+    x_label = &#39;Methylation Difference&#39;)
+print(dm_vs_regions_annot2)
+
+dm_vs_regions_name = plot_numerical(
+    annotated_regions = dm_annotated,
+    x = &#39;mu0&#39;,
+    y = &#39;mu1&#39;,
+    facet = &#39;annot.type&#39;,
+    facet_order = c(&#39;hg19_genes_1to5kb&#39;,&#39;hg19_genes_promoters&#39;,
+        &#39;hg19_genes_5UTRs&#39;,&#39;hg19_genes_3UTRs&#39;, &#39;hg19_custom_ezh2&#39;,
+        &#39;hg19_genes_intergenic&#39;, &#39;hg19_cpg_islands&#39;, &#39;hg19_cpg_shores&#39;),
+    plot_title = &#39;Region Methylation: Group 0 vs Group 1&#39;,
+    x_label = &#39;Group 0&#39;,
+    y_label = &#39;Group 1&#39;)
+print(dm_vs_regions_name)</code></pre>
+<p>plot_numerical_coannotations（）显示了出现在任意两个注释以及一个或另一个注释中的区域的数值数据分布。例如，下面的示例显示了仅在启动子、仅在CpG岛以及启动子和CpG岛中发生的CpG甲基化率。</p>
+<pre class="r"><code>dm_vs_num_co = plot_numerical_coannotations(
+    annotated_regions = dm_annotated,
+    x = &#39;mu0&#39;,
+    annot1 = &#39;hg19_cpg_islands&#39;,
+    annot2 = &#39;hg19_genes_promoters&#39;,
+    bin_width = 5,
+    plot_title = &#39;Group 0 Perc. Meth. in CpG Islands and Promoters&#39;,
+    x_label = &#39;Percent Methylation&#39;)
+print(dm_vs_num_co)</code></pre>
+<p><strong>4.5.4 分类数据画图</strong></p>
+<pre class="r"><code># View the counts of CpG annotations in data classes
+
+# The orders for the x-axis labels. This is also a subset
+# of the labels (hyper, hypo, none).
+x_order = c(
+    &#39;hyper&#39;,
+    &#39;hypo&#39;)
+# The orders for the fill labels. Can also use this
+# parameter to subset annotation types to fill.
+fill_order = c(
+    &#39;hg19_cpg_islands&#39;,
+    &#39;hg19_cpg_shores&#39;,
+    &#39;hg19_cpg_shelves&#39;,
+    &#39;hg19_cpg_inter&#39;)
+# Make a barplot of the data class where each bar
+# is composed of the counts of CpG annotations.
+dm_vs_cpg_cat1 = plot_categorical(
+    annotated_regions = dm_annotated, x=&#39;DM_status&#39;, fill=&#39;annot.type&#39;,
+    x_order = x_order, fill_order = fill_order, position=&#39;stack&#39;,
+    plot_title = &#39;DM Status by CpG Annotation Counts&#39;,
+    legend_title = &#39;Annotations&#39;,
+    x_label = &#39;DM status&#39;,
+    y_label = &#39;Count&#39;)
+print(dm_vs_cpg_cat1)
+
+
+
+# Use the same order vectors as the previous code block,
+# but use proportional fill instead of counts.
+
+# Make a barplot of the data class where each bar
+# is composed of the *proportion* of CpG annotations.
+dm_vs_cpg_cat2 = plot_categorical(
+    annotated_regions = dm_annotated, x=&#39;DM_status&#39;, fill=&#39;annot.type&#39;,
+    x_order = x_order, fill_order = fill_order, position=&#39;fill&#39;,
+    plot_title = &#39;DM Status by CpG Annotation Proportions&#39;,
+    legend_title = &#39;Annotations&#39;,
+    x_label = &#39;DM status&#39;,
+    y_label = &#39;Proportion&#39;)
+print(dm_vs_cpg_cat2)
+
+
+# Add in the randomized annotations for &quot;Random Regions&quot; bar
+
+# Make a barplot of the data class where each bar
+# is composed of the *proportion* of CpG annotations, and
+# includes &quot;All&quot; regions tested for DM and &quot;Random Regions&quot;
+# regions consisting of randomized regions.
+dm_vs_cpg_cat_random = plot_categorical(
+    annotated_regions = dm_annotated, annotated_random = dm_random_annotated,
+    x=&#39;DM_status&#39;, fill=&#39;annot.type&#39;,
+    x_order = x_order, fill_order = fill_order, position=&#39;fill&#39;,
+    plot_title = &#39;DM Status by CpG Annotation Proportions&#39;,
+    legend_title = &#39;Annotations&#39;,
+    x_label = &#39;DM status&#39;,
+    y_label = &#39;Proportion&#39;)
+print(dm_vs_cpg_cat_random)
+
+# View the proportions of data classes in knownGene annotations
+
+# The orders for the x-axis labels.
+x_order = c(
+    &#39;hg19_custom_ezh2&#39;,
+    &#39;hg19_genes_1to5kb&#39;,
+    &#39;hg19_genes_promoters&#39;,
+    &#39;hg19_genes_5UTRs&#39;,
+    &#39;hg19_genes_exons&#39;,
+    &#39;hg19_genes_introns&#39;,
+    &#39;hg19_genes_3UTRs&#39;,
+    &#39;hg19_genes_intergenic&#39;)
+# The orders for the fill labels.
+fill_order = c(
+    &#39;hyper&#39;,
+    &#39;hypo&#39;,
+    &#39;none&#39;)
+dm_vs_kg_cat = plot_categorical(
+    annotated_regions = dm_annotated, x=&#39;annot.type&#39;, fill=&#39;DM_status&#39;,
+    x_order = x_order, fill_order = fill_order, position=&#39;fill&#39;,
+    legend_title = &#39;DM Status&#39;,
+    x_label = &#39;knownGene Annotations&#39;,
+    y_label = &#39;Proportion&#39;)
+print(dm_vs_kg_cat)</code></pre>
+<p>(<a href="(http://www.bioconductor.org/packages/release/bioc/vignettes/annotatr/inst/doc/annotatr-vignette.html)">来源</a>)</p>
+
+        </div>
+        
+
+        <div class="site-footer">
+  
+  <div class="site-footer-item">
+    <a href="https://github.com/qihaowei89/My_Blog" target="_blank">GitHub</a>
+  </div>
+  
+  <div class="site-footer-item">
+    <a href="../../" target="_blank">HomePage</a>
+  </div>
+  
+  
+</div>
+
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/highlight.pack.js"></script>
+
+
+<script>
+  hljs.initHighlightingOnLoad();
+  
+  
+  
+    
+    
+  
+</script>
+
+  
+
+</body>
+
+</html>

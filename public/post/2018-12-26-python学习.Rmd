@@ -1,0 +1,23 @@
+---
+title: python学习
+author: ''
+date: '2018-12-26'
+slug: python学习
+categories:
+  - python
+tags:
+  - functions
+css: []
+description: ''
+highlight: yes
+index: no
+scripts: []
+---
+
+**目录操作**   
+`os.getcwd():` 获取当前所在目录    
+`os.chdir(dir):` 改变工作目录为"dir"    
+
+****
+
+

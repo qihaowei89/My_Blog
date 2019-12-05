@@ -1,0 +1,462 @@
+---
+title: 基于TCGA数据库的癌症基因组学和表观基因组学分析流程
+author: ''
+date: '2019-07-16'
+slug: 基于tcga数据库的癌症基因组学和表观基因组学分析流程
+categories:
+  - R
+  - TCGA
+tags: []
+css: []
+description: ''
+highlight: yes
+scripts: []
+---
+
+该工作流程基于[TCGA Workflow: Analyze cancer genomics and epigenomics data using Bioconductor packages ](https://f1000research.com/articles/5-1542/v2) 
+
+---
+示例数据可以在`TCGAWorkflowData`包中找到   
+---
+
+# 安装+加载包
+```{r echo=TRUE,eval=FALSE,include=TRUE}
+if (!"BiocManager" %in% rownames(installed.packages()))
+     install.packages("BiocManager")
+BiocManager::install("TCGAWorkflow")
+# library(TCGAWorkflow)
+library(TCGAWorkflowData)
+library(DT)
+
+```
+
+# 概括   
+癌症基因组图谱(TCGA)，DNA元素百科全书(ENCODE)和NIH路线图表观基因组学绘图联盟(Roadmap)等公开数据库导致公开数据的爆炸式增长,Bioconductor提供1000多个开源软件和统计软件包，用于分析高通量基因组数据,大多数软件包都是针对特定数据类型(例如表达，表观遗传学，基因组学)而设计的,没有一种综合工具能够对所有三个公共项目提供的资源和数据进行全面的综合分析.本流程描述了如何下载，处理和准备TCGA数据，并利用几个关键的Bioconductor包，描述了使用Roadmap和ENCODE数据如何提取具有生物学意义的基因组和表观基因组数据。   
+
+这里描述了一个综合工作流程，它集成了许多Bioconductor软件包，以便在大规模癌症数据集中分析和整合多个分子观察层。基于网络的策略最近已成为发现作为癌症表型主要调节因子的功能性疾病驱动因素的有效框架。   
+
+
+- **癌症基因组图谱(TCGA)** : TCGA联盟是美国国立卫生研究院(NIH)倡议，为30多种人类癌症提供公开的分子和临床信息，外显子组(变异分析)，单核苷酸多态性(SNP)，DNA甲基化，转录组(mRNA)，microRNA(miRNA)和蛋白质组。 TCGA提供的样本类型包括：原发性实体瘤，复发性实体瘤，血液来源正常和肿瘤，转移性和实体组织正常(Weinstein等，2013)
+
+- **DNA元素百科全书(ENCODE)** : 由美国国家人类基因组研究所(NHGRI)于2003年创建，该项目旨在建立一个全面的功能元素列表，这些功能元素在基因组中发挥着积极作用，包括控制基因表达的调控元素。生物组包括永生细胞系、组织、原代细胞和干细胞(Consortium和其他2011)   
+
+- **NIH表观基因组图谱绘制联盟**:该组织成立的目的是为分析生物学和面向疾病的研究提供人类表观基因组数据的公共资源。Roadmap绘制了干细胞和主要体外组织中的DNA甲基化、组蛋白修饰、染色质可及性和小RNA转录本(Fingerman等，2011;Bernstein等，2010)
+
+
+# 方法   
+## TCGA数据数据可以使用
+NCI Genomic Data Commons(GDC)提供对使用GDC生物信息学管道与GRCh38(hg38)协调的TCGA数据子集的访问，该管道提供了生物样本和临床数据标准化的方法，DNA和RNA序列数据与公共数据的重新比对参考基因组构建GRCh38，并生成派生数据   
+
+GDC Legacy Archive可以访问以前存储在CGHub中的未经修改的数据副本 (Wilks等人，2014年)   
+
+TCGA数据协调中心(DCC)主持的TCGA数据门户，其中使用GRCh37(hg19)和GRCh36(hg18)作为参考   
+
+
+
+Bioconductor package `TCGAbiolinks`可以访问GDC data portal和GDC Legacy Archive提供的数据，而使用Bioconductor package `RTCGAToolbox`可以访问Firehose提供的数据    
+
+
+### 从TCGA数据门户下载数据    
+[`TCGAbiolinks`](http://bioconductor.org/packages/TCGAbiolinks/)有三个功能：`GDCquery`：搜索，`GDCdownload`：下载，`GDC`：加载数据为R对象,[详细使用手册](https://www.bioconductor.org/packages/3.3/bioc/vignettes/TCGAbiolinks/inst/doc/tcgaBiolinks.html#harmonized-data-1)  
+
+`GDCquery`GDC API 搜索给定项目和数据类别的数据，并根据用户请求的样本，样本类型，文件类型和其他功能过滤结果.函数返回一个带有摘要表的对象，其中包含找到的结果(样本，文件和其他有用信息)以及查询中使用的参数   
+`project`指定下载的GDC project (`TCGA-USC`，`TCGA-LGG`，`TARGET-AML`等)    
+`data.category`指定下载数据保存的类别信息(`Transcriptome Profiling`, `Copy Number Variation`, `DNA methylation`, `Gene expression`，等)     
+`data.type`指定数据的类型(`Gene expression quantification`, `Isoform Expression Quantification`, `miRNA Expression Quantification`, `Copy Number Segment`, `Masked Copy Number Segment`)    
+`workflow.type`GDC工作流类型(`HTSeq - Counts`，`HTSeq - FPKM-UQ` ，`HTSeq - FPKM`)   
+`legacy`选择使用旧数据库或协调数据库   
+`file.type`筛选数据库中搜索的文件类型(`hg18.seg`,`hg19.seg`,`nocnv_hg18.seg`,`nocnv_hg19.seg`, `rsem.genes.results`,`rsem.genes.normalized_results`)   
+`platform`筛选数据库中搜索的平台(`HumanMethylation27`,`Genome_Wide_SNP_6`,`IlluminaHiSeq_RNASeqV2`)   
+
+之后使用`GDCdownload`函数下载数据，也可以使用gdc下载客户端工具。下载的数据将保存在具有项目名称的目录加`data.category`的子文件夹中，如"TCGA-GBM/DNA_methylation"    
+
+最后，`GDCprepare`变换所下载的数据到`summarizedExperiment`对象或者数据框
+```{r eval=FALSE,echo=TRUE,include=TRUE}
+library(TCGAbiolinks)
+# Obs: The data in the legacy database has been aligned to hg19
+query.met.gbm <- GDCquery(project = "TCGA-GBM", 
+                          legacy = TRUE,
+                          data.category = "DNA methylation",
+                          platform = "Illumina Human Methylation 450", 
+                          barcode = c("TCGA-76-4926-01B-01D-1481-05", "TCGA-28-5211-01C-11D-1844-05"))
+GDCdownload(query.met.gbm)
+
+met.gbm.450 <- GDCprepare(query = query.met.gbm,
+                          save = TRUE, 
+                          save.filename = "gbmDNAmet450k.rda",
+                          summarizedExperiment = TRUE)
+
+query.met.lgg <- GDCquery(project = "TCGA-LGG", 
+                          legacy = TRUE,
+                          data.category = "DNA methylation",
+                          platform = "Illumina Human Methylation 450",
+                          barcode = c("TCGA-HT-7879-01A-11D-2399-05", "TCGA-HT-8113-01A-11D-2399-05"))
+GDCdownload(query.met.lgg)
+met.lgg.450 <- GDCprepare(query = query.met.lgg,
+                          save = TRUE, 
+                          save.filename = "lggDNAmet450k.rda",
+                          summarizedExperiment = TRUE)
+met.gbm.lgg <- SummarizedExperiment::cbind(met.lgg.450, met.gbm.450)
+
+
+
+query.exp.lgg <- GDCquery(project = "TCGA-LGG", 
+                          legacy = TRUE,
+                          data.category = "Gene expression",
+                          data.type = "Gene expression quantification",
+                          platform = "Illumina HiSeq", 
+                          file.type = "results",
+                          sample.type = "Primary solid Tumor")
+GDCdownload(query.exp.lgg)
+exp.lgg <- GDCprepare(query = query.exp.lgg, save = TRUE, save.filename = "lggExp.rda")
+
+
+query.exp.gbm <- GDCquery(project = "TCGA-GBM", 
+                          legacy = TRUE,
+                          data.category = "Gene expression",
+                          data.type = "Gene expression quantification",
+                          platform = "Illumina HiSeq", 
+                          file.type = "results",
+                          sample.type = "Primary solid Tumor")
+GDCdownload(query.exp.gbm)
+exp.gbm <- GDCprepare(query = query.exp.gbm, save = TRUE, save.filename = "gbmExp.rda")
+exp.gbm.lgg <- SummarizedExperiment::cbind(exp.lgg, exp.gbm)
+
+
+#-----------------------------------------------------------------------------
+#                   Data.category: Copy number variation aligned to hg38
+#-----------------------------------------------------------------------------
+query <- GDCquery(project = "TCGA-ACC",
+                  data.category = "Copy Number Variation",
+                  data.type = "Copy Number Segment",
+                  barcode = c( "TCGA-OR-A5KU-01A-11D-A29H-01", "TCGA-OR-A5JK-01A-11D-A29H-01"))
+GDCdownload(query)
+data <- GDCprepare(query)
+
+
+query <- GDCquery("TCGA-ACC",
+                  "Copy Number Variation",
+                  data.type = "Masked Copy Number Segment",
+                  sample.type = c("Primary solid Tumor")) # see the barcodes with getResults(query)$cases
+GDCdownload(query)
+data <- GDCprepare(query)
+```
+
+对于`SummarizedExperiment`对象，可以使用`assay`函数访问数据，`rowRanges`函数获得每一行的坐标范围值，`colData`函数获得样本的信息(病人，批次，样本类型，等)   
+
+```{r echo=T,eval=F,include=T}
+library(SummarizedExperiment)
+library(TCGAWorkflowData)
+library(DT)
+# Load object from TCGAWorkflowData package
+# THis object will be created in the further sections,
+data(GBMIllumina_HiSeq) 
+
+# get expression matrix
+data <- assay(gbm.exp)
+datatable(data[1:10,],options = list(scrollX = TRUE, keys = TRUE, pageLength = 5), rownames = TRUE)
+
+# get genes information
+genes.info <- rowRanges(gbm.exp)
+genes.info
+
+
+# get sample information
+sample.info <- colData(gbm.exp)
+datatable(as.data.frame(sample.info), options = list(scrollX = TRUE, keys = TRUE, pageLength = 5), rownames = FALSE)
+
+
+```
+`TCGAbiolinks`有两种方法获得临床数据：   
+第一个将仅下载索引的GDC临床数据，其中包括**诊断**(生命状态，死亡天数，诊断年龄，最后一次随访天数，复发天数),**治疗**(治疗天数，治疗ID，治疗药物，治疗意图类型),**人口统计**(性别，种族，种族)和**暴露**(每天的香烟，体重，身高，酒精史)信息。   
+
+第二种是使用函数`GDCquery_clinical`获得临床数据，包括**患者**(肿瘤组织部位，组织学类型，性别，生命状态，出生日期，最后一次随访天数等)，**药物**(药物治疗开始的天数，药物治疗的天数)结束，治疗类型，药物名称)，**辐射**(放射治疗开始的天数，放射治疗结束的天数，放射类型，放射剂量)，**新的肿瘤事件**(初始治疗后新肿瘤事件的天数，新的肿瘤事件类型，额外的药物治疗)，**随访**(主要治疗结果成功，随访治疗成功，生命状态，最后一次随访，完成日期)，**阶段事件**(病理分期)，**管理**(批号)   
+
+
+```{r echo=T,eval=F,include=T}
+# get indexed clinical patient data for GBM samples
+gbm_clin <- GDCquery_clinic(project = "TCGA-GBM", type = "Clinical")
+
+# get indexed clinical patient data for LGG samples
+lgg_clin <- GDCquery_clinic(project = "TCGA-LGG", type = "Clinical")
+
+# Bind the results, as the columns might not be the same,
+# we will will plyr rbind.fill, to have all columns from both files
+clinical <- plyr::rbind.fill(gbm_clin,lgg_clin)
+
+datatable(clinical[1:10,], options = list(scrollX = TRUE, keys = TRUE), rownames = FALSE)
+
+
+
+
+# Fetch clinical data directly from the clinical XML files.
+# if barcode is not set, it will consider all samples.
+# We only set it to make the example faster
+query <- GDCquery(project = "TCGA-GBM",
+                  file.type = "xml",
+                  data.category = "Clinical",
+                  barcode = c("TCGA-08-0516","TCGA-02-0317")) 
+GDCdownload(query)
+clinical <- GDCprepare_clinic(query, clinical.info = "patient")
+datatable(clinical, options = list(scrollX = TRUE, keys = TRUE), rownames = FALSE)
+
+clinical.drug <- GDCprepare_clinic(query, clinical.info = "drug")
+datatable(clinical.drug, options = list(scrollX = TRUE, keys = TRUE), rownames = FALSE)
+
+clinical.radiation <- GDCprepare_clinic(query, clinical.info = "radiation")
+datatable(clinical.radiation, options = list(scrollX = TRUE,  keys = TRUE), rownames = FALSE)
+
+clinical.admin <- GDCprepare_clinic(query, clinical.info = "admin")
+datatable(clinical.admin, options = list(scrollX = TRUE, keys = TRUE), rownames = FALSE)
+
+
+
+```
+使用`TCGAbiolinks`下载Somatic MAF数据, 需要提供`GDCquery_maf`函数   
+```{r echo=T,eval=F,include=T}
+LGGmut <- GDCquery_Maf(tumor = "LGG", pipelines = "mutect2")
+data(mafMutect2LGGGBM)
+datatable(LGGmut[1:10,], options = list(scrollX = TRUE, keys = TRUE), rownames = FALSE)
+
+```
+
+癌症基因组图谱（TCGA）研究网络报告了各种疾病的综合全基因组研究将癌症分为不同子类：ACC，BRCA，COAD，GBM，HNSC，KICH，KIRC，KIRP，LGG，LUAD，LUSC，PRAD，READ，SKCM，STAD，THCA和UCEC   
+```{r echo=T,eval=F,include=TRUE}
+gbm.subtypes <- TCGAquery_subtype(tumor = "gbm")
+datatable(gbm.subtypes[1:10,], options = list(scrollX = TRUE, keys = TRUE), rownames = FALSE)
+```
+
+## 从Broad TCGA GDAC门户下载数据   
+可以使用`RTCGAToolbox`包中的`getFirehoseData`函数访问Firehose中等级3和等级4的数据,参数：   
+下面参数可以选择感兴趣的肿瘤类型和数据版本：  
+
+- dataset 指定下载的肿瘤类型，`getFirehoseDatasets()`可以列出所有支持的下载肿瘤类型   
+- runDate 指定Stddata run的日期，`getFirehoseRunningDates()`可以列出所有日期   
+- gistic2_Date 指定Analyze run的日期，`getFirehoseAnalyzeDates()`可以列出所有日期   
+
+下面参数用来指定下载数据的类型：   
+`RNAseq_Gene, Clinic, miRNASeq_Gene, ccRNAseq2_Gene_Norm, CNA_SNP, CNV_SNP, CNA_Seq, CNA_CGH, Methylation, Mutation, mRNA_Array , miRNA_Array, and RPPA`
+
+```{r echo=T,eval=F,include=T}
+library(RTCGAToolbox)
+# Get the last run dates
+lastRunDate <- getFirehoseRunningDates()[1]
+
+# get DNA methylation data, RNAseq2 and clinical data for GBM
+# RTCGAToolbox允许用户下载最多500 MB的数据。为了增加下载的大小，建议用户使用fileSizeLimit参数
+gbm.data <- getFirehoseData(dataset = "GBM",
+                            runDate = lastRunDate, 
+                            gistic2Date = getFirehoseAnalyzeDates(1),
+                            Methylation = FALSE,  
+                            clinical = TRUE,
+                            RNASeq2GeneNorm  = FALSE, 
+                            Mutation = TRUE,
+                            fileSizeLimit = 10000)
+
+gbm.mut <- getData(gbm.data,"Mutation")
+gbm.clin <- getData(gbm.data,"clinical")
+
+```
+
+`RTCGAToolbox`可以访问4级数据，当用户需要GISTIC结果时，这可以很方便。GISTIC用于识别体细胞拷贝数改变（SCNAs）靶向的基因（Mermel等，2011）。   
+
+
+```{r echo=T,eval=F,include=T}
+# Download GISTIC results
+lastanalyzedate <- getFirehoseAnalyzeDates(1)
+gistic <- getFirehoseData("GBM",gistic2Date = lastanalyzedate)
+
+# get GISTIC results
+# gistic.allbygene <- getData(gistic, type = "GISTIC", platform = "AllByGene") 
+gistic.allbygene <- getData(gistic, type = "clinical", platform = "AllByGene")
+
+# gistic.thresholedbygene <- getData(gistic, type = "GISTIC", platform = "ThresholdedByGene")
+gistic.thresholedbygene <- getData(gistic, type = "clinical", platform = "ThresholdedByGene")
+
+data(GBMGistic)
+datatable(gistic.allbygene,
+          filter = 'top',
+          options = list(scrollX = TRUE, keys = TRUE, pageLength = 5), 
+          rownames = FALSE)
+
+datatable(gistic.thresholedbygene,
+          filter = 'top',
+          options = list(scrollX = TRUE, keys = TRUE, pageLength = 5), 
+          rownames = FALSE)
+
+```
+
+
+## 基因组分析   
+在本节中，我们将展示如何分析来自TCGA的CNV 3级数据，以识别癌症基因组中的复发性改变。我们从SNP阵列（Affymetrix Genome-Wide Human SNP Array 6.0）分析了GBM的CNV   
+
+### 预处理数据   
+TCGA中唯一可用于GBM的CNV平台是`Affymetrix Genome-Wide Human SNP Array 6.0`,使用`TCGAbiolinks`查询遗留数据库中20个原发实体肿瘤样本的CNV SNP6 3级数据。下载的数据储存在rse对象(RangedSummarizedExperiment)中   
+```{r echo=T,eval=F,include=T}
+library(TCGAbiolinks)
+# Select common CN technology available for GBM and LGG
+#############################
+## CNV data pre-processing ##
+#############################
+query.gbm.nocnv <- GDCquery(project = "TCGA-GBM",
+                            data.category = "Copy number variation",
+                            legacy = TRUE,
+                            file.type = "nocnv_hg19.seg",
+                            sample.type = c("Primary solid Tumor"))
+# to reduce time we will select only 20 samples
+query.gbm.nocnv$results[[1]] <- query.gbm.nocnv$results[[1]][1:20,]
+
+GDCdownload(query.gbm.nocnv, files.per.chunk = 100)
+
+gbm.nocnv <- GDCprepare(query.gbm.nocnv, save = TRUE, save.filename = "GBMnocnvhg19.rda")
+
+```
+### 鉴定癌症中复发的CNV   
+癌症相关的CNV必须存在于许多分析的基因组中。使用GAIA(Morganella，Pagnotta和Ceccarelli，nd)鉴定最显着的复发性CNV 
+TCGA检索的分段数据用于生成包括关于观察到的异常区域的所有所需信息的矩阵。此外，GAIA需要基因组探针元数据(特定于每种CNV技术)，可以从网站下载
+```{r echo=T,eval=F,include=T}
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-==--=--==---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-==--=--==--
+# Retrieve probes meta file from broadinstitute website for hg19
+# For hg38 analysis please take a look on:
+# https://gdc.cancer.gov/about-data/data-harmonization-and-generation/gdc-reference-files
+# File: SNP6 GRCh38 Liftover Probeset File for Copy Number Variation Analysis
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-==--=--==---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-==--=--==--
+gdac.root <- "ftp://ftp.broadinstitute.org/pub/GISTIC2.0/hg19_support/"
+file <- paste0(gdac.root, "genome.info.6.0_hg19.na31_minus_frequent_nan_probes_sorted_2.1.txt")
+gdacDir <- "//mnt/hgfs/D/workdir/TCGA" %T>% dir.create()
+gdac <- file.path(gdacDir,basename(file))
+if(!file.exists(gdac)) downloader::download(file, gdac)
+
+markersMatrix <-  readr::read_tsv(gdac, col_names = FALSE, col_types = "ccn", progress = FALSE)
+save(markersMatrix, file = file.path(gdacDir,"markersMatrix.rda"), compress = "xz")
+
+cancer <- "GBM"
+message(paste0("Starting ", cancer))
+
+# get objects created above
+data(GBMnocnvhg19)
+data(markersMatrix)
+
+# Add label (0 for loss, 1 for gain)
+cnvMatrix <- cbind(cnvMatrix,Label=NA)
+cnvMatrix[cnvMatrix[,"Segment_Mean"] < -0.3,"Label"] <- 0
+cnvMatrix[cnvMatrix[,"Segment_Mean"] > 0.3,"Label"] <- 1
+cnvMatrix <- cnvMatrix[!is.na(cnvMatrix$Label),]
+
+# Remove "Segment_Mean" and change col.names
+cnvMatrix <- cnvMatrix[,-6]
+colnames(cnvMatrix) <- c("Sample.Name", "Chromosome", "Start", "End", "Num.of.Markers", "Aberration")
+
+# Substitute Chromosomes "X" and "Y" with "23" and "24"
+cnvMatrix[cnvMatrix$Chromosome == "X","Chromosome"] <- 23
+cnvMatrix[cnvMatrix$Chromosome == "Y","Chromosome"] <- 24
+cnvMatrix$Chromosome <- as.integer(cnvMatrix$Chromosome)
+
+# Recurrent CNV identification with GAIA
+colnames(markersMatrix) <- c("Probe.Name", "Chromosome", "Start")
+unique(markersMatrix$Chromosome)
+
+
+markersMatrix[markersMatrix$Chromosome == "X","Chromosome"] <- 23
+markersMatrix[markersMatrix$Chromosome == "Y","Chromosome"] <- 24
+markersMatrix$Chromosome <- as.integer(markersMatrix$Chromosome)
+markerID <- paste(markersMatrix$Chromosome,markersMatrix$Start, sep = ":")
+# Removed duplicates
+markersMatrix <- markersMatrix[!duplicated(markerID),]
+# Filter markersMatrix for common CNV
+markerID <- paste(markersMatrix$Chromosome,markersMatrix$Start, sep = ":")
+
+file <- "ftp://ftp.broadinstitute.org/pub/GISTIC2.0/hg19_support/CNV.hg19.bypos.111213.txt"
+locateFile <- file.path(gdacDir,basename(file))
+
+if(!file.exists(locateFile)) downloader::download(file, locateFile)
+commonCNV <- readr::read_tsv(locateFile, progress = FALSE)
+commonID <- paste(commonCNV$Chromosome,commonCNV$Start, sep = ":")
+markersMatrix_fil <- markersMatrix[!markerID %in% commonID,]
+
+library(gaia)
+set.seed(200)
+markers_obj <- load_markers(as.data.frame(markersMatrix_fil))
+nbsamples <- length(unique(cnvMatrix$Sample))
+cnv_obj <- load_cnv(cnvMatrix, markers_obj, nbsamples)
+suppressWarnings({
+  results <- runGAIA(cnv_obj,
+                     markers_obj,
+                     output_file_name = paste0("GAIA_",cancer,"_flt.txt"),
+                     aberrations = -1,  # -1 to all aberrations
+                     chromosomes = 9, # -1 to all chromosomes
+                     approximation = TRUE, # Set to TRUE to speed up the time requirements
+                     num_iterations = 5000, # Reduced to speed up the time requirements
+                     threshold = 0.25)
+})
+# Set q-value threshold
+# Use a smalled value for your analysis. We set this as high values
+# due to the small number of samples which did not reproduced
+# results with smaller q-values
+threshold <- 0.3
+
+# Plot the results
+RecCNV <- t(apply(results,1,as.numeric))
+colnames(RecCNV) <- colnames(results)
+RecCNV <- cbind(RecCNV, score = 0)
+minval <- format(min(RecCNV[RecCNV[,"q-value"] != 0,"q-value"]), scientific = FALSE)
+minval <- substring(minval,1, nchar(minval) - 1)
+RecCNV[RecCNV[,"q-value"] == 0,"q-value"] <- as.numeric(minval)
+RecCNV[,"score"] <- sapply(RecCNV[,"q-value"],function(x) -log10(as.numeric(x)))
+RecCNV[RecCNV[,"q-value"] == as.numeric(minval),]
+
+gaiaCNVplot(RecCNV,threshold)
+
+
+save(results, RecCNV, threshold, file = paste0(cancer,"_CNV_results.rda"))
+```
+复发扩增和缺失通过图中染色体上的统计值表示(-log10 扩增的矫正p值，log10 缺失的矫正p值)，矫正p值 < 10e-4 认为该基因组区间拷贝数有显著改变，然后注释并报告为可能与癌症相关的扩增和缺失的基因    
+
+# 复发CNV基因注释   
+由GAIA鉴定的癌症中的异常复发CNV区域须注释后验证哪些基因被显著扩增或缺失，使用biomaRt检索所有人类基因组范围，与异常区域进行比较，以选择全长基因   
+```{r echo=T,eval=F,include=T}
+library(GenomicRanges)
+# Get gene information from GENCODE using biomart
+genes <- TCGAbiolinks:::get.GRCh.bioMart(genome = "hg19") 
+genes <- genes[genes$external_gene_id != "" & genes$chromosome_name %in% c(1:22,"X","Y"),]
+genes[genes$chromosome_name == "X", "chromosome_name"] <- 23
+genes[genes$chromosome_name == "Y", "chromosome_name"] <- 24
+genes$chromosome_name <- sapply(genes$chromosome_name,as.integer)
+genes <- genes[order(genes$start_position),]
+genes <- genes[order(genes$chromosome_name),]
+genes <- genes[,c("external_gene_id", "chromosome_name", "start_position","end_position")]
+colnames(genes) <- c("GeneSymbol","Chr","Start","End")
+genes_GR <- makeGRangesFromDataFrame(genes,keep.extra.columns = TRUE)
+save(genes_GR,genes,file = "genes_GR.rda", compress = "xz")
+
+##############################
+## Recurrent CNV annotation ## 
+##############################
+# Get gene information from GENCODE using biomart
+data(genes_GR) # downloaded in the previous step (available in TCGAWorkflowData)
+
+load(paste0(cancer,"_CNV_results.rda"))
+sCNV <- RecCNV[RecCNV[,"q-value"] <= threshold,c(1:4,6)]
+sCNV <- sCNV[order(sCNV[,3]),]
+sCNV <- sCNV[order(sCNV[,1]),]
+colnames(sCNV) <- c("Chr","Aberration","Start","End","q-value")
+sCNV_GR <- makeGRangesFromDataFrame(sCNV,keep.extra.columns = TRUE)
+
+hits <- findOverlaps(genes_GR, sCNV_GR, type = "within")
+sCNV_ann <- cbind(sCNV[subjectHits(hits),],genes[queryHits(hits),])
+AberrantRegion <- paste0(sCNV_ann[,1],":",sCNV_ann[,3],"-",sCNV_ann[,4])
+GeneRegion <- paste0(sCNV_ann[,7],":",sCNV_ann[,8],"-",sCNV_ann[,9])
+AmpDel_genes <- cbind(sCNV_ann[,c(6,2,5)],AberrantRegion,GeneRegion)
+AmpDel_genes[AmpDel_genes[,2] == 0,2] <- "Del"
+AmpDel_genes[AmpDel_genes[,2] == 1,2] <- "Amp"
+rownames(AmpDel_genes) <- NULL
+
+save(RecCNV, AmpDel_genes, file = paste0(cancer,"_CNV_results.rda"))
+
+
+
+```
+
+
+
+

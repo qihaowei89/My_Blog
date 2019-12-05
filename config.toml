@@ -9,14 +9,10 @@ DefaultContentLanguage = "cn"
   homepage = "/"
 
 [languages]
-  [languages.en]
-    contentDir = "content/en"
-    languageName = "English"
-    weight = 1
   [languages.cn]
-    contentDir = "content/cn"
+    contentDir = "content/"
     languageName = "中文版"
-    weight = 2
+    weight = 1
 
 [params]
 headTitle = "Qihao Wei"

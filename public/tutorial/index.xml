@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tutorials on Qihao&#39; Blog</title>
+    <link>/tutorial/</link>
+    <description>Recent content in Tutorials on Qihao&#39; Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Compiling Custom CSS</title>
+      <link>/tutorial/custom-css/</link>
+      <pubDate>Sat, 05 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/custom-css/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet molestie mauris nec tempor. Sed non lacus massa. Aliquam ut convallis velit. Etiam dictum mollis mi, a vestibulum ex suscipit ut. Proin viverra lacinia urna at interdum. Sed eu quam sit amet metus fermentum pharetra id a sem. Pellentesque lorem dolor, venenatis sed felis non, fringilla ornare felis. Donec nisi lorem, dignissim id interdum vel, cursus malesuada quam. Integer tempus consectetur tellus, nec sagittis est mattis vel.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started With hugo-geo</title>
+      <link>/tutorial/getting-started/</link>
+      <pubDate>Fri, 04 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tutorial/getting-started/</guid>
+      <description>&lt;p&gt;Setting up and configuring hugo-geo is as simple as changing a few values in your site &lt;code&gt;config.toml&lt;/code&gt;. Lets look at this example site&#39;s config and go over what
+each of hugo-geo&#39;s site &lt;code&gt;[params]&lt;/code&gt; do.&lt;/p&gt;
+&lt;p&gt;If this guide doesn&#39;t answer your question it may be covered in the &lt;a href=&#34;http://gohugo.io/overview/configuration/&#34;&gt;Hugo documentation&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
